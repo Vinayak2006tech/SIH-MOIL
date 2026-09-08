@@ -127,9 +127,9 @@ npm run dev
 
 | Role | Email | Password | Permissions |
 | :--- | :--- | :--- | :--- |
-| **Director / Admin** | `vaishayvinayak@gmail.com` | `vinayak@2006` | Full Control, Data Ingestion, Fleet Management, Prescriptive Overrides |
-| **Mine Planner** | `planner@balaghat.moil.gov.in` | `planner123` | Simulation & What-If Sandbox, Re-Estimation, Action Approvals |
-| **Executive Viewer** | `auditor@steel.gov.in` | `auditor123` | Read-Only KPI Analytics, GIS Maps, Export Reports |
+| **Director / Admin** | `vaishayvinayak@gmail.com` |  | Full Control, Data Ingestion, Fleet Management, Prescriptive Overrides |
+| **Mine Planner** | `planner@balaghat.moil.gov.in` |  | Simulation & What-If Sandbox, Re-Estimation, Action Approvals |
+| **Executive Viewer** | `auditor@steel.gov.in` |  | Read-Only KPI Analytics, GIS Maps, Export Reports |
 
 ---
 
