@@ -123,12 +123,13 @@ export interface ApiClient {
 }
 
 export const api: ApiClient = {
-  // Auth
   login: async (email: string, password: string) => {
+    const cleanEmail = (email || '').trim().toLowerCase();
+    const cleanPass = (password || '').trim();
     try {
       const res = await apiClient.post<{ success: boolean; token: string; user: User; status?: string; message?: string }>('/auth/login', {
-        email: email.trim().toLowerCase(),
-        password
+        email: cleanEmail,
+        password: cleanPass
       });
       if (res.data.token) {
         localStorage.setItem('moil_token', res.data.token);
@@ -144,15 +145,34 @@ export const api: ApiClient = {
         err.response?.status === 404;
 
       if (isProxyOrNetworkError) {
-        const cleanEmail = email.trim().toLowerCase();
         let matchedRole: 'ADMIN' | 'MINE_PLANNER' | 'VIEWER' = 'MINE_PLANNER';
-        if (cleanEmail.includes('admin') || cleanEmail === 'vaishayvinayak@gmail.com' || cleanEmail === 'admin@moil.gov.in') {
+        let matchedDept = 'Balaghat Planning Division';
+        let matchedName = 'Vipin Kulkarni';
+
+        if (cleanEmail.includes('admin') || cleanEmail === 'vaishayvinayak@gmail.com' || cleanEmail.includes('vinayak')) {
           matchedRole = 'ADMIN';
-        } else if (cleanEmail.includes('auditor') || cleanEmail === 'auditor@steel.gov.in') {
+          matchedDept = 'Executive Directorate of Mining & Exploration';
+          matchedName = 'Vinayak Vaishay (Admin)';
+        } else if (cleanEmail.includes('auditor') || cleanEmail.includes('steel') || cleanEmail.includes('ministry')) {
           matchedRole = 'VIEWER';
+          matchedDept = 'Ministry of Steel (Govt. of India) - Oversight Cell';
+          matchedName = 'Ananya Deshmukh';
+        } else {
+          const namePart = cleanEmail.split('@')[0].replace(/[._-]/g, ' ');
+          matchedName = namePart ? namePart.charAt(0).toUpperCase() + namePart.slice(1) : 'MOIL Personnel';
         }
 
-        const fallbackUser = FALLBACK_DEMO_USERS[matchedRole] || FALLBACK_DEMO_USERS.MINE_PLANNER;
+        const fallbackUser: User = {
+          _id: `usr-${matchedRole.toLowerCase()}-${Date.now().toString(36)}`,
+          id: `usr-${matchedRole.toLowerCase()}-${Date.now().toString(36)}`,
+          name: matchedName,
+          email: cleanEmail || 'personnel@moil.gov.in',
+          role: matchedRole,
+          department: matchedDept,
+          mineAccess: matchedRole === 'MINE_PLANNER' ? ['mine-balaghat-01', 'mine-dongri-02', 'mine-kandri-03'] : ['ALL'],
+          isGoogleAuth: false
+        };
+
         const mockToken = `offline_token_${Date.now()}`;
         localStorage.setItem('moil_token', mockToken);
         localStorage.setItem('moil_user', JSON.stringify(fallbackUser));

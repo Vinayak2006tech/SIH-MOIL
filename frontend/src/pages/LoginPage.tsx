@@ -35,7 +35,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onGoToRegister, onGoToForg
     setLoading(true);
 
     try {
-      await login(email, password);
+      await login(email.trim(), password.trim());
     } catch (err: any) {
       const respStatus = err.response?.data?.status;
       const respMsg = err.response?.data?.message;
@@ -50,7 +50,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onGoToRegister, onGoToForg
         setErrorStatus('SUSPENDED');
         setError(respMsg || 'Your account has been suspended by the administrator.');
       } else {
-        setError(respMsg || 'Invalid email or password. Please verify your credentials.');
+        setError(respMsg || err.message || 'Invalid email or password. Please verify your credentials.');
       }
     } finally {
       setLoading(false);
