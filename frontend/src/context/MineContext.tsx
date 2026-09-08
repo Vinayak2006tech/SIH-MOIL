@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import type { Mine } from '../types';
-import { api } from '../services/api.1';
+import { api } from '../services/api';
 
 interface MineContextType {
   mines: Mine[];

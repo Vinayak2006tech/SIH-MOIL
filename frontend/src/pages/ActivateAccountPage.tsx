@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Layers, Lock, CheckCircle2, AlertCircle, ArrowRight, Eye, EyeOff, ShieldCheck, KeyRound } from 'lucide-react';
-import { api } from '../services/api.1';
+import { api } from '../services/api';
 
 interface ActivateAccountPageProps {
   onGoToLogin: () => void;

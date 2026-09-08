@@ -29,7 +29,7 @@ import {
   DollarSign
 } from 'lucide-react';
 import { useMine } from '../context/MineContext';
-import { api } from '../services/api.1';
+import { api } from '../services/api';
 import type { ProductionLog, AnnualProductionRecord } from '../types';
 import { LoadingSkeleton } from '../components/common/LoadingSkeleton';
 import { ProvenanceBadge } from '../components/common/ProvenanceBadge';

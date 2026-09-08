@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, ArrowRight, ArrowLeft, AlertCircle, CheckCircle2, KeyRound } from 'lucide-react';
-import { api } from '../services/api.1';
+import { api } from '../services/api';
 
 interface ForgotPasswordPageProps {
   onGoToLogin: () => void;

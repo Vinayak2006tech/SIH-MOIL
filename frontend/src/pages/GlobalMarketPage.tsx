@@ -39,7 +39,7 @@ import {
 } from 'recharts';
 import { MapContainer, TileLayer, CircleMarker, Popup, Tooltip as LeafletTooltip } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { api } from '../services/api.1';
+import { api } from '../services/api';
 import { ProvenanceBadge } from '../components/common/ProvenanceBadge';
 import { DataSourceModal } from '../components/common/DataSourceModal';
 import { LoadingSkeleton } from '../components/common/LoadingSkeleton';

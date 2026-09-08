@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, ExternalLink, ShieldCheck, Database, Satellite, AlertTriangle, CheckCircle2, Calendar, FileText } from 'lucide-react';
 import type { DataSource, DataSourceType } from '../../types';
-import { api } from '../../services/api.1';
+import { api } from '../../services/api';
 
 interface DataSourceModalProps {
   sourceId: string;

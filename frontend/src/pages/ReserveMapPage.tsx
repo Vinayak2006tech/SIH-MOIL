@@ -56,7 +56,7 @@ import {
   Cell
 } from 'recharts';
 import { useMine } from '../context/MineContext';
-import { api } from '../services/api.1';
+import { api } from '../services/api';
 import type {
   Mine,
   MineZone,

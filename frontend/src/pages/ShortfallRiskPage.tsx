@@ -16,7 +16,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import { useMine } from '../context/MineContext';
-import { api } from '../services/api.1';
+import { api } from '../services/api';
 import type { ShortfallRisk, RiskLevel } from '../types';
 import { RiskBadge } from '../components/common/RiskBadge';
 import { ProvenanceBadge } from '../components/common/ProvenanceBadge';

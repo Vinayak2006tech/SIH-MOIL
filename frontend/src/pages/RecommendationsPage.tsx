@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 import { useMine } from '../context/MineContext';
 import { useAuth } from '../context/AuthContext';
-import { api } from '../services/api.1';
+import { api } from '../services/api';
 import type { Recommendation } from '../types';
 import { LoadingSkeleton } from '../components/common/LoadingSkeleton';
 
