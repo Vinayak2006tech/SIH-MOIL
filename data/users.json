@@ -11,8 +11,8 @@
     "mineAccess": [
       "ALL"
     ],
-    "lastLogin": "2026-09-08T19:29:42.430Z",
-    "updatedAt": "2026-09-08T19:29:42.430Z"
+    "lastLogin": "2026-09-08T19:32:07.068Z",
+    "updatedAt": "2026-09-08T19:32:07.068Z"
   },
   {
     "_id": "usr-planner-01",
@@ -100,7 +100,7 @@
     ],
     "isGoogleAuth": false,
     "createdAt": "2026-09-08T15:50:09.770Z",
-    "updatedAt": "2026-09-08T17:11:33.759Z",
+    "updatedAt": "2026-09-08T19:31:24.249Z",
     "suspensionReason": null,
     "_id": "usr-1788882609770",
     "approvedAt": "2026-09-08T16:25:05.420Z",
@@ -110,7 +110,7 @@
     "rejectedAt": null,
     "rejectionReason": null,
     "suspendedAt": null,
-    "lastLogin": "2026-09-08T17:05:00.068Z"
+    "lastLogin": "2026-09-08T19:31:24.249Z"
   },
   {
     "name": "Priyanshi Pant",
@@ -118,16 +118,18 @@
     "passwordHash": "$2a$10$I.j/wCTtZPbOx.Siy3KrfeKuuikZTziiHkZaxAGJX1Ov.cMr9N/BG",
     "role": "VIEWER",
     "department": "Mine Planning & Geology",
-    "status": "APPROVED",
+    "status": "SUSPENDED",
     "emailVerified": true,
     "mineAccess": [
       "ALL"
     ],
     "isGoogleAuth": false,
     "createdAt": "2026-09-08T16:35:08.328Z",
-    "updatedAt": "2026-09-08T16:40:34.131Z",
+    "updatedAt": "2026-09-08T19:30:51.955Z",
     "_id": "usr-1788885308328",
-    "approvedAt": "2026-09-08T16:40:34.131Z"
+    "approvedAt": "2026-09-08T16:40:34.131Z",
+    "suspendedAt": "2026-09-08T19:30:51.955Z",
+    "suspensionReason": "Access temporarily suspended by system administration."
   },
   {
     "name": "Naitak Chaurasia",
@@ -145,5 +147,21 @@
     "updatedAt": "2026-09-08T17:09:29.750Z",
     "approvedAt": "2026-09-08T17:09:29.750Z",
     "_id": "usr-1788887369750"
+  },
+  {
+    "name": "atharv",
+    "email": "vaishayvinayak1@gmail.com",
+    "passwordHash": "$2a$10$BjkV5zIOMda5FOzuA32OUuhlmFpBytpE1uIqwSL5oKstDPrZKhJdO",
+    "role": "VIEWER",
+    "department": "Mine Planning & Geology",
+    "status": "PENDING",
+    "emailVerified": false,
+    "mineAccess": [
+      "ALL"
+    ],
+    "isGoogleAuth": false,
+    "createdAt": "2026-09-08T19:31:56.600Z",
+    "updatedAt": "2026-09-08T19:31:56.600Z",
+    "_id": "usr-1788895916600"
   }
 ]

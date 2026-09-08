@@ -595,15 +595,22 @@ export const api: ApiClient = {
       return {
         recommendationId: id,
         mineId: 'mine-balaghat-01',
+        mineName: 'Balaghat Mine',
         category: 'Fleet Redeployment',
         title: 'Updated Recommendation Action',
+        urgency: 'HIGH',
         description: outcomeNote || 'Directive applied',
-        potentialTonnageGain: 3500,
-        status: status as any,
-        priority: 'HIGH',
-        confidenceScore: 0.92,
-        sourceProvenance: 'AI Prescriptive Dispatch Engine',
-        createdAt: new Date().toISOString()
+        actionSteps: ['Execute load optimization', 'Reassign secondary haulage'],
+        expectedRiskReductionPct: 15.0,
+        expectedTonnageGain: realizedTonnageGain || 3500,
+        estimatedRoiInrLakhs: 45.0,
+        status: (status as any) || 'ACCEPTED',
+        targetShift: 'Shift A',
+        targetEquipment: 'Loader Unit L-04',
+        outcomeNote: outcomeNote || `Status updated to ${status}`,
+        realizedTonnageGain: realizedTonnageGain || 3500,
+        sourceId: 'src-ai-dispatch',
+        isSynthetic: false
       };
     }
   },
@@ -655,7 +662,7 @@ export const api: ApiClient = {
 
       const total = list.length;
       const operational = list.filter((e) => e.status === 'OPERATIONAL').length;
-      const maintenance = list.filter((e) => e.status === 'MAINTENANCE').length;
+      const maintenance = list.filter((e) => e.status === 'UNDER_MAINTENANCE').length;
       const breakdown = list.filter((e) => e.status === 'BREAKDOWN').length;
       const standby = list.filter((e) => e.status === 'STANDBY').length;
       const overallAvailability = total > 0 ? Number(((operational / total) * 100).toFixed(1)) : 88.5;
@@ -683,21 +690,18 @@ export const api: ApiClient = {
       const list = getStoredEquipment();
       const newEquip: Equipment = {
         code: data.code || `EQ-NEW-${Date.now().toString(36).toUpperCase()}`,
+        mineId: data.mineId || 'mine-balaghat-01',
+        mineName: data.mineName || 'Balaghat Mine',
         name: data.name || 'Heavy Mining Machinery',
         type: data.type || 'EXCAVATOR',
-        mineId: data.mineId || 'mine-balaghat-01',
-        capacity: data.capacity || '4.5 m³',
         equipmentModel: data.equipmentModel || 'CAT 6020B Heavy Mining Loader',
+        capacity: data.capacity || '4.5 m³',
         status: data.status || 'OPERATIONAL',
-        operatingHours: data.operatingHours || 1200,
+        uptimePct: data.uptimePct || 88.5,
+        mtbfHours: data.mtbfHours || 420,
         lastMaintenanceDate: data.lastMaintenanceDate || new Date().toISOString().split('T')[0],
         nextScheduledMaintenance: data.nextScheduledMaintenance || new Date(Date.now() + 30 * 86400000).toISOString().split('T')[0],
-        criticalTelemetry: data.criticalTelemetry || {
-          engineTempC: 84.5,
-          vibrationMmS: 2.1,
-          fuelLevelPct: 88,
-          hydraulicPressureBar: 245
-        }
+        criticalAlert: null
       };
       list.unshift(newEquip);
       setStoredEquipment(list);
@@ -834,7 +838,12 @@ export const api: ApiClient = {
       return {
         success: true,
         countryReserves: MOCK_GLOBAL_DATA.countryReserves,
-        sourceMetadata: MOCK_GLOBAL_DATA.sourceMetadata
+        sourceMetadata: (MOCK_GLOBAL_DATA as any).sourceMetadata || {
+          sourceId: 'src-usgs-2025',
+          sourceName: 'USGS Mineral Commodity Summaries 2025',
+          dataType: 'OFFICIAL_USGS',
+          isSynthetic: false
+        }
       };
     }
   },
