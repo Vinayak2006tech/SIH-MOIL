@@ -144,8 +144,8 @@ export const RecommendationsPage: React.FC = () => {
               key={st}
               onClick={() => setFilterStatus(st)}
               className={`px-3 py-1.5 text-xs font-bold rounded-md transition ${filterStatus === st
-                  ? 'bg-purple-600 text-white shadow-glow-purple'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                ? 'bg-purple-600 text-white shadow-glow-purple'
+                : 'text-slate-400 hover:text-white hover:bg-slate-800'
                 }`}
             >
               {st}
@@ -183,10 +183,10 @@ export const RecommendationsPage: React.FC = () => {
             <div
               key={rec.recommendationId || rec._id}
               className={`glass-panel rounded-2xl p-6 border transition-all duration-300 ${isPending
-                  ? 'border-slate-800 hover:border-purple-500/50 hover:shadow-glow-purple'
-                  : isAccepted
-                    ? 'border-emerald-800/60 bg-emerald-950/20'
-                    : 'border-slate-800/60 opacity-70'
+                ? 'border-slate-800 hover:border-purple-500/50 hover:shadow-glow-purple'
+                : isAccepted
+                  ? 'border-emerald-800/60 bg-emerald-950/20'
+                  : 'border-slate-800/60 opacity-70'
                 }`}
             >
               {/* Card Header */}
@@ -205,10 +205,10 @@ export const RecommendationsPage: React.FC = () => {
 
                 <span
                   className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase font-mono ${rec.urgency === 'CRITICAL'
-                      ? 'bg-red-950 text-red-400 border border-red-800 animate-pulse'
-                      : rec.urgency === 'HIGH'
-                        ? 'bg-amber-950 text-amber-400 border border-amber-800'
-                        : 'bg-blue-950 text-blue-400 border border-blue-800'
+                    ? 'bg-red-950 text-red-400 border border-red-800 animate-pulse'
+                    : rec.urgency === 'HIGH'
+                      ? 'bg-amber-950 text-amber-400 border border-amber-800'
+                      : 'bg-blue-950 text-blue-400 border border-blue-800'
                     }`}
                 >
                   {rec.urgency} Urgency
@@ -335,8 +335,8 @@ export const RecommendationsPage: React.FC = () => {
                   <td className="p-3">
                     <span
                       className={`px-2 py-0.5 rounded font-mono text-[10px] font-bold ${log.status === 'ACCEPTED'
-                          ? 'bg-emerald-950 text-emerald-400 border border-emerald-800'
-                          : 'bg-red-950 text-red-400 border border-red-800'
+                        ? 'bg-emerald-950 text-emerald-400 border border-emerald-800'
+                        : 'bg-red-950 text-red-400 border border-red-800'
                         }`}
                     >
                       {log.status}

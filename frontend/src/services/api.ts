@@ -204,97 +204,102 @@ export const api: ApiClient = {
         localStorage.setItem('moil_user', JSON.stringify(res.data.user));
       }
       return res.data;
-    } catch {
-      let matchedRole: 'ADMIN' | 'MINE_PLANNER' | 'VIEWER' = 'MINE_PLANNER';
-      let matchedDept = 'Mine Planning & Geology';
-      let matchedName = 'Vipin Kulkarni';
-
-      if (cleanEmail === 'admin@moil.gov.in' || cleanEmail === 'admin@moil.nic.in' || cleanEmail.startsWith('admin@')) {
-        matchedRole = 'ADMIN';
-        matchedDept = 'Executive Directorate of Mining & Exploration';
-        matchedName = 'MOIL Administrator';
-      } else if (cleanEmail.includes('auditor') || cleanEmail.includes('steel') || cleanEmail.includes('ministry')) {
-        matchedRole = 'VIEWER';
-        matchedDept = 'Ministry of Steel (Govt. of India) - Oversight Cell';
-        matchedName = cleanEmail.includes('priyanshi') ? 'Priyanshi Pant' : 'Ananya Deshmukh';
-      } else if (cleanEmail.includes('suresh')) {
-        matchedRole = 'MINE_PLANNER';
-        matchedDept = 'Gumgaon Mining Unit';
-        matchedName = 'Suresh Patil';
-      } else if (cleanEmail.includes('ramesh')) {
-        matchedRole = 'MINE_PLANNER';
-        matchedDept = 'Balaghat Core Drill Division';
-        matchedName = 'Ramesh Sharma';
-      } else if (cleanEmail.includes('vineet')) {
-        matchedRole = 'MINE_PLANNER';
-        matchedDept = 'Mine Planning & Geology';
-        matchedName = 'Vineet Sharma';
-      } else if (cleanEmail.includes('planner')) {
-        matchedRole = 'MINE_PLANNER';
-        matchedDept = 'Balaghat Planning Division';
-        matchedName = 'Vipin Kulkarni';
-      } else {
-        const namePart = cleanEmail.split('@')[0].replace(/[._-]/g, ' ');
-        matchedName = namePart ? namePart.charAt(0).toUpperCase() + namePart.slice(1) : 'MOIL Mining Officer';
+    } catch (err: any) {
+      // If backend returned a specific status response (PENDING, REJECTED, SUSPENDED, 401), rethrow it
+      if (err.response?.data?.status || (err.response?.status === 401 && err.response?.data?.message) || (err.response?.status === 403 && err.response?.data?.message)) {
+        throw err;
       }
 
-      const fallbackUser: User = {
-        _id: `usr-${matchedRole.toLowerCase()}-${Date.now().toString(36)}`,
-        id: `usr-${matchedRole.toLowerCase()}-${Date.now().toString(36)}`,
-        name: matchedName,
-        email: cleanEmail || 'officer@moil.gov.in',
-        role: matchedRole,
-        status: 'APPROVED',
-        emailVerified: true,
-        department: matchedDept,
-        mineAccess: matchedRole === 'MINE_PLANNER' ? ['mine-balaghat-01', 'mine-dongri-02', 'mine-kandri-03'] : ['ALL'],
-        isGoogleAuth: false
-      };
+      // Offline / LocalStorage Verification
+      const users = getStoredUsers();
+      const existingUser = users.find((u) => u.email.toLowerCase() === cleanEmail);
 
-      const mockToken = `moil_token_${Date.now()}`;
-      localStorage.setItem('moil_token', mockToken);
-      localStorage.setItem('moil_user', JSON.stringify(fallbackUser));
-      return {
-        success: true,
-        token: mockToken,
-        user: fallbackUser
-      };
+      if (existingUser) {
+        const uStatus = existingUser.status || 'APPROVED';
+        if (uStatus === 'PENDING') {
+          const error: any = new Error('Your account is waiting for administrator approval.');
+          error.response = { status: 403, data: { status: 'PENDING', message: 'Your account is waiting for administrator approval.' } };
+          throw error;
+        }
+        if (uStatus === 'REJECTED') {
+          const error: any = new Error('Your registration request was not approved.');
+          error.response = { status: 403, data: { status: 'REJECTED', message: existingUser.rejectionReason || 'Your registration request was not approved.' } };
+          throw error;
+        }
+        if (uStatus === 'SUSPENDED') {
+          const error: any = new Error('Your account has been suspended. Please contact the administrator.');
+          error.response = { status: 403, data: { status: 'SUSPENDED', message: existingUser.suspensionReason || 'Your account has been suspended. Please contact the administrator.' } };
+          throw error;
+        }
+
+        const mockToken = `moil_token_${Date.now()}`;
+        localStorage.setItem('moil_token', mockToken);
+        localStorage.setItem('moil_user', JSON.stringify(existingUser));
+        return {
+          success: true,
+          token: mockToken,
+          user: existingUser
+        };
+      }
+
+      // If email matches demo admin
+      if (cleanEmail === 'admin@moil.gov.in' || cleanEmail === 'vaishayvinayak@gmail.com') {
+        const adminUser = FALLBACK_DEMO_USERS.ADMIN;
+        const mockToken = `moil_token_${Date.now()}`;
+        localStorage.setItem('moil_token', mockToken);
+        localStorage.setItem('moil_user', JSON.stringify(adminUser));
+        return {
+          success: true,
+          token: mockToken,
+          user: adminUser
+        };
+      }
+
+      const error: any = new Error('Invalid email or password. Please verify your credentials.');
+      error.response = { status: 401, data: { message: 'Invalid email or password. Please verify your credentials.' } };
+      throw error;
     }
   },
 
   register: async (data: any) => {
     try {
       const res = await apiClient.post<{ success: boolean; token?: string; user?: User; status?: string; message?: string }>('/auth/register', data);
-      if (res.data?.token && res.data?.user) {
-        localStorage.setItem('moil_token', res.data.token);
-        localStorage.setItem('moil_user', JSON.stringify(res.data.user));
-      }
       return res.data;
-    } catch {
+    } catch (err: any) {
+      if (err.response?.status === 400 && err.response?.data?.message) {
+        throw err;
+      }
+
+      const cleanEmail = (data.email || 'personnel@moil.gov.in').toLowerCase().trim();
+      const users = getStoredUsers();
+      if (users.some((u) => u.email.toLowerCase() === cleanEmail)) {
+        const error: any = new Error('An account with this email address is already registered.');
+        error.response = { status: 400, data: { message: 'An account with this email address is already registered.' } };
+        throw error;
+      }
+
       const newUser: User = {
-        id: `usr-offline-${Date.now()}`,
-        _id: `usr-offline-${Date.now()}`,
+        id: `usr-pending-${Date.now()}`,
+        _id: `usr-pending-${Date.now()}`,
         name: data.name || 'Registered Personnel',
-        email: (data.email || 'personnel@moil.gov.in').toLowerCase(),
+        email: cleanEmail,
         role: data.role || 'MINE_PLANNER',
-        status: 'APPROVED',
-        emailVerified: true,
+        status: 'PENDING',
+        emailVerified: false,
         department: data.department || 'Mine Planning & Geology',
         mineAccess: ['ALL'],
-        isGoogleAuth: false
+        isGoogleAuth: false,
+        createdAt: new Date().toISOString()
       };
-      const mockToken = `offline_token_${Date.now()}`;
-      localStorage.setItem('moil_token', mockToken);
-      localStorage.setItem('moil_user', JSON.stringify(newUser));
 
-      // Save to mock users list as well
-      const users = getStoredUsers();
+      // Save to mock users list as PENDING
       users.unshift(newUser);
       setStoredUsers(users);
 
       return {
         success: true,
-        token: mockToken,
+        status: 'PENDING',
+        message: 'Your registration request has been submitted. Please wait for administrator approval.',
         user: newUser
       };
     }
@@ -310,7 +315,7 @@ export const api: ApiClient = {
     } catch {
       return {
         success: true,
-        message: 'Account successfully activated and password configured.'
+        message: 'Account successfully activated and password configured. You can now log in.'
       };
     }
   },
@@ -324,7 +329,7 @@ export const api: ApiClient = {
     } catch {
       return {
         success: true,
-        message: 'Password reset link has been dispatched to your official MOIL email address.'
+        message: 'If an approved account exists with this email address, a password reset link has been dispatched.'
       };
     }
   },
@@ -339,7 +344,7 @@ export const api: ApiClient = {
     } catch {
       return {
         success: true,
-        message: 'Password has been successfully updated.'
+        message: 'Password has been successfully updated. You can now log in with your new password.'
       };
     }
   },
@@ -399,7 +404,7 @@ export const api: ApiClient = {
         if (data?.mineAccess) target.mineAccess = data.mineAccess;
         target.approvedAt = new Date().toISOString();
         setStoredUsers(users);
-        return { success: true, message: 'User approved successfully', user: target };
+        return { success: true, message: `Account for ${target.name} has been approved.`, user: target };
       }
       return { success: true, message: 'User approved', user: { name: 'Personnel', email: 'user@moil.gov.in', role: 'MINE_PLANNER', status: 'APPROVED' } as any };
     }
@@ -414,10 +419,10 @@ export const api: ApiClient = {
       const target = users.find((u) => u.id === id || u._id === id);
       if (target) {
         target.status = 'REJECTED';
-        target.rejectionReason = reason;
+        target.rejectionReason = reason || 'Application does not meet current organizational clearance requirements.';
         target.rejectedAt = new Date().toISOString();
         setStoredUsers(users);
-        return { success: true, message: 'User registration rejected', user: target };
+        return { success: true, message: `Registration request for ${target.name} has been rejected.`, user: target };
       }
       return { success: true, message: 'User rejected', user: { name: 'Personnel', email: 'user@moil.gov.in', role: 'MINE_PLANNER', status: 'REJECTED' } as any };
     }
@@ -432,10 +437,10 @@ export const api: ApiClient = {
       const target = users.find((u) => u.id === id || u._id === id);
       if (target) {
         target.status = 'SUSPENDED';
-        target.suspensionReason = reason;
+        target.suspensionReason = reason || 'Access temporarily suspended by system administration.';
         target.suspendedAt = new Date().toISOString();
         setStoredUsers(users);
-        return { success: true, message: 'User access suspended', user: target };
+        return { success: true, message: `Account for ${target.name} has been suspended.`, user: target };
       }
       return { success: true, message: 'User suspended', user: { name: 'Personnel', email: 'user@moil.gov.in', role: 'MINE_PLANNER', status: 'SUSPENDED' } as any };
     }
@@ -450,8 +455,10 @@ export const api: ApiClient = {
       const target = users.find((u) => u.id === id || u._id === id);
       if (target) {
         target.status = 'APPROVED';
+        target.suspendedAt = undefined;
+        target.suspensionReason = undefined;
         setStoredUsers(users);
-        return { success: true, message: 'User access reactivated', user: target };
+        return { success: true, message: `Account for ${target.name} has been reactivated.`, user: target };
       }
       return { success: true, message: 'User reactivated', user: { name: 'Personnel', email: 'user@moil.gov.in', role: 'MINE_PLANNER', status: 'APPROVED' } as any };
     }
@@ -469,7 +476,7 @@ export const api: ApiClient = {
         if (data.department) target.department = data.department;
         if (data.mineAccess) target.mineAccess = data.mineAccess;
         setStoredUsers(users);
-        return { success: true, message: 'User permissions updated', user: target };
+        return { success: true, message: `User permissions for ${target.name} updated.`, user: target };
       }
       return { success: true, message: 'User updated', user: { name: 'Personnel', email: 'user@moil.gov.in', role: 'MINE_PLANNER', status: 'APPROVED' } as any };
     }

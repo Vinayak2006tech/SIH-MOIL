@@ -183,8 +183,8 @@ export const GlobalMarketPage: React.FC = () => {
             <button
               onClick={() => setActiveTab('overview')}
               className={`px-3.5 py-2 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 ${activeTab === 'overview'
-                  ? 'bg-purple-600 text-white shadow-glow-purple'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                ? 'bg-purple-600 text-white shadow-glow-purple'
+                : 'text-slate-400 hover:text-white hover:bg-slate-800'
                 }`}
             >
               <Globe2 className="w-3.5 h-3.5" /> World Reserves Map
@@ -192,8 +192,8 @@ export const GlobalMarketPage: React.FC = () => {
             <button
               onClick={() => setActiveTab('benchmarking')}
               className={`px-3.5 py-2 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 ${activeTab === 'benchmarking'
-                  ? 'bg-purple-600 text-white shadow-glow-purple'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                ? 'bg-purple-600 text-white shadow-glow-purple'
+                : 'text-slate-400 hover:text-white hover:bg-slate-800'
                 }`}
             >
               <Award className="w-3.5 h-3.5" /> MOIL vs Global Peers
@@ -201,8 +201,8 @@ export const GlobalMarketPage: React.FC = () => {
             <button
               onClick={() => setActiveTab('trade')}
               className={`px-3.5 py-2 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 ${activeTab === 'trade'
-                  ? 'bg-purple-600 text-white shadow-glow-purple'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                ? 'bg-purple-600 text-white shadow-glow-purple'
+                : 'text-slate-400 hover:text-white hover:bg-slate-800'
                 }`}
             >
               <Ship className="w-3.5 h-3.5" /> Seaborne Trade Flows
@@ -210,8 +210,8 @@ export const GlobalMarketPage: React.FC = () => {
             <button
               onClick={() => setActiveTab('deepsea')}
               className={`px-3.5 py-2 rounded-lg text-xs font-semibold transition flex items-center gap-1.5 ${activeTab === 'deepsea'
-                  ? 'bg-purple-600 text-white shadow-glow-purple'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                ? 'bg-purple-600 text-white shadow-glow-purple'
+                : 'text-slate-400 hover:text-white hover:bg-slate-800'
                 }`}
             >
               <Compass className="w-3.5 h-3.5" /> Deep Ocean Nodules
@@ -387,8 +387,8 @@ export const GlobalMarketPage: React.FC = () => {
                   <button
                     onClick={() => setChartMetric('contained')}
                     className={`px-3 py-1.5 rounded-lg font-semibold transition ${chartMetric === 'contained'
-                        ? 'bg-purple-600 text-white shadow-glow-purple'
-                        : 'text-slate-400 hover:text-white'
+                      ? 'bg-purple-600 text-white shadow-glow-purple'
+                      : 'text-slate-400 hover:text-white'
                       }`}
                   >
                     Contained Metal (Mt Mn)
@@ -396,8 +396,8 @@ export const GlobalMarketPage: React.FC = () => {
                   <button
                     onClick={() => setChartMetric('gross')}
                     className={`px-3 py-1.5 rounded-lg font-semibold transition ${chartMetric === 'gross'
-                        ? 'bg-purple-600 text-white shadow-glow-purple'
-                        : 'text-slate-400 hover:text-white'
+                      ? 'bg-purple-600 text-white shadow-glow-purple'
+                      : 'text-slate-400 hover:text-white'
                       }`}
                   >
                     Gross Ore (Mt Ore)
@@ -405,8 +405,8 @@ export const GlobalMarketPage: React.FC = () => {
                   <button
                     onClick={() => setChartMetric('life')}
                     className={`px-3 py-1.5 rounded-lg font-semibold transition ${chartMetric === 'life'
-                        ? 'bg-purple-600 text-white shadow-glow-purple'
-                        : 'text-slate-400 hover:text-white'
+                      ? 'bg-purple-600 text-white shadow-glow-purple'
+                      : 'text-slate-400 hover:text-white'
                       }`}
                   >
                     Reserve Life (Years)
@@ -644,8 +644,8 @@ export const GlobalMarketPage: React.FC = () => {
                       key={c.countryCode}
                       onClick={() => setSelectedCountry(c)}
                       className={`p-2 rounded-xl text-left text-xs transition border flex items-center gap-2 ${selectedCountry?.countryCode === c.countryCode
-                          ? 'bg-purple-950/80 border-purple-600 text-white font-bold'
-                          : 'bg-slate-950/60 border-slate-800 text-slate-300 hover:bg-slate-800'
+                        ? 'bg-purple-950/80 border-purple-600 text-white font-bold'
+                        : 'bg-slate-950/60 border-slate-800 text-slate-300 hover:bg-slate-800'
                         }`}
                     >
                       <span className="text-lg">{c.flag}</span>
@@ -736,8 +736,8 @@ export const GlobalMarketPage: React.FC = () => {
                       <div
                         key={idx}
                         className={`p-4 rounded-xl border transition ${isMoil
-                            ? 'bg-purple-950/40 border-purple-600/80 shadow-glow-purple'
-                            : 'bg-slate-900/80 border-slate-800 hover:border-slate-700'
+                          ? 'bg-purple-950/40 border-purple-600/80 shadow-glow-purple'
+                          : 'bg-slate-900/80 border-slate-800 hover:border-slate-700'
                           }`}
                       >
                         <div className="flex items-center justify-between mb-2">
@@ -832,8 +832,8 @@ export const GlobalMarketPage: React.FC = () => {
                       <span className="text-xs font-bold text-white leading-tight">{bm.gradeName}</span>
                       <span
                         className={`text-[10px] px-2 py-0.5 rounded font-mono font-bold flex items-center gap-0.5 ${bm.yoyChangePct >= 0
-                            ? 'bg-emerald-950 text-emerald-300 border border-emerald-800'
-                            : 'bg-red-950 text-red-300 border border-red-800'
+                          ? 'bg-emerald-950 text-emerald-300 border border-emerald-800'
+                          : 'bg-red-950 text-red-300 border border-red-800'
                           }`}
                       >
                         {bm.yoyChangePct >= 0 ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
@@ -989,8 +989,8 @@ export const GlobalMarketPage: React.FC = () => {
                 <div
                   key={idx}
                   className={`glass-panel p-6 rounded-2xl border transition space-y-4 flex flex-col justify-between ${isIndia
-                      ? 'border-cyan-500/80 bg-gradient-to-b from-slate-900 to-cyan-950/30 shadow-glow-cyan'
-                      : 'border-slate-800 hover:border-slate-700'
+                    ? 'border-cyan-500/80 bg-gradient-to-b from-slate-900 to-cyan-950/30 shadow-glow-cyan'
+                    : 'border-slate-800 hover:border-slate-700'
                     }`}
                 >
                   <div className="space-y-3">

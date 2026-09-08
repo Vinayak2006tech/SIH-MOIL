@@ -558,8 +558,8 @@ export const ReserveMapPage: React.FC = () => {
                 <button
                   onClick={() => setShowReserveProbability(!showReserveProbability)}
                   className={`px-2 py-1.5 rounded-lg text-xs font-bold border transition flex items-center gap-1 shrink-0 ${showReserveProbability
-                      ? 'bg-purple-600 text-white border-purple-400 shadow-glow-purple'
-                      : 'bg-slate-800/90 text-slate-400 border-slate-700 hover:text-white'
+                    ? 'bg-purple-600 text-white border-purple-400 shadow-glow-purple'
+                    : 'bg-slate-800/90 text-slate-400 border-slate-700 hover:text-white'
                     }`}
                   title="Toggle 2D/3D Reserve Probability Field (Indicator Kriging)"
                 >
@@ -578,8 +578,8 @@ export const ReserveMapPage: React.FC = () => {
                     setIsProbabilityControlOpen(!isProbabilityControlOpen);
                   }}
                   className={`p-1.5 rounded-lg text-xs border transition shrink-0 relative ${isProbabilityControlOpen || minProbabilityCutoff !== 25 || gradeCutoffMn !== 20
-                      ? 'bg-indigo-600 text-white border-indigo-400'
-                      : 'bg-slate-800/80 text-slate-300 border-slate-700 hover:bg-slate-700 hover:text-white'
+                    ? 'bg-indigo-600 text-white border-indigo-400'
+                    : 'bg-slate-800/80 text-slate-300 border-slate-700 hover:bg-slate-700 hover:text-white'
                     }`}
                   title="Probability & Cutoff Filter Controls"
                 >
@@ -608,8 +608,8 @@ export const ReserveMapPage: React.FC = () => {
                 <button
                   onClick={() => setIsLayersOpen(!isLayersOpen)}
                   className={`p-1.5 rounded-lg text-xs font-semibold border transition flex items-center gap-1 shrink-0 ${isLayersOpen
-                      ? 'bg-purple-600 text-white border-purple-500 shadow-glow-purple'
-                      : 'bg-slate-800/80 text-slate-300 border-slate-700 hover:bg-slate-700 hover:text-white'
+                    ? 'bg-purple-600 text-white border-purple-500 shadow-glow-purple'
+                    : 'bg-slate-800/80 text-slate-300 border-slate-700 hover:bg-slate-700 hover:text-white'
                     }`}
                   title="Toggle GIS Overlays & Base Imagery"
                 >
@@ -664,8 +664,8 @@ export const ReserveMapPage: React.FC = () => {
                   <button
                     onClick={() => setFilterCategory('ALL')}
                     className={`px-2.5 py-1 rounded-lg font-semibold shrink-0 transition ${filterCategory === 'ALL'
-                        ? 'bg-purple-600 text-white shadow-glow-purple'
-                        : 'bg-slate-950/60 text-slate-400 hover:text-white hover:bg-slate-800'
+                      ? 'bg-purple-600 text-white shadow-glow-purple'
+                      : 'bg-slate-950/60 text-slate-400 hover:text-white hover:bg-slate-800'
                       }`}
                   >
                     All ({allLocations.length})
@@ -673,8 +673,8 @@ export const ReserveMapPage: React.FC = () => {
                   <button
                     onClick={() => setFilterCategory('MINE')}
                     className={`px-2.5 py-1 rounded-lg font-semibold shrink-0 transition flex items-center gap-1 ${filterCategory === 'MINE'
-                        ? 'bg-purple-600 text-white shadow-glow-purple'
-                        : 'bg-slate-950/60 text-slate-400 hover:text-white hover:bg-slate-800'
+                      ? 'bg-purple-600 text-white shadow-glow-purple'
+                      : 'bg-slate-950/60 text-slate-400 hover:text-white hover:bg-slate-800'
                       }`}
                   >
                     ⛏️ Mines ({mines.length})
@@ -682,8 +682,8 @@ export const ReserveMapPage: React.FC = () => {
                   <button
                     onClick={() => setFilterCategory('FACILITY')}
                     className={`px-2.5 py-1 rounded-lg font-semibold shrink-0 transition flex items-center gap-1 ${filterCategory === 'FACILITY'
-                        ? 'bg-cyan-600 text-white shadow-glow-cyan'
-                        : 'bg-slate-950/60 text-slate-400 hover:text-white hover:bg-slate-800'
+                      ? 'bg-cyan-600 text-white shadow-glow-cyan'
+                      : 'bg-slate-950/60 text-slate-400 hover:text-white hover:bg-slate-800'
                       }`}
                   >
                     🏭 Plants ({facilities.length})
@@ -691,8 +691,8 @@ export const ReserveMapPage: React.FC = () => {
                   <button
                     onClick={() => setFilterCategory('EXPLORATION')}
                     className={`px-2.5 py-1 rounded-lg font-semibold shrink-0 transition flex items-center gap-1 ${filterCategory === 'EXPLORATION'
-                        ? 'bg-pink-600 text-white'
-                        : 'bg-slate-950/60 text-slate-400 hover:text-white hover:bg-slate-800'
+                      ? 'bg-pink-600 text-white'
+                      : 'bg-slate-950/60 text-slate-400 hover:text-white hover:bg-slate-800'
                       }`}
                   >
                     🔍 Exploration ({explorationBlocks.length})
@@ -740,8 +740,8 @@ export const ReserveMapPage: React.FC = () => {
                           }
                         }}
                         className={`w-full text-left p-2 rounded-xl text-xs flex items-center justify-between transition ${isSelected
-                            ? 'bg-purple-950/60 border border-purple-600 text-white'
-                            : 'hover:bg-slate-800/70 text-slate-300'
+                          ? 'bg-purple-950/60 border border-purple-600 text-white'
+                          : 'hover:bg-slate-800/70 text-slate-300'
                           }`}
                       >
                         <div className="space-y-0.5">
@@ -801,8 +801,8 @@ export const ReserveMapPage: React.FC = () => {
                       type="button"
                       onClick={() => setPendingMinProbCutoff(cutoff)}
                       className={`py-1.5 rounded-lg border transition ${pendingMinProbCutoff === cutoff
-                          ? 'bg-purple-600 text-white border-purple-400 shadow-glow-purple font-bold'
-                          : 'bg-slate-950 text-slate-400 border-slate-800 hover:text-white hover:bg-slate-800'
+                        ? 'bg-purple-600 text-white border-purple-400 shadow-glow-purple font-bold'
+                        : 'bg-slate-950 text-slate-400 border-slate-800 hover:text-white hover:bg-slate-800'
                         }`}
                     >
                       {cutoff === 85 ? 'Proved (85%)' : cutoff === 70 ? 'Probable (70%)' : cutoff === 50 ? 'Inferred (50%)' : 'All (25%)'}
@@ -824,8 +824,8 @@ export const ReserveMapPage: React.FC = () => {
                       type="button"
                       onClick={() => setPendingGradeCutoffMn(g)}
                       className={`py-1.5 rounded-lg border transition ${pendingGradeCutoffMn === g
-                          ? 'bg-emerald-600 text-white border-emerald-400 font-bold'
-                          : 'bg-slate-950 text-slate-400 border-slate-800 hover:text-white hover:bg-slate-800'
+                        ? 'bg-emerald-600 text-white border-emerald-400 font-bold'
+                        : 'bg-slate-950 text-slate-400 border-slate-800 hover:text-white hover:bg-slate-800'
                         }`}
                     >
                       {g === 44 ? 'High (>=44%)' : g === 35 ? 'Med (>=35%)' : 'Low (>=20%)'}
@@ -866,8 +866,8 @@ export const ReserveMapPage: React.FC = () => {
                   type="button"
                   onClick={handleApplyFilters}
                   className={`flex-1 py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-lg ${isFilterDirty
-                      ? 'bg-gradient-to-r from-purple-600 via-purple-500 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white shadow-glow-purple ring-2 ring-purple-400/80'
-                      : 'bg-purple-600 hover:bg-purple-500 text-white'
+                    ? 'bg-gradient-to-r from-purple-600 via-purple-500 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white shadow-glow-purple ring-2 ring-purple-400/80'
+                    : 'bg-purple-600 hover:bg-purple-500 text-white'
                     }`}
                 >
                   <Check className="w-4 h-4" />
@@ -919,8 +919,8 @@ export const ReserveMapPage: React.FC = () => {
                       type="button"
                       onClick={() => setBaseLayer(key as BaseLayerType)}
                       className={`p-1.5 rounded-lg text-left font-semibold flex items-center gap-1.5 transition ${baseLayer === key
-                          ? 'bg-purple-600 text-white shadow-glow-purple'
-                          : 'bg-slate-950/70 text-slate-300 hover:text-white hover:bg-slate-800'
+                        ? 'bg-purple-600 text-white shadow-glow-purple'
+                        : 'bg-slate-950/70 text-slate-300 hover:text-white hover:bg-slate-800'
                         }`}
                     >
                       <span className="text-xs">{config.icon}</span>
@@ -1397,8 +1397,8 @@ export const ReserveMapPage: React.FC = () => {
               <button
                 onClick={() => setInspectorTab('PROBABILITY')}
                 className={`flex-1 py-1.5 rounded-lg font-bold transition flex items-center justify-center gap-1 ${inspectorTab === 'PROBABILITY'
-                    ? 'bg-purple-600 text-white shadow-glow-purple'
-                    : 'text-slate-400 hover:text-white'
+                  ? 'bg-purple-600 text-white shadow-glow-purple'
+                  : 'text-slate-400 hover:text-white'
                   }`}
               >
                 <Target className="w-3.5 h-3.5" />
@@ -1407,8 +1407,8 @@ export const ReserveMapPage: React.FC = () => {
               <button
                 onClick={() => setInspectorTab('ASSAYS')}
                 className={`flex-1 py-1.5 rounded-lg font-bold transition flex items-center justify-center gap-1 ${inspectorTab === 'ASSAYS'
-                    ? 'bg-purple-600 text-white shadow-glow-purple'
-                    : 'text-slate-400 hover:text-white'
+                  ? 'bg-purple-600 text-white shadow-glow-purple'
+                  : 'text-slate-400 hover:text-white'
                   }`}
               >
                 <Database className="w-3.5 h-3.5" />
@@ -1417,8 +1417,8 @@ export const ReserveMapPage: React.FC = () => {
               <button
                 onClick={() => setInspectorTab('RE_ESTIMATE')}
                 className={`flex-1 py-1.5 rounded-lg font-bold transition flex items-center justify-center gap-1 ${inspectorTab === 'RE_ESTIMATE'
-                    ? 'bg-purple-600 text-white shadow-glow-purple'
-                    : 'text-slate-400 hover:text-white'
+                  ? 'bg-purple-600 text-white shadow-glow-purple'
+                  : 'text-slate-400 hover:text-white'
                   }`}
               >
                 <Sparkles className="w-3.5 h-3.5" />
@@ -1433,8 +1433,8 @@ export const ReserveMapPage: React.FC = () => {
                   <div className="flex items-center justify-between">
                     <span
                       className={`text-[10px] px-2 py-0.5 rounded-full font-mono uppercase font-bold border ${selectedProbabilityCell
-                          ? getProbabilityColor(selectedProbabilityCell.probabilityPct).bgBadge
-                          : 'bg-purple-950 text-purple-300 border-purple-800'
+                        ? getProbabilityColor(selectedProbabilityCell.probabilityPct).bgBadge
+                        : 'bg-purple-950 text-purple-300 border-purple-800'
                         }`}
                     >
                       {selectedProbabilityCell

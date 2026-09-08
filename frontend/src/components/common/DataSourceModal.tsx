@@ -62,8 +62,8 @@ export const DataSourceModal: React.FC<DataSourceModalProps> = ({
           <div className="flex items-center gap-2.5">
             <div
               className={`p-2 rounded-xl border ${source?.isSynthetic
-                  ? 'bg-amber-950/80 border-amber-800 text-amber-400'
-                  : 'bg-emerald-950/80 border-emerald-800 text-emerald-400'
+                ? 'bg-amber-950/80 border-amber-800 text-amber-400'
+                : 'bg-emerald-950/80 border-emerald-800 text-emerald-400'
                 }`}
             >
               {source?.isSynthetic ? <AlertTriangle className="w-5 h-5" /> : <ShieldCheck className="w-5 h-5" />}
@@ -95,8 +95,8 @@ export const DataSourceModal: React.FC<DataSourceModalProps> = ({
             {/* Status Callout Banner */}
             <div
               className={`p-3.5 rounded-2xl border flex items-start gap-3 ${source.isSynthetic
-                  ? 'bg-amber-950/40 border-amber-800/80 text-amber-200'
-                  : 'bg-emerald-950/40 border-emerald-800/80 text-emerald-200'
+                ? 'bg-amber-950/40 border-amber-800/80 text-amber-200'
+                : 'bg-emerald-950/40 border-emerald-800/80 text-emerald-200'
                 }`}
             >
               {source.isSynthetic ? (

@@ -29,45 +29,52 @@ const login = async (req, res) => {
         }
         const cleanEmail = (email || '').toLowerCase().trim();
         const cleanPass = (password || '').trim();
-        let user = await store_1.store.findUserByEmail(cleanEmail);
+        const user = await store_1.store.findUserByEmail(cleanEmail);
         if (!user) {
-            // Auto-provision unseeded or new user as APPROVED
-            let assignedRole = 'MINE_PLANNER';
-            let assignedDept = 'Balaghat Planning Division';
-            if (cleanEmail.includes('admin') || cleanEmail === 'vaishayvinayak@gmail.com' || cleanEmail.includes('vinayak')) {
-                assignedRole = 'ADMIN';
-                assignedDept = 'Executive Directorate of Mining & Exploration';
-            }
-            else if (cleanEmail.includes('auditor') || cleanEmail.includes('steel') || cleanEmail.includes('ministry')) {
-                assignedRole = 'VIEWER';
-                assignedDept = 'Ministry of Steel (Govt. of India) - Oversight Cell';
-            }
-            const namePart = cleanEmail.split('@')[0].replace(/[._-]/g, ' ');
-            const displayName = namePart ? namePart.charAt(0).toUpperCase() + namePart.slice(1) : 'MOIL Personnel';
-            user = await store_1.store.createUser({
-                name: displayName,
-                email: cleanEmail,
-                passwordHash: bcryptjs_1.default.hashSync(cleanPass, 10),
-                role: assignedRole,
-                department: assignedDept,
-                status: 'APPROVED',
-                emailVerified: true,
-                mineAccess: assignedRole === 'MINE_PLANNER' ? ['mine-balaghat-01', 'mine-dongri-02', 'mine-kandri-03'] : ['ALL'],
-                isGoogleAuth: false,
-                createdAt: new Date(),
-                updatedAt: new Date()
+            return res.status(401).json({
+                success: false,
+                message: 'Invalid email or password. Please verify your credentials.'
             });
         }
-        else {
-            // Update password hash if needed and ensure status is approved
-            await store_1.store.updateUser(user._id || user.id, {
-                status: 'APPROVED',
-                emailVerified: true,
-                passwordHash: bcryptjs_1.default.hashSync(cleanPass, 10),
-                lastLogin: new Date()
+        // Verify Password
+        const isPasswordValid = bcryptjs_1.default.compareSync(cleanPass, user.passwordHash);
+        if (!isPasswordValid) {
+            return res.status(401).json({
+                success: false,
+                message: 'Invalid email or password. Please verify your credentials.'
             });
-            user.status = 'APPROVED';
         }
+        // Verify User Status
+        const userStatus = user.status || 'APPROVED';
+        if (userStatus === 'PENDING') {
+            return res.status(403).json({
+                success: false,
+                status: 'PENDING',
+                message: 'Your account is waiting for administrator approval.'
+            });
+        }
+        if (userStatus === 'REJECTED') {
+            return res.status(403).json({
+                success: false,
+                status: 'REJECTED',
+                message: user.rejectionReason
+                    ? `Your registration request was not approved: ${user.rejectionReason}`
+                    : 'Your registration request was not approved.'
+            });
+        }
+        if (userStatus === 'SUSPENDED') {
+            return res.status(403).json({
+                success: false,
+                status: 'SUSPENDED',
+                message: user.suspensionReason
+                    ? `Your account has been suspended: ${user.suspensionReason}. Please contact the administrator.`
+                    : 'Your account has been suspended. Please contact the administrator.'
+            });
+        }
+        // Update last login timestamp
+        await store_1.store.updateUser(user._id || user.id, {
+            lastLogin: new Date()
+        });
         const token = generateToken(user);
         setAuthCookie(res, token);
         return res.status(200).json({
@@ -79,7 +86,7 @@ const login = async (req, res) => {
                 name: user.name,
                 email: user.email,
                 role: user.role,
-                status: 'APPROVED',
+                status: userStatus,
                 department: user.department,
                 mineAccess: user.mineAccess || ['ALL'],
                 isGoogleAuth: user.isGoogleAuth || false,
@@ -96,72 +103,50 @@ exports.login = login;
 const register = async (req, res) => {
     try {
         const { name, email, password, role, department, purpose } = req.body;
-        if (!email) {
-            return res.status(400).json({ success: false, message: 'Email address is required.' });
+        if (!name || !email || !password) {
+            return res.status(400).json({ success: false, message: 'Full name, email address, and password are required.' });
+        }
+        if (password.length < 6) {
+            return res.status(400).json({ success: false, message: 'Password must be at least 6 characters long.' });
         }
         const cleanEmail = email.toLowerCase().trim();
-        const cleanName = (name || '').trim() || cleanEmail.split('@')[0].replace(/[._-]/g, ' ');
-        const displayName = cleanName.charAt(0).toUpperCase() + cleanName.slice(1);
-        const initialPassword = (password || '').trim() || 'moil@123';
-        const passwordHash = bcryptjs_1.default.hashSync(initialPassword, 10);
         const existing = await store_1.store.findUserByEmail(cleanEmail);
         if (existing) {
-            // Update existing account credentials and details cleanly instead of erroring
-            await store_1.store.updateUser(existing._id || existing.id, {
-                name: displayName,
-                passwordHash,
-                role: role || existing.role || 'MINE_PLANNER',
-                department: department?.trim() || existing.department || 'Mine Planning & Geology',
-                status: 'APPROVED',
-                emailVerified: true,
-                suspensionReason: purpose ? `Purpose: ${purpose}` : undefined,
-                lastLogin: new Date()
-            });
-            const token = generateToken(existing);
-            setAuthCookie(res, token);
-            return res.status(200).json({
-                success: true,
-                status: 'APPROVED',
-                token,
-                message: 'Account registered and approved successfully. Welcome to ReserveIQ!',
-                user: {
-                    id: existing._id || existing.id,
-                    name: displayName,
-                    email: existing.email,
-                    role: role || existing.role || 'MINE_PLANNER',
-                    department: department?.trim() || existing.department || 'Mine Planning & Geology',
-                    status: 'APPROVED'
-                }
-            });
+            return res.status(400).json({ success: false, message: 'An account with this email address is already registered.' });
         }
+        const passwordHash = bcryptjs_1.default.hashSync(password, 10);
         const newUser = await store_1.store.createUser({
-            name: displayName,
+            name: name.trim(),
             email: cleanEmail,
             passwordHash,
             role: role || 'MINE_PLANNER',
-            department: department?.trim() || 'Mine Planning & Geology',
-            status: 'APPROVED',
-            emailVerified: true,
-            mineAccess: role === 'MINE_PLANNER' ? ['mine-balaghat-01', 'mine-dongri-02', 'mine-kandri-03'] : ['ALL'],
+            department: department || 'Mine Planning & Geology',
+            status: 'PENDING',
+            emailVerified: false,
+            mineAccess: ['ALL'],
             isGoogleAuth: false,
             createdAt: new Date(),
             updatedAt: new Date(),
             suspensionReason: purpose ? `Purpose: ${purpose}` : undefined
         });
-        const token = generateToken(newUser);
-        setAuthCookie(res, token);
+        // Send Registration Received notification email
+        try {
+            await emailService_1.emailService.sendRegistrationReceivedEmail(cleanEmail, name.trim());
+        }
+        catch (mailErr) {
+            console.warn('[Auth] Registration email delivery notice:', mailErr);
+        }
         return res.status(201).json({
             success: true,
-            status: 'APPROVED',
-            token,
-            message: 'Your account has been registered and approved successfully. Welcome to ReserveIQ!',
+            status: 'PENDING',
+            message: 'Your registration request has been submitted. Please wait for administrator approval.',
             user: {
                 id: newUser._id || newUser.id,
                 name: newUser.name,
                 email: newUser.email,
                 role: newUser.role,
                 department: newUser.department,
-                status: 'APPROVED'
+                status: 'PENDING'
             }
         });
     }

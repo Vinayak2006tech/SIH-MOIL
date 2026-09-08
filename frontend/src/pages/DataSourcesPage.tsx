@@ -104,8 +104,8 @@ export const DataSourcesPage: React.FC = () => {
               key={tab.id}
               onClick={() => setSelectedFilter(tab.id)}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${selectedFilter === tab.id
-                  ? 'bg-purple-600 text-white shadow-glow-purple'
-                  : 'bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800'
+                ? 'bg-purple-600 text-white shadow-glow-purple'
+                : 'bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800'
                 }`}
             >
               {tab.label}
@@ -139,12 +139,12 @@ export const DataSourcesPage: React.FC = () => {
               <div
                 key={source.sourceId}
                 className={`glass-panel p-5 rounded-2xl border transition-all duration-200 space-y-3 ${isSyn
-                    ? 'border-amber-800/80 bg-amber-950/20 hover:border-amber-700'
-                    : isSat
-                      ? 'border-cyan-800/80 bg-cyan-950/20 hover:border-cyan-700'
-                      : isGov
-                        ? 'border-blue-800/80 bg-blue-950/20 hover:border-blue-700'
-                        : 'border-emerald-800/80 bg-emerald-950/20 hover:border-emerald-700'
+                  ? 'border-amber-800/80 bg-amber-950/20 hover:border-amber-700'
+                  : isSat
+                    ? 'border-cyan-800/80 bg-cyan-950/20 hover:border-cyan-700'
+                    : isGov
+                      ? 'border-blue-800/80 bg-blue-950/20 hover:border-blue-700'
+                      : 'border-emerald-800/80 bg-emerald-950/20 hover:border-emerald-700'
                   }`}
               >
                 {/* Card Header */}

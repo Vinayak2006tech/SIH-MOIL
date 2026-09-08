@@ -224,10 +224,10 @@ export const EquipmentPage: React.FC = () => {
             <div
               key={eq.code}
               className={`glass-panel rounded-2xl p-5 border transition-all duration-200 ${isBreakdown
-                  ? 'border-red-800/80 bg-red-950/20 shadow-glow-red'
-                  : isMaintenance
-                    ? 'border-amber-800/80 bg-amber-950/20'
-                    : 'border-slate-800 hover:border-slate-700'
+                ? 'border-red-800/80 bg-red-950/20 shadow-glow-red'
+                : isMaintenance
+                  ? 'border-amber-800/80 bg-amber-950/20'
+                  : 'border-slate-800 hover:border-slate-700'
                 }`}
             >
               {/* Header */}
@@ -242,10 +242,10 @@ export const EquipmentPage: React.FC = () => {
 
                 <span
                   className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase font-mono ${isBreakdown
-                      ? 'bg-red-950 text-red-400 border border-red-800 animate-pulse'
-                      : isMaintenance
-                        ? 'bg-amber-950 text-amber-400 border border-amber-800'
-                        : 'bg-emerald-950 text-emerald-400 border border-emerald-800'
+                    ? 'bg-red-950 text-red-400 border border-red-800 animate-pulse'
+                    : isMaintenance
+                      ? 'bg-amber-950 text-amber-400 border border-amber-800'
+                      : 'bg-emerald-950 text-emerald-400 border border-emerald-800'
                     }`}
                 >
                   {eq.status.replace(/_/g, ' ')}

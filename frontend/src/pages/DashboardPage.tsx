@@ -271,8 +271,8 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ setActiveTab }) =>
                 key={days}
                 onClick={() => setHorizonDays(days)}
                 className={`px-2.5 py-1 text-xs font-bold rounded-md transition ${horizonDays === days
-                    ? 'bg-purple-600 text-white shadow-glow-purple'
-                    : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                  ? 'bg-purple-600 text-white shadow-glow-purple'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
                   }`}
               >
                 {days} Days
