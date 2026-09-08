@@ -29,8 +29,7 @@ import {
   MOCK_PRODUCTION_LOGS,
   MOCK_DASHBOARD_SUMMARY
 } from './mockData';
-
-const API_BASE = import.meta.env.VITE_API_URL || '/api';
+import { API_BASE } from './API_BASE';
 
 export const apiClient = axios.create({
   baseURL: API_BASE,

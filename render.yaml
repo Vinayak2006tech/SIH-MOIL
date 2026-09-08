@@ -1,4 +1,5 @@
 services:
+  # Node.js + Express + MongoDB REST API Backend
   - type: web
     name: moil-reserveiq-backend
     env: node
@@ -26,3 +27,21 @@ services:
         sync: false
       - key: CORS_ORIGIN
         sync: false
+      - key: ML_SERVICE_URL
+        fromService:
+          name: moil-reserveiq-ml
+          type: web
+          property: host
+
+  # Python + FastAPI + Scikit-learn AI/ML Microservice
+  - type: web
+    name: moil-reserveiq-ml
+    env: python
+    plan: free
+    rootDir: ml-service
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.8
