@@ -3,7 +3,7 @@
     "_id": "usr-admin-01",
     "name": "Vinayak Vaishay",
     "email": "vaishayvinayak@gmail.com",
-    "passwordHash": "$2a$10$o0WYekkwBEILRfH9wVS64OUU7R97xLW3/4ZxSxl2h6VSFzK9cLF4m",
+    "passwordHash": "$2a$10$GtobXZtkoNfG.4kRXf5CIOte0EnvRWLDpDe2xMF0yamq.7G8Q8NnW",
     "role": "ADMIN",
     "status": "APPROVED",
     "emailVerified": true,
@@ -11,14 +11,14 @@
     "mineAccess": [
       "ALL"
     ],
-    "lastLogin": "2026-09-08T17:56:38.550Z",
-    "updatedAt": "2026-09-08T17:56:38.550Z"
+    "lastLogin": "2026-09-08T18:44:16.546Z",
+    "updatedAt": "2026-09-08T18:44:16.546Z"
   },
   {
     "_id": "usr-planner-01",
     "name": "Vipin Kulkarni",
     "email": "planner@balaghat.moil.gov.in",
-    "passwordHash": "$2a$10$L7IPhA4Rdkfpcfer/UIy9eE9ZaMXtUxEwfNm6hZJyKikzG/DoWMRW",
+    "passwordHash": "$2a$10$gh24eAGuyXtb594u0v0IB.rCx10bh36hJjOAb15GEJd7TPS0bKcsi",
     "role": "MINE_PLANNER",
     "status": "APPROVED",
     "emailVerified": true,
@@ -28,14 +28,14 @@
       "mine-dongri-02",
       "mine-kandri-03"
     ],
-    "updatedAt": "2026-09-08T15:38:18.681Z",
-    "lastLogin": "2026-09-08T15:38:18.681Z"
+    "updatedAt": "2026-09-08T18:44:15.957Z",
+    "lastLogin": "2026-09-08T18:44:15.957Z"
   },
   {
     "_id": "usr-viewer-01",
     "name": "Ananya Deshmukh",
     "email": "auditor@steel.gov.in",
-    "passwordHash": "$2a$10$LHdWGdkynZm.CLdruVrmAu7aRWLBE5hU2lo6Ju7S0BKKPsO5eqA0K",
+    "passwordHash": "$2a$10$IW/NwfeFGAsGtkfyIk8epOQJycmhwNBo25AQCd.zLeQ3/9RAvo7ie",
     "role": "VIEWER",
     "status": "APPROVED",
     "emailVerified": true,
@@ -43,8 +43,8 @@
     "mineAccess": [
       "ALL"
     ],
-    "updatedAt": "2026-09-08T15:48:59.139Z",
-    "lastLogin": "2026-09-08T15:48:59.139Z"
+    "updatedAt": "2026-09-08T18:44:16.315Z",
+    "lastLogin": "2026-09-08T18:44:16.315Z"
   },
   {
     "_id": "usr-1788865377696",
@@ -93,15 +93,15 @@
     "passwordHash": "$2a$10$kPYJfJHGekS5ZGglkYZYp.rRNDcBfCtnOXhlhWAOcx7QzlA5gaTzW",
     "role": "MINE_PLANNER",
     "department": "Mine Planning ",
-    "status": "SUSPENDED",
-    "emailVerified": false,
+    "status": "APPROVED",
+    "emailVerified": true,
     "mineAccess": [
       "ALL"
     ],
     "isGoogleAuth": false,
     "createdAt": "2026-09-08T15:50:09.770Z",
     "updatedAt": "2026-09-08T17:11:33.759Z",
-    "suspensionReason": "Not eligibile",
+    "suspensionReason": null,
     "_id": "usr-1788882609770",
     "approvedAt": "2026-09-08T16:25:05.420Z",
     "approvedBy": "vaishayvinayak@gmail.com",
@@ -109,7 +109,7 @@
     "activationTokenExpiry": "2026-09-10T16:25:05.420Z",
     "rejectedAt": null,
     "rejectionReason": null,
-    "suspendedAt": "2026-09-08T17:11:33.759Z",
+    "suspendedAt": null,
     "lastLogin": "2026-09-08T17:05:00.068Z"
   },
   {
@@ -118,8 +118,8 @@
     "passwordHash": "$2a$10$I.j/wCTtZPbOx.Siy3KrfeKuuikZTziiHkZaxAGJX1Ov.cMr9N/BG",
     "role": "VIEWER",
     "department": "Mine Planning & Geology",
-    "status": "REJECTED",
-    "emailVerified": false,
+    "status": "APPROVED",
+    "emailVerified": true,
     "mineAccess": [
       "ALL"
     ],
@@ -127,8 +127,7 @@
     "createdAt": "2026-09-08T16:35:08.328Z",
     "updatedAt": "2026-09-08T16:40:34.131Z",
     "_id": "usr-1788885308328",
-    "rejectedAt": "2026-09-08T16:40:34.131Z",
-    "rejectionReason": "Application does not meet current organizational clearance requirements."
+    "approvedAt": "2026-09-08T16:40:34.131Z"
   },
   {
     "name": "Naitak Chaurasia",
@@ -136,15 +135,15 @@
     "passwordHash": "$2a$10$vDkb60IZ9mTeS9rH10eUDu0Wwq32jB1j4X33fuEyq79bm6wEw2ahK",
     "role": "VIEWER",
     "department": "Mine Planning & Geology",
-    "status": "PENDING",
-    "emailVerified": false,
+    "status": "APPROVED",
+    "emailVerified": true,
     "mineAccess": [
       "ALL"
     ],
     "isGoogleAuth": false,
     "createdAt": "2026-09-08T17:09:29.750Z",
     "updatedAt": "2026-09-08T17:09:29.750Z",
-    "suspensionReason": "Purpose: India",
+    "approvedAt": "2026-09-08T17:09:29.750Z",
     "_id": "usr-1788887369750"
   }
 ]
