@@ -6,9 +6,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.config = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
-dotenv_1.default.config({ path: path_1.default.resolve(__dirname, '../../.env') });
+const fs_1 = __importDefault(require("fs"));
+// Try loading from backend/.env first, then root .env, then current working dir
+const candidatePaths = [
+    path_1.default.resolve(__dirname, '../../.env'),
+    path_1.default.resolve(__dirname, '../../../.env'),
+    path_1.default.resolve(process.cwd(), '.env'),
+    path_1.default.resolve(process.cwd(), 'backend/.env')
+];
+for (const envPath of candidatePaths) {
+    if (fs_1.default.existsSync(envPath)) {
+        dotenv_1.default.config({ path: envPath });
+    }
+}
 exports.config = {
-    PORT: process.env.PORT || 5001,
+    PORT: parseInt(process.env.PORT || '5001', 10),
     NODE_ENV: process.env.NODE_ENV || 'development',
     MONGO_URI: process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/moil_reserveiq',
     JWT_SECRET: process.env.JWT_SECRET || 'moil_reserveiq_secret_super_secure_key_2026',

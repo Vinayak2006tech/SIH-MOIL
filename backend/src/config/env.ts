@@ -1,10 +1,23 @@
 import dotenv from 'dotenv';
 import path from 'path';
+import fs from 'fs';
 
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+// Try loading from backend/.env first, then root .env, then current working dir
+const candidatePaths = [
+  path.resolve(__dirname, '../../.env'),
+  path.resolve(__dirname, '../../../.env'),
+  path.resolve(process.cwd(), '.env'),
+  path.resolve(process.cwd(), 'backend/.env')
+];
+
+for (const envPath of candidatePaths) {
+  if (fs.existsSync(envPath)) {
+    dotenv.config({ path: envPath });
+  }
+}
 
 export const config = {
-  PORT: process.env.PORT || 5001,
+  PORT: parseInt(process.env.PORT || '5001', 10),
   NODE_ENV: process.env.NODE_ENV || 'development',
   MONGO_URI: process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/moil_reserveiq',
   JWT_SECRET: process.env.JWT_SECRET || 'moil_reserveiq_secret_super_secure_key_2026',

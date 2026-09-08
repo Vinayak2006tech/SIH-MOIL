@@ -11,7 +11,7 @@ const connectDB = async () => {
     try {
         mongoose_1.default.set('strictQuery', false);
         const conn = await mongoose_1.default.connect(env_1.config.MONGO_URI, {
-            serverSelectionTimeoutMS: 2000 // Quick timeout to fallback if no Mongo running
+            serverSelectionTimeoutMS: 10000 // 10s timeout for cloud MongoDB Atlas cluster
         });
         exports.isMongoConnected = true;
         console.log(`[Database] MongoDB Connected successfully to: ${conn.connection.host}`);
@@ -19,7 +19,7 @@ const connectDB = async () => {
     }
     catch (error) {
         exports.isMongoConnected = false;
-        console.warn(`[Database] MongoDB connection failed (${error.message}).`);
+        console.warn(`[Database] MongoDB connection notice (${error.message}).`);
         console.log(`[Database] Initializing High-Performance In-Memory Repository Fallback mode.`);
         return false;
     }
