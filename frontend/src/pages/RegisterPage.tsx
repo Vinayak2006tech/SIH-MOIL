@@ -81,43 +81,60 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({ onGoToLogin }) => {
         {submitted ? (
           /* Confirmation Screen after Registration */
           <div className="space-y-6 text-center py-4 animate-fadeIn">
-            <div className="w-20 h-20 bg-emerald-500/15 border-2 border-emerald-500/40 rounded-3xl flex items-center justify-center mx-auto text-emerald-400 shadow-glow-emerald">
-              <CheckCircle2 className="w-10 h-10 animate-pulse" />
+            <div className="w-20 h-20 bg-amber-500/15 border-2 border-amber-500/40 rounded-3xl flex items-center justify-center mx-auto text-amber-400 shadow-glow-amber">
+              <Clock className="w-10 h-10 animate-pulse" />
             </div>
 
             <div className="space-y-2">
               <h2 className="text-2xl font-black text-white tracking-tight">
-                Personnel Registration Successful
+                Registration Request Submitted
               </h2>
-              <p className="text-xs text-emerald-300 font-semibold uppercase tracking-wider">
-                Status: Account Approved & Cleared
+              <p className="text-xs text-amber-300 font-semibold uppercase tracking-wider">
+                Status: Pending Administrator Approval
               </p>
               <p className="text-xs text-slate-300 leading-relaxed max-w-sm mx-auto pt-2">
-                Your official credentials for <strong className="text-purple-300">{email}</strong> have been registered in the MOIL ReserveIQ registry. You can now sign in immediately.
+                Your request has been submitted to the MOIL ReserveIQ administrator. Please wait for official approval.
               </p>
             </div>
 
-            {/* Quick summary info */}
-            <div className="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 text-left space-y-2 text-xs">
-              <div className="flex items-center justify-between text-slate-300">
-                <span className="text-slate-400">Registered Name:</span>
-                <span className="font-semibold text-white">{name}</span>
+            {/* Steps explanation */}
+            <div className="bg-slate-950/80 border border-slate-800 rounded-2xl p-4 text-left space-y-3">
+              <div className="flex items-start gap-3 text-xs">
+                <div className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-mono font-bold text-[10px] shrink-0 mt-0.5">
+                  1
+                </div>
+                <div>
+                  <strong className="text-slate-200 block font-semibold">Verification by Directorate</strong>
+                  <span className="text-slate-400 text-[11px]">System administrators review your departmental clearance and assigned mine division.</span>
+                </div>
               </div>
-              <div className="flex items-center justify-between text-slate-300">
-                <span className="text-slate-400">Official Email:</span>
-                <span className="font-mono text-purple-300">{email}</span>
+              <div className="flex items-start gap-3 text-xs">
+                <div className="w-5 h-5 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center font-mono font-bold text-[10px] shrink-0 mt-0.5">
+                  2
+                </div>
+                <div>
+                  <strong className="text-slate-200 block font-semibold">Activation Email Dispatched</strong>
+                  <span className="text-slate-400 text-[11px]">
+                    Once approved, an email with a secure single-use activation link will be sent to <span className="text-purple-300 font-mono">{email}</span>.
+                  </span>
+                </div>
               </div>
-              <div className="flex items-center justify-between text-slate-300">
-                <span className="text-slate-400">Assigned Department:</span>
-                <span className="text-slate-200">{department}</span>
+              <div className="flex items-start gap-3 text-xs">
+                <div className="w-5 h-5 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-mono font-bold text-[10px] shrink-0 mt-0.5">
+                  3
+                </div>
+                <div>
+                  <strong className="text-slate-200 block font-semibold">Instant Platform Access</strong>
+                  <span className="text-slate-400 text-[11px]">Click the link to activate your access and view reserves, boreholes, and AI shortfall simulations.</span>
+                </div>
               </div>
             </div>
 
             <button
               onClick={onGoToLogin}
-              className="w-full py-3.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold rounded-xl shadow-glow-purple transition flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold rounded-xl shadow-glow-purple transition flex items-center justify-center gap-2 cursor-pointer"
             >
-              <span>Proceed to Official Sign In</span>
+              <span>Return to Official Sign In</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
