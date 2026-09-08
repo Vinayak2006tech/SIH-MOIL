@@ -10,11 +10,9 @@ import {
   EyeOff,
   Clock,
   Ban,
-  ShieldAlert,
-  Sparkles
+  ShieldAlert
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import type { UserRole } from '../types';
 
 interface LoginPageProps {
   onGoToRegister: () => void;
@@ -22,7 +20,7 @@ interface LoginPageProps {
 }
 
 export const LoginPage: React.FC<LoginPageProps> = ({ onGoToRegister, onGoToForgotPassword }) => {
-  const { login, demoLogin } = useAuth();
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -54,19 +52,6 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onGoToRegister, onGoToForg
       } else {
         setError(respMsg || 'Invalid email or password. Please verify your credentials.');
       }
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleQuickDemoLogin = async (role: UserRole) => {
-    setError(null);
-    setErrorStatus(null);
-    setLoading(true);
-    try {
-      await demoLogin(role);
-    } catch (err: any) {
-      setError(err.response?.data?.message || 'Demo authentication failed.');
     } finally {
       setLoading(false);
     }
@@ -209,26 +194,14 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onGoToRegister, onGoToForg
           </button>
         </form>
 
-        {/* Demo Access & Registration Link */}
-        <div className="space-y-3 pt-1 border-t border-slate-800/80">
+        {/* Registration Link */}
+        <div className="pt-2 border-t border-slate-800/80 text-center">
           <button
-            type="button"
-            onClick={() => handleQuickDemoLogin('ADMIN')}
-            className="w-full py-2.5 px-3 rounded-xl bg-purple-950/40 hover:bg-purple-900/60 border border-purple-800/80 text-purple-200 text-xs font-semibold flex items-center justify-center gap-1.5 transition cursor-pointer"
+            onClick={onGoToRegister}
+            className="text-xs text-purple-400 hover:text-purple-300 font-semibold transition"
           >
-            <Sparkles className="w-3.5 h-3.5 text-purple-400" />
-            <span>1-Click Admin Access (Demo)</span>
+            Don't have an account? <span className="underline font-bold">Register Official Personnel Account</span>
           </button>
-
-          {/* Registration Link */}
-          <div className="text-center pt-1">
-            <button
-              onClick={onGoToRegister}
-              className="text-xs text-purple-400 hover:text-purple-300 font-semibold transition"
-            >
-              Don't have an account? <span className="underline font-bold">Register Official Personnel Account</span>
-            </button>
-          </div>
         </div>
 
         {/* Security Footer */}
