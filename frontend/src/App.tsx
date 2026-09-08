@@ -39,13 +39,16 @@ const AppContent: React.FC = () => {
     const pathname = window.location.pathname.toLowerCase();
     const params = new URLSearchParams(window.location.search);
     const token = params.get('token');
+    const type = params.get('type')?.toLowerCase();
 
-    if (pathname.includes('/reset-password') || (token && (pathname.includes('reset') || params.get('type') === 'reset'))) {
+    if (pathname.includes('/reset-password') || pathname.includes('/reset') || type === 'reset') {
       setAuthView('reset-password');
-    } else if (pathname.includes('/activate') || token) {
+    } else if (pathname.includes('/activate') || type === 'activate' || (token && !pathname.includes('reset') && type !== 'reset')) {
       setAuthView('activate');
-    } else if (pathname.includes('/forgot-password')) {
+    } else if (pathname.includes('/forgot-password') || pathname.includes('/forgot')) {
       setAuthView('forgot-password');
+    } else if (pathname.includes('/register') || pathname.includes('/signup')) {
+      setAuthView('register');
     }
   }, []);
 
