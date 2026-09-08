@@ -158,7 +158,7 @@ const AppContent: React.FC = () => {
 
       {/* Main Content Area */}
       <div
-        className={`flex-1 transition-all duration-300 flex flex-col min-h-screen w-full ${
+        className={`flex-1 transition-all duration-300 flex flex-col min-h-screen w-full min-w-0 max-w-full ${
           sidebarCollapsed ? 'lg:ml-20' : 'lg:ml-64'
         }`}
       >
@@ -170,7 +170,7 @@ const AppContent: React.FC = () => {
         />
 
         {/* Dynamic Page Canvas */}
-        <main className="flex-1 pb-12 overflow-x-hidden p-4 sm:p-6 lg:p-8">
+        <main className="flex-1 pb-12 overflow-x-hidden p-3 sm:p-6 lg:p-8 min-w-0 max-w-full">
           {renderActivePage()}
         </main>
       </div>

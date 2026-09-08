@@ -11,8 +11,8 @@
     "mineAccess": [
       "ALL"
     ],
-    "lastLogin": "2026-09-08T15:50:26.443Z",
-    "updatedAt": "2026-09-08T15:50:26.443Z"
+    "lastLogin": "2026-09-08T17:56:38.550Z",
+    "updatedAt": "2026-09-08T17:56:38.550Z"
   },
   {
     "_id": "usr-planner-01",
@@ -92,6 +92,49 @@
     "email": "vvaishay9@gmail.com",
     "passwordHash": "$2a$10$kPYJfJHGekS5ZGglkYZYp.rRNDcBfCtnOXhlhWAOcx7QzlA5gaTzW",
     "role": "MINE_PLANNER",
+    "department": "Mine Planning ",
+    "status": "SUSPENDED",
+    "emailVerified": false,
+    "mineAccess": [
+      "ALL"
+    ],
+    "isGoogleAuth": false,
+    "createdAt": "2026-09-08T15:50:09.770Z",
+    "updatedAt": "2026-09-08T17:11:33.759Z",
+    "suspensionReason": "Not eligibile",
+    "_id": "usr-1788882609770",
+    "approvedAt": "2026-09-08T16:25:05.420Z",
+    "approvedBy": "vaishayvinayak@gmail.com",
+    "activationToken": "be0fed1fd80d1b18fc19634c9f4e0b1c290da8f17173cdf66f15d188e1b5f10d",
+    "activationTokenExpiry": "2026-09-10T16:25:05.420Z",
+    "rejectedAt": null,
+    "rejectionReason": null,
+    "suspendedAt": "2026-09-08T17:11:33.759Z",
+    "lastLogin": "2026-09-08T17:05:00.068Z"
+  },
+  {
+    "name": "Priyanshi Pant",
+    "email": "priyanshipant1610@gmail.com",
+    "passwordHash": "$2a$10$I.j/wCTtZPbOx.Siy3KrfeKuuikZTziiHkZaxAGJX1Ov.cMr9N/BG",
+    "role": "VIEWER",
+    "department": "Mine Planning & Geology",
+    "status": "REJECTED",
+    "emailVerified": false,
+    "mineAccess": [
+      "ALL"
+    ],
+    "isGoogleAuth": false,
+    "createdAt": "2026-09-08T16:35:08.328Z",
+    "updatedAt": "2026-09-08T16:40:34.131Z",
+    "_id": "usr-1788885308328",
+    "rejectedAt": "2026-09-08T16:40:34.131Z",
+    "rejectionReason": "Application does not meet current organizational clearance requirements."
+  },
+  {
+    "name": "Naitak Chaurasia",
+    "email": "naitikchaurasia3820@gmail.com",
+    "passwordHash": "$2a$10$vDkb60IZ9mTeS9rH10eUDu0Wwq32jB1j4X33fuEyq79bm6wEw2ahK",
+    "role": "VIEWER",
     "department": "Mine Planning & Geology",
     "status": "PENDING",
     "emailVerified": false,
@@ -99,8 +142,9 @@
       "ALL"
     ],
     "isGoogleAuth": false,
-    "createdAt": "2026-09-08T15:50:09.770Z",
-    "updatedAt": "2026-09-08T15:50:09.770Z",
-    "_id": "usr-1788882609770"
+    "createdAt": "2026-09-08T17:09:29.750Z",
+    "updatedAt": "2026-09-08T17:09:29.750Z",
+    "suspensionReason": "Purpose: India",
+    "_id": "usr-1788887369750"
   }
 ]

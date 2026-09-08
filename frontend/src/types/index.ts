@@ -32,7 +32,7 @@ export interface DataSource {
 export type UserStatus = 'PENDING' | 'APPROVED' | 'REJECTED' | 'SUSPENDED';
 
 export interface User {
-  _id: string;
+  _id?: string;
   id?: string;
   name: string;
   email: string;

@@ -67,7 +67,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
   }, [mobileOpen, setMobileOpen]);
 
   const navItems = [
-    { id: 'landing', label: 'Welcome Portal', icon: Home, badge: 'Overview' },
+    { id: 'landing', label: 'HOME', icon: Home, badge: 'Overview' },
     { id: 'dashboard', label: 'Executive Dashboard', icon: LayoutDashboard },
     { id: 'reserve-map', label: 'GIS Reserve Map', icon: MapPin },
     { id: 'production', label: 'Production Analytics', icon: BarChart3 },

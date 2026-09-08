@@ -36,6 +36,7 @@ apiClient.interceptors.request.use((config) => {
 
 const FALLBACK_DEMO_USERS: Record<string, User> = {
   MINE_PLANNER: {
+    _id: 'usr-planner-01',
     id: 'usr-planner-01',
     name: 'Vipin Kulkarni',
     email: 'planner@balaghat.moil.gov.in',
@@ -45,6 +46,7 @@ const FALLBACK_DEMO_USERS: Record<string, User> = {
     isGoogleAuth: false
   },
   ADMIN: {
+    _id: 'usr-admin-01',
     id: 'usr-admin-01',
     name: 'Vinayak Vaishay (Admin)',
     email: 'vaishayvinayak@gmail.com',
@@ -54,6 +56,7 @@ const FALLBACK_DEMO_USERS: Record<string, User> = {
     isGoogleAuth: false
   },
   VIEWER: {
+    _id: 'usr-viewer-01',
     id: 'usr-viewer-01',
     name: 'Ananya Deshmukh',
     email: 'auditor@steel.gov.in',
@@ -64,7 +67,62 @@ const FALLBACK_DEMO_USERS: Record<string, User> = {
   }
 };
 
-export const api = {
+export interface ApiClient {
+  login: (email: string, password: string) => Promise<{ success: boolean; token: string; user: User; status?: string; message?: string }>;
+  register: (data: any) => Promise<{ success: boolean; token?: string; user?: User; status?: string; message?: string }>;
+  activateAccount: (token: string, password: string) => Promise<{ success: boolean; message: string }>;
+  forgotPassword: (email: string) => Promise<{ success: boolean; message: string }>;
+  resetPassword: (token: string, password: string) => Promise<{ success: boolean; message: string }>;
+  getAdminUsers: (params?: { status?: string; role?: string; search?: string }) => Promise<{ success: boolean; count: number; users: User[] }>;
+  getAdminUserStats: () => Promise<{ totalUsers: number; pendingUsers: number; approvedUsers: number; rejectedUsers: number; suspendedUsers: number }>;
+  approveUser: (id: string, data?: { role?: string; department?: string; mineAccess?: string[] }) => Promise<{ success: boolean; message: string; user: User }>;
+  rejectUser: (id: string, reason?: string) => Promise<{ success: boolean; message: string; user: User }>;
+  suspendUser: (id: string, reason?: string) => Promise<{ success: boolean; message: string; user: User }>;
+  reactivateUser: (id: string) => Promise<{ success: boolean; message: string; user: User }>;
+  updateUserRole: (id: string, data: { role?: string; department?: string; mineAccess?: string[] }) => Promise<{ success: boolean; message: string; user: User }>;
+  deleteUser: (id: string) => Promise<{ success: boolean; message: string }>;
+  loginWithGoogle: (googleData: { email?: string; name?: string; picture?: string; role?: string; department?: string; credential?: string }) => Promise<{ success: boolean; token: string; user: User }>;
+  demoLogin: (role: 'ADMIN' | 'MINE_PLANNER' | 'VIEWER') => Promise<{ success: boolean; token: string; user: User }>;
+  getMe: () => Promise<{ success: boolean; user: User }>;
+  logout: () => Promise<any>;
+  getDataSources: (params?: { dataType?: string; isSynthetic?: boolean }) => Promise<DataSource[]>;
+  getDataSourceById: (id: string) => Promise<DataSource>;
+  getDashboardSummary: () => Promise<DashboardSummary>;
+  getAllMines: () => Promise<Mine[]>;
+  getFacilities: () => Promise<Facility[]>;
+  getExplorationBlocks: () => Promise<ExplorationBlock[]>;
+  getMineById: (mineId: string) => Promise<any>;
+  getMineZones: () => Promise<MineZone[]>;
+  calculateReserves: (payload: any) => Promise<any>;
+  getBoreholes: (mineId?: string) => Promise<Borehole[]>;
+  getOreGradeDistribution: (mineId?: string) => Promise<{ success: boolean; distribution: any[]; totalBoreholes: number }>;
+  getProductionHistory: (mineId?: string, limit?: number) => Promise<ProductionLog[]>;
+  getAnnualProductionSummary: () => Promise<AnnualProductionRecord[]>;
+  getSalesHistory: () => Promise<any[]>;
+  getDowntimeBreakdown: (mineId?: string) => Promise<{ success: boolean; summary: any[]; monthlyDowntime: any[] }>;
+  getCorrelationData: (mineId?: string) => Promise<any[]>;
+  getShortfallRisks: (mineId?: string) => Promise<ShortfallRisk[]>;
+  simulateShortfall: (payload: any) => Promise<{ success: boolean; simulation: ShortfallRisk; prescriptiveActions: any }>;
+  getRecommendations: (mineId?: string, status?: string) => Promise<Recommendation[]>;
+  updateRecommendationStatus: (id: string, status: string, outcomeNote?: string, realizedTonnageGain?: number) => Promise<Recommendation>;
+  getFeedbackLoopHistory: () => Promise<{ success: boolean; metrics: any; feedbackLog: Recommendation[] }>;
+  getEquipmentList: (params?: { mineId?: string; status?: string; type?: string }) => Promise<{ success: boolean; stats: any; equipment: Equipment[] }>;
+  createEquipment: (data: any) => Promise<Equipment>;
+  updateEquipment: (code: string, data: any) => Promise<Equipment>;
+  deleteEquipment: (code: string) => Promise<any>;
+  uploadDrillingCsv: (formData: FormData) => Promise<any>;
+  uploadProductionCsv: (formData: FormData) => Promise<any>;
+  triggerSatelliteSync: (mineId: string) => Promise<{ success: boolean; message: string; telemetry: any }>;
+  getExecutiveReport: (mineId?: string) => Promise<any>;
+  getGlobalMarketOverview: () => Promise<any>;
+  getGlobalReserves: () => Promise<{ success: boolean; countryReserves: any[]; sourceMetadata: any }>;
+  getGlobalTradeFlows: () => Promise<any>;
+  getGlobalPricing: () => Promise<any>;
+  getDeepSeaNodules: () => Promise<any>;
+  getMoilVsGlobalPeers: () => Promise<any[]>;
+}
+
+export const api: ApiClient = {
   // Auth
   login: async (email: string, password: string) => {
     const res = await apiClient.post<{ success: boolean; token: string; user: User; status?: string; message?: string }>('/auth/login', {
@@ -413,3 +471,5 @@ export const api = {
     return res.data.peers;
   }
 };
+
+export default api;

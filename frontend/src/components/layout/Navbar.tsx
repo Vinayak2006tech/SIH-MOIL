@@ -30,7 +30,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onOpenReport, onToggl
 
   const tabTitles: Record<TabType, { title: string; subtitle: string }> = {
     landing: {
-      title: 'MOIL ReserveIQ Welcome Portal',
+      title: 'MOIL ReserveIQ',
       subtitle: 'Space Technology & Geostatistical AI for Manganese Reserve Estimation & Production Shortfall Mitigation'
     },
     dashboard: {
@@ -92,13 +92,8 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onOpenReport, onToggl
         )}
 
         <div>
-          <h2 className="text-sm md:text-base font-bold text-white tracking-tight flex items-center gap-2">
-            <span>{currentTabInfo.title}</span>
-            {selectedMine && activeTab !== 'landing' && (
-              <span className="hidden sm:inline-block text-[10px] font-mono px-2 py-0.5 rounded bg-purple-950/80 text-purple-300 border border-purple-800">
-                {selectedMine.name}
-              </span>
-            )}
+          <h2 className="text-sm md:text-base font-bold text-white tracking-tight">
+            {currentTabInfo.title}
           </h2>
           <p className="text-xs text-slate-400 hidden md:block">{currentTabInfo.subtitle}</p>
         </div>
