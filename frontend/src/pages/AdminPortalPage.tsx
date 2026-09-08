@@ -23,7 +23,7 @@ import {
   RefreshCw,
   Edit3
 } from 'lucide-react';
-import { api } from '../services/api';
+import { api } from '../services/api.1';
 import type { User, UserRole, UserStatus, UserStats } from '../types';
 import { useAuth } from '../context/AuthContext';
 

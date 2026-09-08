@@ -30,7 +30,7 @@ import { KpiCard } from '../components/common/KpiCard';
 import { RiskBadge } from '../components/common/RiskBadge';
 import { ProvenanceBadge } from '../components/common/ProvenanceBadge';
 import { LoadingSkeleton } from '../components/common/LoadingSkeleton';
-import { api } from '../services/api';
+import { api } from '../services/api.1';
 import { useMine } from '../context/MineContext';
 import type { DashboardSummary, ProductionLog, ShortfallRisk } from '../types';
 import type { TabType } from '../components/layout/Sidebar';

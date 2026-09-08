@@ -13,7 +13,7 @@ import {
   FileText
 } from 'lucide-react';
 import type { DataSource, DataSourceType } from '../types';
-import { api } from '../services/api';
+import { api } from '../services/api.1';
 import { LoadingSkeleton } from '../components/common/LoadingSkeleton';
 import { ProvenanceBadge } from '../components/common/ProvenanceBadge';
 

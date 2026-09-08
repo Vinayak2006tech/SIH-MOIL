@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 import { useMine } from '../context/MineContext';
 import { useAuth } from '../context/AuthContext';
-import { api } from '../services/api';
+import { api } from '../services/api.1';
 import type { Equipment } from '../types';
 import { LoadingSkeleton } from '../components/common/LoadingSkeleton';
 import { ProvenanceBadge } from '../components/common/ProvenanceBadge';

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, Printer, Download, FileText, CheckCircle, AlertTriangle } from 'lucide-react';
-import { api } from '../../services/api';
+import { api } from '../../services/api.1';
 import { useMine } from '../../context/MineContext';
 
 interface ExecutiveReportModalProps {

@@ -15,7 +15,6 @@ import type {
   Facility
 } from '../types';
 import {
-  MOCK_USERS,
   MOCK_MINES,
   MOCK_FACILITIES,
   MOCK_EXPLORATION_BLOCKS,
@@ -147,21 +146,25 @@ export const api: ApiClient = {
       throw error;
     }
 
-    // REAL BACKEND LOGIN VIA AXIOS
+    // STRICT REAL BACKEND AUTHENTICATION (NO FALLBACKS, NO BYPASSES)
     const res = await apiClient.post<{ success: boolean; token: string; user: User; status?: string; message?: string }>('/auth/login', {
       email: cleanEmail,
       password: cleanPass
     });
 
-    if (res.data?.token) {
-      localStorage.setItem('moil_token', res.data.token);
-      localStorage.setItem('moil_user', JSON.stringify(res.data.user));
+    if (!res.data || !res.data.token || !res.data.user) {
+      const error: any = new Error('Invalid email or password. Please verify your credentials.');
+      error.response = { status: 401, data: { message: 'Invalid email or password. Please verify your credentials.' } };
+      throw error;
     }
+
+    localStorage.setItem('moil_token', res.data.token);
+    localStorage.setItem('moil_user', JSON.stringify(res.data.user));
     return res.data;
   },
 
   register: async (data: any) => {
-    // REAL BACKEND REGISTRATION VIA AXIOS
+    // REAL BACKEND REGISTRATION (status will be PENDING)
     const res = await apiClient.post<{ success: boolean; token?: string; user?: User; status?: string; message?: string }>('/auth/register', data);
     return res.data;
   },
