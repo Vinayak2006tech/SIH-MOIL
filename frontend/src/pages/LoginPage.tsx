@@ -11,23 +11,69 @@ import {
   EyeOff,
   Clock,
   Ban,
-  ShieldAlert
+  ShieldAlert,
+  Sparkles,
+  UserCheck,
+  Compass,
+  Building
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { GoogleAuthModal } from '../components/common/GoogleAuthModal';
+import type { UserRole } from '../types';
 
 interface LoginPageProps {
   onGoToRegister: () => void;
   onGoToForgotPassword?: () => void;
 }
 
+const PRESET_ACCOUNTS = [
+  {
+    role: 'ADMIN' as UserRole,
+    title: 'Executive Admin',
+    email: 'vaishayvinayak@gmail.com',
+    password: 'vinayak@2006',
+    desc: 'Full approval control & settings',
+    badge: 'Executive',
+    badgeColor: 'bg-purple-950/80 text-purple-300 border-purple-700'
+  },
+  {
+    role: 'MINE_PLANNER' as UserRole,
+    title: 'Mine Planner',
+    email: 'planner@balaghat.moil.gov.in',
+    password: 'planner@123',
+    desc: 'Balaghat / Dongri / Kandri planning',
+    badge: 'Operations',
+    badgeColor: 'bg-blue-950/80 text-blue-300 border-blue-700'
+  },
+  {
+    role: 'VIEWER' as UserRole,
+    title: 'Ministry Auditor',
+    email: 'auditor@steel.gov.in',
+    password: 'auditor@123',
+    desc: 'Ministry of Steel oversight cell',
+    badge: 'Oversight',
+    badgeColor: 'bg-emerald-950/80 text-emerald-300 border-emerald-700'
+  }
+];
+
 export const LoginPage: React.FC<LoginPageProps> = ({ onGoToRegister, onGoToForgotPassword }) => {
-  const { login } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const { login, demoLogin } = useAuth();
+  const [email, setEmail] = useState('vaishayvinayak@gmail.com');
+  const [password, setPassword] = useState('vinayak@2006');
+  const [selectedPreset, setSelectedPreset] = useState<string>('vaishayvinayak@gmail.com');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [errorStatus, setErrorStatus] = useState<'PENDING' | 'REJECTED' | 'SUSPENDED' | null>(null);
   const [loading, setLoading] = useState(false);
+  const [isGoogleModalOpen, setIsGoogleModalOpen] = useState(false);
+
+  const handleSelectPreset = (preset: typeof PRESET_ACCOUNTS[0]) => {
+    setEmail(preset.email);
+    setPassword(preset.password);
+    setSelectedPreset(preset.email);
+    setError(null);
+    setErrorStatus(null);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,21 +97,34 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onGoToRegister, onGoToForg
         setErrorStatus('SUSPENDED');
         setError(respMsg || 'Your account has been suspended by the administrator.');
       } else {
-        setError(respMsg || 'Invalid email or password. Please verify your credentials.');
+        setError(respMsg || 'Invalid email or password. Please verify your credentials or select an official preset above.');
       }
     } finally {
       setLoading(false);
     }
   };
 
+  const handleQuickDemoLogin = async (role: UserRole) => {
+    setError(null);
+    setErrorStatus(null);
+    setLoading(true);
+    try {
+      await demoLogin(role);
+    } catch (err: any) {
+      setError(err.response?.data?.message || 'Demo authentication failed.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-[#080C14] text-slate-100 flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
+    <div className="min-h-screen bg-[#080C14] text-slate-100 flex items-center justify-center p-3 sm:p-6 relative overflow-hidden">
       {/* Ambient background glow orbs */}
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-purple-600/15 rounded-full blur-3xl pointer-events-none animate-pulse" />
       <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-950/20 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="relative w-full max-w-lg glass-panel bg-slate-900/95 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 animate-fadeIn">
+      <div className="relative w-full max-w-xl glass-panel bg-slate-900/95 border border-slate-800 rounded-3xl p-5 sm:p-8 shadow-2xl space-y-5 animate-fadeIn my-auto">
         {/* Top Ministry & GOI Badges */}
         <div className="flex items-center justify-between text-[11px] border-b border-slate-800 pb-3 flex-wrap gap-2">
           <div className="flex items-center gap-2">
@@ -78,24 +137,52 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onGoToRegister, onGoToForg
         </div>
 
         {/* Brand Header */}
-        <div className="text-center space-y-2">
-          <div className="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-br from-purple-500 via-indigo-600 to-purple-800 flex items-center justify-center text-white shadow-glow-purple">
-            <Layers className="w-7 h-7" />
+        <div className="text-center space-y-1.5">
+          <div className="w-12 h-12 sm:w-14 sm:h-14 mx-auto rounded-2xl bg-gradient-to-br from-purple-500 via-indigo-600 to-purple-800 flex items-center justify-center text-white shadow-glow-purple">
+            <Layers className="w-6 h-6 sm:w-7 sm:h-7" />
           </div>
-          <h1 className="text-2xl font-extrabold text-white tracking-tight">
+          <h1 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
             MOIL <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-300">ReserveIQ</span>
           </h1>
-          <p className="text-xs text-slate-300 max-w-sm mx-auto font-medium">
+          <p className="text-xs text-slate-300 max-w-sm mx-auto font-medium leading-relaxed">
             AI-Driven Manganese Ore Reserve Estimation & Production Shortfall Mitigation System
           </p>
         </div>
 
-        {/* Compulsory Authentication Banner */}
-        <div className="p-3 rounded-2xl bg-purple-950/40 border border-purple-800/80 text-xs text-purple-200 flex items-start gap-2.5">
-          <ShieldCheck className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
-          <div className="text-[11px] leading-relaxed">
-            <strong className="text-white block font-semibold">Official Login Compulsory</strong>
-            Please authenticate using your Approved MOIL Credentials to access geological models, UNFC 111 reserves, and AI forecasts.
+        {/* Quick Official Persona Selection */}
+        <div className="space-y-2">
+          <div className="flex items-center justify-between text-[11px] text-slate-400">
+            <span className="font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1">
+              <Sparkles className="w-3.5 h-3.5 text-purple-400" />
+              <span>Select Authorized Role Preset:</span>
+            </span>
+            <span className="text-[10px] text-purple-300 font-mono">1-Click Auto-Fill</span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            {PRESET_ACCOUNTS.map((preset) => {
+              const isSelected = selectedPreset === preset.email && email === preset.email;
+              return (
+                <button
+                  key={preset.email}
+                  type="button"
+                  onClick={() => handleSelectPreset(preset)}
+                  className={`p-2.5 rounded-xl border text-left transition cursor-pointer flex flex-col justify-between gap-1.5 ${
+                    isSelected
+                      ? 'bg-purple-950/60 border-purple-500 shadow-glow-purple text-white'
+                      : 'bg-slate-950/60 border-slate-800 hover:border-slate-700 text-slate-300'
+                  }`}
+                >
+                  <div className="flex items-center justify-between gap-1">
+                    <span className="font-bold text-xs truncate">{preset.title}</span>
+                    <span className={`px-1.5 py-0.2 rounded text-[9px] font-mono border ${preset.badgeColor} shrink-0`}>
+                      {preset.badge}
+                    </span>
+                  </div>
+                  <div className="text-[10px] text-slate-400 font-mono truncate">{preset.email}</div>
+                </button>
+              );
+            })}
           </div>
         </div>
 
@@ -108,9 +195,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onGoToRegister, onGoToForg
                   <Clock className="w-4 h-4 text-amber-400 animate-pulse" />
                   <span>REGISTRATION PENDING APPROVAL</span>
                 </div>
-                <p className="text-xs text-amber-100/90 leading-relaxed">
-                  {error}
-                </p>
+                <p className="text-xs text-amber-100/90 leading-relaxed">{error}</p>
                 <div className="text-[11px] text-amber-300/80 border-t border-amber-800/50 pt-1.5">
                   An activation email will be sent automatically once your department supervisor clears your account.
                 </div>
@@ -121,9 +206,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onGoToRegister, onGoToForg
                   <Ban className="w-4 h-4 text-red-400" />
                   <span>REGISTRATION NOT APPROVED</span>
                 </div>
-                <p className="text-xs text-red-100/90 leading-relaxed">
-                  {error}
-                </p>
+                <p className="text-xs text-red-100/90 leading-relaxed">{error}</p>
                 <div className="text-[11px] text-red-300/80 border-t border-red-800/50 pt-1.5">
                   For clearance inquiries, contact the Directorate of Mine Planning & Exploration.
                 </div>
@@ -134,9 +217,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onGoToRegister, onGoToForg
                   <ShieldAlert className="w-4 h-4 text-rose-400" />
                   <span>ACCOUNT SUSPENDED</span>
                 </div>
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  {error}
-                </p>
+                <p className="text-xs text-slate-300 leading-relaxed">{error}</p>
               </div>
             ) : (
               <div className="p-3.5 rounded-xl bg-red-950/60 border border-red-800/80 text-xs text-red-300 flex items-center gap-2 animate-fadeIn">
@@ -209,24 +290,72 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onGoToRegister, onGoToForg
           </button>
         </form>
 
-        {/* Registration Link */}
-        <div className="text-center pt-1 border-t border-slate-800/80">
-          <button
-            onClick={onGoToRegister}
-            className="text-xs text-purple-400 hover:text-purple-300 font-semibold transition"
-          >
-            Don't have an account? <span className="underline font-bold">Register Official Personnel Account</span>
-          </button>
+        {/* Divider & Google Login / Demo Access */}
+        <div className="space-y-3 pt-1 border-t border-slate-800/80">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <button
+              type="button"
+              onClick={() => setIsGoogleModalOpen(true)}
+              className="py-2.5 px-3 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-700 text-slate-200 text-xs font-semibold flex items-center justify-center gap-2 transition cursor-pointer"
+            >
+              <svg className="w-4 h-4" viewBox="0 0 24 24">
+                <path
+                  fill="#4285F4"
+                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                />
+                <path
+                  fill="#34A853"
+                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                />
+                <path
+                  fill="#FBBC05"
+                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"
+                />
+                <path
+                  fill="#EA4335"
+                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"
+                />
+              </svg>
+              <span>Sign in with Google</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => handleQuickDemoLogin('ADMIN')}
+              className="py-2.5 px-3 rounded-xl bg-purple-950/40 hover:bg-purple-900/60 border border-purple-800/80 text-purple-200 text-xs font-semibold flex items-center justify-center gap-1.5 transition cursor-pointer"
+            >
+              <Sparkles className="w-3.5 h-3.5 text-purple-400" />
+              <span>1-Click Admin Access</span>
+            </button>
+          </div>
+
+          {/* Registration Link */}
+          <div className="text-center pt-1">
+            <button
+              onClick={onGoToRegister}
+              className="text-xs text-purple-400 hover:text-purple-300 font-semibold transition"
+            >
+              Don't have an account? <span className="underline font-bold">Register Official Personnel Account</span>
+            </button>
+          </div>
         </div>
 
         {/* Security Footer */}
-        <div className="flex items-center justify-between text-[10px] text-slate-500 font-mono pt-1">
+        <div className="flex items-center justify-between text-[10px] text-slate-500 font-mono pt-1 border-t border-slate-800/60">
           <span className="flex items-center gap-1">
             <CheckCircle2 className="w-3 h-3 text-emerald-400" /> 256-Bit SSL Encrypted
           </span>
           <span>National Mineral Registry</span>
         </div>
       </div>
+
+      {/* Google Auth Modal */}
+      <GoogleAuthModal
+        isOpen={isGoogleModalOpen}
+        onClose={() => setIsGoogleModalOpen(false)}
+        mode="login"
+        defaultRole="ADMIN"
+      />
     </div>
   );
 };

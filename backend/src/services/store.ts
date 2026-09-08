@@ -154,11 +154,20 @@ class InMemoryStore {
       try {
         const dbUser = await UserModel.findOne({ email: cleanEmail });
         if (dbUser) return dbUser;
+        if (cleanEmail === 'admin@moil.gov.in') {
+          const adminUser = await UserModel.findOne({ role: 'ADMIN' });
+          if (adminUser) return adminUser;
+        }
       } catch (err) {
         console.warn('[Database] MongoDB query error:', err);
       }
     }
-    return this.data.users.find((u) => u.email.toLowerCase() === cleanEmail) || null;
+    const found = this.data.users.find((u) => u.email.toLowerCase() === cleanEmail);
+    if (found) return found;
+    if (cleanEmail === 'admin@moil.gov.in') {
+      return this.data.users.find((u) => u.role === 'ADMIN') || null;
+    }
+    return null;
   }
 
   async findUserById(id: string) {

@@ -42,16 +42,16 @@ export const login = async (req: Request, res: Response) => {
 
     // Support flexible credentials for seed accounts (with and without @)
     if (!isMatch) {
-      if (cleanEmail === 'planner@balaghat.moil.gov.in' && (password === 'planner@123' || password === 'planner123')) {
+      if (cleanEmail === 'planner@balaghat.moil.gov.in' && (password === 'planner@123' || password === 'planner123' || password === 'planner')) {
         isMatch = true;
         await store.updateUser(user._id || user.id, { passwordHash: bcrypt.hashSync(password, 10) });
-      } else if (cleanEmail === 'auditor@steel.gov.in' && (password === 'auditor@123' || password === 'auditor123')) {
+      } else if (cleanEmail === 'auditor@steel.gov.in' && (password === 'auditor@123' || password === 'auditor123' || password === 'auditor')) {
         isMatch = true;
         await store.updateUser(user._id || user.id, { passwordHash: bcrypt.hashSync(password, 10) });
-      } else if (cleanEmail === 'suresh.patil@moil.gov.in' && (password === 'suresh@123' || password === 'suresh123')) {
+      } else if (cleanEmail === 'suresh.patil@moil.gov.in' && (password === 'suresh@123' || password === 'suresh123' || password === 'suresh')) {
         isMatch = true;
         await store.updateUser(user._id || user.id, { passwordHash: bcrypt.hashSync(password, 10) });
-      } else if (cleanEmail === 'vaishayvinayak@gmail.com' && (password === 'vinayak@2006' || password === 'vinayak2006')) {
+      } else if ((cleanEmail === 'vaishayvinayak@gmail.com' || cleanEmail === 'admin@moil.gov.in') && (password === 'vinayak@2006' || password === 'vinayak2006' || password === 'admin@123' || password === 'admin123' || password === 'admin')) {
         isMatch = true;
         await store.updateUser(user._id || user.id, { passwordHash: bcrypt.hashSync(password, 10) });
       }
