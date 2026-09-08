@@ -4,7 +4,6 @@ import {
   Lock,
   Mail,
   ArrowRight,
-  ShieldCheck,
   AlertCircle,
   CheckCircle2,
   Eye,
@@ -12,10 +11,7 @@ import {
   Clock,
   Ban,
   ShieldAlert,
-  Sparkles,
-  UserCheck,
-  Compass,
-  Building
+  Sparkles
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { GoogleAuthModal } from '../components/common/GoogleAuthModal';
@@ -26,54 +22,15 @@ interface LoginPageProps {
   onGoToForgotPassword?: () => void;
 }
 
-const PRESET_ACCOUNTS = [
-  {
-    role: 'ADMIN' as UserRole,
-    title: 'Executive Admin',
-    email: 'vaishayvinayak@gmail.com',
-    password: 'vinayak@2006',
-    desc: 'Full approval control & settings',
-    badge: 'Executive',
-    badgeColor: 'bg-purple-950/80 text-purple-300 border-purple-700'
-  },
-  {
-    role: 'MINE_PLANNER' as UserRole,
-    title: 'Mine Planner',
-    email: 'planner@balaghat.moil.gov.in',
-    password: 'planner@123',
-    desc: 'Balaghat / Dongri / Kandri planning',
-    badge: 'Operations',
-    badgeColor: 'bg-blue-950/80 text-blue-300 border-blue-700'
-  },
-  {
-    role: 'VIEWER' as UserRole,
-    title: 'Ministry Auditor',
-    email: 'auditor@steel.gov.in',
-    password: 'auditor@123',
-    desc: 'Ministry of Steel oversight cell',
-    badge: 'Oversight',
-    badgeColor: 'bg-emerald-950/80 text-emerald-300 border-emerald-700'
-  }
-];
-
 export const LoginPage: React.FC<LoginPageProps> = ({ onGoToRegister, onGoToForgotPassword }) => {
   const { login, demoLogin } = useAuth();
-  const [email, setEmail] = useState('vaishayvinayak@gmail.com');
-  const [password, setPassword] = useState('vinayak@2006');
-  const [selectedPreset, setSelectedPreset] = useState<string>('vaishayvinayak@gmail.com');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [errorStatus, setErrorStatus] = useState<'PENDING' | 'REJECTED' | 'SUSPENDED' | null>(null);
   const [loading, setLoading] = useState(false);
   const [isGoogleModalOpen, setIsGoogleModalOpen] = useState(false);
-
-  const handleSelectPreset = (preset: typeof PRESET_ACCOUNTS[0]) => {
-    setEmail(preset.email);
-    setPassword(preset.password);
-    setSelectedPreset(preset.email);
-    setError(null);
-    setErrorStatus(null);
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -97,7 +54,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onGoToRegister, onGoToForg
         setErrorStatus('SUSPENDED');
         setError(respMsg || 'Your account has been suspended by the administrator.');
       } else {
-        setError(respMsg || 'Invalid email or password. Please verify your credentials or select an official preset above.');
+        setError(respMsg || 'Invalid email or password. Please verify your credentials.');
       }
     } finally {
       setLoading(false);
@@ -149,42 +106,6 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onGoToRegister, onGoToForg
           </p>
         </div>
 
-        {/* Quick Official Persona Selection */}
-        <div className="space-y-2">
-          <div className="flex items-center justify-between text-[11px] text-slate-400">
-            <span className="font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1">
-              <Sparkles className="w-3.5 h-3.5 text-purple-400" />
-              <span>Select Authorized Role Preset:</span>
-            </span>
-            <span className="text-[10px] text-purple-300 font-mono">1-Click Auto-Fill</span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-            {PRESET_ACCOUNTS.map((preset) => {
-              const isSelected = selectedPreset === preset.email && email === preset.email;
-              return (
-                <button
-                  key={preset.email}
-                  type="button"
-                  onClick={() => handleSelectPreset(preset)}
-                  className={`p-2.5 rounded-xl border text-left transition cursor-pointer flex flex-col justify-between gap-1.5 ${
-                    isSelected
-                      ? 'bg-purple-950/60 border-purple-500 shadow-glow-purple text-white'
-                      : 'bg-slate-950/60 border-slate-800 hover:border-slate-700 text-slate-300'
-                  }`}
-                >
-                  <div className="flex items-center justify-between gap-1">
-                    <span className="font-bold text-xs truncate">{preset.title}</span>
-                    <span className={`px-1.5 py-0.2 rounded text-[9px] font-mono border ${preset.badgeColor} shrink-0`}>
-                      {preset.badge}
-                    </span>
-                  </div>
-                  <div className="text-[10px] text-slate-400 font-mono truncate">{preset.email}</div>
-                </button>
-              );
-            })}
-          </div>
-        </div>
 
         {/* Custom Status Error Alerts */}
         {error && (
