@@ -4,6 +4,7 @@
   "description": "MOIL ReserveIQ - Express REST API & Orchestration Backend",
   "main": "dist/server.js",
   "scripts": {
+    "predev": "lsof -ti :5001 | xargs kill -9 2>/dev/null || true",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "build": "rimraf dist && tsc",
     "start": "node dist/server.js",

@@ -110,12 +110,22 @@ const startServer = async () => {
             console.warn('[Database] Initial sync warning:', e);
         }
     }
-    app.listen(env_1.config.PORT, () => {
+    const server = app.listen(env_1.config.PORT, () => {
         console.log(`\n======================================================`);
         console.log(`⚡ MOIL ReserveIQ Backend running on http://localhost:${env_1.config.PORT}`);
         console.log(`📡 ML Service Target: ${env_1.config.ML_SERVICE_URL}`);
         console.log(`💾 MongoDB URI: ${env_1.config.MONGO_URI}`);
         console.log(`======================================================\n`);
+    });
+    server.on('error', (e) => {
+        if (e.code === 'EADDRINUSE') {
+            console.error(`\n⚠️  [PORT BUSY] Port ${env_1.config.PORT} is currently in use by another process.`);
+            console.error(`👉 Run 'lsof -ti :${env_1.config.PORT} | xargs kill -9' to free the port, then run 'npm run dev' again.\n`);
+            process.exit(1);
+        }
+        else {
+            console.error('[Server Error]', e);
+        }
     });
 };
 startServer();
