@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const mineController_1 = require("../controllers/mineController");
+const router = (0, express_1.Router)();
+router.get('/', mineController_1.getAllMines);
+router.get('/summary', mineController_1.getDashboardSummary);
+router.get('/zones', mineController_1.getMineZones);
+router.get('/facilities', mineController_1.getFacilities);
+router.get('/exploration-blocks', mineController_1.getExplorationBlocks);
+router.get('/:mineId', mineController_1.getMineById);
+exports.default = router;

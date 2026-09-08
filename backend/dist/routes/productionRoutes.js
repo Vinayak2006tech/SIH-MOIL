@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const productionController_1 = require("../controllers/productionController");
+const router = (0, express_1.Router)();
+router.get('/history', productionController_1.getProductionHistory);
+router.get('/downtime-breakdown', productionController_1.getDowntimeBreakdown);
+router.get('/correlation', productionController_1.getCorrelationData);
+router.get('/annual', productionController_1.getAnnualSummary);
+router.get('/sales', productionController_1.getSalesHistory);
+exports.default = router;

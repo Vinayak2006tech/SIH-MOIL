@@ -1,0 +1,15 @@
+{
+  "name": "moil-reserveiq-workspace",
+  "version": "1.0.0",
+  "description": "MOIL ReserveIQ - AI/ML Manganese Reserve Estimation and Production Shortfall Prediction System",
+  "scripts": {
+    "start:ml": "./ml-service/.venv/bin/uvicorn app.main:app --app-dir ml-service --host 0.0.0.0 --port 8000 --reload",
+    "start:backend": "cd backend && npm run dev",
+    "start:frontend": "cd frontend && npm run dev",
+    "build:all": "cd backend && npm run build && cd ../frontend && npm run build",
+    "test:ml": "./ml-service/.venv/bin/python ml-service/test_ml.py"
+  },
+  "keywords": ["moil", "manganese", "mining", "reserve-estimation", "shortfall-prediction", "machine-learning", "sih"],
+  "author": "MOIL ReserveIQ Team",
+  "license": "MIT"
+}

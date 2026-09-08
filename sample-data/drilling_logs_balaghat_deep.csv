@@ -1,0 +1,9 @@
+boreholeId,latitude,longitude,elevationMeters,totalDepthMeters,seamInterceptDepthMeters,seamThicknessMeters,avgMnGradePct,avgFeGradePct,avgSiO2GradePct,coreRecoveryPct,rqdPct,rockFormation,drillingYear
+BH-BGT-201,21.8052,80.1855,322,390,210,14.8,47.2,5.4,6.8,92.5,86.0,Mansar Gondite Ore Horizon,2026
+BH-BGT-202,21.8061,80.1862,325,410,225,16.2,46.8,5.6,7.1,91.0,84.5,Mansar Gondite Ore Horizon,2026
+BH-BGT-203,21.8039,80.1841,318,375,195,13.5,45.9,6.1,7.5,89.5,82.0,Mansar Gondite Ore Horizon,2026
+BH-BGT-204,21.8045,80.1870,320,405,215,15.0,46.5,5.8,7.0,93.0,88.0,Mansar Gondite Ore Horizon,2026
+BH-BGT-205,21.8070,80.1835,328,420,230,17.1,48.1,5.2,6.4,94.2,89.5,Mansar Gondite Ore Horizon,2026
+BH-BGT-206,21.8030,80.1860,315,360,185,12.0,44.2,6.4,8.2,88.0,79.0,Mansar Gondite Ore Horizon,2026
+BH-BGT-207,21.8058,80.1828,324,395,205,14.2,46.1,5.9,7.4,90.5,83.0,Mansar Gondite Ore Horizon,2026
+BH-BGT-208,21.8065,80.1878,326,415,220,15.8,47.5,5.5,6.7,92.0,87.0,Mansar Gondite Ore Horizon,2026

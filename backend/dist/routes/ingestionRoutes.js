@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const ingestionController_1 = require("../controllers/ingestionController");
+const csvParser_1 = require("../services/csvParser");
+const auth_1 = require("../middleware/auth");
+const router = (0, express_1.Router)();
+router.post('/drilling-csv', auth_1.authenticateJWT, (0, auth_1.requireRole)(['ADMIN', 'MINE_PLANNER', 'VIEWER']), csvParser_1.upload.single('file'), ingestionController_1.uploadDrillingLogsCsv);
+router.post('/production-csv', auth_1.authenticateJWT, (0, auth_1.requireRole)(['ADMIN', 'MINE_PLANNER', 'VIEWER']), csvParser_1.upload.single('file'), ingestionController_1.uploadProductionRecordsCsv);
+router.post('/satellite-sync', auth_1.authenticateJWT, (0, auth_1.requireRole)(['ADMIN', 'MINE_PLANNER', 'VIEWER']), ingestionController_1.triggerSatelliteSync);
+exports.default = router;

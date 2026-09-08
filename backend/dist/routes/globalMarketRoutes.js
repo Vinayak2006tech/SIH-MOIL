@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const globalMarketController_1 = require("../controllers/globalMarketController");
+const router = (0, express_1.Router)();
+router.get('/overview', globalMarketController_1.getGlobalMarketOverview);
+router.get('/reserves', globalMarketController_1.getGlobalReserves);
+router.get('/trade-flows', globalMarketController_1.getGlobalTradeFlows);
+router.get('/pricing', globalMarketController_1.getGlobalPricing);
+router.get('/deep-sea', globalMarketController_1.getDeepSeaNodules);
+router.get('/peers', globalMarketController_1.getMoilVsGlobalPeers);
+exports.default = router;

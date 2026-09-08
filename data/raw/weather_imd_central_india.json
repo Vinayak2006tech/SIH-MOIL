@@ -1,0 +1,39 @@
+{
+  "sourceMetadata": {
+    "sourceId": "src-imd-weather",
+    "sourceName": "India Meteorological Department (IMD) Gridded Meteorological Disclosures",
+    "sourceUrl": "https://mausam.imd.gov.in/",
+    "dataType": "PUBLIC_WEATHER",
+    "isSynthetic": false,
+    "lastVerified": "2026-03-01"
+  },
+  "districtClimateProfiles": [
+    {
+      "district": "Balaghat",
+      "state": "Madhya Pradesh",
+      "annualAvgPrecipitationMm": 1340.0,
+      "monsoonPeakMonths": ["July", "August", "September"],
+      "monsoonAvgRainfallMm": 980.0,
+      "summerMaxTempC": 43.5,
+      "winterMinTempC": 8.5
+    },
+    {
+      "district": "Nagpur",
+      "state": "Maharashtra",
+      "annualAvgPrecipitationMm": 1160.0,
+      "monsoonPeakMonths": ["July", "August"],
+      "monsoonAvgRainfallMm": 840.0,
+      "summerMaxTempC": 45.2,
+      "winterMinTempC": 10.2
+    },
+    {
+      "district": "Bhandara",
+      "state": "Maharashtra",
+      "annualAvgPrecipitationMm": 1280.0,
+      "monsoonPeakMonths": ["July", "August", "September"],
+      "monsoonAvgRainfallMm": 910.0,
+      "summerMaxTempC": 44.0,
+      "winterMinTempC": 9.5
+    }
+  ]
+}

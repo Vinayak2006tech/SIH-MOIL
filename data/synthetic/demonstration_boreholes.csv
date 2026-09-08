@@ -1,0 +1,24 @@
+boreholeId,mineId,collarLatitude,collarLongitude,elevationMeters,totalDepthMeters,seamInterceptDepthMeters,seamThicknessMeters,avgMnGradePct,avgFeGradePct,avgSiO2GradePct,avgPGradePct,coreRecoveryPct,rqdPct,rockFormation,drillingYear,sourceId,dataType,isSynthetic
+BH-DEMO-BGT-01,mine-balaghat-01,21.8052,80.1855,322,390,210,14.8,47.2,5.4,6.8,0.15,92.5,86.0,Mansar Gondite Ore Horizon,2025,src-synthetic-boreholes,SYNTHETIC_DEMO,true
+BH-DEMO-BGT-02,mine-balaghat-01,21.8061,80.1862,325,410,225,16.2,46.8,5.6,7.1,0.15,91.0,84.5,Mansar Gondite Ore Horizon,2025,src-synthetic-boreholes,SYNTHETIC_DEMO,true
+BH-DEMO-BGT-03,mine-balaghat-01,21.8039,80.1841,318,375,195,13.5,45.9,6.1,7.5,0.15,89.5,82.0,Mansar Gondite Ore Horizon,2025,src-synthetic-boreholes,SYNTHETIC_DEMO,true
+BH-DEMO-BGT-04,mine-balaghat-01,21.8045,80.1870,320,405,215,15.0,46.5,5.8,7.0,0.15,93.0,88.0,Mansar Gondite Ore Horizon,2025,src-synthetic-boreholes,SYNTHETIC_DEMO,true
+BH-DEMO-DGB-01,mine-dongri-02,21.5548,79.6920,295,180,45,22.4,42.5,7.8,9.2,0.18,94.0,91.0,Chorbaoli Quartzite Supergene,2025,src-synthetic-boreholes,SYNTHETIC_DEMO,true
+BH-DEMO-DGB-02,mine-dongri-02,21.5539,79.6905,292,165,38,19.8,41.8,8.2,9.8,0.19,92.5,88.5,Chorbaoli Quartzite Supergene,2025,src-synthetic-boreholes,SYNTHETIC_DEMO,true
+BH-DEMO-DGB-03,mine-dongri-02,21.5555,79.6930,298,195,52,24.0,43.1,7.2,8.6,0.17,95.0,92.0,Chorbaoli Quartzite Supergene,2025,src-synthetic-boreholes,SYNTHETIC_DEMO,true
+BH-DEMO-KND-01,mine-kandri-03,21.4172,79.2840,310,280,140,11.5,45.2,5.9,7.4,0.16,90.5,85.0,Mansar Schist Braunite,2025,src-synthetic-boreholes,SYNTHETIC_DEMO,true
+BH-DEMO-KND-02,mine-kandri-03,21.4162,79.2825,308,295,155,12.8,44.5,6.2,7.9,0.16,89.0,83.0,Mansar Schist Braunite,2025,src-synthetic-boreholes,SYNTHETIC_DEMO,true
+BH-DEMO-MSR-01,mine-mansar-04,21.4018,79.2625,305,260,120,10.2,42.0,6.5,8.1,0.17,88.0,81.0,Mansar Gondite Formation,2025,src-synthetic-boreholes,SYNTHETIC_DEMO,true
+BH-DEMO-MSR-02,mine-mansar-04,21.4005,79.2610,302,250,115,9.8,41.2,6.8,8.5,0.18,87.5,80.0,Mansar Gondite Formation,2025,src-synthetic-boreholes,SYNTHETIC_DEMO,true
+BH-DEMO-GMG-01,mine-gumgaon-05,21.3922,78.9840,315,310,165,11.0,43.5,6.1,7.8,0.16,89.5,83.5,Gumgaon Braunite Bed,2025,src-synthetic-boreholes,SYNTHETIC_DEMO,true
+BH-DEMO-GMG-02,mine-gumgaon-05,21.3910,78.9825,312,295,150,10.4,42.8,6.4,8.2,0.17,88.0,81.5,Gumgaon Braunite Bed,2025,src-synthetic-boreholes,SYNTHETIC_DEMO,true
+BH-DEMO-TRD-01,mine-tirodi-06,21.6850,79.7125,330,170,35,18.5,41.0,8.0,9.5,0.19,91.0,87.0,Tirodi Gneissic Manganite,2025,src-synthetic-boreholes,SYNTHETIC_DEMO,true
+BH-DEMO-TRD-02,mine-tirodi-06,21.6840,79.7110,328,155,30,16.8,40.2,8.4,10.1,0.20,89.5,85.0,Tirodi Gneissic Manganite,2025,src-synthetic-boreholes,SYNTHETIC_DEMO,true
+BH-DEMO-CHK-01,mine-chikla-07,21.5340,79.7510,305,275,130,12.2,43.2,6.0,7.6,0.15,91.5,86.0,Chikla Braunite Reef,2025,src-synthetic-boreholes,SYNTHETIC_DEMO,true
+BH-DEMO-CHK-02,mine-chikla-07,21.5325,79.7490,302,260,122,11.5,42.5,6.3,8.0,0.16,90.0,84.0,Chikla Braunite Reef,2025,src-synthetic-boreholes,SYNTHETIC_DEMO,true
+BH-DEMO-UKW-01,mine-ukwa-08,21.9675,80.4675,540,320,175,13.4,45.5,5.2,6.5,0.12,94.0,90.0,Ukwa Low-P Braunite Band,2025,src-synthetic-boreholes,SYNTHETIC_DEMO,true
+BH-DEMO-UKW-02,mine-ukwa-08,21.9660,80.4655,536,305,160,12.8,44.8,5.5,6.9,0.13,92.5,88.0,Ukwa Low-P Braunite Band,2025,src-synthetic-boreholes,SYNTHETIC_DEMO,true
+BH-DEMO-BLD-01,mine-beldongri-09,21.3655,79.2310,298,210,90,8.5,39.8,7.2,9.0,0.18,87.0,79.0,Beldongri Manganese Layer,2025,src-synthetic-boreholes,SYNTHETIC_DEMO,true
+BH-DEMO-BLD-02,mine-beldongri-09,21.3645,79.2290,295,195,80,7.8,39.2,7.5,9.4,0.19,86.0,78.0,Beldongri Manganese Layer,2025,src-synthetic-boreholes,SYNTHETIC_DEMO,true
+BH-DEMO-STP-01,mine-sitapatore-10,21.7205,79.8210,340,140,28,11.2,38.5,8.1,10.2,0.19,88.5,82.0,Sukli Supergene Ore Body,2025,src-synthetic-boreholes,SYNTHETIC_DEMO,true
+BH-DEMO-STP-02,mine-sitapatore-10,21.7195,79.8190,338,130,22,10.5,37.8,8.5,10.8,0.20,87.0,80.0,Sukli Supergene Ore Body,2025,src-synthetic-boreholes,SYNTHETIC_DEMO,true

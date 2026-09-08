@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const equipmentController_1 = require("../controllers/equipmentController");
+const auth_1 = require("../middleware/auth");
+const router = (0, express_1.Router)();
+router.get('/', equipmentController_1.getEquipmentList);
+router.post('/', auth_1.authenticateJWT, (0, auth_1.requireRole)(['ADMIN', 'MINE_PLANNER']), equipmentController_1.createEquipment);
+router.put('/:code', auth_1.authenticateJWT, (0, auth_1.requireRole)(['ADMIN', 'MINE_PLANNER']), equipmentController_1.updateEquipment);
+router.delete('/:code', auth_1.authenticateJWT, (0, auth_1.requireRole)(['ADMIN']), equipmentController_1.deleteEquipment);
+exports.default = router;

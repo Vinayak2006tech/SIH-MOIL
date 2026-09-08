@@ -1,0 +1,22 @@
+code,mineId,name,type,equipmentModel,capacity,status,uptimePct,mtbfHours,lastMaintenanceDate,nextScheduledMaintenance,criticalAlert,sourceId,dataType,isSynthetic
+HEMM-001,mine-balaghat-01,Komatsu Hydraulic Shovel PC600,Excavator,PC600-8,3.5 m³ Bucket,OPERATIONAL,84.5,340,2026-02-15,2026-03-20,,src-synthetic-equipment,SYNTHETIC_DEMO,true
+HEMM-002,mine-balaghat-01,BEML Dumper Truck BH35,Dumper Truck,BH35-2,35 Tonne Payload,OPERATIONAL,88.2,420,2026-02-18,2026-03-25,,src-synthetic-equipment,SYNTHETIC_DEMO,true
+HEMM-003,mine-balaghat-01,Balaghat Deep Shaft Main Winder,Vertical Shaft Hoist,GHH-Winder,120 t/hr Hoisting,OPERATIONAL,82.0,380,2026-02-10,2026-03-15,,src-synthetic-equipment,SYNTHETIC_DEMO,true
+HEMM-004,mine-dongri-02,Hitachi EX1200 Heavy Excavator,Excavator,EX1200-6,6.5 m³ Bucket,OPERATIONAL,92.0,510,2026-02-22,2026-03-28,,src-synthetic-equipment,SYNTHETIC_DEMO,true
+HEMM-005,mine-dongri-02,BEML High-Capacity Dumper BH60,Dumper Truck,BH60M,60 Tonne Payload,OPERATIONAL,89.5,460,2026-02-20,2026-03-26,,src-synthetic-equipment,SYNTHETIC_DEMO,true
+HEMM-006,mine-kandri-03,Sandvik Underground Drill Rig,Drill Rig,DD321,Twin Boom Jumbo,BREAKDOWN,48.0,110,2026-01-10,2026-02-15,Hydraulic pump manifold pressure drop - Stoppage in Level 4 Stope,src-synthetic-equipment,SYNTHETIC_DEMO,true
+HEMM-007,mine-kandri-03,Eimco Underground Load Haul Dump,LHD Loader,LHD-912,2.5 m³ Bucket,OPERATIONAL,79.0,310,2026-02-14,2026-03-18,,src-synthetic-equipment,SYNTHETIC_DEMO,true
+HEMM-008,mine-mansar-04,Atlas Copco Boomer 282 Jumbo,Drill Rig,Boomer 282,Twin Boom Hydraulic,OPERATIONAL,83.5,360,2026-02-16,2026-03-22,,src-synthetic-equipment,SYNTHETIC_DEMO,true
+HEMM-009,mine-mansar-04,Mansar Incline Ore Conveyor,Belt Conveyor,MC-800,250 t/hr,OPERATIONAL,86.0,410,2026-02-12,2026-03-19,,src-synthetic-equipment,SYNTHETIC_DEMO,true
+HEMM-010,mine-gumgaon-05,CAT R1300G Underground Loader,LHD Loader,R1300G,3.1 m³ Bucket,OPERATIONAL,85.0,390,2026-02-19,2026-03-24,,src-synthetic-equipment,SYNTHETIC_DEMO,true
+HEMM-011,mine-gumgaon-05,Gumgaon Main Ventilation Fan,Mine Fan,Korfmann 150kW,65 m³/s Airflow,OPERATIONAL,94.0,620,2026-02-05,2026-03-12,,src-synthetic-equipment,SYNTHETIC_DEMO,true
+HEMM-012,mine-tirodi-06,Caterpillar 773E Quarry Dumper,Dumper Truck,773E,55 Tonne Payload,UNDER_MAINTENANCE,65.0,230,2026-02-25,2026-03-05,Scheduled transmission fluid & brake disc overhaul,src-synthetic-equipment,SYNTHETIC_DEMO,true
+HEMM-013,mine-tirodi-06,Volvo EC480D Excavator,Excavator,EC480D,2.8 m³ Bucket,OPERATIONAL,87.0,440,2026-02-18,2026-03-25,,src-synthetic-equipment,SYNTHETIC_DEMO,true
+HEMM-014,mine-chikla-07,Tamrock Minematic Drill Rig,Drill Rig,MM-240,Single Boom Diesel,OPERATIONAL,81.5,330,2026-02-11,2026-03-16,,src-synthetic-equipment,SYNTHETIC_DEMO,true
+HEMM-015,mine-chikla-07,Chikla Incline Hoisting System,Tugger Winch,TW-50,40 t/hr Incline,OPERATIONAL,84.0,370,2026-02-15,2026-03-21,,src-synthetic-equipment,SYNTHETIC_DEMO,true
+HEMM-016,mine-ukwa-08,Ukwa Aerial Ropeway Bi-Cable,Aerial Ropeway,Bicable-12,50 t/hr Valley Transit,OPERATIONAL,91.0,540,2026-02-20,2026-03-28,,src-synthetic-equipment,SYNTHETIC_DEMO,true
+HEMM-017,mine-ukwa-08,Sandvik LH203 Underground LHD,LHD Loader,LH203,1.5 m³ Bucket,OPERATIONAL,82.5,350,2026-02-14,2026-03-20,,src-synthetic-equipment,SYNTHETIC_DEMO,true
+HEMM-018,mine-beldongri-09,Beldongri Slusher Hoist Winch,Scraper Winch,SW-30,20 kW Double Drum,OPERATIONAL,86.5,410,2026-02-17,2026-03-23,,src-synthetic-equipment,SYNTHETIC_DEMO,true
+HEMM-019,mine-beldongri-09,Battery Electric Mine Locomotive,Locomotive,BEL-10T,10 Tonne Tractive,OPERATIONAL,88.0,450,2026-02-19,2026-03-26,,src-synthetic-equipment,SYNTHETIC_DEMO,true
+HEMM-020,mine-sitapatore-10,Tata Hitachi EX200 LC Excavator,Excavator,EX200-5,1.2 m³ Bucket,OPERATIONAL,87.5,430,2026-02-21,2026-03-27,,src-synthetic-equipment,SYNTHETIC_DEMO,true
+HEMM-021,mine-sitapatore-10,Ashok Leyland Captain Tipper 2518,Tipper Truck,Captain 2518,16 m³ Tipper,OPERATIONAL,89.0,470,2026-02-22,2026-03-29,,src-synthetic-equipment,SYNTHETIC_DEMO,true

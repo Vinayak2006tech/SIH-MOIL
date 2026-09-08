@@ -1,0 +1,6 @@
+acquisitionDate,satelliteSensor,mineCode,latitude,longitude,ndviIndex,soilMoisturePct,precipitationRateMm,landSurfaceTempC,cloudCoverPct,geotechnicalStabilityAdvisory
+2026-03-01,Sentinel-2 MSI / MODIS,MOIL-BGT-01,21.8048,80.1849,0.382,29.5,14.0,33.2,12.0,Safe (Optimum Dry Conditions)
+2026-03-01,Sentinel-2 MSI / MODIS,MOIL-DGB-02,21.5544,79.6912,0.415,26.0,8.5,34.0,8.0,Safe (Optimum Dry Conditions)
+2026-03-01,Sentinel-2 MSI / MODIS,MOIL-KND-03,21.4167,79.2833,0.340,38.2,19.5,31.8,18.0,Advisory (Moderate Surface Moisture)
+2026-03-01,Sentinel-2 MSI / MODIS,MOIL-TRD-06,21.6845,79.7118,0.295,44.0,28.0,30.5,24.0,Alert (High Saturated Bench Risk)
+2026-03-01,Sentinel-2 MSI / MODIS,MOIL-MSR-04,21.4012,79.2618,0.365,28.0,10.0,33.8,10.0,Safe (Optimum Dry Conditions)

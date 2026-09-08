@@ -1,0 +1,106 @@
+[
+  {
+    "_id": "usr-admin-01",
+    "name": "Vinayak Vaishay",
+    "email": "vaishayvinayak@gmail.com",
+    "passwordHash": "$2a$10$o0WYekkwBEILRfH9wVS64OUU7R97xLW3/4ZxSxl2h6VSFzK9cLF4m",
+    "role": "ADMIN",
+    "status": "APPROVED",
+    "emailVerified": true,
+    "department": "Executive Directorate of Mining & Exploration",
+    "mineAccess": [
+      "ALL"
+    ],
+    "lastLogin": "2026-09-08T15:50:26.443Z",
+    "updatedAt": "2026-09-08T15:50:26.443Z"
+  },
+  {
+    "_id": "usr-planner-01",
+    "name": "Vipin Kulkarni",
+    "email": "planner@balaghat.moil.gov.in",
+    "passwordHash": "$2a$10$L7IPhA4Rdkfpcfer/UIy9eE9ZaMXtUxEwfNm6hZJyKikzG/DoWMRW",
+    "role": "MINE_PLANNER",
+    "status": "APPROVED",
+    "emailVerified": true,
+    "department": "Balaghat Planning Division",
+    "mineAccess": [
+      "mine-balaghat-01",
+      "mine-dongri-02",
+      "mine-kandri-03"
+    ],
+    "updatedAt": "2026-09-08T15:38:18.681Z",
+    "lastLogin": "2026-09-08T15:38:18.681Z"
+  },
+  {
+    "_id": "usr-viewer-01",
+    "name": "Ananya Deshmukh",
+    "email": "auditor@steel.gov.in",
+    "passwordHash": "$2a$10$LHdWGdkynZm.CLdruVrmAu7aRWLBE5hU2lo6Ju7S0BKKPsO5eqA0K",
+    "role": "VIEWER",
+    "status": "APPROVED",
+    "emailVerified": true,
+    "department": "Ministry of Steel (Govt. of India) - Oversight Cell",
+    "mineAccess": [
+      "ALL"
+    ],
+    "updatedAt": "2026-09-08T15:48:59.139Z",
+    "lastLogin": "2026-09-08T15:48:59.139Z"
+  },
+  {
+    "_id": "usr-1788865377696",
+    "name": "Suresh Patil",
+    "email": "suresh.patil@moil.gov.in",
+    "passwordHash": "$2a$10$X3llfRxOrXSf.6k4F.MYyegX/0uLgT7nmKCGapHKZ68y/LvlSTCMm",
+    "role": "MINE_PLANNER",
+    "status": "APPROVED",
+    "emailVerified": true,
+    "department": "Gumgaon Mining Unit",
+    "mineAccess": [
+      "ALL"
+    ],
+    "isGoogleAuth": false,
+    "updatedAt": "2026-09-08T15:38:19.271Z",
+    "lastLogin": "2026-09-08T15:38:19.271Z"
+  },
+  {
+    "name": "Ramesh Sharma",
+    "email": "member.new1788881915639@moil.gov.in",
+    "passwordHash": "$2a$10$oQJxOElty9.p/RRwWPidiOPf6/yzDXdn.Civzhfi7OKgR.RxFvc3a",
+    "role": "MINE_PLANNER",
+    "department": "Balaghat Core Drill Division",
+    "status": "APPROVED",
+    "emailVerified": false,
+    "mineAccess": [
+      "ALL"
+    ],
+    "isGoogleAuth": false,
+    "createdAt": "2026-09-08T15:38:35.793Z",
+    "updatedAt": "2026-09-08T15:38:35.988Z",
+    "suspensionReason": null,
+    "_id": "usr-1788881915793",
+    "approvedAt": "2026-09-08T15:38:35.899Z",
+    "approvedBy": "vaishayvinayak@gmail.com",
+    "activationToken": "ab6a04bce11f17217835e9d9aa33196e2922a70f35de0d179c2b228e66587ad2",
+    "activationTokenExpiry": "2026-09-10T15:38:35.899Z",
+    "rejectedAt": null,
+    "rejectionReason": null,
+    "suspendedAt": null,
+    "lastLogin": "2026-09-08T15:38:35.988Z"
+  },
+  {
+    "name": "Vineet sharma",
+    "email": "vvaishay9@gmail.com",
+    "passwordHash": "$2a$10$kPYJfJHGekS5ZGglkYZYp.rRNDcBfCtnOXhlhWAOcx7QzlA5gaTzW",
+    "role": "MINE_PLANNER",
+    "department": "Mine Planning & Geology",
+    "status": "PENDING",
+    "emailVerified": false,
+    "mineAccess": [
+      "ALL"
+    ],
+    "isGoogleAuth": false,
+    "createdAt": "2026-09-08T15:50:09.770Z",
+    "updatedAt": "2026-09-08T15:50:09.770Z",
+    "_id": "usr-1788882609770"
+  }
+]
