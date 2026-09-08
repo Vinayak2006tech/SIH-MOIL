@@ -62,6 +62,13 @@ const AppContent: React.FC = () => {
     handleInitialLayout();
   }, []);
 
+  // Ensure user always lands on the home/landing page upon login
+  useEffect(() => {
+    if (user) {
+      setActiveTab('landing');
+    }
+  }, [user?.id, user?.email]);
+
   if (loading) {
     return (
       <div className="min-h-screen bg-[#080C14] flex flex-col items-center justify-center space-y-4">

@@ -272,13 +272,12 @@ export const AdminPortalPage: React.FC = () => {
       {/* Toast Notification */}
       {toast && (
         <div
-          className={`fixed top-4 right-4 left-4 sm:left-auto sm:right-4 z-50 p-4 rounded-2xl border shadow-2xl flex items-center gap-3 animate-fadeIn text-xs max-w-md ${
-            toast.type === 'success'
+          className={`fixed top-4 right-4 left-4 sm:left-auto sm:right-4 z-50 p-4 rounded-2xl border shadow-2xl flex items-center gap-3 animate-fadeIn text-xs max-w-md ${toast.type === 'success'
               ? 'bg-emerald-950/95 border-emerald-500 text-emerald-100'
               : toast.type === 'error'
-              ? 'bg-rose-950/95 border-rose-500 text-rose-100'
-              : 'bg-indigo-950/95 border-indigo-500 text-indigo-100'
-          }`}
+                ? 'bg-rose-950/95 border-rose-500 text-rose-100'
+                : 'bg-indigo-950/95 border-indigo-500 text-indigo-100'
+            }`}
         >
           {toast.type === 'success' ? (
             <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
@@ -327,11 +326,10 @@ export const AdminPortalPage: React.FC = () => {
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
         <div
           onClick={() => setActiveTab('ALL')}
-          className={`glass-panel p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border transition cursor-pointer ${
-            activeTab === 'ALL'
+          className={`glass-panel p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border transition cursor-pointer ${activeTab === 'ALL'
               ? 'border-purple-500/80 bg-purple-950/20 shadow-glow-purple'
               : 'border-slate-800/80 hover:border-slate-700'
-          }`}
+            }`}
         >
           <div className="flex items-center justify-between text-slate-400 text-xs font-semibold mb-1.5 sm:mb-2 gap-1">
             <span className="truncate">Total Personnel</span>
@@ -343,13 +341,12 @@ export const AdminPortalPage: React.FC = () => {
 
         <div
           onClick={() => setActiveTab('PENDING')}
-          className={`glass-panel p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border transition cursor-pointer relative ${
-            activeTab === 'PENDING'
+          className={`glass-panel p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border transition cursor-pointer relative ${activeTab === 'PENDING'
               ? 'border-amber-500/80 bg-amber-950/20 shadow-glow-amber'
               : stats.pendingUsers > 0
-              ? 'border-amber-700/60 bg-amber-950/10'
-              : 'border-slate-800/80 hover:border-slate-700'
-          }`}
+                ? 'border-amber-700/60 bg-amber-950/10'
+                : 'border-slate-800/80 hover:border-slate-700'
+            }`}
         >
           {stats.pendingUsers > 0 && (
             <span className="absolute -top-1.5 -right-1.5 w-3 h-3 bg-amber-400 rounded-full animate-ping" />
@@ -364,11 +361,10 @@ export const AdminPortalPage: React.FC = () => {
 
         <div
           onClick={() => setActiveTab('APPROVED')}
-          className={`glass-panel p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border transition cursor-pointer ${
-            activeTab === 'APPROVED'
+          className={`glass-panel p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border transition cursor-pointer ${activeTab === 'APPROVED'
               ? 'border-emerald-500/80 bg-emerald-950/20 shadow-glow-emerald'
               : 'border-slate-800/80 hover:border-slate-700'
-          }`}
+            }`}
         >
           <div className="flex items-center justify-between text-emerald-300 text-xs font-semibold mb-1.5 sm:mb-2 gap-1">
             <span className="truncate">Approved & Active</span>
@@ -380,11 +376,10 @@ export const AdminPortalPage: React.FC = () => {
 
         <div
           onClick={() => setActiveTab('SUSPENDED')}
-          className={`glass-panel p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border transition cursor-pointer ${
-            activeTab === 'SUSPENDED'
+          className={`glass-panel p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border transition cursor-pointer ${activeTab === 'SUSPENDED'
               ? 'border-slate-500 bg-slate-800/40'
               : 'border-slate-800/80 hover:border-slate-700'
-          }`}
+            }`}
         >
           <div className="flex items-center justify-between text-slate-300 text-xs font-semibold mb-1.5 sm:mb-2 gap-1">
             <span className="truncate">Suspended</span>
@@ -396,11 +391,10 @@ export const AdminPortalPage: React.FC = () => {
 
         <div
           onClick={() => setActiveTab('REJECTED')}
-          className={`glass-panel p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border transition cursor-pointer col-span-2 sm:col-span-1 ${
-            activeTab === 'REJECTED'
+          className={`glass-panel p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border transition cursor-pointer col-span-2 sm:col-span-1 ${activeTab === 'REJECTED'
               ? 'border-rose-500/80 bg-rose-950/20'
               : 'border-slate-800/80 hover:border-slate-700'
-          }`}
+            }`}
         >
           <div className="flex items-center justify-between text-rose-300 text-xs font-semibold mb-1.5 sm:mb-2 gap-1">
             <span className="truncate">Rejected</span>
@@ -428,21 +422,19 @@ export const AdminPortalPage: React.FC = () => {
               <button
                 key={t.key}
                 onClick={() => setActiveTab(t.key)}
-                className={`px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 whitespace-nowrap cursor-pointer shrink-0 ${
-                  activeTab === t.key
+                className={`px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 whitespace-nowrap cursor-pointer shrink-0 ${activeTab === t.key
                     ? t.highlight && t.count > 0
                       ? 'bg-amber-500 text-slate-950 shadow-glow-amber'
                       : 'bg-purple-600 text-white shadow-glow-purple'
                     : 'bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800'
-                }`}
+                  }`}
               >
                 <span>{t.label}</span>
                 <span
-                  className={`px-1.5 py-0.5 rounded-full text-[10px] font-mono ${
-                    activeTab === t.key
+                  className={`px-1.5 py-0.5 rounded-full text-[10px] font-mono ${activeTab === t.key
                       ? 'bg-black/20 text-current'
                       : 'bg-slate-800 text-slate-400'
-                  }`}
+                    }`}
                 >
                   {t.count}
                 </span>

@@ -270,11 +270,10 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ setActiveTab }) =>
               <button
                 key={days}
                 onClick={() => setHorizonDays(days)}
-                className={`px-2.5 py-1 text-xs font-bold rounded-md transition ${
-                  horizonDays === days
+                className={`px-2.5 py-1 text-xs font-bold rounded-md transition ${horizonDays === days
                     ? 'bg-purple-600 text-white shadow-glow-purple'
                     : 'text-slate-400 hover:text-white hover:bg-slate-800'
-                }`}
+                  }`}
               >
                 {days} Days
               </button>
@@ -389,9 +388,8 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ setActiveTab }) =>
                 {mines.map((mine) => (
                   <tr
                     key={mine.mineId}
-                    className={`hover:bg-slate-800/40 transition ${
-                      selectedMineId === mine.mineId ? 'bg-purple-950/30' : ''
-                    }`}
+                    className={`hover:bg-slate-800/40 transition ${selectedMineId === mine.mineId ? 'bg-purple-950/30' : ''
+                      }`}
                   >
                     <td className="p-3 font-semibold text-white">
                       <div className="flex items-center gap-2">

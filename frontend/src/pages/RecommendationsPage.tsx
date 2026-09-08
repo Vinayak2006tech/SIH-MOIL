@@ -59,8 +59,8 @@ export const RecommendationsPage: React.FC = () => {
         status === 'ACCEPTED'
           ? `Executed by ${user?.name || 'Mine Planner'}. Directive issued to shift supervisor.`
           : status === 'REJECTED'
-          ? `Declined by ${user?.name || 'Mine Planner'}. Operational constraints identified.`
-          : `Snoozed for 24h by ${user?.name || 'Mine Planner'}.`;
+            ? `Declined by ${user?.name || 'Mine Planner'}. Operational constraints identified.`
+            : `Snoozed for 24h by ${user?.name || 'Mine Planner'}.`;
 
       await api.updateRecommendationStatus(recId, status, outcomeNote);
       await loadRecommendationsData();
@@ -143,11 +143,10 @@ export const RecommendationsPage: React.FC = () => {
             <button
               key={st}
               onClick={() => setFilterStatus(st)}
-              className={`px-3 py-1.5 text-xs font-bold rounded-md transition ${
-                filterStatus === st
+              className={`px-3 py-1.5 text-xs font-bold rounded-md transition ${filterStatus === st
                   ? 'bg-purple-600 text-white shadow-glow-purple'
                   : 'text-slate-400 hover:text-white hover:bg-slate-800'
-              }`}
+                }`}
             >
               {st}
             </button>
@@ -183,13 +182,12 @@ export const RecommendationsPage: React.FC = () => {
           return (
             <div
               key={rec.recommendationId || rec._id}
-              className={`glass-panel rounded-2xl p-6 border transition-all duration-300 ${
-                isPending
+              className={`glass-panel rounded-2xl p-6 border transition-all duration-300 ${isPending
                   ? 'border-slate-800 hover:border-purple-500/50 hover:shadow-glow-purple'
                   : isAccepted
-                  ? 'border-emerald-800/60 bg-emerald-950/20'
-                  : 'border-slate-800/60 opacity-70'
-              }`}
+                    ? 'border-emerald-800/60 bg-emerald-950/20'
+                    : 'border-slate-800/60 opacity-70'
+                }`}
             >
               {/* Card Header */}
               <div className="flex items-start justify-between gap-3 mb-3">
@@ -206,13 +204,12 @@ export const RecommendationsPage: React.FC = () => {
                 </div>
 
                 <span
-                  className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase font-mono ${
-                    rec.urgency === 'CRITICAL'
+                  className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase font-mono ${rec.urgency === 'CRITICAL'
                       ? 'bg-red-950 text-red-400 border border-red-800 animate-pulse'
                       : rec.urgency === 'HIGH'
-                      ? 'bg-amber-950 text-amber-400 border border-amber-800'
-                      : 'bg-blue-950 text-blue-400 border border-blue-800'
-                  }`}
+                        ? 'bg-amber-950 text-amber-400 border border-amber-800'
+                        : 'bg-blue-950 text-blue-400 border border-blue-800'
+                    }`}
                 >
                   {rec.urgency} Urgency
                 </span>
@@ -286,9 +283,8 @@ export const RecommendationsPage: React.FC = () => {
                 <div className="p-2.5 rounded-lg bg-slate-950/80 border border-slate-800 text-xs">
                   <div className="flex items-center justify-between mb-1">
                     <span
-                      className={`font-bold font-mono text-[11px] ${
-                        isAccepted ? 'text-emerald-400' : 'text-red-400'
-                      }`}
+                      className={`font-bold font-mono text-[11px] ${isAccepted ? 'text-emerald-400' : 'text-red-400'
+                        }`}
                     >
                       Status: {rec.status}
                     </span>
@@ -338,11 +334,10 @@ export const RecommendationsPage: React.FC = () => {
                   <td className="p-3 text-slate-300">{log.mineName}</td>
                   <td className="p-3">
                     <span
-                      className={`px-2 py-0.5 rounded font-mono text-[10px] font-bold ${
-                        log.status === 'ACCEPTED'
+                      className={`px-2 py-0.5 rounded font-mono text-[10px] font-bold ${log.status === 'ACCEPTED'
                           ? 'bg-emerald-950 text-emerald-400 border border-emerald-800'
                           : 'bg-red-950 text-red-400 border border-red-800'
-                      }`}
+                        }`}
                     >
                       {log.status}
                     </span>

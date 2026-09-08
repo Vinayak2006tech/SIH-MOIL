@@ -223,13 +223,12 @@ export const EquipmentPage: React.FC = () => {
           return (
             <div
               key={eq.code}
-              className={`glass-panel rounded-2xl p-5 border transition-all duration-200 ${
-                isBreakdown
+              className={`glass-panel rounded-2xl p-5 border transition-all duration-200 ${isBreakdown
                   ? 'border-red-800/80 bg-red-950/20 shadow-glow-red'
                   : isMaintenance
-                  ? 'border-amber-800/80 bg-amber-950/20'
-                  : 'border-slate-800 hover:border-slate-700'
-              }`}
+                    ? 'border-amber-800/80 bg-amber-950/20'
+                    : 'border-slate-800 hover:border-slate-700'
+                }`}
             >
               {/* Header */}
               <div className="flex items-start justify-between gap-2 mb-2.5">
@@ -242,13 +241,12 @@ export const EquipmentPage: React.FC = () => {
                 </div>
 
                 <span
-                  className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase font-mono ${
-                    isBreakdown
+                  className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase font-mono ${isBreakdown
                       ? 'bg-red-950 text-red-400 border border-red-800 animate-pulse'
                       : isMaintenance
-                      ? 'bg-amber-950 text-amber-400 border border-amber-800'
-                      : 'bg-emerald-950 text-emerald-400 border border-emerald-800'
-                  }`}
+                        ? 'bg-amber-950 text-amber-400 border border-amber-800'
+                        : 'bg-emerald-950 text-emerald-400 border border-emerald-800'
+                    }`}
                 >
                   {eq.status.replace(/_/g, ' ')}
                 </span>

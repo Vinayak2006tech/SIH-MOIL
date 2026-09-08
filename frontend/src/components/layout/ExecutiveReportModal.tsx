@@ -162,13 +162,12 @@ export const ExecutiveReportModal: React.FC<ExecutiveReportModalProps> = ({ isOp
                           </td>
                           <td className="p-3">
                             <span
-                              className={`px-2 py-0.5 rounded text-[10px] font-bold ${
-                                m.shortfallRiskLevel === 'CRITICAL'
+                              className={`px-2 py-0.5 rounded text-[10px] font-bold ${m.shortfallRiskLevel === 'CRITICAL'
                                   ? 'bg-red-950 text-red-400'
                                   : m.shortfallRiskLevel === 'HIGH'
-                                  ? 'bg-amber-950 text-amber-400'
-                                  : 'bg-emerald-950 text-emerald-400'
-                              }`}
+                                    ? 'bg-amber-950 text-amber-400'
+                                    : 'bg-emerald-950 text-emerald-400'
+                                }`}
                             >
                               {m.shortfallRiskLevel} ({m.shortfallProbabilityPct}%)
                             </span>

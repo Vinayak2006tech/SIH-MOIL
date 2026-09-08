@@ -51,7 +51,7 @@ apiClient.interceptors.request.use((config) => {
 });
 
 // LocalStorage Persistence Helpers for Static / Offline Hosting
-function getStoredUsers(): User[] {
+export function getStoredUsers(): User[] {
   try {
     const raw = localStorage.getItem('moil_mock_users');
     if (raw) return JSON.parse(raw);
@@ -60,13 +60,13 @@ function getStoredUsers(): User[] {
   return MOCK_USERS;
 }
 
-function setStoredUsers(users: User[]) {
+export function setStoredUsers(users: User[]) {
   try {
     localStorage.setItem('moil_mock_users', JSON.stringify(users));
   } catch {}
 }
 
-function getStoredEquipment(): Equipment[] {
+export function getStoredEquipment(): Equipment[] {
   try {
     const raw = localStorage.getItem('moil_mock_equipment');
     if (raw) return JSON.parse(raw);
@@ -75,13 +75,13 @@ function getStoredEquipment(): Equipment[] {
   return MOCK_EQUIPMENT;
 }
 
-function setStoredEquipment(equip: Equipment[]) {
+export function setStoredEquipment(equip: Equipment[]) {
   try {
     localStorage.setItem('moil_mock_equipment', JSON.stringify(equip));
   } catch {}
 }
 
-function getStoredRecommendations(): Recommendation[] {
+export function getStoredRecommendations(): Recommendation[] {
   try {
     const raw = localStorage.getItem('moil_mock_recommendations');
     if (raw) return JSON.parse(raw);
@@ -90,13 +90,13 @@ function getStoredRecommendations(): Recommendation[] {
   return MOCK_RECOMMENDATIONS;
 }
 
-function setStoredRecommendations(recs: Recommendation[]) {
+export function setStoredRecommendations(recs: Recommendation[]) {
   try {
     localStorage.setItem('moil_mock_recommendations', JSON.stringify(recs));
   } catch {}
 }
 
-const FALLBACK_DEMO_USERS: Record<string, User> = {
+export const FALLBACK_DEMO_USERS: Record<string, User> = {
   MINE_PLANNER: {
     _id: 'usr-planner-01',
     id: 'usr-planner-01',
@@ -112,8 +112,8 @@ const FALLBACK_DEMO_USERS: Record<string, User> = {
   ADMIN: {
     _id: 'usr-admin-01',
     id: 'usr-admin-01',
-    name: 'Vinayak Vaishay (Admin)',
-    email: 'vaishayvinayak@gmail.com',
+    name: 'MOIL Administrator',
+    email: 'admin@moil.gov.in',
     role: 'ADMIN',
     status: 'APPROVED',
     emailVerified: true,
@@ -206,14 +206,14 @@ export const api: ApiClient = {
       return res.data;
     } catch {
       let matchedRole: 'ADMIN' | 'MINE_PLANNER' | 'VIEWER' = 'MINE_PLANNER';
-      let matchedDept = 'Balaghat Planning Division';
+      let matchedDept = 'Mine Planning & Geology';
       let matchedName = 'Vipin Kulkarni';
 
-      if (cleanEmail.includes('admin') || cleanEmail === 'vaishayvinayak@gmail.com' || cleanEmail.includes('vinayak')) {
+      if (cleanEmail === 'admin@moil.gov.in' || cleanEmail === 'admin@moil.nic.in' || cleanEmail.startsWith('admin@')) {
         matchedRole = 'ADMIN';
         matchedDept = 'Executive Directorate of Mining & Exploration';
-        matchedName = 'Vinayak Vaishay (Admin)';
-      } else if (cleanEmail.includes('auditor') || cleanEmail.includes('steel') || cleanEmail.includes('ministry') || cleanEmail.includes('pant') || cleanEmail.includes('priyanshi')) {
+        matchedName = 'MOIL Administrator';
+      } else if (cleanEmail.includes('auditor') || cleanEmail.includes('steel') || cleanEmail.includes('ministry')) {
         matchedRole = 'VIEWER';
         matchedDept = 'Ministry of Steel (Govt. of India) - Oversight Cell';
         matchedName = cleanEmail.includes('priyanshi') ? 'Priyanshi Pant' : 'Ananya Deshmukh';
@@ -229,9 +229,13 @@ export const api: ApiClient = {
         matchedRole = 'MINE_PLANNER';
         matchedDept = 'Mine Planning & Geology';
         matchedName = 'Vineet Sharma';
+      } else if (cleanEmail.includes('planner')) {
+        matchedRole = 'MINE_PLANNER';
+        matchedDept = 'Balaghat Planning Division';
+        matchedName = 'Vipin Kulkarni';
       } else {
         const namePart = cleanEmail.split('@')[0].replace(/[._-]/g, ' ');
-        matchedName = namePart ? namePart.charAt(0).toUpperCase() + namePart.slice(1) : 'MOIL Officer';
+        matchedName = namePart ? namePart.charAt(0).toUpperCase() + namePart.slice(1) : 'MOIL Mining Officer';
       }
 
       const fallbackUser: User = {
@@ -491,12 +495,12 @@ export const api: ApiClient = {
       }
       return res.data;
     } catch {
-      const email = googleData.email || 'evaluator.google@moil.gov.in';
-      const role = (googleData.role as any) || (email.includes('admin') ? 'ADMIN' : email.includes('auditor') ? 'VIEWER' : 'MINE_PLANNER');
+      const email = googleData.email || 'officer@moil.gov.in';
+      const role = (googleData.role as any) || (email.startsWith('admin@') ? 'ADMIN' : email.includes('auditor') ? 'VIEWER' : 'MINE_PLANNER');
       const fallbackUser: User = {
         id: `usr-google-${Date.now()}`,
         _id: `usr-google-${Date.now()}`,
-        name: googleData.name || 'Google Evaluator',
+        name: googleData.name || 'MOIL Personnel',
         email: email,
         role: role,
         status: 'APPROVED',
@@ -554,9 +558,7 @@ export const api: ApiClient = {
           return { success: true, user: JSON.parse(storedUser) };
         } catch {}
       }
-      // If default demo login user exists in session
-      const defaultUser = FALLBACK_DEMO_USERS.ADMIN;
-      return { success: true, user: defaultUser };
+      throw new Error('Unauthenticated');
     }
   },
 

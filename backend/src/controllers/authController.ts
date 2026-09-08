@@ -37,11 +37,10 @@ export const login = async (req: Request, res: Response) => {
     let user: any = await store.findUserByEmail(cleanEmail);
 
     if (!user) {
-      // Auto-provision unseeded or new user as APPROVED
       let assignedRole: 'ADMIN' | 'MINE_PLANNER' | 'VIEWER' = 'MINE_PLANNER';
       let assignedDept = 'Balaghat Planning Division';
 
-      if (cleanEmail.includes('admin') || cleanEmail === 'vaishayvinayak@gmail.com' || cleanEmail.includes('vinayak')) {
+      if (cleanEmail === 'admin@moil.gov.in' || cleanEmail === 'admin@moil.nic.in' || cleanEmail.startsWith('admin@')) {
         assignedRole = 'ADMIN';
         assignedDept = 'Executive Directorate of Mining & Exploration';
       } else if (cleanEmail.includes('auditor') || cleanEmail.includes('steel') || cleanEmail.includes('ministry')) {

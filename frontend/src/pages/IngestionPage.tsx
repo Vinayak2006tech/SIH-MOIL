@@ -314,11 +314,10 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
             setActiveTab('drilling');
             handleClearFile();
           }}
-          className={`flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-xl transition ${
-            activeTab === 'drilling'
+          className={`flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-xl transition ${activeTab === 'drilling'
               ? 'bg-purple-600 text-white shadow-glow-purple'
               : 'text-slate-400 hover:text-white hover:bg-slate-800/80'
-          }`}
+            }`}
         >
           <Database className="w-4 h-4" /> Diamond Drilling Logs (CSV)
         </button>
@@ -328,11 +327,10 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
             setActiveTab('production');
             handleClearFile();
           }}
-          className={`flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-xl transition ${
-            activeTab === 'production'
+          className={`flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-xl transition ${activeTab === 'production'
               ? 'bg-purple-600 text-white shadow-glow-purple'
               : 'text-slate-400 hover:text-white hover:bg-slate-800/80'
-          }`}
+            }`}
         >
           <FileSpreadsheet className="w-4 h-4" /> Production Records (CSV)
         </button>
@@ -342,11 +340,10 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
             setActiveTab('satellite');
             handleClearFile();
           }}
-          className={`flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-xl transition ${
-            activeTab === 'satellite'
+          className={`flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-xl transition ${activeTab === 'satellite'
               ? 'bg-purple-600 text-white shadow-glow-purple'
               : 'text-slate-400 hover:text-white hover:bg-slate-800/80'
-          }`}
+            }`}
         >
           <Satellite className="w-4 h-4" /> Satellite Pass Synchronizer (Sentinel-2 / MODIS)
         </button>
@@ -394,13 +391,12 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
               onClick={() => fileInputRef.current?.click()}
-              className={`relative p-8 border-2 border-dashed rounded-2xl text-center transition-all duration-200 cursor-pointer flex flex-col items-center justify-center space-y-3 ${
-                isDragging
+              className={`relative p-8 border-2 border-dashed rounded-2xl text-center transition-all duration-200 cursor-pointer flex flex-col items-center justify-center space-y-3 ${isDragging
                   ? 'border-purple-400 bg-purple-950/40 shadow-glow-purple scale-[1.01]'
                   : file
-                  ? 'border-emerald-500/70 bg-emerald-950/10'
-                  : 'border-slate-700 hover:border-purple-500/80 bg-slate-950/50 hover:bg-slate-950/80'
-              }`}
+                    ? 'border-emerald-500/70 bg-emerald-950/10'
+                    : 'border-slate-700 hover:border-purple-500/80 bg-slate-950/50 hover:bg-slate-950/80'
+                }`}
             >
               <input
                 ref={fileInputRef}
@@ -412,13 +408,12 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
 
               {/* Glowing Icon */}
               <div
-                className={`p-4 rounded-2xl transition-transform ${
-                  isDragging
+                className={`p-4 rounded-2xl transition-transform ${isDragging
                     ? 'bg-purple-600 text-white scale-110 shadow-glow-purple animate-bounce'
                     : file
-                    ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
-                    : 'bg-purple-500/10 text-purple-400 border border-purple-500/20'
-                }`}
+                      ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
+                      : 'bg-purple-500/10 text-purple-400 border border-purple-500/20'
+                  }`}
               >
                 {file ? <FileSpreadsheet className="w-8 h-8" /> : <UploadCloud className="w-8 h-8" />}
               </div>
@@ -428,8 +423,8 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
                   {isDragging
                     ? 'Drop CSV dataset now to analyze'
                     : file
-                    ? file.name
-                    : 'Drag and drop your CSV dataset here'}
+                      ? file.name
+                      : 'Drag and drop your CSV dataset here'}
                 </p>
                 <p className="text-xs text-slate-400 mt-1">
                   {file
