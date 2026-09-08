@@ -50,27 +50,12 @@ apiClient.interceptors.request.use((config) => {
   return config;
 });
 
-// LocalStorage Persistence Helpers for Static / Offline Hosting
-export function getStoredUsers(): User[] {
-  try {
-    const raw = localStorage.getItem('moil_mock_users');
-    if (raw) return JSON.parse(raw);
-  } catch {}
-  localStorage.setItem('moil_mock_users', JSON.stringify(MOCK_USERS));
-  return MOCK_USERS;
-}
-
-export function setStoredUsers(users: User[]) {
-  try {
-    localStorage.setItem('moil_mock_users', JSON.stringify(users));
-  } catch {}
-}
-
+// LocalStorage helpers for offline mining data
 export function getStoredEquipment(): Equipment[] {
   try {
     const raw = localStorage.getItem('moil_mock_equipment');
     if (raw) return JSON.parse(raw);
-  } catch {}
+  } catch { }
   localStorage.setItem('moil_mock_equipment', JSON.stringify(MOCK_EQUIPMENT));
   return MOCK_EQUIPMENT;
 }
@@ -78,14 +63,14 @@ export function getStoredEquipment(): Equipment[] {
 export function setStoredEquipment(equip: Equipment[]) {
   try {
     localStorage.setItem('moil_mock_equipment', JSON.stringify(equip));
-  } catch {}
+  } catch { }
 }
 
 export function getStoredRecommendations(): Recommendation[] {
   try {
     const raw = localStorage.getItem('moil_mock_recommendations');
     if (raw) return JSON.parse(raw);
-  } catch {}
+  } catch { }
   localStorage.setItem('moil_mock_recommendations', JSON.stringify(MOCK_RECOMMENDATIONS));
   return MOCK_RECOMMENDATIONS;
 }
@@ -93,47 +78,8 @@ export function getStoredRecommendations(): Recommendation[] {
 export function setStoredRecommendations(recs: Recommendation[]) {
   try {
     localStorage.setItem('moil_mock_recommendations', JSON.stringify(recs));
-  } catch {}
+  } catch { }
 }
-
-export const FALLBACK_DEMO_USERS: Record<string, User> = {
-  MINE_PLANNER: {
-    _id: 'usr-planner-01',
-    id: 'usr-planner-01',
-    name: 'Vipin Kulkarni',
-    email: 'planner@balaghat.moil.gov.in',
-    role: 'MINE_PLANNER',
-    status: 'APPROVED',
-    emailVerified: true,
-    department: 'Balaghat Planning Division',
-    mineAccess: ['mine-balaghat-01', 'mine-dongri-02', 'mine-kandri-03'],
-    isGoogleAuth: false
-  },
-  ADMIN: {
-    _id: 'usr-admin-01',
-    id: 'usr-admin-01',
-    name: 'MOIL Administrator',
-    email: 'admin@moil.gov.in',
-    role: 'ADMIN',
-    status: 'APPROVED',
-    emailVerified: true,
-    department: 'Executive Directorate of Mining & Exploration',
-    mineAccess: ['ALL'],
-    isGoogleAuth: false
-  },
-  VIEWER: {
-    _id: 'usr-viewer-01',
-    id: 'usr-viewer-01',
-    name: 'Ananya Deshmukh',
-    email: 'auditor@steel.gov.in',
-    role: 'VIEWER',
-    status: 'APPROVED',
-    emailVerified: true,
-    department: 'Ministry of Steel (Govt. of India) - Oversight Cell',
-    mineAccess: ['ALL'],
-    isGoogleAuth: false
-  }
-};
 
 export interface ApiClient {
   login: (email: string, password: string) => Promise<{ success: boolean; token: string; user: User; status?: string; message?: string }>;
@@ -194,379 +140,120 @@ export const api: ApiClient = {
   login: async (email: string, password: string) => {
     const cleanEmail = (email || '').trim().toLowerCase();
     const cleanPass = (password || '').trim();
-    try {
-      const res = await apiClient.post<{ success: boolean; token: string; user: User; status?: string; message?: string }>('/auth/login', {
-        email: cleanEmail,
-        password: cleanPass
-      });
-      if (res.data?.token) {
-        localStorage.setItem('moil_token', res.data.token);
-        localStorage.setItem('moil_user', JSON.stringify(res.data.user));
-      }
-      return res.data;
-    } catch (err: any) {
-      // If backend returned a specific status response (PENDING, REJECTED, SUSPENDED, 401), rethrow it
-      if (err.response?.data?.status || (err.response?.status === 401 && err.response?.data?.message) || (err.response?.status === 403 && err.response?.data?.message)) {
-        throw err;
-      }
 
-      // Offline / LocalStorage Verification
-      const users = getStoredUsers();
-      const existingUser = users.find((u) => u.email.toLowerCase() === cleanEmail);
-
-      if (existingUser) {
-        const uStatus = existingUser.status || 'APPROVED';
-        if (uStatus === 'PENDING') {
-          const error: any = new Error('Your account is waiting for administrator approval.');
-          error.response = { status: 403, data: { status: 'PENDING', message: 'Your account is waiting for administrator approval.' } };
-          throw error;
-        }
-        if (uStatus === 'REJECTED') {
-          const error: any = new Error('Your registration request was not approved.');
-          error.response = { status: 403, data: { status: 'REJECTED', message: existingUser.rejectionReason || 'Your registration request was not approved.' } };
-          throw error;
-        }
-        if (uStatus === 'SUSPENDED') {
-          const error: any = new Error('Your account has been suspended. Please contact the administrator.');
-          error.response = { status: 403, data: { status: 'SUSPENDED', message: existingUser.suspensionReason || 'Your account has been suspended. Please contact the administrator.' } };
-          throw error;
-        }
-
-        const mockToken = `moil_token_${Date.now()}`;
-        localStorage.setItem('moil_token', mockToken);
-        localStorage.setItem('moil_user', JSON.stringify(existingUser));
-        return {
-          success: true,
-          token: mockToken,
-          user: existingUser
-        };
-      }
-
-      // If email matches demo admin
-      if (cleanEmail === 'admin@moil.gov.in' || cleanEmail === 'vaishayvinayak@gmail.com') {
-        const adminUser = FALLBACK_DEMO_USERS.ADMIN;
-        const mockToken = `moil_token_${Date.now()}`;
-        localStorage.setItem('moil_token', mockToken);
-        localStorage.setItem('moil_user', JSON.stringify(adminUser));
-        return {
-          success: true,
-          token: mockToken,
-          user: adminUser
-        };
-      }
-
-      const error: any = new Error('Invalid email or password. Please verify your credentials.');
-      error.response = { status: 401, data: { message: 'Invalid email or password. Please verify your credentials.' } };
+    if (!cleanEmail || !cleanPass) {
+      const error: any = new Error('Email and password are required.');
+      error.response = { status: 400, data: { message: 'Email and password are required.' } };
       throw error;
     }
+
+    // REAL BACKEND LOGIN VIA AXIOS
+    const res = await apiClient.post<{ success: boolean; token: string; user: User; status?: string; message?: string }>('/auth/login', {
+      email: cleanEmail,
+      password: cleanPass
+    });
+
+    if (res.data?.token) {
+      localStorage.setItem('moil_token', res.data.token);
+      localStorage.setItem('moil_user', JSON.stringify(res.data.user));
+    }
+    return res.data;
   },
 
   register: async (data: any) => {
-    try {
-      const res = await apiClient.post<{ success: boolean; token?: string; user?: User; status?: string; message?: string }>('/auth/register', data);
-      return res.data;
-    } catch (err: any) {
-      if (err.response?.status === 400 && err.response?.data?.message) {
-        throw err;
-      }
-
-      const cleanEmail = (data.email || 'personnel@moil.gov.in').toLowerCase().trim();
-      const users = getStoredUsers();
-      if (users.some((u) => u.email.toLowerCase() === cleanEmail)) {
-        const error: any = new Error('An account with this email address is already registered.');
-        error.response = { status: 400, data: { message: 'An account with this email address is already registered.' } };
-        throw error;
-      }
-
-      const newUser: User = {
-        id: `usr-pending-${Date.now()}`,
-        _id: `usr-pending-${Date.now()}`,
-        name: data.name || 'Registered Personnel',
-        email: cleanEmail,
-        role: data.role || 'MINE_PLANNER',
-        status: 'PENDING',
-        emailVerified: false,
-        department: data.department || 'Mine Planning & Geology',
-        mineAccess: ['ALL'],
-        isGoogleAuth: false,
-        createdAt: new Date().toISOString()
-      };
-
-      // Save to mock users list as PENDING
-      users.unshift(newUser);
-      setStoredUsers(users);
-
-      return {
-        success: true,
-        status: 'PENDING',
-        message: 'Your registration request has been submitted. Please wait for administrator approval.',
-        user: newUser
-      };
-    }
+    // REAL BACKEND REGISTRATION VIA AXIOS
+    const res = await apiClient.post<{ success: boolean; token?: string; user?: User; status?: string; message?: string }>('/auth/register', data);
+    return res.data;
   },
 
   activateAccount: async (token: string, password: string) => {
-    try {
-      const res = await apiClient.post<{ success: boolean; message: string }>('/auth/activate', {
-        token: token.trim(),
-        password: password.trim()
-      });
-      return res.data;
-    } catch {
-      return {
-        success: true,
-        message: 'Account successfully activated and password configured. You can now log in.'
-      };
-    }
+    const res = await apiClient.post<{ success: boolean; message: string }>('/auth/activate', {
+      token: token.trim(),
+      password: password.trim()
+    });
+    return res.data;
   },
 
   forgotPassword: async (email: string) => {
-    try {
-      const res = await apiClient.post<{ success: boolean; message: string }>('/auth/forgot-password', {
-        email: email.trim().toLowerCase()
-      });
-      return res.data;
-    } catch {
-      return {
-        success: true,
-        message: 'If an approved account exists with this email address, a password reset link has been dispatched.'
-      };
-    }
+    const res = await apiClient.post<{ success: boolean; message: string }>('/auth/forgot-password', {
+      email: email.trim().toLowerCase()
+    });
+    return res.data;
   },
 
   resetPassword: async (token: string, password: string) => {
-    try {
-      const res = await apiClient.post<{ success: boolean; message: string }>('/auth/reset-password', {
-        token: token.trim(),
-        password: password.trim()
-      });
-      return res.data;
-    } catch {
-      return {
-        success: true,
-        message: 'Password has been successfully updated. You can now log in with your new password.'
-      };
-    }
+    const res = await apiClient.post<{ success: boolean; message: string }>('/auth/reset-password', {
+      token: token.trim(),
+      password: password.trim()
+    });
+    return res.data;
   },
 
   // Admin Management Endpoints
   getAdminUsers: async (params?: { status?: string; role?: string; search?: string }) => {
-    try {
-      const res = await apiClient.get<{ success: boolean; count: number; users: User[] }>('/admin/users', { params });
-      return res.data;
-    } catch {
-      let users = getStoredUsers();
-      if (params?.status && params.status !== 'ALL') {
-        users = users.filter((u) => (u.status || 'APPROVED') === params.status);
-      }
-      if (params?.role && params.role !== 'ALL') {
-        users = users.filter((u) => u.role === params.role);
-      }
-      if (params?.search) {
-        const q = params.search.toLowerCase();
-        users = users.filter((u) => u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q) || (u.department || '').toLowerCase().includes(q));
-      }
-      return {
-        success: true,
-        count: users.length,
-        users
-      };
-    }
+    const res = await apiClient.get<{ success: boolean; count: number; users: User[] }>('/admin/users', { params });
+    return res.data;
   },
 
   getAdminUserStats: async () => {
-    try {
-      const res = await apiClient.get<{ success: boolean; stats: { totalUsers: number; pendingUsers: number; approvedUsers: number; rejectedUsers: number; suspendedUsers: number } }>('/admin/users/stats');
-      return res.data.stats;
-    } catch {
-      const users = getStoredUsers();
-      return {
-        totalUsers: users.length,
-        pendingUsers: users.filter((u) => u.status === 'PENDING').length,
-        approvedUsers: users.filter((u) => (u.status || 'APPROVED') === 'APPROVED').length,
-        rejectedUsers: users.filter((u) => u.status === 'REJECTED').length,
-        suspendedUsers: users.filter((u) => u.status === 'SUSPENDED').length
-      };
-    }
+    const res = await apiClient.get<{ success: boolean; stats: { totalUsers: number; pendingUsers: number; approvedUsers: number; rejectedUsers: number; suspendedUsers: number } }>('/admin/users/stats');
+    return res.data.stats;
   },
 
   approveUser: async (id: string, data?: { role?: string; department?: string; mineAccess?: string[] }) => {
-    try {
-      const res = await apiClient.patch<{ success: boolean; message: string; user: User }>(`/admin/users/${id}/approve`, data || {});
-      return res.data;
-    } catch {
-      const users = getStoredUsers();
-      const target = users.find((u) => u.id === id || u._id === id);
-      if (target) {
-        target.status = 'APPROVED';
-        if (data?.role) target.role = data.role as any;
-        if (data?.department) target.department = data.department;
-        if (data?.mineAccess) target.mineAccess = data.mineAccess;
-        target.approvedAt = new Date().toISOString();
-        setStoredUsers(users);
-        return { success: true, message: `Account for ${target.name} has been approved.`, user: target };
-      }
-      return { success: true, message: 'User approved', user: { name: 'Personnel', email: 'user@moil.gov.in', role: 'MINE_PLANNER', status: 'APPROVED' } as any };
-    }
+    const res = await apiClient.patch<{ success: boolean; message: string; user: User }>(`/admin/users/${id}/approve`, data || {});
+    return res.data;
   },
 
   rejectUser: async (id: string, reason?: string) => {
-    try {
-      const res = await apiClient.patch<{ success: boolean; message: string; user: User }>(`/admin/users/${id}/reject`, { reason });
-      return res.data;
-    } catch {
-      const users = getStoredUsers();
-      const target = users.find((u) => u.id === id || u._id === id);
-      if (target) {
-        target.status = 'REJECTED';
-        target.rejectionReason = reason || 'Application does not meet current organizational clearance requirements.';
-        target.rejectedAt = new Date().toISOString();
-        setStoredUsers(users);
-        return { success: true, message: `Registration request for ${target.name} has been rejected.`, user: target };
-      }
-      return { success: true, message: 'User rejected', user: { name: 'Personnel', email: 'user@moil.gov.in', role: 'MINE_PLANNER', status: 'REJECTED' } as any };
-    }
+    const res = await apiClient.patch<{ success: boolean; message: string; user: User }>(`/admin/users/${id}/reject`, { reason });
+    return res.data;
   },
 
   suspendUser: async (id: string, reason?: string) => {
-    try {
-      const res = await apiClient.patch<{ success: boolean; message: string; user: User }>(`/admin/users/${id}/suspend`, { reason });
-      return res.data;
-    } catch {
-      const users = getStoredUsers();
-      const target = users.find((u) => u.id === id || u._id === id);
-      if (target) {
-        target.status = 'SUSPENDED';
-        target.suspensionReason = reason || 'Access temporarily suspended by system administration.';
-        target.suspendedAt = new Date().toISOString();
-        setStoredUsers(users);
-        return { success: true, message: `Account for ${target.name} has been suspended.`, user: target };
-      }
-      return { success: true, message: 'User suspended', user: { name: 'Personnel', email: 'user@moil.gov.in', role: 'MINE_PLANNER', status: 'SUSPENDED' } as any };
-    }
+    const res = await apiClient.patch<{ success: boolean; message: string; user: User }>(`/admin/users/${id}/suspend`, { reason });
+    return res.data;
   },
 
   reactivateUser: async (id: string) => {
-    try {
-      const res = await apiClient.patch<{ success: boolean; message: string; user: User }>(`/admin/users/${id}/reactivate`, {});
-      return res.data;
-    } catch {
-      const users = getStoredUsers();
-      const target = users.find((u) => u.id === id || u._id === id);
-      if (target) {
-        target.status = 'APPROVED';
-        target.suspendedAt = undefined;
-        target.suspensionReason = undefined;
-        setStoredUsers(users);
-        return { success: true, message: `Account for ${target.name} has been reactivated.`, user: target };
-      }
-      return { success: true, message: 'User reactivated', user: { name: 'Personnel', email: 'user@moil.gov.in', role: 'MINE_PLANNER', status: 'APPROVED' } as any };
-    }
+    const res = await apiClient.patch<{ success: boolean; message: string; user: User }>(`/admin/users/${id}/reactivate`, {});
+    return res.data;
   },
 
   updateUserRole: async (id: string, data: { role?: string; department?: string; mineAccess?: string[] }) => {
-    try {
-      const res = await apiClient.patch<{ success: boolean; message: string; user: User }>(`/admin/users/${id}/role`, data);
-      return res.data;
-    } catch {
-      const users = getStoredUsers();
-      const target = users.find((u) => u.id === id || u._id === id);
-      if (target) {
-        if (data.role) target.role = data.role as any;
-        if (data.department) target.department = data.department;
-        if (data.mineAccess) target.mineAccess = data.mineAccess;
-        setStoredUsers(users);
-        return { success: true, message: `User permissions for ${target.name} updated.`, user: target };
-      }
-      return { success: true, message: 'User updated', user: { name: 'Personnel', email: 'user@moil.gov.in', role: 'MINE_PLANNER', status: 'APPROVED' } as any };
-    }
+    const res = await apiClient.patch<{ success: boolean; message: string; user: User }>(`/admin/users/${id}/role`, data);
+    return res.data;
   },
 
   deleteUser: async (id: string) => {
-    try {
-      const res = await apiClient.delete<{ success: boolean; message: string }>(`/admin/users/${id}`);
-      return res.data;
-    } catch {
-      const users = getStoredUsers().filter((u) => u.id !== id && u._id !== id);
-      setStoredUsers(users);
-      return { success: true, message: 'User successfully deleted from registry' };
-    }
+    const res = await apiClient.delete<{ success: boolean; message: string }>(`/admin/users/${id}`);
+    return res.data;
   },
 
   loginWithGoogle: async (googleData: { email?: string; name?: string; picture?: string; role?: string; department?: string; credential?: string }) => {
-    try {
-      const res = await apiClient.post<{ success: boolean; token: string; user: User }>('/auth/google', googleData);
-      if (res.data?.token) {
-        localStorage.setItem('moil_token', res.data.token);
-        localStorage.setItem('moil_user', JSON.stringify(res.data.user));
-      }
-      return res.data;
-    } catch {
-      const email = googleData.email || 'officer@moil.gov.in';
-      const role = (googleData.role as any) || (email.startsWith('admin@') ? 'ADMIN' : email.includes('auditor') ? 'VIEWER' : 'MINE_PLANNER');
-      const fallbackUser: User = {
-        id: `usr-google-${Date.now()}`,
-        _id: `usr-google-${Date.now()}`,
-        name: googleData.name || 'MOIL Personnel',
-        email: email,
-        role: role,
-        status: 'APPROVED',
-        emailVerified: true,
-        department: googleData.department || 'Mine Planning & Geology',
-        mineAccess: ['ALL'],
-        isGoogleAuth: true,
-        googlePicture: googleData.picture,
-        picture: googleData.picture
-      };
-      const mockToken = `google_offline_token_${Date.now()}`;
-      localStorage.setItem('moil_token', mockToken);
-      localStorage.setItem('moil_user', JSON.stringify(fallbackUser));
-      return {
-        success: true,
-        token: mockToken,
-        user: fallbackUser
-      };
+    const res = await apiClient.post<{ success: boolean; token: string; user: User }>('/auth/google', googleData);
+    if (res.data?.token) {
+      localStorage.setItem('moil_token', res.data.token);
+      localStorage.setItem('moil_user', JSON.stringify(res.data.user));
     }
+    return res.data;
   },
 
   demoLogin: async (role: 'ADMIN' | 'MINE_PLANNER' | 'VIEWER') => {
-    try {
-      const res = await apiClient.post<{ success: boolean; token: string; user: User }>('/auth/demo-login', { role });
-      if (res.data?.token) {
-        localStorage.setItem('moil_token', res.data.token);
-        localStorage.setItem('moil_user', JSON.stringify(res.data.user));
-      }
-      return res.data;
-    } catch {
-      const fallbackUser = FALLBACK_DEMO_USERS[role] || FALLBACK_DEMO_USERS.MINE_PLANNER;
-      const mockToken = `offline_token_${Date.now()}`;
-      localStorage.setItem('moil_token', mockToken);
-      localStorage.setItem('moil_user', JSON.stringify(fallbackUser));
-      return {
-        success: true,
-        token: mockToken,
-        user: fallbackUser
-      };
+    const res = await apiClient.post<{ success: boolean; token: string; user: User }>('/auth/demo-login', { role });
+    if (res.data?.token) {
+      localStorage.setItem('moil_token', res.data.token);
+      localStorage.setItem('moil_user', JSON.stringify(res.data.user));
     }
+    return res.data;
   },
 
   getMe: async () => {
-    try {
-      const res = await apiClient.get<{ success: boolean; user: User }>('/auth/me');
-      if (res.data?.user) {
-        localStorage.setItem('moil_user', JSON.stringify(res.data.user));
-      }
-      return res.data;
-    } catch {
-      const storedUser = localStorage.getItem('moil_user');
-      const token = localStorage.getItem('moil_token');
-      if (storedUser && token) {
-        try {
-          return { success: true, user: JSON.parse(storedUser) };
-        } catch {}
-      }
-      throw new Error('Unauthenticated');
+    const res = await apiClient.get<{ success: boolean; user: User }>('/auth/me');
+    if (res.data?.user) {
+      localStorage.setItem('moil_user', JSON.stringify(res.data.user));
     }
+    return res.data;
   },
 
   logout: async () => {

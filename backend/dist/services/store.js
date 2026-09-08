@@ -147,21 +147,6 @@ class InMemoryStore {
                 const dbUser = await User_1.UserModel.findOne({ email: cleanEmail });
                 if (dbUser)
                     return dbUser;
-                if (cleanEmail === 'admin@moil.gov.in' || cleanEmail === 'admin@moil.in' || cleanEmail === 'admin') {
-                    const adminUser = await User_1.UserModel.findOne({ role: 'ADMIN' });
-                    if (adminUser)
-                        return adminUser;
-                }
-                else if (cleanEmail === 'planner@moil.gov.in' || cleanEmail === 'planner@moil.in' || cleanEmail === 'planner') {
-                    const plannerUser = await User_1.UserModel.findOne({ role: 'MINE_PLANNER' });
-                    if (plannerUser)
-                        return plannerUser;
-                }
-                else if (cleanEmail === 'auditor@moil.gov.in' || cleanEmail === 'auditor@steel.gov.in' || cleanEmail === 'auditor') {
-                    const auditorUser = await User_1.UserModel.findOne({ role: 'VIEWER' });
-                    if (auditorUser)
-                        return auditorUser;
-                }
             }
             catch (err) {
                 console.warn('[Database] MongoDB query error:', err);
@@ -170,15 +155,6 @@ class InMemoryStore {
         const found = this.data.users.find((u) => u.email.toLowerCase() === cleanEmail);
         if (found)
             return found;
-        if (cleanEmail === 'admin@moil.gov.in' || cleanEmail === 'admin@moil.in' || cleanEmail === 'admin') {
-            return this.data.users.find((u) => u.role === 'ADMIN') || null;
-        }
-        if (cleanEmail === 'planner@moil.gov.in' || cleanEmail === 'planner@moil.in' || cleanEmail === 'planner') {
-            return this.data.users.find((u) => u.role === 'MINE_PLANNER') || null;
-        }
-        if (cleanEmail === 'auditor@moil.gov.in' || cleanEmail === 'auditor@steel.gov.in' || cleanEmail === 'auditor') {
-            return this.data.users.find((u) => u.role === 'VIEWER') || null;
-        }
         return null;
     }
     async findUserById(id) {
