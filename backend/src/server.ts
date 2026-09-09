@@ -36,7 +36,43 @@ app.use(
   })
 );
 
-// Health Check
+// Root Service Info & Health Check
+app.get('/', (req, res) => {
+  res.status(200).json({
+    service: 'MOIL ReserveIQ Backend REST API',
+    status: 'ONLINE',
+    version: '1.0.0',
+    cpse: 'MOIL LIMITED (Miniratna CPSE)',
+    ministry: 'Ministry of Steel, Govt. of India',
+    healthCheck: '/api/health',
+    endpoints: [
+      '/api/health',
+      '/api/auth',
+      '/api/admin',
+      '/api/mines',
+      '/api/reserves',
+      '/api/production',
+      '/api/shortfall',
+      '/api/recommendations',
+      '/api/equipment',
+      '/api/ingestion',
+      '/api/reports',
+      '/api/data-sources',
+      '/api/global'
+    ],
+    timestamp: new Date().toISOString()
+  });
+});
+
+app.get('/api', (req, res) => {
+  res.status(200).json({
+    service: 'MOIL ReserveIQ Backend REST API',
+    status: 'ONLINE',
+    version: '1.0.0',
+    health: '/api/health'
+  });
+});
+
 app.get('/api/health', (req, res) => {
   res.status(200).json({
     status: 'healthy',
