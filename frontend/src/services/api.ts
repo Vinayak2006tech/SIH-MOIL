@@ -232,6 +232,19 @@ export const api: ApiClient = {
     return res.data;
   },
 
+  createAdminUser: async (data: {
+    name: string;
+    email: string;
+    password: string;
+    role: string;
+    department: string;
+    mineAccess?: string[];
+    status?: string;
+  }) => {
+    const res = await apiClient.post<{ success: boolean; message: string; user: User }>('/admin/users', data);
+    return res.data;
+  },
+
   loginWithGoogle: async (googleData: { email?: string; name?: string; picture?: string; role?: string; department?: string; credential?: string }) => {
     const res = await apiClient.post<{ success: boolean; token: string; user: User }>('/auth/google', googleData);
     if (res.data?.token) {

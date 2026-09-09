@@ -1,5 +1,6 @@
 import { Response } from 'express';
 import crypto from 'crypto';
+import bcrypt from 'bcryptjs';
 import { store } from '../services/store';
 import { AuthRequest } from '../middleware/auth';
 import { emailService } from '../services/emailService';
@@ -259,3 +260,51 @@ export const updateUserRole = async (req: AuthRequest, res: Response) => {
     return res.status(500).json({ success: false, message: error.message });
   }
 };
+
+export const createUserByAdmin = async (req: AuthRequest, res: Response) => {
+  try {
+    const { name, email, password, role, department, mineAccess, status } = req.body;
+
+    if (!name || !email || !password) {
+      return res.status(400).json({ success: false, message: 'Full name, email address, and initial password are required.' });
+    }
+
+    if (password.length < 6) {
+      return res.status(400).json({ success: false, message: 'Password must be at least 6 characters long.' });
+    }
+
+    const cleanEmail = email.toLowerCase().trim();
+    const existing = await store.findUserByEmail(cleanEmail);
+    if (existing) {
+      return res.status(400).json({ success: false, message: 'An account with this email address is already registered.' });
+    }
+
+    const passwordHash = bcrypt.hashSync(password, 10);
+    const targetStatus = status || 'APPROVED';
+
+    const newUser: any = await store.createUser({
+      name: name.trim(),
+      email: cleanEmail,
+      passwordHash,
+      role: role || 'ADMIN',
+      department: department || 'Central Administration Directorate',
+      status: targetStatus,
+      emailVerified: true,
+      mineAccess: mineAccess || ['ALL'],
+      isGoogleAuth: false,
+      approvedAt: targetStatus === 'APPROVED' ? new Date() : undefined,
+      approvedBy: req.user?.email || 'admin',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    });
+
+    return res.status(201).json({
+      success: true,
+      message: `Account for ${newUser.name} (${newUser.email}) created successfully with role ${newUser.role}.`,
+      user: sanitizeUser(newUser)
+    });
+  } catch (error: any) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
+

@@ -3,8 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateUserRole = exports.deleteUser = exports.reactivateUser = exports.suspendUser = exports.rejectUser = exports.approveUser = exports.getUserStats = exports.getUsers = void 0;
+exports.createUserByAdmin = exports.updateUserRole = exports.deleteUser = exports.reactivateUser = exports.suspendUser = exports.rejectUser = exports.approveUser = exports.getUserStats = exports.getUsers = void 0;
 const crypto_1 = __importDefault(require("crypto"));
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const store_1 = require("../services/store");
 const emailService_1 = require("../services/emailService");
 // Format user for safe API response (exclude passwordHash)
@@ -244,3 +245,45 @@ const updateUserRole = async (req, res) => {
     }
 };
 exports.updateUserRole = updateUserRole;
+const createUserByAdmin = async (req, res) => {
+    try {
+        const { name, email, password, role, department, mineAccess, status } = req.body;
+        if (!name || !email || !password) {
+            return res.status(400).json({ success: false, message: 'Full name, email address, and initial password are required.' });
+        }
+        if (password.length < 6) {
+            return res.status(400).json({ success: false, message: 'Password must be at least 6 characters long.' });
+        }
+        const cleanEmail = email.toLowerCase().trim();
+        const existing = await store_1.store.findUserByEmail(cleanEmail);
+        if (existing) {
+            return res.status(400).json({ success: false, message: 'An account with this email address is already registered.' });
+        }
+        const passwordHash = bcryptjs_1.default.hashSync(password, 10);
+        const targetStatus = status || 'APPROVED';
+        const newUser = await store_1.store.createUser({
+            name: name.trim(),
+            email: cleanEmail,
+            passwordHash,
+            role: role || 'ADMIN',
+            department: department || 'Central Administration Directorate',
+            status: targetStatus,
+            emailVerified: true,
+            mineAccess: mineAccess || ['ALL'],
+            isGoogleAuth: false,
+            approvedAt: targetStatus === 'APPROVED' ? new Date() : undefined,
+            approvedBy: req.user?.email || 'admin',
+            createdAt: new Date(),
+            updatedAt: new Date()
+        });
+        return res.status(201).json({
+            success: true,
+            message: `Account for ${newUser.name} (${newUser.email}) created successfully with role ${newUser.role}.`,
+            user: sanitizeUser(newUser)
+        });
+    }
+    catch (error) {
+        return res.status(500).json({ success: false, message: error.message });
+    }
+};
+exports.createUserByAdmin = createUserByAdmin;

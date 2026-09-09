@@ -8,6 +8,7 @@ const router = (0, express_1.Router)();
 router.use(auth_1.authenticateJWT, auth_1.requireAdmin);
 router.get('/users/stats', adminController_1.getUserStats);
 router.get('/users', adminController_1.getUsers);
+router.post('/users', adminController_1.createUserByAdmin);
 router.patch('/users/:id/approve', adminController_1.approveUser);
 router.patch('/users/:id/reject', adminController_1.rejectUser);
 router.patch('/users/:id/suspend', adminController_1.suspendUser);

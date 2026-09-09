@@ -7,7 +7,8 @@ import {
   suspendUser,
   reactivateUser,
   updateUserRole,
-  deleteUser
+  deleteUser,
+  createUserByAdmin
 } from '../controllers/adminController';
 import { authenticateJWT, requireAdmin } from '../middleware/auth';
 
@@ -18,6 +19,7 @@ router.use(authenticateJWT, requireAdmin);
 
 router.get('/users/stats', getUserStats);
 router.get('/users', getUsers);
+router.post('/users', createUserByAdmin);
 router.patch('/users/:id/approve', approveUser);
 router.patch('/users/:id/reject', rejectUser);
 router.patch('/users/:id/suspend', suspendUser);

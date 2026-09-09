@@ -1,6 +1,6 @@
 [
   {
-    "_id": "usr-admin-01",
+    "_id": "6aa06c48cde598854cfa5454",
     "name": "Vinayak Vaishay",
     "email": "vaishayvinayak@gmail.com",
     "passwordHash": "$2a$10$eShm1wQ54bvpI8QxviDrc.b1E2sncyGxlGaAeZzcS0eqES2zPtNOu",
@@ -11,11 +11,122 @@
     "mineAccess": [
       "ALL"
     ],
-    "lastLogin": "2026-09-09T15:13:50.604Z",
-    "updatedAt": "2026-09-09T15:13:50.604Z"
+    "isGoogleAuth": false,
+    "lastLogin": "2026-09-09T17:58:37.895Z",
+    "updatedAt": "2026-09-09T17:58:37.957Z"
   },
   {
-    "_id": "usr-planner-01",
+    "_id": "usr-admin-02",
+    "name": "MOIL System Administrator",
+    "email": "admin@moil.gov.in",
+    "passwordHash": "$2a$10$tZ2Pkn8Fp0qXGZomv5v4EekH1lV7f6E8bXUuK1UfX4P9b4F7G0GOm",
+    "role": "ADMIN",
+    "status": "APPROVED",
+    "emailVerified": true,
+    "department": "Central IT & Mine Safety Directorate",
+    "mineAccess": [
+      "ALL"
+    ],
+    "isGoogleAuth": false,
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "approvedAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "_id": "6aa06c49cde598854cfa5459",
+    "email": "vvaishay9@gmail.com",
+    "__v": 0,
+    "activationToken": "be0fed1fd80d1b18fc19634c9f4e0b1c290da8f17173cdf66f15d188e1b5f10d",
+    "activationTokenExpiry": "2026-09-10T16:25:05.420Z",
+    "approvedAt": "2026-01-01T00:00:00.000Z",
+    "createdAt": "2026-09-08T20:12:57.270Z",
+    "department": "Mine Planning & Operations Directorate",
+    "emailVerified": true,
+    "isGoogleAuth": false,
+    "lastLogin": "2026-09-09T17:54:49.757Z",
+    "mineAccess": [
+      "ALL"
+    ],
+    "name": "Vineet Sharma",
+    "passwordHash": "$2a$10$eShm1wQ54bvpI8QxviDrc.b1E2sncyGxlGaAeZzcS0eqES2zPtNOu",
+    "rejectedAt": null,
+    "rejectionReason": null,
+    "role": "ADMIN",
+    "status": "APPROVED",
+    "suspendedAt": null,
+    "suspensionReason": null,
+    "updatedAt": "2026-09-09T17:54:49.810Z"
+  },
+  {
+    "_id": "6aa06c49cde598854cfa545c",
+    "email": "vaishayvinayak1@gmail.com",
+    "__v": 0,
+    "createdAt": "2026-09-08T20:12:57.443Z",
+    "department": "Exploration & Mineral Inventory Directorate",
+    "emailVerified": true,
+    "isGoogleAuth": false,
+    "mineAccess": [
+      "ALL"
+    ],
+    "name": "Atharv Vaishay",
+    "passwordHash": "$2a$10$eShm1wQ54bvpI8QxviDrc.b1E2sncyGxlGaAeZzcS0eqES2zPtNOu",
+    "role": "ADMIN",
+    "status": "APPROVED",
+    "updatedAt": "2026-09-09T17:54:50.006Z",
+    "activationToken": "c153e9da8f8bb118064af5bfb7d9a7fee620288d1a4036d49353261fd8fb3c04",
+    "activationTokenExpiry": "2026-09-11T15:13:58.001Z",
+    "approvedAt": "2026-01-01T00:00:00.000Z",
+    "rejectedAt": null,
+    "rejectionReason": null,
+    "suspendedAt": null,
+    "suspensionReason": null,
+    "lastLogin": "2026-09-09T17:54:49.952Z"
+  },
+  {
+    "_id": "6aa19835cde598854cfa6367",
+    "email": "aaradhyasharma9631@gmail.com",
+    "__v": 0,
+    "activationToken": "06871ced9e196f98e1ab3d6f768bf74fb93bd5c29f9909422da9bb32efe49d53",
+    "activationTokenExpiry": "2026-09-11T15:14:03.417Z",
+    "approvedAt": "2026-01-01T00:00:00.000Z",
+    "createdAt": "2026-09-09T17:32:37.067Z",
+    "department": "Strategic Planning Division",
+    "emailVerified": true,
+    "isGoogleAuth": false,
+    "mineAccess": [
+      "ALL"
+    ],
+    "name": "Aaradhya Sharma",
+    "passwordHash": "$2a$10$eShm1wQ54bvpI8QxviDrc.b1E2sncyGxlGaAeZzcS0eqES2zPtNOu",
+    "rejectedAt": null,
+    "rejectionReason": null,
+    "role": "ADMIN",
+    "status": "APPROVED",
+    "suspendedAt": null,
+    "suspensionReason": null,
+    "updatedAt": "2026-09-09T17:54:50.219Z",
+    "lastLogin": "2026-09-09T17:54:50.157Z"
+  },
+  {
+    "_id": "6aa06c49cde598854cfa545b",
+    "email": "naitikchaurasia3820@gmail.com",
+    "__v": 0,
+    "approvedAt": "2026-01-01T00:00:00.000Z",
+    "createdAt": "2026-09-08T20:12:57.380Z",
+    "department": "Technical Audit & Production Cell",
+    "emailVerified": true,
+    "isGoogleAuth": false,
+    "mineAccess": [
+      "ALL"
+    ],
+    "name": "Naitik Chaurasia",
+    "passwordHash": "$2a$10$eShm1wQ54bvpI8QxviDrc.b1E2sncyGxlGaAeZzcS0eqES2zPtNOu",
+    "role": "ADMIN",
+    "status": "APPROVED",
+    "updatedAt": "2026-09-09T17:54:50.462Z",
+    "lastLogin": "2026-09-09T17:54:50.351Z"
+  },
+  {
+    "_id": "6aa06c49cde598854cfa5455",
     "name": "Vipin Kulkarni",
     "email": "planner@balaghat.moil.gov.in",
     "passwordHash": "$2a$10$I4O4S7vv/1Kg1FucJMCpcet9zZ0RU8Pc6iBGvjXI..aLCwfDwPPFi",
@@ -28,11 +139,12 @@
       "mine-dongri-02",
       "mine-kandri-03"
     ],
-    "updatedAt": "2026-09-08T18:44:15.957Z",
-    "lastLogin": "2026-09-08T18:44:15.957Z"
+    "isGoogleAuth": false,
+    "lastLogin": "2026-09-09T17:55:03.805Z",
+    "updatedAt": "2026-09-09T17:55:03.869Z"
   },
   {
-    "_id": "usr-viewer-01",
+    "_id": "6aa06c49cde598854cfa5456",
     "name": "Ananya Deshmukh",
     "email": "auditor@steel.gov.in",
     "passwordHash": "$2a$10$OXWuTIQl9AXAc3iaASEas.LkPswPJA4aXftfUJ2FfPcY22LrtdPOm",
@@ -43,11 +155,12 @@
     "mineAccess": [
       "ALL"
     ],
-    "updatedAt": "2026-09-08T18:44:16.315Z",
-    "lastLogin": "2026-09-08T18:44:16.315Z"
+    "isGoogleAuth": false,
+    "lastLogin": "2026-09-09T17:55:11.923Z",
+    "updatedAt": "2026-09-09T17:55:11.980Z"
   },
   {
-    "_id": "usr-1788865377696",
+    "_id": "6aa06c49cde598854cfa5457",
     "name": "Suresh Patil",
     "email": "suresh.patil@moil.gov.in",
     "passwordHash": "$2a$10$gxzLA8iIbCIXmIBF/51Y7e5FvQnu7ERfHDPwRfTDEaDtwJIs8.AhC",
@@ -59,141 +172,45 @@
       "ALL"
     ],
     "isGoogleAuth": false,
-    "updatedAt": "2026-09-08T15:38:19.271Z",
-    "lastLogin": "2026-09-08T15:38:19.271Z"
+    "lastLogin": "2026-09-09T17:55:12.131Z",
+    "updatedAt": "2026-09-09T17:55:12.185Z"
   },
   {
-    "name": "Ramesh Sharma",
-    "email": "member.new1788881915639@moil.gov.in",
-    "passwordHash": "$2a$10$oQJxOElty9.p/RRwWPidiOPf6/yzDXdn.Civzhfi7OKgR.RxFvc3a",
-    "role": "MINE_PLANNER",
-    "department": "Balaghat Core Drill Division",
-    "status": "APPROVED",
-    "emailVerified": false,
+    "_id": "6aa19ce6cde598854cfa63da",
+    "email": "admin@moil.gov.in",
+    "__v": 0,
+    "approvedAt": "2026-01-01T00:00:00.000Z",
+    "createdAt": "2026-09-09T17:52:38.270Z",
+    "department": "Central IT & Mine Safety Directorate",
+    "emailVerified": true,
+    "isGoogleAuth": false,
     "mineAccess": [
       "ALL"
     ],
-    "isGoogleAuth": false,
-    "createdAt": "2026-09-08T15:38:35.793Z",
-    "updatedAt": "2026-09-08T15:38:35.988Z",
-    "suspensionReason": null,
-    "_id": "usr-1788881915793",
-    "approvedAt": "2026-09-08T15:38:35.899Z",
-    "approvedBy": "vaishayvinayak@gmail.com",
-    "activationToken": "ab6a04bce11f17217835e9d9aa33196e2922a70f35de0d179c2b228e66587ad2",
-    "activationTokenExpiry": "2026-09-10T15:38:35.899Z",
-    "rejectedAt": null,
-    "rejectionReason": null,
-    "suspendedAt": null,
-    "lastLogin": "2026-09-08T15:38:35.988Z"
+    "name": "MOIL System Administrator",
+    "passwordHash": "$2a$10$UT1PJOIakY0JWGNihHe0G.cJ3ucSRzs5Pb8j7ncFJUDV6ZS4g49ze",
+    "role": "ADMIN",
+    "status": "APPROVED",
+    "updatedAt": "2026-09-09T17:57:07.838Z",
+    "lastLogin": "2026-09-09T17:57:07.837Z"
   },
   {
-    "name": "Vineet sharma",
-    "email": "vvaishay9@gmail.com",
-    "passwordHash": "$2a$10$kPYJfJHGekS5ZGglkYZYp.rRNDcBfCtnOXhlhWAOcx7QzlA5gaTzW",
-    "role": "MINE_PLANNER",
-    "department": "Mine Planning ",
+    "name": "Chief Mining Engineer",
+    "email": "chief.engineer@moil.gov.in",
+    "passwordHash": "$2a$10$Y3skzhMz0S9oAIoLT5VTkeFkJOmxxaKfXSEoDnO2UZjfb3hHAeKyy",
+    "role": "ADMIN",
+    "department": "Central Directorate",
     "status": "APPROVED",
     "emailVerified": true,
     "mineAccess": [
       "ALL"
     ],
     "isGoogleAuth": false,
-    "createdAt": "2026-09-08T15:50:09.770Z",
-    "updatedAt": "2026-09-08T19:31:24.249Z",
-    "suspensionReason": null,
-    "_id": "usr-1788882609770",
-    "approvedAt": "2026-09-08T16:25:05.420Z",
+    "approvedAt": "2026-09-09T17:58:38.142Z",
     "approvedBy": "vaishayvinayak@gmail.com",
-    "activationToken": "be0fed1fd80d1b18fc19634c9f4e0b1c290da8f17173cdf66f15d188e1b5f10d",
-    "activationTokenExpiry": "2026-09-10T16:25:05.420Z",
-    "rejectedAt": null,
-    "rejectionReason": null,
-    "suspendedAt": null,
-    "lastLogin": "2026-09-08T19:31:24.249Z"
-  },
-  {
-    "name": "Priyanshi Pant",
-    "email": "priyanshipant1610@gmail.com",
-    "passwordHash": "$2a$10$I.j/wCTtZPbOx.Siy3KrfeKuuikZTziiHkZaxAGJX1Ov.cMr9N/BG",
-    "role": "VIEWER",
-    "department": "Mine Planning & Geology",
-    "status": "SUSPENDED",
-    "emailVerified": true,
-    "mineAccess": [
-      "ALL"
-    ],
-    "isGoogleAuth": false,
-    "createdAt": "2026-09-08T16:35:08.328Z",
-    "updatedAt": "2026-09-08T19:30:51.955Z",
-    "_id": "usr-1788885308328",
-    "approvedAt": "2026-09-08T16:40:34.131Z",
-    "suspendedAt": "2026-09-08T19:30:51.955Z",
-    "suspensionReason": "Access temporarily suspended by system administration."
-  },
-  {
-    "name": "Naitak Chaurasia",
-    "email": "naitikchaurasia3820@gmail.com",
-    "passwordHash": "$2a$10$vDkb60IZ9mTeS9rH10eUDu0Wwq32jB1j4X33fuEyq79bm6wEw2ahK",
-    "role": "VIEWER",
-    "department": "Mine Planning & Geology",
-    "status": "APPROVED",
-    "emailVerified": true,
-    "mineAccess": [
-      "ALL"
-    ],
-    "isGoogleAuth": false,
-    "createdAt": "2026-09-08T17:09:29.750Z",
-    "updatedAt": "2026-09-08T17:09:29.750Z",
-    "approvedAt": "2026-09-08T17:09:29.750Z",
-    "_id": "usr-1788887369750"
-  },
-  {
-    "name": "atharv",
-    "email": "vaishayvinayak1@gmail.com",
-    "passwordHash": "$2a$10$BjkV5zIOMda5FOzuA32OUuhlmFpBytpE1uIqwSL5oKstDPrZKhJdO",
-    "role": "VIEWER",
-    "department": "Mine Planning & Geology",
-    "status": "APPROVED",
-    "emailVerified": false,
-    "mineAccess": [
-      "ALL"
-    ],
-    "isGoogleAuth": false,
-    "createdAt": "2026-09-08T19:31:56.600Z",
-    "updatedAt": "2026-09-09T15:13:58.001Z",
-    "_id": "usr-1788895916600",
-    "approvedAt": "2026-09-09T15:13:58.001Z",
-    "approvedBy": "vaishayvinayak@gmail.com",
-    "activationToken": "c153e9da8f8bb118064af5bfb7d9a7fee620288d1a4036d49353261fd8fb3c04",
-    "activationTokenExpiry": "2026-09-11T15:13:58.001Z",
-    "rejectedAt": null,
-    "rejectionReason": null,
-    "suspendedAt": null,
-    "suspensionReason": null
-  },
-  {
-    "name": "Aaradhay Sharma",
-    "email": "aaradhyasharma9631@gmail.com",
-    "passwordHash": "$2a$10$8Swr0U9jVd2w9W1TqJC7n.SHPh3/TAp8scVYVpQYuIXEDu4D4I8qK",
-    "role": "MINE_PLANNER",
-    "department": "Mine Planning & Geology",
-    "status": "APPROVED",
-    "emailVerified": false,
-    "mineAccess": [
-      "ALL"
-    ],
-    "isGoogleAuth": false,
-    "createdAt": "2026-09-09T15:07:22.358Z",
-    "updatedAt": "2026-09-09T15:14:03.417Z",
-    "_id": "usr-1788966452386",
-    "approvedAt": "2026-09-09T15:14:03.417Z",
-    "approvedBy": "vaishayvinayak@gmail.com",
-    "activationToken": "06871ced9e196f98e1ab3d6f768bf74fb93bd5c29f9909422da9bb32efe49d53",
-    "activationTokenExpiry": "2026-09-11T15:14:03.417Z",
-    "rejectedAt": null,
-    "rejectionReason": null,
-    "suspendedAt": null,
-    "suspensionReason": null
+    "createdAt": "2026-09-09T17:58:38.142Z",
+    "updatedAt": "2026-09-09T17:58:38.402Z",
+    "_id": "6aa19e4ea7ad556019210dc2",
+    "lastLogin": "2026-09-09T17:58:38.349Z"
   }
 ]

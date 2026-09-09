@@ -21,7 +21,11 @@ import {
   Sparkles,
   AlertCircle,
   RefreshCw,
-  Edit3
+  Edit3,
+  UserPlus,
+  Lock,
+  Eye,
+  EyeOff
 } from 'lucide-react';
 import { api } from '../services/api';
 import type { User, UserRole, UserStatus, UserStats } from '../types';
@@ -46,10 +50,19 @@ export const AdminPortalPage: React.FC = () => {
 
   // Modals state
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
-  const [modalType, setModalType] = useState<'APPROVE' | 'REJECT' | 'SUSPEND' | 'EDIT_ROLE' | 'DELETE' | null>(null);
+  const [modalType, setModalType] = useState<'APPROVE' | 'REJECT' | 'SUSPEND' | 'EDIT_ROLE' | 'DELETE' | 'CREATE_USER' | null>(null);
   const [actionReason, setActionReason] = useState('');
   const [editRole, setEditRole] = useState<UserRole>('MINE_PLANNER');
   const [editDepartment, setEditDepartment] = useState('');
+
+  // Create User state
+  const [newUserName, setNewUserName] = useState('');
+  const [newUserEmail, setNewUserEmail] = useState('');
+  const [newUserPassword, setNewUserPassword] = useState('');
+  const [showNewUserPassword, setShowNewUserPassword] = useState(false);
+  const [newUserRole, setNewUserRole] = useState<UserRole>('ADMIN');
+  const [newUserDepartment, setNewUserDepartment] = useState('Central Administration Directorate');
+  const [newUserStatus, setNewUserStatus] = useState<'APPROVED' | 'PENDING'>('APPROVED');
 
   const fetchUsersAndStats = async () => {
     setLoading(true);
@@ -114,10 +127,54 @@ export const AdminPortalPage: React.FC = () => {
     setModalType('DELETE');
   };
 
+  const handleOpenCreateUserModal = () => {
+    setSelectedUser(null);
+    setNewUserName('');
+    setNewUserEmail('');
+    setNewUserPassword('');
+    setShowNewUserPassword(false);
+    setNewUserRole('ADMIN');
+    setNewUserDepartment('Central Administration Directorate');
+    setNewUserStatus('APPROVED');
+    setModalType('CREATE_USER');
+  };
+
   const closeModal = () => {
     setSelectedUser(null);
     setModalType(null);
     setActionReason('');
+  };
+
+  const handleCreateUser = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newUserName.trim() || !newUserEmail.trim() || !newUserPassword.trim()) {
+      showToast('error', 'Please fill in all required fields (Name, Email, Password).');
+      return;
+    }
+    if (newUserPassword.length < 6) {
+      showToast('error', 'Password must be at least 6 characters.');
+      return;
+    }
+
+    setActionLoading(true);
+    try {
+      const res = await api.createAdminUser({
+        name: newUserName.trim(),
+        email: newUserEmail.trim().toLowerCase(),
+        password: newUserPassword.trim(),
+        role: newUserRole,
+        department: newUserDepartment.trim(),
+        status: newUserStatus,
+        mineAccess: ['ALL']
+      });
+      showToast('success', res.message || `Account for ${newUserName} created successfully! They can log in immediately.`);
+      closeModal();
+      fetchUsersAndStats();
+    } catch (err: any) {
+      showToast('error', err.response?.data?.message || 'Failed to create user account.');
+    } finally {
+      setActionLoading(false);
+    }
   };
 
   const handleApprove = async () => {
@@ -309,7 +366,14 @@ export const AdminPortalPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex items-center gap-2 self-stretch sm:self-auto shrink-0">
+          <div className="flex items-center gap-2 self-stretch sm:self-auto shrink-0 flex-wrap">
+            <button
+              onClick={handleOpenCreateUserModal}
+              className="w-full sm:w-auto px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-glow-purple transition cursor-pointer"
+            >
+              <UserPlus className="w-3.5 h-3.5" />
+              <span>+ Provision Personnel / Admin</span>
+            </button>
             <button
               onClick={fetchUsersAndStats}
               disabled={loading}
@@ -1062,6 +1126,129 @@ export const AdminPortalPage: React.FC = () => {
                 <span>Delete Permanently</span>
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* CREATE PERSONNEL / ADMIN MODAL */}
+      {modalType === 'CREATE_USER' && (
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+          <div className="w-full max-w-lg glass-panel bg-slate-900 border border-purple-500/50 rounded-2xl sm:rounded-3xl p-5 sm:p-6 space-y-4 shadow-2xl animate-fadeIn my-auto max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-400 shrink-0">
+                <UserPlus className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-white">Directly Provision New Account</h3>
+                <p className="text-xs text-slate-400">Create pre-approved Administrator or Staff credentials</p>
+              </div>
+            </div>
+
+            <form onSubmit={handleCreateUser} className="space-y-3.5 text-xs">
+              <div className="space-y-1">
+                <label className="text-slate-300 font-semibold block text-[11px]">Full Name</label>
+                <input
+                  type="text"
+                  required
+                  value={newUserName}
+                  onChange={(e) => setNewUserName(e.target.value)}
+                  placeholder="e.g. Dr. Rajeshwar Sharma"
+                  className="w-full px-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:outline-none focus:border-purple-500"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-slate-300 font-semibold block text-[11px]">Official Email Address</label>
+                <input
+                  type="email"
+                  required
+                  value={newUserEmail}
+                  onChange={(e) => setNewUserEmail(e.target.value)}
+                  placeholder="name@moil.gov.in"
+                  className="w-full px-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white font-mono text-xs focus:outline-none focus:border-purple-500"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="space-y-1">
+                  <label className="text-slate-300 font-semibold block text-[11px]">Assigned Role</label>
+                  <select
+                    value={newUserRole}
+                    onChange={(e) => setNewUserRole(e.target.value as UserRole)}
+                    className="w-full px-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:outline-none focus:border-purple-500 cursor-pointer"
+                  >
+                    <option value="ADMIN">System Administrator (Full Control)</option>
+                    <option value="MINE_PLANNER">Mine Planner</option>
+                    <option value="VIEWER">Ministry Auditor (Viewer)</option>
+                  </select>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-slate-300 font-semibold block text-[11px]">Initial Status</label>
+                  <select
+                    value={newUserStatus}
+                    onChange={(e) => setNewUserStatus(e.target.value as 'APPROVED' | 'PENDING')}
+                    className="w-full px-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:outline-none focus:border-purple-500 cursor-pointer"
+                  >
+                    <option value="APPROVED">Approved (Immediate Login)</option>
+                    <option value="PENDING">Pending (Requires Activation)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-slate-300 font-semibold block text-[11px]">Department / Unit</label>
+                <input
+                  type="text"
+                  required
+                  value={newUserDepartment}
+                  onChange={(e) => setNewUserDepartment(e.target.value)}
+                  placeholder="e.g. Central Administration Directorate"
+                  className="w-full px-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:outline-none focus:border-purple-500"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-slate-300 font-semibold block text-[11px]">Password (Min 6 Characters)</label>
+                <div className="relative">
+                  <input
+                    type={showNewUserPassword ? 'text' : 'password'}
+                    required
+                    value={newUserPassword}
+                    onChange={(e) => setNewUserPassword(e.target.value)}
+                    placeholder="••••••••"
+                    className="w-full pl-9 pr-10 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:outline-none focus:border-purple-500"
+                  />
+                  <Lock className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
+                  <button
+                    type="button"
+                    onClick={() => setShowNewUserPassword(!showNewUserPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white transition focus:outline-none cursor-pointer"
+                  >
+                    {showNewUserPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
+
+              <div className="flex flex-col-reverse sm:flex-row sm:items-center justify-end gap-2 pt-3 border-t border-slate-800">
+                <button
+                  type="button"
+                  onClick={closeModal}
+                  disabled={actionLoading}
+                  className="w-full sm:w-auto px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition cursor-pointer text-center"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={actionLoading}
+                  className="w-full sm:w-auto px-5 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold shadow-lg transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                >
+                  {actionLoading ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <UserPlus className="w-3.5 h-3.5" />}
+                  <span>Provision Account</span>
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}

@@ -9,9 +9,12 @@ const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
 const getInitialSeedData = () => {
     const adminHash = bcryptjs_1.default.hashSync('vinayak@2006', 10);
+    const moilAdminHash = bcryptjs_1.default.hashSync('admin@2026', 10);
     const plannerHash = bcryptjs_1.default.hashSync('planner@123', 10);
     const auditorHash = bcryptjs_1.default.hashSync('auditor@123', 10);
     const sureshHash = bcryptjs_1.default.hashSync('suresh@123', 10);
+    const aaradhyaHash = bcryptjs_1.default.hashSync('aaradhya@2026', 10);
+    const naitikHash = bcryptjs_1.default.hashSync('naitik@2026', 10);
     const users = [
         {
             _id: 'usr-admin-01',
@@ -22,6 +25,71 @@ const getInitialSeedData = () => {
             status: 'APPROVED',
             emailVerified: true,
             department: 'Executive Directorate of Mining & Exploration',
+            mineAccess: ['ALL'],
+            approvedAt: new Date('2026-01-01T00:00:00.000Z'),
+            createdAt: new Date('2026-01-01T00:00:00.000Z')
+        },
+        {
+            _id: 'usr-admin-02',
+            name: 'MOIL System Administrator',
+            email: 'admin@moil.gov.in',
+            passwordHash: moilAdminHash,
+            role: 'ADMIN',
+            status: 'APPROVED',
+            emailVerified: true,
+            department: 'Central IT & Mine Safety Directorate',
+            mineAccess: ['ALL'],
+            approvedAt: new Date('2026-01-01T00:00:00.000Z'),
+            createdAt: new Date('2026-01-01T00:00:00.000Z')
+        },
+        {
+            _id: 'usr-admin-03',
+            name: 'Vineet Sharma',
+            email: 'vvaishay9@gmail.com',
+            passwordHash: adminHash,
+            role: 'ADMIN',
+            status: 'APPROVED',
+            emailVerified: true,
+            department: 'Mine Planning & Operations Directorate',
+            mineAccess: ['ALL'],
+            approvedAt: new Date('2026-01-01T00:00:00.000Z'),
+            createdAt: new Date('2026-01-01T00:00:00.000Z')
+        },
+        {
+            _id: 'usr-admin-04',
+            name: 'Atharv Vaishay',
+            email: 'vaishayvinayak1@gmail.com',
+            passwordHash: adminHash,
+            role: 'ADMIN',
+            status: 'APPROVED',
+            emailVerified: true,
+            department: 'Exploration & Mineral Inventory Directorate',
+            mineAccess: ['ALL'],
+            approvedAt: new Date('2026-01-01T00:00:00.000Z'),
+            createdAt: new Date('2026-01-01T00:00:00.000Z')
+        },
+        {
+            _id: 'usr-admin-05',
+            name: 'Aaradhya Sharma',
+            email: 'aaradhyasharma9631@gmail.com',
+            passwordHash: aaradhyaHash,
+            role: 'ADMIN',
+            status: 'APPROVED',
+            emailVerified: true,
+            department: 'Strategic Planning Division',
+            mineAccess: ['ALL'],
+            approvedAt: new Date('2026-01-01T00:00:00.000Z'),
+            createdAt: new Date('2026-01-01T00:00:00.000Z')
+        },
+        {
+            _id: 'usr-admin-06',
+            name: 'Naitik Chaurasia',
+            email: 'naitikchaurasia3820@gmail.com',
+            passwordHash: naitikHash,
+            role: 'ADMIN',
+            status: 'APPROVED',
+            emailVerified: true,
+            department: 'Technical Audit & Production Cell',
             mineAccess: ['ALL'],
             approvedAt: new Date('2026-01-01T00:00:00.000Z'),
             createdAt: new Date('2026-01-01T00:00:00.000Z')
