@@ -11,8 +11,8 @@
     "mineAccess": [
       "ALL"
     ],
-    "lastLogin": "2026-09-08T19:49:16.530Z",
-    "updatedAt": "2026-09-08T19:49:16.530Z"
+    "lastLogin": "2026-09-09T15:13:50.604Z",
+    "updatedAt": "2026-09-09T15:13:50.604Z"
   },
   {
     "_id": "usr-planner-01",
@@ -154,14 +154,46 @@
     "passwordHash": "$2a$10$BjkV5zIOMda5FOzuA32OUuhlmFpBytpE1uIqwSL5oKstDPrZKhJdO",
     "role": "VIEWER",
     "department": "Mine Planning & Geology",
-    "status": "PENDING",
+    "status": "APPROVED",
     "emailVerified": false,
     "mineAccess": [
       "ALL"
     ],
     "isGoogleAuth": false,
     "createdAt": "2026-09-08T19:31:56.600Z",
-    "updatedAt": "2026-09-08T19:31:56.600Z",
-    "_id": "usr-1788895916600"
+    "updatedAt": "2026-09-09T15:13:58.001Z",
+    "_id": "usr-1788895916600",
+    "approvedAt": "2026-09-09T15:13:58.001Z",
+    "approvedBy": "vaishayvinayak@gmail.com",
+    "activationToken": "c153e9da8f8bb118064af5bfb7d9a7fee620288d1a4036d49353261fd8fb3c04",
+    "activationTokenExpiry": "2026-09-11T15:13:58.001Z",
+    "rejectedAt": null,
+    "rejectionReason": null,
+    "suspendedAt": null,
+    "suspensionReason": null
+  },
+  {
+    "name": "Aaradhay Sharma",
+    "email": "aaradhyasharma9631@gmail.com",
+    "passwordHash": "$2a$10$8Swr0U9jVd2w9W1TqJC7n.SHPh3/TAp8scVYVpQYuIXEDu4D4I8qK",
+    "role": "MINE_PLANNER",
+    "department": "Mine Planning & Geology",
+    "status": "APPROVED",
+    "emailVerified": false,
+    "mineAccess": [
+      "ALL"
+    ],
+    "isGoogleAuth": false,
+    "createdAt": "2026-09-09T15:07:22.358Z",
+    "updatedAt": "2026-09-09T15:14:03.417Z",
+    "_id": "usr-1788966452386",
+    "approvedAt": "2026-09-09T15:14:03.417Z",
+    "approvedBy": "vaishayvinayak@gmail.com",
+    "activationToken": "06871ced9e196f98e1ab3d6f768bf74fb93bd5c29f9909422da9bb32efe49d53",
+    "activationTokenExpiry": "2026-09-11T15:14:03.417Z",
+    "rejectedAt": null,
+    "rejectionReason": null,
+    "suspendedAt": null,
+    "suspensionReason": null
   }
 ]

@@ -144,12 +144,12 @@ class InMemoryStore {
             return null;
         if (db_1.isMongoConnected) {
             try {
-                const dbUser = await User_1.UserModel.findOne({ email: cleanEmail });
+                const dbUser = await User_1.UserModel.findOne({ email: cleanEmail }).maxTimeMS(2500).lean();
                 if (dbUser)
                     return dbUser;
             }
             catch (err) {
-                console.warn('[Database] MongoDB query error:', err);
+                // Fallback to in-memory store
             }
         }
         const found = this.data.users.find((u) => u.email.toLowerCase() === cleanEmail);
@@ -158,25 +158,33 @@ class InMemoryStore {
         return null;
     }
     async findUserById(id) {
+        if (!id)
+            return null;
         if (db_1.isMongoConnected) {
             try {
-                const dbUser = await User_1.UserModel.findById(id);
+                let dbUser = null;
+                if (id.match(/^[0-9a-fA-F]{24}$/)) {
+                    dbUser = await User_1.UserModel.findById(id).maxTimeMS(2500).lean();
+                }
+                if (!dbUser) {
+                    dbUser = await User_1.UserModel.findOne({ email: id.toLowerCase() }).maxTimeMS(2500).lean();
+                }
                 if (dbUser)
                     return dbUser;
             }
             catch (err) {
-                // May fail if id is not a valid Mongo ObjectId, ignore and fallback
+                // Fallback
             }
         }
-        return this.data.users.find((u) => u._id === id || u.id === id) || null;
+        return this.data.users.find((u) => u._id === id || u.id === id || u.email?.toLowerCase() === id?.toLowerCase()) || null;
     }
     async findUserByActivationToken(token) {
-        if (db_1.isMongoConnected) {
+        if (db_1.isMongoConnected && token) {
             try {
                 const dbUser = await User_1.UserModel.findOne({
                     activationToken: token,
                     activationTokenExpiry: { $gt: new Date() }
-                });
+                }).maxTimeMS(2500).lean();
                 if (dbUser)
                     return dbUser;
             }
@@ -196,12 +204,12 @@ class InMemoryStore {
         }) || null;
     }
     async findUserByResetToken(token) {
-        if (db_1.isMongoConnected) {
+        if (db_1.isMongoConnected && token) {
             try {
                 const dbUser = await User_1.UserModel.findOne({
                     resetPasswordToken: token,
                     resetPasswordExpiry: { $gt: new Date() }
-                });
+                }).maxTimeMS(2500).lean();
                 if (dbUser)
                     return dbUser;
             }
@@ -245,15 +253,20 @@ class InMemoryStore {
     }
     async updateUser(id, updates) {
         let updatedUser = null;
-        if (db_1.isMongoConnected) {
+        if (db_1.isMongoConnected && id) {
             try {
-                updatedUser = await User_1.UserModel.findByIdAndUpdate(id, updates, { new: true });
+                if (id.match(/^[0-9a-fA-F]{24}$/)) {
+                    updatedUser = await User_1.UserModel.findByIdAndUpdate(id, updates, { new: true }).lean();
+                }
+                else {
+                    updatedUser = await User_1.UserModel.findOneAndUpdate({ email: id.toLowerCase() }, updates, { new: true }).lean();
+                }
             }
             catch (err) {
                 console.warn('[Database] MongoDB updateUser error:', err);
             }
         }
-        const idx = this.data.users.findIndex((u) => u._id === id || u.id === id);
+        const idx = this.data.users.findIndex((u) => u._id === id || u.id === id || u.email?.toLowerCase() === id?.toLowerCase());
         if (idx !== -1) {
             this.data.users[idx] = {
                 ...this.data.users[idx],
@@ -264,10 +277,9 @@ class InMemoryStore {
             return this.data.users[idx];
         }
         if (updatedUser) {
-            const plain = updatedUser.toObject ? updatedUser.toObject() : updatedUser;
-            this.data.users.push(plain);
+            this.data.users.push(updatedUser);
             this.savePersistedUsers();
-            return plain;
+            return updatedUser;
         }
         return null;
     }
