@@ -93,9 +93,27 @@ class InMemoryStore {
                 }, { upsert: true, new: true });
             }
             console.log(`[Database] Synchronized ${this.data.users.length} user accounts to MongoDB.`);
+            // Seed Mines if collection is empty
+            const existingMines = await Mine_1.MineModel.countDocuments();
+            if (existingMines === 0 && this.data.mines.length > 0) {
+                await Mine_1.MineModel.insertMany(this.data.mines);
+                console.log(`[Database] Seeded ${this.data.mines.length} MOIL mines to MongoDB.`);
+            }
+            // Seed Equipment if collection is empty
+            const existingEquip = await Equipment_1.EquipmentModel.countDocuments();
+            if (existingEquip === 0 && this.data.equipment.length > 0) {
+                await Equipment_1.EquipmentModel.insertMany(this.data.equipment);
+                console.log(`[Database] Seeded ${this.data.equipment.length} equipment assets to MongoDB.`);
+            }
+            // Seed Boreholes if collection is empty
+            const existingBh = await Borehole_1.BoreholeModel.countDocuments();
+            if (existingBh === 0 && this.data.boreholes.length > 0) {
+                await Borehole_1.BoreholeModel.insertMany(this.data.boreholes);
+                console.log(`[Database] Seeded ${this.data.boreholes.length} drilling boreholes to MongoDB.`);
+            }
         }
         catch (err) {
-            console.warn('[Database] User synchronization to MongoDB encountered an error:', err.message);
+            console.warn('[Database] Data synchronization to MongoDB encountered a notice:', err.message);
         }
     }
     // Data Sources & Provenance
@@ -380,19 +398,32 @@ class InMemoryStore {
     // Mines
     async getAllMines() {
         if (db_1.isMongoConnected) {
-            return await Mine_1.MineModel.find().lean();
+            try {
+                const dbMines = await Mine_1.MineModel.find().lean();
+                if (dbMines && dbMines.length > 0)
+                    return dbMines;
+            }
+            catch (err) { }
         }
         return this.data.mines;
     }
     async getMineById(mineId) {
         if (db_1.isMongoConnected) {
-            return await Mine_1.MineModel.findOne({ mineId }).lean();
+            try {
+                const dbMine = await Mine_1.MineModel.findOne({ mineId }).lean();
+                if (dbMine)
+                    return dbMine;
+            }
+            catch (err) { }
         }
         return this.data.mines.find((m) => m.mineId === mineId) || null;
     }
     async updateMine(mineId, updates) {
         if (db_1.isMongoConnected) {
-            return await Mine_1.MineModel.findOneAndUpdate({ mineId }, updates, { new: true }).lean();
+            try {
+                return await Mine_1.MineModel.findOneAndUpdate({ mineId }, updates, { new: true }).lean();
+            }
+            catch (err) { }
         }
         const idx = this.data.mines.findIndex((m) => m.mineId === mineId);
         if (idx !== -1) {
@@ -404,8 +435,13 @@ class InMemoryStore {
     // Boreholes / Drilling Logs
     async getBoreholes(mineId) {
         if (db_1.isMongoConnected) {
-            const filter = mineId ? { mineId } : {};
-            return await Borehole_1.BoreholeModel.find(filter).lean();
+            try {
+                const filter = mineId ? { mineId } : {};
+                const dbBoreholes = await Borehole_1.BoreholeModel.find(filter).lean();
+                if (dbBoreholes && dbBoreholes.length > 0)
+                    return dbBoreholes;
+            }
+            catch (err) { }
         }
         if (mineId) {
             return this.data.boreholes.filter((b) => b.mineId === mineId);
@@ -428,8 +464,13 @@ class InMemoryStore {
     // Production Logs
     async getProductionLogs(mineId, limit = 24) {
         if (db_1.isMongoConnected) {
-            const filter = mineId ? { mineId } : {};
-            return await ProductionLog_1.ProductionLogModel.find(filter).sort({ date: 1 }).limit(limit).lean();
+            try {
+                const filter = mineId ? { mineId } : {};
+                const dbLogs = await ProductionLog_1.ProductionLogModel.find(filter).sort({ date: 1 }).limit(limit).lean();
+                if (dbLogs && dbLogs.length > 0)
+                    return dbLogs;
+            }
+            catch (err) { }
         }
         let logs = [...this.data.productionLogs];
         if (mineId) {
@@ -454,8 +495,13 @@ class InMemoryStore {
     // Equipment Fleet
     async getEquipment(mineId) {
         if (db_1.isMongoConnected) {
-            const filter = mineId ? { mineId } : {};
-            return await Equipment_1.EquipmentModel.find(filter).lean();
+            try {
+                const filter = mineId ? { mineId } : {};
+                const dbEquip = await Equipment_1.EquipmentModel.find(filter).lean();
+                if (dbEquip && dbEquip.length > 0)
+                    return dbEquip;
+            }
+            catch (err) { }
         }
         if (mineId) {
             return this.data.equipment.filter((e) => e.mineId === mineId);
@@ -477,7 +523,10 @@ class InMemoryStore {
     }
     async updateEquipment(code, updates) {
         if (db_1.isMongoConnected) {
-            return await Equipment_1.EquipmentModel.findOneAndUpdate({ code }, updates, { new: true }).lean();
+            try {
+                return await Equipment_1.EquipmentModel.findOneAndUpdate({ code }, updates, { new: true }).lean();
+            }
+            catch (err) { }
         }
         const idx = this.data.equipment.findIndex((e) => e.code === code);
         if (idx !== -1) {
@@ -488,7 +537,10 @@ class InMemoryStore {
     }
     async deleteEquipment(code) {
         if (db_1.isMongoConnected) {
-            return await Equipment_1.EquipmentModel.findOneAndDelete({ code });
+            try {
+                return await Equipment_1.EquipmentModel.findOneAndDelete({ code });
+            }
+            catch (err) { }
         }
         const idx = this.data.equipment.findIndex((e) => e.code === code);
         if (idx !== -1) {
@@ -499,8 +551,13 @@ class InMemoryStore {
     // Shortfall Risk
     async getShortfallRisks(mineId) {
         if (db_1.isMongoConnected) {
-            const filter = mineId ? { mineId } : {};
-            return await ShortfallRisk_1.ShortfallRiskModel.find(filter).lean();
+            try {
+                const filter = mineId ? { mineId } : {};
+                const dbRisks = await ShortfallRisk_1.ShortfallRiskModel.find(filter).lean();
+                if (dbRisks && dbRisks.length > 0)
+                    return dbRisks;
+            }
+            catch (err) { }
         }
         if (mineId) {
             return this.data.shortfallRisks.filter((r) => r.mineId === mineId);
@@ -509,7 +566,10 @@ class InMemoryStore {
     }
     async updateShortfallRisk(mineId, riskData) {
         if (db_1.isMongoConnected) {
-            return await ShortfallRisk_1.ShortfallRiskModel.findOneAndUpdate({ mineId }, riskData, { upsert: true, new: true }).lean();
+            try {
+                return await ShortfallRisk_1.ShortfallRiskModel.findOneAndUpdate({ mineId }, riskData, { upsert: true, new: true }).lean();
+            }
+            catch (err) { }
         }
         const idx = this.data.shortfallRisks.findIndex((r) => r.mineId === mineId);
         if (idx !== -1) {
@@ -523,12 +583,17 @@ class InMemoryStore {
     // Recommendations
     async getRecommendations(mineId, status) {
         if (db_1.isMongoConnected) {
-            const filter = {};
-            if (mineId)
-                filter.mineId = mineId;
-            if (status)
-                filter.status = status;
-            return await Recommendation_1.RecommendationModel.find(filter).sort({ createdAt: -1 }).lean();
+            try {
+                const filter = {};
+                if (mineId)
+                    filter.mineId = mineId;
+                if (status)
+                    filter.status = status;
+                const dbRecs = await Recommendation_1.RecommendationModel.find(filter).sort({ createdAt: -1 }).lean();
+                if (dbRecs && dbRecs.length > 0)
+                    return dbRecs;
+            }
+            catch (err) { }
         }
         let list = [...this.data.recommendations];
         if (mineId) {
