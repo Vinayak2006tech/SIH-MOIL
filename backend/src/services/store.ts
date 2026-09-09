@@ -154,10 +154,10 @@ class InMemoryStore {
 
     if (isMongoConnected) {
       try {
-        const dbUser = await UserModel.findOne({ email: cleanEmail });
+        const dbUser = await UserModel.findOne({ email: cleanEmail }).maxTimeMS(2500).lean();
         if (dbUser) return dbUser;
       } catch (err) {
-        console.warn('[Database] MongoDB query error:', err);
+        // Fallback to in-memory store
       }
     }
 
@@ -168,24 +168,31 @@ class InMemoryStore {
   }
 
   async findUserById(id: string) {
+    if (!id) return null;
     if (isMongoConnected) {
       try {
-        const dbUser = await UserModel.findById(id);
+        let dbUser: any = null;
+        if (id.match(/^[0-9a-fA-F]{24}$/)) {
+          dbUser = await UserModel.findById(id).maxTimeMS(2500).lean();
+        }
+        if (!dbUser) {
+          dbUser = await UserModel.findOne({ email: id.toLowerCase() }).maxTimeMS(2500).lean();
+        }
         if (dbUser) return dbUser;
       } catch (err) {
-        // May fail if id is not a valid Mongo ObjectId, ignore and fallback
+        // Fallback
       }
     }
-    return this.data.users.find((u) => u._id === id || u.id === id) || null;
+    return this.data.users.find((u) => u._id === id || u.id === id || u.email?.toLowerCase() === id?.toLowerCase()) || null;
   }
 
   async findUserByActivationToken(token: string) {
-    if (isMongoConnected) {
+    if (isMongoConnected && token) {
       try {
         const dbUser = await UserModel.findOne({
           activationToken: token,
           activationTokenExpiry: { $gt: new Date() }
-        });
+        }).maxTimeMS(2500).lean();
         if (dbUser) return dbUser;
       } catch (err) {
         console.warn('[Database] MongoDB findUserByActivationToken error:', err);
@@ -203,12 +210,12 @@ class InMemoryStore {
   }
 
   async findUserByResetToken(token: string) {
-    if (isMongoConnected) {
+    if (isMongoConnected && token) {
       try {
         const dbUser = await UserModel.findOne({
           resetPasswordToken: token,
           resetPasswordExpiry: { $gt: new Date() }
-        });
+        }).maxTimeMS(2500).lean();
         if (dbUser) return dbUser;
       } catch (err) {
         console.warn('[Database] MongoDB findUserByResetToken error:', err);
@@ -250,15 +257,23 @@ class InMemoryStore {
 
   async updateUser(id: string, updates: any) {
     let updatedUser: any = null;
-    if (isMongoConnected) {
+    if (isMongoConnected && id) {
       try {
-        updatedUser = await UserModel.findByIdAndUpdate(id, updates, { new: true });
+        if (id.match(/^[0-9a-fA-F]{24}$/)) {
+          updatedUser = await UserModel.findByIdAndUpdate(id, updates, { new: true }).lean();
+        } else {
+          updatedUser = await UserModel.findOneAndUpdate(
+            { email: id.toLowerCase() },
+            updates,
+            { new: true }
+          ).lean();
+        }
       } catch (err) {
         console.warn('[Database] MongoDB updateUser error:', err);
       }
     }
 
-    const idx = this.data.users.findIndex((u) => u._id === id || u.id === id);
+    const idx = this.data.users.findIndex((u) => u._id === id || u.id === id || u.email?.toLowerCase() === id?.toLowerCase());
     if (idx !== -1) {
       this.data.users[idx] = {
         ...this.data.users[idx],
@@ -270,10 +285,9 @@ class InMemoryStore {
     }
 
     if (updatedUser) {
-      const plain = updatedUser.toObject ? updatedUser.toObject() : updatedUser;
-      this.data.users.push(plain);
+      this.data.users.push(updatedUser);
       this.savePersistedUsers();
-      return plain;
+      return updatedUser;
     }
 
     return null;

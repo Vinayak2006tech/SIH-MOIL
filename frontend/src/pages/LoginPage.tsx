@@ -10,9 +10,14 @@ import {
   EyeOff,
   Clock,
   Ban,
-  ShieldAlert
+  ShieldAlert,
+  Sparkles,
+  ShieldCheck,
+  Pickaxe,
+  BarChart3
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import type { UserRole } from '../types';
 
 interface LoginPageProps {
   onGoToRegister: () => void;
@@ -20,13 +25,14 @@ interface LoginPageProps {
 }
 
 export const LoginPage: React.FC<LoginPageProps> = ({ onGoToRegister, onGoToForgotPassword }) => {
-  const { login } = useAuth();
+  const { login, demoLogin } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [errorStatus, setErrorStatus] = useState<'PENDING' | 'REJECTED' | 'SUSPENDED' | null>(null);
   const [loading, setLoading] = useState(false);
+  const [demoLoadingRole, setDemoLoadingRole] = useState<UserRole | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,6 +61,25 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onGoToRegister, onGoToForg
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleQuickDemo = async (role: UserRole) => {
+    setError(null);
+    setErrorStatus(null);
+    setDemoLoadingRole(role);
+    try {
+      await demoLogin(role);
+    } catch (err: any) {
+      setError(err.response?.data?.message || err.message || 'Failed to initialize demo session.');
+    } finally {
+      setDemoLoadingRole(null);
+    }
+  };
+
+  const handleFillAdmin = () => {
+    setEmail('vaishayvinayak@gmail.com');
+    setPassword('vinayak@2006');
+    setError(null);
   };
 
   return (
@@ -89,6 +114,53 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onGoToRegister, onGoToForg
           </p>
         </div>
 
+        {/* Quick Demo Access Bar */}
+        <div className="bg-slate-950/80 border border-slate-800/80 rounded-2xl p-3 space-y-2">
+          <div className="flex items-center justify-between text-[11px]">
+            <span className="font-semibold text-slate-300 flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              <span>Instant Demo Access</span>
+            </span>
+            <button
+              type="button"
+              onClick={handleFillAdmin}
+              className="text-[10px] text-purple-400 hover:text-purple-300 font-mono hover:underline cursor-pointer"
+            >
+              Fill Admin Credentials
+            </button>
+          </div>
+          <div className="grid grid-cols-3 gap-2">
+            <button
+              type="button"
+              disabled={!!demoLoadingRole || loading}
+              onClick={() => handleQuickDemo('ADMIN')}
+              className="px-2.5 py-2 rounded-xl bg-purple-900/30 hover:bg-purple-900/50 border border-purple-700/50 text-purple-200 text-[11px] font-semibold flex items-center justify-center gap-1.5 transition disabled:opacity-50 cursor-pointer"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-purple-400" />
+              <span>{demoLoadingRole === 'ADMIN' ? 'Loading...' : 'Admin'}</span>
+            </button>
+
+            <button
+              type="button"
+              disabled={!!demoLoadingRole || loading}
+              onClick={() => handleQuickDemo('MINE_PLANNER')}
+              className="px-2.5 py-2 rounded-xl bg-blue-900/30 hover:bg-blue-900/50 border border-blue-700/50 text-blue-200 text-[11px] font-semibold flex items-center justify-center gap-1.5 transition disabled:opacity-50 cursor-pointer"
+            >
+              <Pickaxe className="w-3.5 h-3.5 text-blue-400" />
+              <span>{demoLoadingRole === 'MINE_PLANNER' ? 'Loading...' : 'Planner'}</span>
+            </button>
+
+            <button
+              type="button"
+              disabled={!!demoLoadingRole || loading}
+              onClick={() => handleQuickDemo('VIEWER')}
+              className="px-2.5 py-2 rounded-xl bg-emerald-900/30 hover:bg-emerald-900/50 border border-emerald-700/50 text-emerald-200 text-[11px] font-semibold flex items-center justify-center gap-1.5 transition disabled:opacity-50 cursor-pointer"
+            >
+              <BarChart3 className="w-3.5 h-3.5 text-emerald-400" />
+              <span>{demoLoadingRole === 'VIEWER' ? 'Loading...' : 'Auditor'}</span>
+            </button>
+          </div>
+        </div>
 
         {/* Custom Status Error Alerts */}
         {error && (
@@ -186,7 +258,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onGoToRegister, onGoToForg
 
           <button
             type="submit"
-            disabled={loading}
+            disabled={loading || !!demoLoadingRole}
             className="w-full py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold rounded-xl shadow-glow-purple transition flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
           >
             <span>{loading ? 'Authenticating Personnel...' : 'Sign In to ReserveIQ'}</span>
@@ -197,8 +269,9 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onGoToRegister, onGoToForg
         {/* Registration Link */}
         <div className="pt-2 border-t border-slate-800/80 text-center">
           <button
+            type="button"
             onClick={onGoToRegister}
-            className="text-xs text-purple-400 hover:text-purple-300 font-semibold transition"
+            className="text-xs text-purple-400 hover:text-purple-300 font-semibold transition cursor-pointer"
           >
             Don't have an account? <span className="underline font-bold">Register Official Personnel Account</span>
           </button>
@@ -215,3 +288,5 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onGoToRegister, onGoToForg
     </div>
   );
 };
+
+export default LoginPage;
