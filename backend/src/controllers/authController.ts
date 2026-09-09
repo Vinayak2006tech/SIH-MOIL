@@ -43,23 +43,14 @@ export const login = async (req: Request, res: Response) => {
       });
     }
 
-    // Verify Password
-    const isPasswordValid = bcrypt.compareSync(cleanPass, user.passwordHash);
-    if (!isPasswordValid) {
-      return res.status(401).json({
-        success: false,
-        message: 'Invalid email or password. Please verify your credentials.'
-      });
-    }
-
-    // Verify User Status
+    // 1. Verify User Status First
     const userStatus = user.status || 'APPROVED';
 
     if (userStatus === 'PENDING') {
       return res.status(403).json({
         success: false,
         status: 'PENDING',
-        message: 'Your account is waiting for administrator approval.'
+        message: 'Your registration request is awaiting administrator approval. You will receive an email once approved.'
       });
     }
 
@@ -69,7 +60,7 @@ export const login = async (req: Request, res: Response) => {
         status: 'REJECTED',
         message: user.rejectionReason
           ? `Your registration request was not approved: ${user.rejectionReason}`
-          : 'Your registration request was not approved.'
+          : 'Your registration request was not approved by the administrator.'
       });
     }
 
@@ -79,11 +70,20 @@ export const login = async (req: Request, res: Response) => {
         status: 'SUSPENDED',
         message: user.suspensionReason
           ? `Your account has been suspended: ${user.suspensionReason}. Please contact the administrator.`
-          : 'Your account has been suspended. Please contact the administrator.'
+          : 'Your account has been suspended by the administrator.'
       });
     }
 
-    // Update last login timestamp
+    // 2. Verify Password
+    const isPasswordValid = bcrypt.compareSync(cleanPass, user.passwordHash);
+    if (!isPasswordValid) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid email or password. Please verify your credentials.'
+      });
+    }
+
+    // 3. Update last login timestamp
     await store.updateUser(user._id || user.id, {
       lastLogin: new Date()
     });
