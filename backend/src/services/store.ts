@@ -188,23 +188,25 @@ class InMemoryStore {
     return null;
   }
 
-  async findUserById(id: string) {
-    if (!id) return null;
+  async findUserById(id: any) {
+    const idStr = String(id || '').trim();
+    if (!idStr) return null;
+
     if (isMongoConnected) {
       try {
         let dbUser: any = null;
-        if (id.match(/^[0-9a-fA-F]{24}$/)) {
-          dbUser = await UserModel.findById(id).maxTimeMS(2500).lean();
+        if (idStr.match(/^[0-9a-fA-F]{24}$/)) {
+          dbUser = await UserModel.findById(idStr).maxTimeMS(2500).lean();
         }
         if (!dbUser) {
-          dbUser = await UserModel.findOne({ email: id.toLowerCase() }).maxTimeMS(2500).lean();
+          dbUser = await UserModel.findOne({ email: idStr.toLowerCase() }).maxTimeMS(2500).lean();
         }
         if (dbUser) return dbUser;
       } catch (err) {
         // Fallback
       }
     }
-    return this.data.users.find((u) => u._id === id || u.id === id || u.email?.toLowerCase() === id?.toLowerCase()) || null;
+    return this.data.users.find((u) => String(u._id) === idStr || String(u.id) === idStr || String(u.email || '').toLowerCase() === idStr.toLowerCase()) || null;
   }
 
   async findUserByActivationToken(token: string) {
@@ -276,15 +278,18 @@ class InMemoryStore {
     return newUser;
   }
 
-  async updateUser(id: string, updates: any) {
+  async updateUser(id: any, updates: any) {
+    const idStr = String(id || '').trim();
+    if (!idStr) return null;
+
     let updatedUser: any = null;
-    if (isMongoConnected && id) {
+    if (isMongoConnected) {
       try {
-        if (id.match(/^[0-9a-fA-F]{24}$/)) {
-          updatedUser = await UserModel.findByIdAndUpdate(id, updates, { new: true }).lean();
+        if (idStr.match(/^[0-9a-fA-F]{24}$/)) {
+          updatedUser = await UserModel.findByIdAndUpdate(idStr, updates, { new: true }).lean();
         } else {
           updatedUser = await UserModel.findOneAndUpdate(
-            { email: id.toLowerCase() },
+            { email: idStr.toLowerCase() },
             updates,
             { new: true }
           ).lean();
@@ -294,7 +299,7 @@ class InMemoryStore {
       }
     }
 
-    const idx = this.data.users.findIndex((u) => u._id === id || u.id === id || u.email?.toLowerCase() === id?.toLowerCase());
+    const idx = this.data.users.findIndex((u) => String(u._id) === idStr || String(u.id) === idStr || String(u.email || '').toLowerCase() === idStr.toLowerCase());
     if (idx !== -1) {
       this.data.users[idx] = {
         ...this.data.users[idx],
@@ -314,18 +319,25 @@ class InMemoryStore {
     return null;
   }
 
-  async deleteUser(id: string) {
+  async deleteUser(id: any) {
+    const idStr = String(id || '').trim();
+    if (!idStr) return false;
+
     let deletedMongo = false;
     if (isMongoConnected) {
       try {
-        await UserModel.findByIdAndDelete(id);
+        if (idStr.match(/^[0-9a-fA-F]{24}$/)) {
+          await UserModel.findByIdAndDelete(idStr);
+        } else {
+          await UserModel.findOneAndDelete({ email: idStr.toLowerCase() });
+        }
         deletedMongo = true;
       } catch (err) {
         console.warn('[Database] MongoDB deleteUser error:', err);
       }
     }
 
-    const idx = this.data.users.findIndex((u) => u._id === id || u.id === id);
+    const idx = this.data.users.findIndex((u) => String(u._id) === idStr || String(u.id) === idStr || String(u.email || '').toLowerCase() === idStr.toLowerCase());
     if (idx !== -1) {
       const removed = this.data.users.splice(idx, 1)[0];
       this.savePersistedUsers();

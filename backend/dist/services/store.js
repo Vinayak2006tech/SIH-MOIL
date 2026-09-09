@@ -176,16 +176,17 @@ class InMemoryStore {
         return null;
     }
     async findUserById(id) {
-        if (!id)
+        const idStr = String(id || '').trim();
+        if (!idStr)
             return null;
         if (db_1.isMongoConnected) {
             try {
                 let dbUser = null;
-                if (id.match(/^[0-9a-fA-F]{24}$/)) {
-                    dbUser = await User_1.UserModel.findById(id).maxTimeMS(2500).lean();
+                if (idStr.match(/^[0-9a-fA-F]{24}$/)) {
+                    dbUser = await User_1.UserModel.findById(idStr).maxTimeMS(2500).lean();
                 }
                 if (!dbUser) {
-                    dbUser = await User_1.UserModel.findOne({ email: id.toLowerCase() }).maxTimeMS(2500).lean();
+                    dbUser = await User_1.UserModel.findOne({ email: idStr.toLowerCase() }).maxTimeMS(2500).lean();
                 }
                 if (dbUser)
                     return dbUser;
@@ -194,7 +195,7 @@ class InMemoryStore {
                 // Fallback
             }
         }
-        return this.data.users.find((u) => u._id === id || u.id === id || u.email?.toLowerCase() === id?.toLowerCase()) || null;
+        return this.data.users.find((u) => String(u._id) === idStr || String(u.id) === idStr || String(u.email || '').toLowerCase() === idStr.toLowerCase()) || null;
     }
     async findUserByActivationToken(token) {
         if (db_1.isMongoConnected && token) {
@@ -270,21 +271,24 @@ class InMemoryStore {
         return newUser;
     }
     async updateUser(id, updates) {
+        const idStr = String(id || '').trim();
+        if (!idStr)
+            return null;
         let updatedUser = null;
-        if (db_1.isMongoConnected && id) {
+        if (db_1.isMongoConnected) {
             try {
-                if (id.match(/^[0-9a-fA-F]{24}$/)) {
-                    updatedUser = await User_1.UserModel.findByIdAndUpdate(id, updates, { new: true }).lean();
+                if (idStr.match(/^[0-9a-fA-F]{24}$/)) {
+                    updatedUser = await User_1.UserModel.findByIdAndUpdate(idStr, updates, { new: true }).lean();
                 }
                 else {
-                    updatedUser = await User_1.UserModel.findOneAndUpdate({ email: id.toLowerCase() }, updates, { new: true }).lean();
+                    updatedUser = await User_1.UserModel.findOneAndUpdate({ email: idStr.toLowerCase() }, updates, { new: true }).lean();
                 }
             }
             catch (err) {
                 console.warn('[Database] MongoDB updateUser error:', err);
             }
         }
-        const idx = this.data.users.findIndex((u) => u._id === id || u.id === id || u.email?.toLowerCase() === id?.toLowerCase());
+        const idx = this.data.users.findIndex((u) => String(u._id) === idStr || String(u.id) === idStr || String(u.email || '').toLowerCase() === idStr.toLowerCase());
         if (idx !== -1) {
             this.data.users[idx] = {
                 ...this.data.users[idx],
@@ -302,17 +306,25 @@ class InMemoryStore {
         return null;
     }
     async deleteUser(id) {
+        const idStr = String(id || '').trim();
+        if (!idStr)
+            return false;
         let deletedMongo = false;
         if (db_1.isMongoConnected) {
             try {
-                await User_1.UserModel.findByIdAndDelete(id);
+                if (idStr.match(/^[0-9a-fA-F]{24}$/)) {
+                    await User_1.UserModel.findByIdAndDelete(idStr);
+                }
+                else {
+                    await User_1.UserModel.findOneAndDelete({ email: idStr.toLowerCase() });
+                }
                 deletedMongo = true;
             }
             catch (err) {
                 console.warn('[Database] MongoDB deleteUser error:', err);
             }
         }
-        const idx = this.data.users.findIndex((u) => u._id === id || u.id === id);
+        const idx = this.data.users.findIndex((u) => String(u._id) === idStr || String(u.id) === idStr || String(u.email || '').toLowerCase() === idStr.toLowerCase());
         if (idx !== -1) {
             const removed = this.data.users.splice(idx, 1)[0];
             this.savePersistedUsers();
