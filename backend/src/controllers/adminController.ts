@@ -155,7 +155,7 @@ export const suspendUser = async (req: AuthRequest, res: Response) => {
     }
 
     // Protection against self-suspension
-    if ((user._id || user.id) === req.user?.id || user.email.toLowerCase() === req.user?.email?.toLowerCase()) {
+    if (String(user._id || user.id) === String(req.user?.id) || String(user.email || '').toLowerCase() === String(req.user?.email || '').toLowerCase()) {
       return res.status(400).json({
         success: false,
         message: 'Security safeguard: Administrators cannot suspend their own active account.'
@@ -215,7 +215,7 @@ export const deleteUser = async (req: AuthRequest, res: Response) => {
     }
 
     // Protection against self-deletion or primary admin deletion
-    if ((user._id || user.id) === req.user?.id || user.email.toLowerCase() === 'vaishayvinayak@gmail.com') {
+    if (String(user._id || user.id) === String(req.user?.id) || String(user.email || '').toLowerCase() === 'vaishayvinayak@gmail.com') {
       return res.status(400).json({
         success: false,
         message: 'Security safeguard: Primary system administrator account cannot be deleted.'
