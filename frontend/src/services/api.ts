@@ -93,6 +93,15 @@ export interface ApiClient {
   reactivateUser: (id: string) => Promise<{ success: boolean; message: string; user: User }>;
   updateUserRole: (id: string, data: { role?: string; department?: string; mineAccess?: string[] }) => Promise<{ success: boolean; message: string; user: User }>;
   deleteUser: (id: string) => Promise<{ success: boolean; message: string }>;
+  createAdminUser: (data: {
+    name: string;
+    email: string;
+    password: string;
+    role: string;
+    department: string;
+    mineAccess?: string[];
+    status?: string;
+  }) => Promise<{ success: boolean; message: string; user: User }>;
   loginWithGoogle: (googleData: { email?: string; name?: string; picture?: string; role?: string; department?: string; credential?: string }) => Promise<{ success: boolean; token: string; user: User }>;
   demoLogin: (role: 'ADMIN' | 'MINE_PLANNER' | 'VIEWER') => Promise<{ success: boolean; token: string; user: User }>;
   getMe: () => Promise<{ success: boolean; user: User }>;
