@@ -215,7 +215,6 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({ onGoToLogin }) => {
                   >
                     <option value="MINE_PLANNER">Mine Planner</option>
                     <option value="VIEWER">Ministry Auditor (Viewer)</option>
-                    <option value="ADMIN">System Administrator</option>
                   </select>
                 </div>
 

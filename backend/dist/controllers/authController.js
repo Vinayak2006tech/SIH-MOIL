@@ -115,11 +115,12 @@ const register = async (req, res) => {
             return res.status(400).json({ success: false, message: 'An account with this email address is already registered.' });
         }
         const passwordHash = bcryptjs_1.default.hashSync(password, 10);
+        const assignedRole = (role === 'VIEWER') ? 'VIEWER' : 'MINE_PLANNER';
         const newUser = await store_1.store.createUser({
             name: name.trim(),
             email: cleanEmail,
             passwordHash,
-            role: role || 'MINE_PLANNER',
+            role: assignedRole,
             department: department || 'Mine Planning & Geology',
             status: 'PENDING',
             emailVerified: false,

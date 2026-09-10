@@ -133,11 +133,13 @@ export const register = async (req: Request, res: Response) => {
 
     const passwordHash = bcrypt.hashSync(password, 10);
 
+    const assignedRole = (role === 'VIEWER') ? 'VIEWER' : 'MINE_PLANNER';
+
     const newUser: any = await store.createUser({
       name: name.trim(),
       email: cleanEmail,
       passwordHash,
-      role: role || 'MINE_PLANNER',
+      role: assignedRole,
       department: department || 'Mine Planning & Geology',
       status: 'PENDING',
       emailVerified: false,
