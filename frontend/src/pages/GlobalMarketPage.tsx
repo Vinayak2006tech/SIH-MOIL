@@ -45,6 +45,58 @@ import { DataSourceModal } from '../components/common/DataSourceModal';
 import { LoadingSkeleton } from '../components/common/LoadingSkeleton';
 import type { CountryReserve, GlobalMarketOverview } from '../types';
 
+// Google Maps Platform API Key
+export const GOOGLE_MAPS_API_KEY =
+  (import.meta as any).env?.VITE_GOOGLE_MAPS_API_KEY || 'AIzaSyDM-T62CEAPrBXcGAQDr-K_9Jg6-rEoYOE';
+
+export type GlobalBaseLayerType =
+  | 'google-hybrid'
+  | 'google-satellite'
+  | 'google-terrain'
+  | 'google-roadmap'
+  | 'carto-dark';
+
+export const globalBaseLayerConfigs: Record<
+  GlobalBaseLayerType,
+  { name: string; icon: string; url: string; attribution: string; maxZoom?: number }
+> = {
+  'google-hybrid': {
+    name: 'Google Satellite Hybrid (HD)',
+    icon: '🛰️',
+    url: `https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}&key=${GOOGLE_MAPS_API_KEY}`,
+    attribution: '&copy; Google Maps Satellite &copy; Maxar Technologies',
+    maxZoom: 20
+  },
+  'google-satellite': {
+    name: 'Google Earth (Satellite)',
+    icon: '🌍',
+    url: `https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}&key=${GOOGLE_MAPS_API_KEY}`,
+    attribution: '&copy; Google Earth Imagery',
+    maxZoom: 20
+  },
+  'google-terrain': {
+    name: 'Google Topographic Terrain',
+    icon: '⛰️',
+    url: `https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}&key=${GOOGLE_MAPS_API_KEY}`,
+    attribution: '&copy; Google Maps Topography',
+    maxZoom: 20
+  },
+  'google-roadmap': {
+    name: 'Google Maps Vector Roads',
+    icon: '🗺️',
+    url: `https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}&key=${GOOGLE_MAPS_API_KEY}`,
+    attribution: '&copy; Google Maps',
+    maxZoom: 20
+  },
+  'carto-dark': {
+    name: 'CARTO Dark Matter',
+    icon: '🌌',
+    url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+    attribution: '&copy; CARTO &copy; OpenStreetMap contributors',
+    maxZoom: 19
+  }
+};
+
 export const GlobalMarketPage: React.FC = () => {
   const [marketData, setMarketData] = useState<GlobalMarketOverview | null>(null);
   const [loading, setLoading] = useState(true);
@@ -54,6 +106,7 @@ export const GlobalMarketPage: React.FC = () => {
   const [selectedSourceId, setSelectedSourceId] = useState<string | null>(null);
   const [chartMetric, setChartMetric] = useState<'contained' | 'gross' | 'life'>('contained');
   const [isChartExpanded, setIsChartExpanded] = useState<boolean>(false);
+  const [baseLayer, setBaseLayer] = useState<GlobalBaseLayerType>('google-hybrid');
 
   useEffect(() => {
     const fetchGlobalData = async () => {
@@ -276,27 +329,59 @@ export const GlobalMarketPage: React.FC = () => {
           <div className="glass-panel rounded-2xl border border-slate-800 overflow-hidden shadow-2xl">
             <div className="px-6 py-4 border-b border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-950/60">
               <div>
-                <h3 className="text-base font-bold text-white flex items-center gap-2">
-                  <Globe2 className="w-4 h-4 text-purple-400" />
-                  Geospatial Distribution of Global Manganese Deposits
-                </h3>
+                <div className="flex items-center gap-2 mb-1 flex-wrap">
+                  <h3 className="text-base font-bold text-white flex items-center gap-2">
+                    <Globe2 className="w-4 h-4 text-purple-400" />
+                    Geospatial Distribution of Global Manganese Deposits
+                  </h3>
+                  <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-950/80 text-emerald-300 border border-emerald-800/80">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    Google Maps Platform Active
+                  </span>
+                </div>
                 <p className="text-xs text-slate-400">
                   Circle size indicates contained metal reserves (Mt Mn). Click any country marker to view geological details.
                 </p>
               </div>
-              <div className="relative w-full md:w-64">
-                <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-400" />
-                <input
-                  type="text"
-                  placeholder="Filter by country, deposit..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-slate-900 text-xs text-slate-200 pl-8 pr-3 py-1.5 rounded-lg border border-slate-700 focus:outline-none focus:border-purple-500"
-                />
+
+              <div className="flex items-center gap-2 flex-wrap">
+                {/* Base Layer Switcher */}
+                <div className="flex items-center gap-1 bg-slate-900/90 p-1 rounded-xl border border-slate-700">
+                  {(Object.keys(globalBaseLayerConfigs) as GlobalBaseLayerType[]).map((layerKey) => {
+                    const cfg = globalBaseLayerConfigs[layerKey];
+                    const isActive = baseLayer === layerKey;
+                    return (
+                      <button
+                        key={layerKey}
+                        onClick={() => setBaseLayer(layerKey)}
+                        className={`px-2.5 py-1 text-xs rounded-lg font-medium transition flex items-center gap-1 cursor-pointer ${
+                          isActive
+                            ? 'bg-purple-600 text-white shadow-sm font-semibold'
+                            : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+                        }`}
+                        title={cfg.name}
+                      >
+                        <span>{cfg.icon}</span>
+                        <span className="hidden sm:inline text-[11px]">{cfg.name.split(' ')[0]}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <div className="relative w-full sm:w-48">
+                  <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-400" />
+                  <input
+                    type="text"
+                    placeholder="Filter country/deposit..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full bg-slate-900 text-xs text-slate-200 pl-8 pr-3 py-1.5 rounded-lg border border-slate-700 focus:outline-none focus:border-purple-500"
+                  />
+                </div>
               </div>
             </div>
 
-            <div className="h-[420px] w-full relative z-0">
+            <div className="h-[460px] w-full relative z-0">
               <MapContainer
                 center={[15.0, 30.0]}
                 zoom={2}
@@ -304,8 +389,10 @@ export const GlobalMarketPage: React.FC = () => {
                 style={{ height: '100%', width: '100%', backgroundColor: '#0B1120' }}
               >
                 <TileLayer
-                  attribution='&copy; <a href="https://carto.com/">CARTO</a>'
-                  url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+                  key={baseLayer}
+                  attribution={globalBaseLayerConfigs[baseLayer].attribution}
+                  url={globalBaseLayerConfigs[baseLayer].url}
+                  maxZoom={globalBaseLayerConfigs[baseLayer].maxZoom || 20}
                 />
                 {countries
                   .filter((c) => c.countryCode !== 'ROW')
