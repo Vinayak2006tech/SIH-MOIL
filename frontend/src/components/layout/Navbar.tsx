@@ -40,48 +40,73 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onOpenReport, onToggl
     };
   }, [showNotifications]);
 
-  const tabTitles: Record<TabType, { title: string; subtitle: string }> = {
+  const tabTitles: Record<
+    TabType,
+    { shortTitle: string; mediumTitle: string; title: string; subtitle: string }
+  > = {
     landing: {
-      title: 'MOIL ReserveIQ',
+      shortTitle: 'Home',
+      mediumTitle: 'MOIL ReserveIQ',
+      title: 'MOIL ReserveIQ • Enterprise Portal',
       subtitle: 'Space Technology & Geostatistical AI for Manganese Reserve Estimation & Production Shortfall Mitigation'
     },
     dashboard: {
+      shortTitle: 'Dashboard',
+      mediumTitle: 'Mining Dashboard',
       title: 'Executive Mining Command Dashboard',
       subtitle: 'Real-time reserve inventory, production variance, and live risk matrix'
     },
     'reserve-map': {
+      shortTitle: 'Reserve Map',
+      mediumTitle: 'GIS Reserve & Satellite Map',
       title: 'GIS Reserve & Satellite Multi-Layer Map',
       subtitle: 'Sub-surface geological boreholes, UNFC confidence polygons, and NDVI proxies'
     },
     production: {
+      shortTitle: 'Production',
+      mediumTitle: 'Production Analytics',
       title: 'Production Analytics & Downtime Correlation',
       subtitle: 'Target compliance, mechanical breakdown hours, and monsoon rainfall impact'
     },
     shortfall: {
+      shortTitle: 'Shortfall AI',
+      mediumTitle: 'AI Shortfall Prediction',
       title: 'AI Shortfall Prediction & Risk Assessment',
       subtitle: '30/60/90-day time-series forecasts and SHAP feature importance attribution'
     },
     recommendations: {
+      shortTitle: 'Prescriptions',
+      mediumTitle: 'Action Recommendations',
       title: 'Prescriptive Action Recommendations Engine',
       subtitle: 'AI-generated corrective mining interventions with closed-loop outcome tracking'
     },
     ingestion: {
+      shortTitle: 'Data Ingestion',
+      mediumTitle: 'Ingestion & Satellite',
       title: 'Data Ingestion & Satellite Synchronizer',
       subtitle: 'Diamond drilling assays, monthly extraction logs, and Sentinel-2 pass ingestion'
     },
     equipment: {
+      shortTitle: 'Equipment',
+      mediumTitle: 'Equipment Registry',
       title: 'Equipment Fleet Health & Maintenance Registry',
       subtitle: 'Shovels, haulers, drill rigs, underground loaders, and MTBF monitoring'
     },
     'global-market': {
+      shortTitle: 'Global Market',
+      mediumTitle: 'Global Reserves & Market',
       title: 'Global Supply & Market Disruption Intelligence',
       subtitle: 'USGS global reserves, South Africa/Gabon supply shocks, and pricing dynamics'
     },
     'data-sources': {
+      shortTitle: 'Data Sources',
+      mediumTitle: 'Provenance & Sources',
       title: 'Multimodal Data Sources & Telemetry Provenance',
       subtitle: 'Complete data lineage, sensor specifications, and audit logs'
     },
     'admin-portal': {
+      shortTitle: 'Admin Portal',
+      mediumTitle: 'Personnel Clearance',
       title: 'Personnel Clearance & Admin Portal',
       subtitle: 'Review registration requests, approve personnel access, and manage security clearance'
     }
@@ -91,7 +116,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onOpenReport, onToggl
 
   return (
     <header className="sticky top-0 z-30 bg-[#080C14]/95 backdrop-blur-md border-b border-slate-800/80 px-3 sm:px-5 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-4 transition-all">
-      {/* Left: Mobile Menu Toggle + Adaptive Title Info */}
+      {/* Left: Mobile Menu Toggle + Adaptive Responsive Title Info */}
       <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
         {onToggleMobileMenu && (
           <button
@@ -105,10 +130,12 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onOpenReport, onToggl
         )}
 
         <div className="min-w-0 flex-1">
-          <h2 className="text-xs sm:text-sm md:text-base font-bold text-white tracking-tight truncate">
-            {currentTabInfo.title}
+          <h2 className="text-xs sm:text-sm md:text-base font-bold text-white tracking-tight leading-tight min-w-0">
+            <span className="inline sm:hidden truncate block">{currentTabInfo.shortTitle}</span>
+            <span className="hidden sm:inline lg:hidden truncate">{currentTabInfo.mediumTitle}</span>
+            <span className="hidden lg:inline truncate">{currentTabInfo.title}</span>
           </h2>
-          <p className="text-[11px] text-slate-400 hidden md:block truncate max-w-sm lg:max-w-md xl:max-w-xl">
+          <p className="text-[11px] text-slate-400 hidden md:block truncate max-w-[220px] lg:max-w-md xl:max-w-xl">
             {currentTabInfo.subtitle}
           </p>
         </div>
