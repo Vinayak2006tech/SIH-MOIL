@@ -18,6 +18,26 @@ export interface SeedDataStore {
   globalMarketData: any;
 }
 
+export function getDataDirectory(): string {
+  const candidates = [
+    process.env.DATA_DIR,
+    path.resolve(__dirname, '../../../data'),
+    path.resolve(__dirname, '../../data'),
+    path.resolve(__dirname, '../data'),
+    path.resolve(process.cwd(), '../data'),
+    path.resolve(process.cwd(), 'data'),
+    '/app/data',
+    '/data'
+  ].filter(Boolean) as string[];
+
+  for (const dir of candidates) {
+    if (fs.existsSync(dir) && (fs.existsSync(path.join(dir, 'raw')) || fs.existsSync(path.join(dir, 'users.json')))) {
+      return dir;
+    }
+  }
+  return path.resolve(__dirname, '../../../data');
+}
+
 export const getInitialSeedData = (): SeedDataStore => {
   const adminHash = bcrypt.hashSync('vinayak@2006', 10);
   const moilAdminHash = bcrypt.hashSync('admin@2026', 10);
@@ -149,7 +169,7 @@ export const getInitialSeedData = (): SeedDataStore => {
   ];
 
   // Resolve base data folder path
-  const rootDataDir = path.resolve(__dirname, '../../../data');
+  const rootDataDir = getDataDirectory();
 
   // 1. Load Data Sources Provenance Catalog
   let dataSources: any[] = [];

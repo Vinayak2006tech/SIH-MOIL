@@ -4,9 +4,28 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getInitialSeedData = void 0;
+exports.getDataDirectory = getDataDirectory;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
+function getDataDirectory() {
+    const candidates = [
+        process.env.DATA_DIR,
+        path_1.default.resolve(__dirname, '../../../data'),
+        path_1.default.resolve(__dirname, '../../data'),
+        path_1.default.resolve(__dirname, '../data'),
+        path_1.default.resolve(process.cwd(), '../data'),
+        path_1.default.resolve(process.cwd(), 'data'),
+        '/app/data',
+        '/data'
+    ].filter(Boolean);
+    for (const dir of candidates) {
+        if (fs_1.default.existsSync(dir) && (fs_1.default.existsSync(path_1.default.join(dir, 'raw')) || fs_1.default.existsSync(path_1.default.join(dir, 'users.json')))) {
+            return dir;
+        }
+    }
+    return path_1.default.resolve(__dirname, '../../../data');
+}
 const getInitialSeedData = () => {
     const adminHash = bcryptjs_1.default.hashSync('vinayak@2006', 10);
     const moilAdminHash = bcryptjs_1.default.hashSync('admin@2026', 10);
@@ -136,7 +155,7 @@ const getInitialSeedData = () => {
         }
     ];
     // Resolve base data folder path
-    const rootDataDir = path_1.default.resolve(__dirname, '../../../data');
+    const rootDataDir = getDataDirectory();
     // 1. Load Data Sources Provenance Catalog
     let dataSources = [];
     try {

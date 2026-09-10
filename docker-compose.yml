@@ -45,6 +45,9 @@ services:
       - JWT_SECRET=moil_reserveiq_production_secret_key_2026
       - ML_SERVICE_URL=http://ml-service:8000
       - CORS_ORIGIN=http://localhost:3000
+      - DATA_DIR=/app/data
+    volumes:
+      - ./data:/app/data
     depends_on:
       - mongo
       - ml-service

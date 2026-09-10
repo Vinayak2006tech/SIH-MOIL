@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { getInitialSeedData, SeedDataStore } from '../seed/seedData';
+import { getInitialSeedData, SeedDataStore, getDataDirectory } from '../seed/seedData';
 import { isMongoConnected } from '../config/db';
 import { UserModel } from '../models/User';
 import { MineModel } from '../models/Mine';
@@ -18,7 +18,8 @@ class InMemoryStore {
 
   constructor() {
     this.data = getInitialSeedData();
-    this.usersFilePath = path.resolve(__dirname, '../../../data/users.json');
+    const dataDir = getDataDirectory();
+    this.usersFilePath = path.join(dataDir, 'users.json');
     this.loadPersistedUsers();
     this.savePersistedUsers();
     console.log(`[Store] Operational store initialized with ${this.data.users.length} authenticated personnel, ${this.data.mines.length} MOIL mines, and ${this.data.equipment.length} equipment assets.`);

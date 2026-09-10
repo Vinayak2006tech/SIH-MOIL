@@ -22,7 +22,8 @@ class InMemoryStore {
     usersFilePath;
     constructor() {
         this.data = (0, seedData_1.getInitialSeedData)();
-        this.usersFilePath = path_1.default.resolve(__dirname, '../../../data/users.json');
+        const dataDir = (0, seedData_1.getDataDirectory)();
+        this.usersFilePath = path_1.default.join(dataDir, 'users.json');
         this.loadPersistedUsers();
         this.savePersistedUsers();
         console.log(`[Store] Operational store initialized with ${this.data.users.length} authenticated personnel, ${this.data.mines.length} MOIL mines, and ${this.data.equipment.length} equipment assets.`);
