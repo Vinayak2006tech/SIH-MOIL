@@ -359,7 +359,6 @@ export const GoogleAuthModal: React.FC<GoogleAuthModalProps> = ({
                     className="w-full px-2.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-slate-900 text-xs font-semibold"
                   >
                     <option value="MINE_PLANNER">Mine Planner</option>
-                    <option value="ADMIN">Administrator (Full Access)</option>
                     <option value="VIEWER">Auditor / Viewer</option>
                   </select>
                 </div>
