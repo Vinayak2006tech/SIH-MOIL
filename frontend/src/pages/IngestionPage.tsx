@@ -16,7 +16,8 @@ import {
   Eye,
   Sparkles,
   MapPin,
-  Layers
+  Layers,
+  Globe2
 } from 'lucide-react';
 import { useMine } from '../context/MineContext';
 import { api } from '../services/api';
