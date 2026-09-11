@@ -731,11 +731,11 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
       {/* Tab 3: Satellite Telemetry Ingestion Simulator */}
       {activeTab === 'satellite' && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 glass-panel rounded-2xl p-6 border border-slate-800 space-y-5">
+          <div className="lg:col-span-2 glass-panel rounded-2xl p-6 border border-slate-800 space-y-6">
             <div className="flex items-center justify-between flex-wrap gap-2">
               <div>
                 <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-                  <Satellite className="w-4 h-4 text-purple-400" /> Copernicus Sentinel-2 & NASA MODIS Orbit Synchronizer
+                  <Satellite className="w-4 h-4 text-purple-400 animate-pulse" /> Copernicus Sentinel-2 & NASA MODIS Orbit Synchronizer
                 </h3>
                 <p className="text-xs text-slate-400 mt-0.5">
                   Fetch latest multispectral Earth Observation proxies (NDVI, soil moisture saturation %, thermal LST)
@@ -746,7 +746,7 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
               <select
                 value={targetMineId}
                 onChange={(e) => setTargetMineId(e.target.value)}
-                className="px-3 py-1.5 bg-slate-900 border border-slate-700 text-xs font-semibold text-white rounded-lg focus:outline-none focus:border-purple-500"
+                className="px-3 py-1.5 bg-slate-900 border border-slate-700 text-xs font-semibold text-white rounded-lg focus:outline-none focus:border-purple-500 cursor-pointer"
               >
                 {mines.map((m) => (
                   <option key={m.mineId} value={m.mineId}>
@@ -756,26 +756,49 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
               </select>
             </div>
 
-            {/* Satellite Pass Animation & Action */}
-            <div className="p-8 rounded-2xl bg-gradient-to-br from-slate-950 via-slate-900 to-purple-950/40 border border-slate-800 text-center space-y-4">
-              <div className="w-16 h-16 mx-auto rounded-full bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 shadow-glow-purple">
-                <Satellite className="w-8 h-8 animate-pulse" />
-              </div>
-              <div>
-                <h4 className="text-base font-bold text-white">Live Earth Observation Overpass</h4>
-                <p className="text-xs text-slate-400 mt-1 max-w-md mx-auto">
-                  Sentinel-2 MSI Multi-spectral Bands 4/8 (NDVI) and MODIS GPM Radar precipitation indices mapped over the active pit geometry.
-                </p>
+            {/* Sentinel-2 Surface Scanning Visualizer */}
+            <div className="relative rounded-2xl overflow-hidden border border-purple-500/50 shadow-2xl bg-slate-950 group">
+              <img
+                src="/images/sentinel-2-surface-scan.jpg"
+                alt="ESA Copernicus Sentinel-2 multispectral scanner projecting active telemetry grid onto open-cast manganese mine"
+                className="w-full h-72 sm:h-80 object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              
+              {/* Dynamic Laser Scanning Line Animation */}
+              <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-scanline pointer-events-none shadow-[0_0_20px_#22d3ee]" />
+
+              {/* Top HUD Telemetry Badges */}
+              <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 flex-wrap">
+                <div className="flex items-center gap-2">
+                  <span className="px-3 py-1 rounded-xl bg-slate-950/90 text-cyan-300 font-mono text-[11px] font-bold border border-cyan-500/60 backdrop-blur-md flex items-center gap-1.5 shadow-lg">
+                    <Satellite className="w-3.5 h-3.5 text-cyan-400 animate-pulse" /> Sentinel-2A MSI • 10m Spatial Res
+                  </span>
+                  <span className="px-2.5 py-1 rounded-xl bg-slate-950/80 text-purple-300 font-mono text-[10px] border border-purple-500/40 backdrop-blur-md">
+                    Swath: 290 km • SSO Orbit
+                  </span>
+                </div>
+                <span className="px-2.5 py-1 rounded-xl bg-emerald-950/90 text-emerald-300 font-mono text-[10px] font-bold border border-emerald-500/60 backdrop-blur-md flex items-center gap-1">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                  Telemetry Synced
+                </span>
               </div>
 
-              <button
-                onClick={handleTriggerSatelliteSync}
-                disabled={syncingSatellite}
-                className="py-3 px-8 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold rounded-xl shadow-glow-purple transition flex items-center justify-center gap-2 mx-auto disabled:opacity-50"
-              >
-                <RefreshCw className={`w-4 h-4 ${syncingSatellite ? 'animate-spin' : ''}`} />
-                {syncingSatellite ? 'Ingesting Satellite Telemetry Pass...' : 'Trigger Satellite Orbit Sync'}
-              </button>
+              {/* Bottom Interactive Scanner Overlay */}
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950 via-slate-950/90 to-transparent p-4 pt-8 flex items-center justify-between flex-wrap gap-2">
+                <div>
+                  <span className="text-white font-bold text-xs block">Active Surface Overpass • {mines.find(m => m.mineId === targetMineId)?.name || 'Balaghat Mine'}</span>
+                  <span className="text-[11px] text-slate-400">Multispectral bands B04 (Red), B08 (NIR), and SWIR active</span>
+                </div>
+
+                <button
+                  onClick={handleTriggerSatelliteSync}
+                  disabled={syncingSatellite}
+                  className="btn-shimmer px-5 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold rounded-xl shadow-glow-purple transition flex items-center gap-2 disabled:opacity-50 cursor-pointer"
+                >
+                  <RefreshCw className={`w-3.5 h-3.5 ${syncingSatellite ? 'animate-spin' : ''}`} />
+                  {syncingSatellite ? 'Acquiring Orbit Pass...' : 'Trigger Live Sentinel-2 Sync'}
+                </button>
+              </div>
             </div>
 
             {/* Satellite Result Output Card */}
@@ -792,21 +815,21 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-center text-xs">
-                  <div className="p-3 rounded-xl bg-slate-900 border border-slate-800">
+                  <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 card-hover">
                     <span className="text-[10px] text-slate-400 block font-mono">NDVI Index</span>
-                    <span className="text-lg font-bold text-purple-400">{satelliteResult.telemetry.ndvi}</span>
+                    <span className="text-lg font-bold text-purple-400 font-mono">{satelliteResult.telemetry.ndvi}</span>
                   </div>
-                  <div className="p-3 rounded-xl bg-slate-900 border border-slate-800">
+                  <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 card-hover">
                     <span className="text-[10px] text-slate-400 block font-mono">Soil Moisture</span>
-                    <span className="text-lg font-bold text-blue-400">{satelliteResult.telemetry.soil_moisture_pct}%</span>
+                    <span className="text-lg font-bold text-blue-400 font-mono">{satelliteResult.telemetry.soil_moisture_pct}%</span>
                   </div>
-                  <div className="p-3 rounded-xl bg-slate-900 border border-slate-800">
+                  <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 card-hover">
                     <span className="text-[10px] text-slate-400 block font-mono">Precipitation</span>
-                    <span className="text-lg font-bold text-amber-400">{satelliteResult.telemetry.precipitation_rate_mm} mm</span>
+                    <span className="text-lg font-bold text-amber-400 font-mono">{satelliteResult.telemetry.precipitation_rate_mm} mm</span>
                   </div>
-                  <div className="p-3 rounded-xl bg-slate-900 border border-slate-800">
+                  <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 card-hover">
                     <span className="text-[10px] text-slate-400 block font-mono">Surface Temp</span>
-                    <span className="text-lg font-bold text-slate-200">{satelliteResult.telemetry.land_surface_temp_c} °C</span>
+                    <span className="text-lg font-bold text-slate-200 font-mono">{satelliteResult.telemetry.land_surface_temp_c} °C</span>
                   </div>
                 </div>
 
@@ -824,18 +847,32 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
             )}
           </div>
 
-          {/* Right 1 Col: Satellite Proxy Mapping Explanation */}
-          <div className="glass-panel rounded-2xl p-6 border border-slate-800 space-y-4">
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider">
-              Earth Observation Integration
+          {/* Right 1 Col: Satellite Proxy Mapping Explanation & Orbit Pass Image */}
+          <div className="glass-panel rounded-2xl p-6 border border-slate-800 space-y-5">
+            <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+              <Globe2 className="w-4 h-4 text-purple-400" />
+              Earth Observation Telemetry
             </h3>
+
+            {/* Orbit Pass Image */}
+            <div className="relative rounded-xl overflow-hidden border border-slate-700/80 shadow-md">
+              <img
+                src="/images/sentinel-2-multispectral-orbit.jpg"
+                alt="Copernicus Sentinel-2 orbital multi-spectral pass over mining terrain"
+                className="w-full h-36 object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent p-2.5 flex items-end">
+                <span className="text-[10px] font-mono font-bold text-purple-300">Central India Mining Corridor Pass</span>
+              </div>
+            </div>
+
             <p className="text-xs text-slate-300 leading-relaxed">
               Real mining operations are vulnerable to surface waterlogging, slope slides, and access road mud-slip.
             </p>
 
             <div className="space-y-3 text-xs">
               <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800">
-                <span className="font-bold text-purple-400 block mb-1">NDVI Vegetation Index</span>
+                <span className="font-bold text-purple-400 block mb-1">NDVI Vegetation Index (B04/B08)</span>
                 <p className="text-[11px] text-slate-400">
                   Monitors vegetative loss at quarry bounds, indicating active ground clearing and overburden spread.
                 </p>

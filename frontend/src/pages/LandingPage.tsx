@@ -403,6 +403,140 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       </section>
 
       {/* ============================================================ */}
+      {/* 🛰️ COPERNICUS SENTINEL-2 SURFACE SCANNING & TELEMETRY SPOTLIGHT */}
+      {/* ============================================================ */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
+        <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-purple-800/60 bg-gradient-to-br from-slate-900 via-[#0C101D] to-purple-950/30 shadow-2xl relative overflow-hidden bg-grid-cyber">
+          {/* Top Title & Mission Badge */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-800 pb-5">
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-purple-950 text-purple-300 border border-purple-700/80 flex items-center gap-1.5 shadow-sm">
+                  <Satellite className="w-3.5 h-3.5 text-purple-400 animate-pulse" />
+                  ESA Copernicus Sentinel-2 MSI Multi-Spectral Telemetry
+                </span>
+                <span className="text-[10px] px-2 py-0.5 rounded-full font-mono bg-emerald-950/80 text-emerald-300 border border-emerald-800 flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                  5-Day Orbital Overpass
+                </span>
+              </div>
+              <h2 className="text-xl sm:text-3xl font-black text-white tracking-tight mt-2">
+                Spaceborne Earth Observation Scanning MOIL Open-Cast Mines
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-3xl leading-relaxed">
+                Sentinel-2 multispectral scanners capture optical and near-infrared (NIR) reflections at 10m spatial resolution, tracking bench clearing, overburden dump stability, and vegetation proxies across Madhya Pradesh and Maharashtra manganese belts.
+              </p>
+            </div>
+
+            <button
+              onClick={() => setActiveTab('ingestion')}
+              className="px-5 py-2.5 bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold rounded-xl shadow-glow-purple transition flex items-center gap-2 shrink-0 cursor-pointer self-start sm:self-auto"
+            >
+              <span>Inspect Satellite Pipeline</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+
+          {/* Dual Satellite Scanning Views Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-6">
+            {/* Image 1: Sentinel-2A Overpass Scanning Mine Surface */}
+            <div className="space-y-3">
+              <div className="relative rounded-2xl overflow-hidden border border-purple-500/40 shadow-xl group card-hover bg-slate-950">
+                <img
+                  src="/images/sentinel-2-surface-scan.jpg"
+                  alt="ESA Copernicus Sentinel-2A multispectral scanner projecting digital laser swath over opencast manganese mine"
+                  className="w-full h-64 sm:h-72 object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+                {/* Real-time laser scanning line animation */}
+                <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-scanline pointer-events-none shadow-[0_0_15px_#22d3ee]" />
+
+                {/* Top HUD Overlay Chips */}
+                <div className="absolute top-3 left-3 flex items-center gap-2 flex-wrap">
+                  <span className="px-2.5 py-1 rounded-lg bg-slate-950/90 text-cyan-300 font-mono text-[10px] font-bold border border-cyan-500/50 backdrop-blur-md flex items-center gap-1.5 shadow-md">
+                    <Satellite className="w-3 h-3 text-cyan-400" /> Sentinel-2A MSI • 10m Res
+                  </span>
+                  <span className="px-2 py-0.5 rounded-lg bg-slate-950/80 text-purple-300 font-mono text-[10px] border border-purple-500/40 backdrop-blur-md">
+                    Swath: 290 km
+                  </span>
+                </div>
+
+                {/* Bottom Caption Bar */}
+                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950 via-slate-950/90 to-transparent p-3 pt-6 text-[11px] text-slate-200 flex items-center justify-between">
+                  <span className="font-semibold text-white">Active Pit & Bench Elevation Contour Scan</span>
+                  <span className="text-emerald-400 font-mono text-[10px] flex items-center gap-1">
+                    <CheckCircle2 className="w-3 h-3" /> NDVI & InSAR Synced
+                  </span>
+                </div>
+              </div>
+
+              {/* Telemetry Feature Badges */}
+              <div className="grid grid-cols-3 gap-2 text-center text-xs">
+                <div className="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800">
+                  <span className="text-[10px] font-mono text-slate-400 block">Spectral Bands</span>
+                  <span className="font-bold text-cyan-400 text-xs font-mono">B02/B04/B08 NIR</span>
+                </div>
+                <div className="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800">
+                  <span className="text-[10px] font-mono text-slate-400 block">Orbit Altitude</span>
+                  <span className="font-bold text-purple-400 text-xs font-mono">786 km (SSO)</span>
+                </div>
+                <div className="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800">
+                  <span className="text-[10px] font-mono text-slate-400 block">Revisit Cycle</span>
+                  <span className="font-bold text-emerald-400 text-xs font-mono">5 Days (2A/2B)</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Image 2: Central India Mineral Lease Satellite Swath Scan */}
+            <div className="space-y-3">
+              <div className="relative rounded-2xl overflow-hidden border border-indigo-500/40 shadow-xl group card-hover bg-slate-950">
+                <img
+                  src="/images/sentinel-2-multispectral-orbit.jpg"
+                  alt="Copernicus Sentinel-2 orbital pass over Central India mining leases showing multispectral false color bands"
+                  className="w-full h-64 sm:h-72 object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+                {/* Laser scanning line */}
+                <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-purple-400 to-transparent animate-scanline pointer-events-none shadow-[0_0_15px_#a855f7]" />
+
+                {/* Top HUD Overlay Chips */}
+                <div className="absolute top-3 left-3 flex items-center gap-2 flex-wrap">
+                  <span className="px-2.5 py-1 rounded-lg bg-slate-950/90 text-purple-300 font-mono text-[10px] font-bold border border-purple-500/50 backdrop-blur-md flex items-center gap-1.5 shadow-md">
+                    <Globe2 className="w-3 h-3 text-purple-400" /> Balaghat Ore Belt Pass
+                  </span>
+                  <span className="px-2 py-0.5 rounded-lg bg-slate-950/80 text-emerald-300 font-mono text-[10px] border border-emerald-500/40 backdrop-blur-md">
+                    Cloud Cover: &lt; 2.1%
+                  </span>
+                </div>
+
+                {/* Bottom Caption Bar */}
+                <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950 via-slate-950/90 to-transparent p-3 pt-6 text-[11px] text-slate-200 flex items-center justify-between">
+                  <span className="font-semibold text-white">Geological Seam Intercept & Vegetation Index Map</span>
+                  <span className="text-cyan-400 font-mono text-[10px]">Lat 21.8°N • Lon 80.1°E</span>
+                </div>
+              </div>
+
+              {/* Telemetry Feature Badges */}
+              <div className="grid grid-cols-3 gap-2 text-center text-xs">
+                <div className="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800">
+                  <span className="text-[10px] font-mono text-slate-400 block">Mining Leases</span>
+                  <span className="font-bold text-indigo-400 text-xs font-mono">19 MOIL Assets</span>
+                </div>
+                <div className="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800">
+                  <span className="text-[10px] font-mono text-slate-400 block">NDVI Soil Proxy</span>
+                  <span className="font-bold text-emerald-400 text-xs font-mono">0.68 Index</span>
+                </div>
+                <div className="p-2.5 rounded-xl bg-slate-950/70 border border-slate-800">
+                  <span className="text-[10px] font-mono text-slate-400 block">Radar InSAR</span>
+                  <span className="font-bold text-cyan-400 text-xs font-mono">Stable (&plusmn;1.2mm)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
       {/* 🚀 4 CORE TECHNOLOGICAL & OPERATIONAL PILLARS */}
       {/* ============================================================ */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 space-y-8">
