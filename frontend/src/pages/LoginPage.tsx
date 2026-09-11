@@ -58,31 +58,31 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onGoToRegister, onGoToForg
   };
 
   return (
-    <div className="min-h-screen bg-[#080C14] text-slate-100 flex items-center justify-center p-3 sm:p-6 relative overflow-hidden">
+    <div className="min-h-screen bg-[#080C14] text-slate-100 flex items-center justify-center p-3 sm:p-6 relative overflow-hidden bg-grid-cyber">
       {/* Ambient background glow orbs */}
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-purple-600/15 rounded-full blur-3xl pointer-events-none animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-950/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
+      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-blue-600/15 rounded-full blur-3xl pointer-events-none animate-float-slow" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-950/25 rounded-full blur-3xl pointer-events-none animate-float-reverse" />
 
       <div className="relative w-full max-w-xl glass-panel bg-slate-900/95 border border-slate-800 rounded-3xl p-5 sm:p-8 shadow-2xl space-y-5 animate-fadeIn my-auto">
         {/* Top Ministry & GOI Badges */}
         <div className="flex items-center justify-between text-[11px] border-b border-slate-800 pb-3 flex-wrap gap-2">
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <div className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
             <span className="font-mono font-semibold text-slate-300">MOIL LIMITED • MINIRATNA CPSE</span>
           </div>
-          <span className="px-2 py-0.5 rounded-full font-mono bg-purple-950/80 text-purple-300 border border-purple-800 text-[10px]">
+          <span className="px-2.5 py-0.5 rounded-full font-mono bg-purple-950/80 text-purple-300 border border-purple-800 text-[10px] shadow-sm">
             Ministry of Steel • Govt. of India
           </span>
         </div>
 
         {/* Brand Header */}
-        <div className="text-center space-y-1.5">
-          <div className="w-12 h-12 sm:w-14 sm:h-14 mx-auto rounded-2xl bg-gradient-to-br from-purple-500 via-indigo-600 to-purple-800 flex items-center justify-center text-white shadow-glow-purple">
-            <Layers className="w-6 h-6 sm:w-7 sm:h-7" />
+        <div className="text-center space-y-2">
+          <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto rounded-2xl bg-gradient-to-br from-purple-500 via-indigo-600 to-purple-800 flex items-center justify-center text-white shadow-glow-purple animate-float">
+            <Layers className="w-7 h-7 sm:w-8 sm:h-8" />
           </div>
           <h1 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
-            MOIL <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-300">ReserveIQ</span>
+            MOIL <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-300 to-cyan-400 animate-gradient-flow">ReserveIQ</span>
           </h1>
           <p className="text-xs text-slate-300 max-w-sm mx-auto font-medium leading-relaxed">
             AI-Driven Manganese Ore Reserve Estimation & Production Shortfall Mitigation System
@@ -186,7 +186,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onGoToRegister, onGoToForg
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold rounded-xl shadow-glow-purple transition flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
+            className="btn-shimmer w-full py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold rounded-xl shadow-glow-purple transition flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer transform hover:-translate-y-0.5"
           >
             <span>{loading ? 'Authenticating Personnel...' : 'Sign In to ReserveIQ'}</span>
             <ArrowRight className="w-4 h-4" />
