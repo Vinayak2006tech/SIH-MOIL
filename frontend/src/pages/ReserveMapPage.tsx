@@ -245,19 +245,19 @@ export const baseLayerConfigs: Record<
 const getProbabilityColor = (prob: number) => {
   if (prob >= 85) {
     return {
-      fill: '#8B5CF6', // Purple - Proved UNFC 111
-      border: '#C084FC',
+      fill: '#6B5B95', // Manganese Oxide Violet - Proved UNFC 111
+      border: '#9B8BBF',
       label: 'Proved Ore Body (UNFC 111)',
-      textColor: 'text-purple-300',
-      bgBadge: 'bg-purple-950/80 border-purple-800 text-purple-300'
+      textColor: 'text-[#BFB2D3]',
+      bgBadge: 'bg-[#2F2742] border-[#564879] text-[#BFB2D3]'
     };
   } else if (prob >= 70) {
     return {
-      fill: '#3B82F6', // Blue - Probable UNFC 122
-      border: '#60A5FA',
+      fill: '#0D9488', // Electric Teal - Probable UNFC 122
+      border: '#2DD4BF',
       label: 'Probable Extension (UNFC 122)',
-      textColor: 'text-blue-300',
-      bgBadge: 'bg-blue-950/80 border-blue-800 text-blue-300'
+      textColor: 'text-teal-300',
+      bgBadge: 'bg-teal-950/80 border-teal-800 text-teal-300'
     };
   } else if (prob >= 50) {
     return {
@@ -277,11 +277,11 @@ const getProbabilityColor = (prob: number) => {
     };
   } else {
     return {
-      fill: '#64748B', // Slate - Country Rock / Sterile
-      border: '#94A3B8',
+      fill: '#475569', // Slate - Country Rock / Sterile
+      border: '#64748B',
       label: 'Sterile Host Rock',
       textColor: 'text-slate-400',
-      bgBadge: 'bg-slate-900 border-slate-700 text-slate-400'
+      bgBadge: 'bg-[#161D22] border-[#26333B] text-slate-400'
     };
   }
 };
@@ -529,20 +529,20 @@ export const ReserveMapPage: React.FC = () => {
         {/* ============================================================ */}
         <div className="absolute top-3 left-3 right-3 lg:right-auto z-[1000] flex flex-col gap-2 w-auto max-w-[calc(100vw-1.5rem)] sm:max-w-2xl pointer-events-auto">
           {/* Main Top Header Card */}
-          <div className="glass-panel bg-slate-900/95 border border-slate-700/80 rounded-2xl shadow-2xl p-2.5 sm:p-3 backdrop-blur-md">
+          <div className="glass-panel bg-[#161D22]/95 border border-[#26333B] rounded-2xl shadow-2xl p-2.5 sm:p-3 backdrop-blur-md">
             <div className="flex items-center justify-between gap-2 flex-wrap sm:flex-nowrap">
               {/* Title and Stats */}
               <div className="flex items-center gap-2 min-w-0 flex-1">
-                <div className="w-8 h-8 rounded-xl bg-purple-600/20 border border-purple-500/40 flex items-center justify-center text-purple-400 shrink-0">
+                <div className="w-8 h-8 rounded-xl bg-teal-500/15 border border-teal-500/30 flex items-center justify-center text-teal-300 shrink-0">
                   <Target className="w-4 h-4" />
                 </div>
                 <div className="min-w-0">
                   <div className="flex items-center gap-1.5 flex-wrap">
-                    <h3 className="text-xs font-extrabold text-white truncate leading-tight">
+                    <h3 className="text-xs font-extrabold text-[#E8E6E3] truncate leading-tight font-sans">
                       MOIL GIS Reserve & Probability Map
                     </h3>
-                    <span className="text-[9px] px-1.5 py-0.2 rounded-full font-mono bg-purple-950 text-purple-300 border border-purple-800 flex items-center gap-1 shrink-0">
-                      <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
+                    <span className="text-[9px] px-1.5 py-0.2 rounded-full font-mono bg-teal-950 text-teal-300 border border-teal-800 flex items-center gap-1 shrink-0">
+                      <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
                       Kriging
                     </span>
                   </div>
@@ -557,13 +557,13 @@ export const ReserveMapPage: React.FC = () => {
                 {/* Reserve Probability Layer Quick Toggle Pill */}
                 <button
                   onClick={() => setShowReserveProbability(!showReserveProbability)}
-                  className={`px-2 py-1.5 rounded-lg text-xs font-bold border transition flex items-center gap-1 shrink-0 ${showReserveProbability
-                    ? 'bg-purple-600 text-white border-purple-400 shadow-glow-purple'
-                    : 'bg-slate-800/90 text-slate-400 border-slate-700 hover:text-white'
+                  className={`px-2 py-1.5 rounded-lg text-xs font-bold border transition flex items-center gap-1 shrink-0 cursor-pointer ${showReserveProbability
+                    ? 'bg-gradient-to-r from-[#6B5B95] to-[#0D9488] text-white border-teal-400 shadow-glow-teal'
+                    : 'bg-[#0F1214] text-slate-400 border-[#26333B] hover:text-white'
                     }`}
                   title="Toggle 2D/3D Reserve Probability Field (Indicator Kriging)"
                 >
-                  <Target className="w-3.5 h-3.5 text-purple-300" />
+                  <Target className="w-3.5 h-3.5 text-teal-300" />
                   <span className="hidden md:inline">Reserve Prob.</span>
                 </button>
 
@@ -577,9 +577,9 @@ export const ReserveMapPage: React.FC = () => {
                     }
                     setIsProbabilityControlOpen(!isProbabilityControlOpen);
                   }}
-                  className={`p-1.5 rounded-lg text-xs border transition shrink-0 relative ${isProbabilityControlOpen || minProbabilityCutoff !== 25 || gradeCutoffMn !== 20
-                    ? 'bg-indigo-600 text-white border-indigo-400'
-                    : 'bg-slate-800/80 text-slate-300 border-slate-700 hover:bg-slate-700 hover:text-white'
+                  className={`p-1.5 rounded-lg text-xs border transition shrink-0 relative cursor-pointer ${isProbabilityControlOpen || minProbabilityCutoff !== 25 || gradeCutoffMn !== 20
+                    ? 'bg-gradient-to-r from-[#6B5B95] to-[#0D9488] text-white border-teal-400'
+                    : 'bg-[#0F1214] text-slate-300 border-[#26333B] hover:bg-[#1B2226] hover:text-white'
                     }`}
                   title="Probability & Cutoff Filter Controls"
                 >
@@ -593,7 +593,7 @@ export const ReserveMapPage: React.FC = () => {
                 <select
                   value={baseLayer}
                   onChange={(e) => setBaseLayer(e.target.value as BaseLayerType)}
-                  className="px-1.5 py-1.5 rounded-lg text-[11px] font-semibold bg-slate-900 border border-purple-500/60 text-purple-300 hover:border-purple-400 focus:outline-none cursor-pointer shadow-sm hidden lg:block max-w-[125px] truncate shrink-0"
+                  className="px-1.5 py-1.5 rounded-lg text-[11px] font-semibold bg-[#0F1214] border border-[#26333B] text-teal-300 hover:border-teal-400 focus:outline-none cursor-pointer shadow-sm hidden lg:block max-w-[125px] truncate shrink-0 font-mono"
                   title="Select Base Imagery (Google Maps / Satellite)"
                 >
                   <option value="google-hybrid">🛰️ Satellite</option>
@@ -607,9 +607,9 @@ export const ReserveMapPage: React.FC = () => {
                 {/* Layers button */}
                 <button
                   onClick={() => setIsLayersOpen(!isLayersOpen)}
-                  className={`p-1.5 rounded-lg text-xs font-semibold border transition flex items-center gap-1 shrink-0 ${isLayersOpen
-                    ? 'bg-purple-600 text-white border-purple-500 shadow-glow-purple'
-                    : 'bg-slate-800/80 text-slate-300 border-slate-700 hover:bg-slate-700 hover:text-white'
+                  className={`p-1.5 rounded-lg text-xs font-semibold border transition flex items-center gap-1 shrink-0 cursor-pointer ${isLayersOpen
+                    ? 'bg-gradient-to-r from-[#6B5B95] to-[#0D9488] text-white border-teal-400 shadow-glow-teal'
+                    : 'bg-[#0F1214] text-slate-300 border-[#26333B] hover:bg-[#1B2226] hover:text-white'
                     }`}
                   title="Toggle GIS Overlays & Base Imagery"
                 >
@@ -619,7 +619,7 @@ export const ReserveMapPage: React.FC = () => {
                 {/* Compass Reset Center */}
                 <button
                   onClick={() => handleFlyTo(21.65, 79.75, 9)}
-                  className="p-1.5 rounded-lg text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition flex items-center shrink-0"
+                  className="p-1.5 rounded-lg text-xs font-semibold bg-[#0F1214] hover:bg-[#1B2226] text-slate-300 hover:text-white border border-[#26333B] transition flex items-center shrink-0 cursor-pointer"
                   title="Center Central India Corridor"
                 >
                   <Compass className="w-3.5 h-3.5" />
@@ -628,7 +628,7 @@ export const ReserveMapPage: React.FC = () => {
                 {/* Minimize / Maximize */}
                 <button
                   onClick={() => setIsFinderOpen(!isFinderOpen)}
-                  className="p-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition shrink-0"
+                  className="p-1.5 rounded-lg bg-[#0F1214] hover:bg-[#1B2226] text-slate-300 hover:text-white border border-[#26333B] transition shrink-0 cursor-pointer"
                   title={isFinderOpen ? 'Minimize Finder' : 'Expand Finder'}
                 >
                   {isFinderOpen ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
@@ -638,7 +638,7 @@ export const ReserveMapPage: React.FC = () => {
 
             {/* Expanded Search & Category Filters */}
             {isFinderOpen && (
-              <div className="mt-3 space-y-2.5 border-t border-slate-800/80 pt-2.5 animate-fadeIn">
+              <div className="mt-3 space-y-2.5 border-t border-[#26333B] pt-2.5 animate-fadeIn">
                 {/* Search Bar */}
                 <div className="relative">
                   <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-400" />
@@ -647,7 +647,7 @@ export const ReserveMapPage: React.FC = () => {
                     placeholder="Search by mine, district, plant (e.g. Balaghat, Dongri, Kandri)..."
                     value={searchLocation}
                     onChange={(e) => setSearchLocation(e.target.value)}
-                    className="w-full bg-slate-950 text-xs text-slate-100 pl-8 pr-8 py-2 rounded-xl border border-slate-700 focus:outline-none focus:border-purple-500 font-sans shadow-inner placeholder:text-slate-500"
+                    className="w-full bg-[#0F1214] text-xs text-[#E8E6E3] pl-8 pr-8 py-2 rounded-xl border border-[#26333B] focus:outline-none focus:border-teal-400 font-sans shadow-inner placeholder:text-slate-500"
                   />
                   {searchLocation && (
                     <button
@@ -660,12 +660,12 @@ export const ReserveMapPage: React.FC = () => {
                 </div>
 
                 {/* Category Filter Pills */}
-                <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5 scrollbar-none text-[11px]">
+                <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5 scrollbar-none text-[11px] font-mono">
                   <button
                     onClick={() => setFilterCategory('ALL')}
-                    className={`px-2.5 py-1 rounded-lg font-semibold shrink-0 transition ${filterCategory === 'ALL'
-                      ? 'bg-purple-600 text-white shadow-glow-purple'
-                      : 'bg-slate-950/60 text-slate-400 hover:text-white hover:bg-slate-800'
+                    className={`px-2.5 py-1 rounded-lg font-semibold shrink-0 transition cursor-pointer ${filterCategory === 'ALL'
+                      ? 'bg-gradient-to-r from-[#6B5B95] to-[#0D9488] text-white shadow-glow-teal'
+                      : 'bg-[#0F1214] text-slate-400 hover:text-white hover:bg-[#1B2226]'
                       }`}
                   >
                     All ({allLocations.length})
@@ -673,8 +673,8 @@ export const ReserveMapPage: React.FC = () => {
                   <button
                     onClick={() => setFilterCategory('MINE')}
                     className={`px-2.5 py-1 rounded-lg font-semibold shrink-0 transition flex items-center gap-1 ${filterCategory === 'MINE'
-                      ? 'bg-purple-600 text-white shadow-glow-purple'
-                      : 'bg-slate-950/60 text-slate-400 hover:text-white hover:bg-slate-800'
+                      ? 'bg-tech-teal text-[#0F1214] font-extrabold shadow-glow-teal'
+                      : 'bg-[#0F1214] text-slate-400 hover:text-white hover:bg-[#1B2226]'
                       }`}
                   >
                     ⛏️ Mines ({mines.length})
@@ -801,8 +801,8 @@ export const ReserveMapPage: React.FC = () => {
                       type="button"
                       onClick={() => setPendingMinProbCutoff(cutoff)}
                       className={`py-1.5 rounded-lg border transition ${pendingMinProbCutoff === cutoff
-                        ? 'bg-purple-600 text-white border-purple-400 shadow-glow-purple font-bold'
-                        : 'bg-slate-950 text-slate-400 border-slate-800 hover:text-white hover:bg-slate-800'
+                        ? 'bg-tech-teal text-[#0F1214] border-tech-teal shadow-glow-teal font-extrabold'
+                        : 'bg-[#0F1214] text-slate-400 border-[#26333B] hover:text-white hover:bg-[#1B2226]'
                         }`}
                     >
                       {cutoff === 85 ? 'Proved (85%)' : cutoff === 70 ? 'Probable (70%)' : cutoff === 50 ? 'Inferred (50%)' : 'All (25%)'}
@@ -866,8 +866,8 @@ export const ReserveMapPage: React.FC = () => {
                   type="button"
                   onClick={handleApplyFilters}
                   className={`flex-1 py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-lg ${isFilterDirty
-                    ? 'bg-gradient-to-r from-purple-600 via-purple-500 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white shadow-glow-purple ring-2 ring-purple-400/80'
-                    : 'bg-purple-600 hover:bg-purple-500 text-white'
+                    ? 'bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-[#0F1214] font-extrabold shadow-glow-teal ring-2 ring-tech-teal/80'
+                    : 'bg-tech-teal text-[#0F1214] font-bold hover:bg-tech-teal/90'
                     }`}
                 >
                   <Check className="w-4 h-4" />
@@ -919,8 +919,8 @@ export const ReserveMapPage: React.FC = () => {
                       type="button"
                       onClick={() => setBaseLayer(key as BaseLayerType)}
                       className={`p-1.5 rounded-lg text-left font-semibold flex items-center gap-1.5 transition ${baseLayer === key
-                        ? 'bg-purple-600 text-white shadow-glow-purple'
-                        : 'bg-slate-950/70 text-slate-300 hover:text-white hover:bg-slate-800'
+                        ? 'bg-tech-teal text-[#0F1214] font-extrabold shadow-glow-teal'
+                        : 'bg-[#0F1214] text-slate-300 hover:text-white hover:bg-[#1B2226]'
                         }`}
                     >
                       <span className="text-xs">{config.icon}</span>
@@ -1034,7 +1034,7 @@ export const ReserveMapPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsLayersOpen(false)}
-                  className="w-full py-2 rounded-xl text-xs font-bold bg-purple-600 hover:bg-purple-500 text-white shadow-glow-purple transition flex items-center justify-center gap-1.5"
+                  className="w-full py-2 rounded-xl text-xs font-extrabold bg-tech-teal hover:bg-tech-teal/90 text-[#0F1214] shadow-glow-teal transition flex items-center justify-center gap-1.5"
                 >
                   <Check className="w-3.5 h-3.5" />
                   <span>Apply & Close</span>
@@ -1393,11 +1393,11 @@ export const ReserveMapPage: React.FC = () => {
             </div>
 
             {/* Navigation Tabs in Drawer */}
-            <div className="flex items-center gap-1 bg-slate-950 p-1 rounded-xl border border-slate-800 text-xs">
+            <div className="flex items-center gap-1 bg-[#0F1214] p-1 rounded-xl border border-[#26333B] text-xs">
               <button
                 onClick={() => setInspectorTab('PROBABILITY')}
                 className={`flex-1 py-1.5 rounded-lg font-bold transition flex items-center justify-center gap-1 ${inspectorTab === 'PROBABILITY'
-                  ? 'bg-purple-600 text-white shadow-glow-purple'
+                  ? 'bg-tech-teal text-[#0F1214] font-extrabold shadow-glow-teal'
                   : 'text-slate-400 hover:text-white'
                   }`}
               >
@@ -1407,7 +1407,7 @@ export const ReserveMapPage: React.FC = () => {
               <button
                 onClick={() => setInspectorTab('ASSAYS')}
                 className={`flex-1 py-1.5 rounded-lg font-bold transition flex items-center justify-center gap-1 ${inspectorTab === 'ASSAYS'
-                  ? 'bg-purple-600 text-white shadow-glow-purple'
+                  ? 'bg-tech-teal text-[#0F1214] font-extrabold shadow-glow-teal'
                   : 'text-slate-400 hover:text-white'
                   }`}
               >
@@ -1417,7 +1417,7 @@ export const ReserveMapPage: React.FC = () => {
               <button
                 onClick={() => setInspectorTab('RE_ESTIMATE')}
                 className={`flex-1 py-1.5 rounded-lg font-bold transition flex items-center justify-center gap-1 ${inspectorTab === 'RE_ESTIMATE'
-                  ? 'bg-purple-600 text-white shadow-glow-purple'
+                  ? 'bg-tech-teal text-[#0F1214] font-extrabold shadow-glow-teal'
                   : 'text-slate-400 hover:text-white'
                   }`}
               >
@@ -1654,7 +1654,7 @@ export const ReserveMapPage: React.FC = () => {
                       <button
                         onClick={handleRunReEstimate}
                         disabled={reEstimating}
-                        className="w-full py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold rounded-xl shadow-glow-purple transition flex items-center justify-center gap-2 disabled:opacity-50"
+                        className="w-full py-2.5 bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-[#0F1214] text-xs font-extrabold rounded-xl shadow-glow-teal transition flex items-center justify-center gap-2 disabled:opacity-50"
                       >
                         {reEstimating ? (
                           <>
@@ -1773,7 +1773,7 @@ export const ReserveMapPage: React.FC = () => {
       {!isDrawerOpen && (
         <button
           onClick={() => setIsDrawerOpen(true)}
-          className="absolute right-4 top-4 z-[950] p-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white shadow-glow-purple transition flex items-center gap-1.5 text-xs font-bold"
+          className="absolute right-4 top-4 z-[950] p-2.5 rounded-xl bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-[#0F1214] shadow-glow-teal transition flex items-center gap-1.5 text-xs font-extrabold cursor-pointer"
           title="Open Geostatistical Inspector Drawer"
         >
           <Target className="w-4 h-4" />

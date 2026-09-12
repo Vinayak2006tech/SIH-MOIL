@@ -157,7 +157,7 @@ export const GoogleAuthModal: React.FC<GoogleAuthModalProps> = ({
       email: customEmail.toLowerCase().trim(),
       role: selectedRole,
       department: selectedDept,
-      avatarBg: 'bg-gradient-to-tr from-purple-600 to-indigo-600',
+      avatarBg: 'bg-gradient-to-tr from-[#6B5B95] to-[#0D9488]',
       initials: initials || 'G'
     };
 
@@ -228,7 +228,7 @@ export const GoogleAuthModal: React.FC<GoogleAuthModalProps> = ({
               onClick={() => setActiveTab('saved')}
               className={`pb-2.5 text-xs font-bold border-b-2 transition ${
                 activeTab === 'saved'
-                  ? 'border-purple-600 text-purple-700'
+                  ? 'border-teal-600 text-teal-700'
                   : 'border-transparent text-slate-500 hover:text-slate-800'
               }`}
             >
@@ -239,7 +239,7 @@ export const GoogleAuthModal: React.FC<GoogleAuthModalProps> = ({
               onClick={() => setActiveTab('custom')}
               className={`pb-2.5 text-xs font-bold border-b-2 transition flex items-center gap-1 ${
                 activeTab === 'custom'
-                  ? 'border-purple-600 text-purple-700'
+                  ? 'border-teal-600 text-teal-700'
                   : 'border-transparent text-slate-500 hover:text-slate-800'
               }`}
             >
@@ -275,20 +275,20 @@ export const GoogleAuthModal: React.FC<GoogleAuthModalProps> = ({
                     <div className="flex items-center gap-3 truncate">
                       <div
                         className={`w-9 h-9 rounded-full ${
-                          acc.avatarBg || 'bg-gradient-to-tr from-purple-600 to-indigo-600'
+                          acc.avatarBg || 'bg-gradient-to-tr from-[#6B5B95] to-[#0D9488]'
                         } text-white font-bold flex items-center justify-center text-xs shrink-0 shadow-sm`}
                       >
                         {acc.initials}
                       </div>
                       <div className="truncate">
-                        <p className="font-semibold text-slate-900 truncate group-hover:text-purple-700 transition-colors">
+                        <p className="font-semibold text-slate-900 truncate group-hover:text-teal-700 transition-colors">
                           {acc.name}
                         </p>
                         <p className="text-[11px] text-slate-500 truncate">{acc.email}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2 shrink-0 ml-2">
-                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-50 text-purple-700 font-bold border border-purple-200">
+                      <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-teal-50 text-teal-700 font-bold border border-teal-200">
                         {acc.role}
                       </span>
                       <button
@@ -308,7 +308,7 @@ export const GoogleAuthModal: React.FC<GoogleAuthModalProps> = ({
                 <button
                   type="button"
                   onClick={() => setActiveTab('custom')}
-                  className="text-xs text-purple-600 hover:text-purple-700 font-semibold flex items-center justify-center gap-1.5 mx-auto"
+                  className="text-xs text-teal-700 hover:text-teal-800 font-semibold flex items-center justify-center gap-1.5 mx-auto"
                 >
                   <Plus className="w-3.5 h-3.5" /> Use another Google account
                 </button>
@@ -318,7 +318,7 @@ export const GoogleAuthModal: React.FC<GoogleAuthModalProps> = ({
             /* Direct Google Account Sign-In Form */
             <form onSubmit={handleCustomGoogleSubmit} className="space-y-3.5">
               <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 text-[11px] flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-purple-600 shrink-0" />
+                <Sparkles className="w-4 h-4 text-teal-600 shrink-0" />
                 <span>Enter your Google/Gmail account to authenticate via Google SSO.</span>
               </div>
 
@@ -333,7 +333,7 @@ export const GoogleAuthModal: React.FC<GoogleAuthModalProps> = ({
                   placeholder="your.email@gmail.com or officer@moil.gov.in"
                   value={customEmail}
                   onChange={(e) => setCustomEmail(e.target.value)}
-                  className="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-slate-900 text-xs focus:outline-none focus:border-purple-600 focus:bg-white transition"
+                  className="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-slate-900 text-xs focus:outline-none focus:border-teal-600 focus:bg-white transition"
                 />
               </div>
 
@@ -346,7 +346,7 @@ export const GoogleAuthModal: React.FC<GoogleAuthModalProps> = ({
                   placeholder="e.g. Vinayak Sharma"
                   value={customName}
                   onChange={(e) => setCustomName(e.target.value)}
-                  className="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-slate-900 text-xs focus:outline-none focus:border-purple-600 focus:bg-white transition"
+                  className="w-full px-3 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-slate-900 text-xs focus:outline-none focus:border-teal-600 focus:bg-white transition"
                 />
               </div>
 
@@ -391,7 +391,7 @@ export const GoogleAuthModal: React.FC<GoogleAuthModalProps> = ({
                   disabled={loading || !customEmail}
                   className={`${
                     savedAccounts.length > 0 ? 'w-2/3' : 'w-full'
-                  } py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold rounded-xl text-xs shadow-md transition flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer`}
+                  } py-2.5 bg-gradient-to-r from-[#6B5B95] to-[#0D9488] hover:from-[#7E69AB] hover:to-[#2DD4BF] text-white font-bold rounded-xl text-xs shadow-md transition flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer`}
                 >
                   {loading ? (
                     <span>Authenticating...</span>

@@ -55,16 +55,16 @@ export const ActivateAccountPage: React.FC<ActivateAccountPageProps> = ({ onGoTo
   };
 
   return (
-    <div className="min-h-screen bg-[#080C14] text-slate-100 flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
+    <div className="min-h-screen bg-[#0F1214] text-[#E8E6E3] flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
       {/* Background glow */}
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-emerald-600/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-tech-teal/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="relative w-full max-w-md glass-panel bg-slate-900/95 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 animate-fadeIn">
+      <div className="relative w-full max-w-md glass-panel bg-[#161D22]/95 border border-[#26333B] rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 animate-fadeIn">
         {/* Header Badges */}
-        <div className="flex items-center justify-between text-[11px] border-b border-slate-800 pb-3">
+        <div className="flex items-center justify-between text-[11px] border-b border-[#26333B] pb-3">
           <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <div className="w-2 h-2 rounded-full bg-tech-teal animate-pulse" />
             <span className="font-mono font-semibold text-slate-300">MOIL LIMITED • MINIRATNA</span>
           </div>
           <span className="px-2 py-0.5 rounded-full font-mono bg-emerald-950/80 text-emerald-300 border border-emerald-800 text-[10px]">
@@ -77,10 +77,10 @@ export const ActivateAccountPage: React.FC<ActivateAccountPageProps> = ({ onGoTo
           <div className="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-700 flex items-center justify-center text-white shadow-glow-emerald">
             <KeyRound className="w-7 h-7" />
           </div>
-          <h1 className="text-2xl font-extrabold text-white tracking-tight">
+          <h1 className="text-2xl font-extrabold text-[#E8E6E3] tracking-tight">
             Activate Official Account
           </h1>
-          <p className="text-xs text-slate-400 max-w-sm mx-auto">
+          <p className="text-xs text-[#94A3B8] max-w-sm mx-auto">
             {email ? `Configure access security for ${email}` : 'Set your permanent password to complete account activation'}
           </p>
         </div>
@@ -91,14 +91,14 @@ export const ActivateAccountPage: React.FC<ActivateAccountPageProps> = ({ onGoTo
               <CheckCircle2 className="w-9 h-9" />
             </div>
             <div className="space-y-2">
-              <h3 className="text-lg font-bold text-white">Account Successfully Activated!</h3>
+              <h3 className="text-lg font-bold text-[#E8E6E3]">Account Successfully Activated!</h3>
               <p className="text-xs text-slate-300 leading-relaxed max-w-xs mx-auto">
                 Your credentials and security password have been registered in the MOIL National Mineral Registry.
               </p>
             </div>
             <button
               onClick={onGoToLogin}
-              className="w-full py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold rounded-xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-3 bg-gradient-to-r from-emerald-600 to-tech-teal hover:from-emerald-500 hover:to-tech-teal text-[#0F1214] font-extrabold rounded-xl shadow-lg transition flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>Proceed to Official Sign In</span>
               <ArrowRight className="w-4 h-4" />
@@ -116,8 +116,8 @@ export const ActivateAccountPage: React.FC<ActivateAccountPageProps> = ({ onGoTo
             </div>
 
             {error && (
-              <div className="p-3 rounded-xl bg-red-950/60 border border-red-800/80 text-xs text-red-300 flex items-center gap-2 animate-fadeIn">
-                <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
+              <div className="p-3 rounded-xl bg-rose-950/60 border border-rose-800/80 text-xs text-rose-300 flex items-center gap-2 animate-fadeIn">
+                <AlertCircle className="w-4 h-4 text-rose-400 shrink-0" />
                 <span>{error}</span>
               </div>
             )}
@@ -132,7 +132,7 @@ export const ActivateAccountPage: React.FC<ActivateAccountPageProps> = ({ onGoTo
                     value={token}
                     onChange={(e) => setToken(e.target.value)}
                     placeholder="Enter token from activation email"
-                    className="w-full px-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white font-mono text-xs focus:outline-none focus:border-emerald-500"
+                    className="w-full px-3 py-2.5 bg-[#0F1214] border border-[#26333B] rounded-xl text-[#E8E6E3] font-mono text-xs focus:outline-none focus:border-tech-teal"
                   />
                 </div>
               )}
@@ -146,7 +146,7 @@ export const ActivateAccountPage: React.FC<ActivateAccountPageProps> = ({ onGoTo
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="At least 6 characters"
-                    className="w-full pl-9 pr-10 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:outline-none focus:border-emerald-500"
+                    className="w-full pl-9 pr-10 py-2.5 bg-[#0F1214] border border-[#26333B] rounded-xl text-[#E8E6E3] text-xs focus:outline-none focus:border-tech-teal"
                   />
                   <Lock className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
                   <button
@@ -168,7 +168,7 @@ export const ActivateAccountPage: React.FC<ActivateAccountPageProps> = ({ onGoTo
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Re-type password"
-                    className="w-full pl-9 pr-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:outline-none focus:border-emerald-500"
+                    className="w-full pl-9 pr-3 py-2.5 bg-[#0F1214] border border-[#26333B] rounded-xl text-[#E8E6E3] text-xs focus:outline-none focus:border-tech-teal"
                   />
                   <Lock className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
                 </div>
@@ -177,19 +177,19 @@ export const ActivateAccountPage: React.FC<ActivateAccountPageProps> = ({ onGoTo
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold rounded-xl shadow-lg transition flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer mt-2"
+                className="w-full py-3 bg-gradient-to-r from-emerald-600 to-tech-teal hover:from-emerald-500 hover:to-tech-teal text-[#0F1214] font-extrabold rounded-xl shadow-lg transition flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer mt-2"
               >
                 <span>{loading ? 'Activating Credentials...' : 'Activate Account & Set Password'}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </form>
 
-            <div className="text-center pt-2 border-t border-slate-800">
+            <div className="text-center pt-2 border-t border-[#26333B]">
               <button
                 onClick={onGoToLogin}
-                className="text-xs text-slate-400 hover:text-slate-200 transition"
+                className="text-xs text-[#94A3B8] hover:text-[#E8E6E3] transition cursor-pointer"
               >
-                Already activated? <span className="text-emerald-400 font-bold underline">Sign in to ReserveIQ</span>
+                Already activated? <span className="text-tech-teal font-bold underline">Sign in to ReserveIQ</span>
               </button>
             </div>
           </>

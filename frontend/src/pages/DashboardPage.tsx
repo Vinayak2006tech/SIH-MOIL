@@ -5,14 +5,10 @@ import {
   AlertTriangle,
   Cpu,
   Sparkles,
-  ArrowUpRight,
-  ArrowDownRight,
-  ChevronRight,
   ShieldAlert,
-  Calendar,
-  Layers,
   MapPin,
-  Clock
+  Clock,
+  ChevronRight
 } from 'lucide-react';
 import {
   ResponsiveContainer,
@@ -112,15 +108,15 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ setActiveTab }) =>
     <div className="p-6 space-y-6 animate-fadeIn">
       {/* Top Banner Alert if Critical Risk */}
       {summary && (summary.criticalMinesCount > 0 || summary.highRiskMinesCount > 0) && (
-        <div className="p-4 rounded-xl bg-gradient-to-r from-red-950/80 via-slate-900 to-amber-950/80 border border-red-800/80 shadow-glow-red flex items-center justify-between flex-wrap gap-3">
+        <div className="p-4 rounded-xl bg-gradient-to-r from-red-950/80 via-[#161D22] to-amber-950/80 border border-[#DC5F4E]/60 shadow-glow-red flex items-center justify-between flex-wrap gap-3">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-red-500/20 text-red-400">
+            <div className="p-2 rounded-lg bg-red-500/20 text-[#DC5F4E]">
               <ShieldAlert className="w-5 h-5 animate-pulse" />
             </div>
             <div>
-              <h4 className="text-sm font-bold text-white flex items-center gap-2">
+              <h4 className="text-sm font-bold text-[#E8E6E3] flex items-center gap-2 font-sans">
                 Production Shortfall Advisory Active
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-red-900 text-red-200 uppercase font-mono">
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-red-950 text-[#DC5F4E] border border-red-800 uppercase font-mono font-bold">
                   {summary.criticalMinesCount} Critical • {summary.highRiskMinesCount} High Risk
                 </span>
               </h4>
@@ -131,7 +127,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ setActiveTab }) =>
           </div>
           <button
             onClick={() => setActiveTab('recommendations')}
-            className="px-4 py-2 bg-red-600 hover:bg-red-500 text-white text-xs font-bold rounded-lg shadow-glow-red transition flex items-center gap-1.5"
+            className="px-4 py-2 bg-gradient-to-r from-red-700 to-[#DC5F4E] hover:from-red-600 hover:to-red-500 text-white text-xs font-bold rounded-lg shadow-glow-red transition flex items-center gap-1.5 cursor-pointer font-sans"
           >
             <Sparkles className="w-3.5 h-3.5" /> View AI Mitigations
           </button>
@@ -140,12 +136,12 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ setActiveTab }) =>
 
       {/* Authentic MOIL Disclosures & National Inventory Highlights */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div className="p-4 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-center justify-between flex-wrap gap-3">
+        <div className="p-4 rounded-2xl bg-[#161D22]/85 border border-[#26333B] flex items-center justify-between flex-wrap gap-3">
           <div className="flex items-center gap-2.5">
             <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             <span className="text-xs font-bold text-slate-200">
               National Mineral Inventory (IBM & MOIL):{' '}
-              <strong className="text-purple-300 font-mono">121.97 Mt</strong> Total Reserves & Resources
+              <strong className="text-teal-300 font-mono">121.97 Mt</strong> Total Reserves & Resources
             </span>
           </div>
           <div className="flex items-center gap-2">
@@ -158,9 +154,9 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ setActiveTab }) =>
           </div>
         </div>
 
-        <div className="p-4 rounded-2xl bg-gradient-to-r from-slate-900 via-purple-950/30 to-slate-900 border border-purple-900/40 flex items-center justify-between flex-wrap gap-3">
+        <div className="p-4 rounded-2xl bg-gradient-to-r from-[#161D22] via-[#2F2742]/30 to-[#161D22] border border-[#26333B] flex items-center justify-between flex-wrap gap-3">
           <div className="flex items-center gap-2.5">
-            <div className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
+            <div className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
             <span className="text-xs font-bold text-slate-200">
               Global Reserves (USGS 2024):{' '}
               <strong className="text-amber-300 font-mono">1,900 Mt</strong> Contained Mn (World Output: 20.0 Mt Mn/yr)
@@ -175,7 +171,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ setActiveTab }) =>
             />
             <button
               onClick={() => setActiveTab('global-market')}
-              className="px-2.5 py-1 bg-purple-600/80 hover:bg-purple-600 text-white text-[11px] font-bold rounded-lg transition flex items-center gap-1 shadow-glow-purple"
+              className="px-2.5 py-1 bg-gradient-to-r from-[#6B5B95] to-[#0D9488] hover:from-[#7E69AB] hover:to-[#2DD4BF] text-white text-[11px] font-bold rounded-lg transition flex items-center gap-1 shadow-glow-manganese cursor-pointer"
             >
               Explore World Map &rarr;
             </button>
@@ -191,7 +187,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ setActiveTab }) =>
           unit="Million Tonnes"
           subtitle={selectedMine ? `Proved: ${selectedMine.provedReservesMt} Mt` : 'Across 8 Central India Leases'}
           icon={Database}
-          accentColor="purple"
+          accentColor="manganese"
           trend={{ value: '+4.2%', isPositive: true, label: 'vs FY25 Survey' }}
           onClick={() => setActiveTab('reserve-map')}
         />
@@ -206,7 +202,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ setActiveTab }) =>
           unit="Tonnes"
           subtitle={`Target: ${(selectedMine ? selectedMine.targetMonthlyTonnes : summary?.totalMonthlyTargetTonnes || 0).toLocaleString()} t`}
           icon={TrendingUp}
-          accentColor="blue"
+          accentColor="teal"
           progress={summary?.productionFulfillmentPct || 88}
           trend={{
             value: `${summary?.productionFulfillmentPct || 88}%`,
@@ -238,11 +234,11 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ setActiveTab }) =>
       </div>
 
       {/* Main Chart Section: Production Trend & Multi-Horizon AI Forecast */}
-      <div className="glass-panel rounded-2xl p-6 border border-slate-800/80">
+      <div className="glass-panel rounded-2xl p-6 border border-[#26333B]">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
           <div>
             <div className="flex items-center gap-2 flex-wrap">
-              <h3 className="text-base font-bold text-white flex items-center gap-2">
+              <h3 className="text-base font-bold text-[#E8E6E3] flex items-center gap-2 font-sans">
                 Monthly Manganese Ore Output & AI Risk Forecast
               </h3>
               <ProvenanceBadge
@@ -262,17 +258,17 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ setActiveTab }) =>
           </div>
 
           {/* Forecast Horizon Switcher */}
-          <div className="flex items-center gap-1.5 p-1 bg-slate-900 border border-slate-800 rounded-lg">
+          <div className="flex items-center gap-1.5 p-1 bg-[#0F1214] border border-[#26333B] rounded-lg font-mono">
             <span className="text-[10px] uppercase font-bold text-slate-400 px-2 flex items-center gap-1">
-              <Clock className="w-3 h-3" /> Forecast Horizon:
+              <Clock className="w-3 h-3 text-teal-400" /> Forecast Horizon:
             </span>
             {[30, 60, 90].map((days) => (
               <button
                 key={days}
                 onClick={() => setHorizonDays(days)}
-                className={`px-2.5 py-1 text-xs font-bold rounded-md transition ${horizonDays === days
-                  ? 'bg-purple-600 text-white shadow-glow-purple'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                className={`px-2.5 py-1 text-xs font-bold rounded-md transition cursor-pointer ${horizonDays === days
+                  ? 'bg-gradient-to-r from-[#6B5B95] to-[#0D9488] text-white shadow-glow-teal'
+                  : 'text-slate-400 hover:text-white hover:bg-[#161D22]'
                   }`}
               >
                 {days} Days
@@ -285,20 +281,21 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ setActiveTab }) =>
         <div className="h-80 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <ComposedChart data={chartData} margin={{ top: 10, right: 20, left: 0, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1E293B" vertical={false} />
-              <XAxis dataKey="month" stroke="#64748B" fontSize={11} tickLine={false} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#26333B" vertical={false} />
+              <XAxis dataKey="month" stroke="#8A99A8" fontSize={11} tickLine={false} />
               <YAxis
-                stroke="#64748B"
+                stroke="#8A99A8"
                 fontSize={11}
                 tickLine={false}
                 tickFormatter={(v) => `${Math.round(v / 1000)}k t`}
               />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#111827',
-                  borderColor: '#334155',
-                  borderRadius: '0.5rem',
-                  fontSize: '12px'
+                  backgroundColor: '#161D22',
+                  borderColor: '#26333B',
+                  borderRadius: '0.75rem',
+                  fontSize: '12px',
+                  color: '#E8E6E3'
                 }}
                 formatter={(val: any, name: any) => [
                   val !== undefined ? `${val.toLocaleString()} Tonnes` : 'N/A',
@@ -312,23 +309,23 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ setActiveTab }) =>
                 type="monotone"
                 dataKey="target"
                 name="Target Monthly Quota"
-                fill="rgba(59, 130, 246, 0.08)"
-                stroke="#3B82F6"
+                fill="rgba(45, 212, 191, 0.08)"
+                stroke="#2DD4BF"
                 strokeWidth={1.5}
                 strokeDasharray="4 4"
               />
 
-              {/* Actual Production Bar */}
-              <Bar dataKey="actual" name="Actual Extraction Output" fill="#8B5CF6" radius={[4, 4, 0, 0]} maxBarSize={38} />
+              {/* Actual Production Bar - Manganese Violet */}
+              <Bar dataKey="actual" name="Actual Extraction Output" fill="#7E69AB" radius={[4, 4, 0, 0]} maxBarSize={38} />
 
-              {/* Forecast Point & Confidence */}
+              {/* Forecast Point & Confidence - Earth-Tech Red/Amber/Emerald */}
               <Line
                 type="monotone"
                 dataKey="predicted"
                 name="AI Predicted Production"
-                stroke="#EF4444"
+                stroke="#DC5F4E"
                 strokeWidth={3}
-                dot={{ r: 6, fill: '#EF4444' }}
+                dot={{ r: 6, fill: '#DC5F4E' }}
               />
               <Line
                 type="monotone"
@@ -356,17 +353,17 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ setActiveTab }) =>
       {/* Two Column Layout: Mine Risk Matrix & AI Alert Feed */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left 2 Cols: Mine-Wise Risk & Production Matrix */}
-        <div className="lg:col-span-2 glass-panel rounded-2xl p-6 border border-slate-800/80">
+        <div className="lg:col-span-2 glass-panel rounded-2xl p-6 border border-[#26333B]">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="text-sm font-bold text-white uppercase tracking-wider">
+              <h3 className="text-sm font-bold text-[#E8E6E3] uppercase tracking-wider font-mono">
                 MOIL Mine Leases • Live Risk Matrix
               </h3>
               <p className="text-xs text-slate-400">Status across Central India manganese belt</p>
             </div>
             <button
               onClick={() => setActiveTab('reserve-map')}
-              className="text-xs font-semibold text-purple-400 hover:text-purple-300 flex items-center gap-1"
+              className="text-xs font-semibold text-teal-400 hover:text-teal-300 flex items-center gap-1 cursor-pointer font-mono"
             >
               View on GIS Map <ChevronRight className="w-3.5 h-3.5" />
             </button>
@@ -374,7 +371,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ setActiveTab }) =>
 
           <div className="overflow-x-auto">
             <table className="w-full text-xs text-left">
-              <thead className="bg-slate-950/60 text-slate-400 uppercase font-mono border-b border-slate-800">
+              <thead className="bg-[#0F1214] text-slate-400 uppercase font-mono border-b border-[#26333B]">
                 <tr>
                   <th className="p-3">Mine Site</th>
                   <th className="p-3">Reserves</th>
@@ -384,16 +381,16 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ setActiveTab }) =>
                   <th className="p-3 text-right">Action</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60 font-medium">
+              <tbody className="divide-y divide-[#26333B]/60 font-medium">
                 {mines.map((mine) => (
                   <tr
                     key={mine.mineId}
-                    className={`hover:bg-slate-800/40 transition ${selectedMineId === mine.mineId ? 'bg-purple-950/30' : ''
+                    className={`hover:bg-[#1B2226]/50 transition ${selectedMineId === mine.mineId ? 'bg-teal-950/20' : ''
                       }`}
                   >
-                    <td className="p-3 font-semibold text-white">
+                    <td className="p-3 font-semibold text-[#E8E6E3]">
                       <div className="flex items-center gap-2">
-                        <MapPin className="w-3.5 h-3.5 text-purple-400 shrink-0" />
+                        <MapPin className="w-3.5 h-3.5 text-teal-400 shrink-0" />
                         <div>
                           {mine.name}
                           <span className="block text-[10px] text-slate-400 font-normal">
@@ -414,7 +411,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ setActiveTab }) =>
                           setSelectedMineId(mine.mineId);
                           setActiveTab('shortfall');
                         }}
-                        className="px-2.5 py-1 bg-slate-800 hover:bg-purple-600 text-slate-300 hover:text-white rounded text-[11px] font-bold transition"
+                        className="px-2.5 py-1 bg-[#161D22] hover:bg-gradient-to-r hover:from-[#6B5B95] hover:to-[#0D9488] text-slate-300 hover:text-white border border-[#26333B] rounded text-[11px] font-bold transition cursor-pointer"
                       >
                         Inspect AI
                       </button>
@@ -427,13 +424,13 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ setActiveTab }) =>
         </div>
 
         {/* Right 1 Col: Live Alert Feed & Quick Actions */}
-        <div className="glass-panel rounded-2xl p-6 border border-slate-800/80 flex flex-col justify-between">
+        <div className="glass-panel rounded-2xl p-6 border border-[#26333B] flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+              <h3 className="text-sm font-bold text-[#E8E6E3] uppercase tracking-wider flex items-center gap-2 font-mono">
                 <AlertTriangle className="w-4 h-4 text-amber-400" /> Real-Time Alerts
               </h3>
-              <span className="text-[10px] font-mono px-2 py-0.5 bg-slate-800 text-slate-300 rounded-full">
+              <span className="text-[10px] font-mono px-2 py-0.5 bg-[#0F1214] border border-[#26333B] text-slate-300 rounded-full">
                 Telemetry
               </span>
             </div>
@@ -442,10 +439,10 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ setActiveTab }) =>
               {summary?.activeAlerts?.map((alert) => (
                 <div
                   key={alert.id}
-                  className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 hover:border-slate-700 transition"
+                  className="p-3.5 rounded-xl bg-[#0F1214]/80 border border-[#26333B] hover:border-teal-500/40 transition"
                 >
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-xs font-bold text-white">{alert.mineName}</span>
+                    <span className="text-xs font-bold text-[#E8E6E3] font-sans">{alert.mineName}</span>
                     <RiskBadge level={alert.riskLevel} size="sm" />
                   </div>
                   <p className="text-xs text-slate-300 leading-relaxed">{alert.message}</p>
@@ -455,10 +452,10 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ setActiveTab }) =>
           </div>
 
           {/* Quick AI Mitigations CTA */}
-          <div className="mt-6 pt-4 border-t border-slate-800">
+          <div className="mt-6 pt-4 border-t border-[#26333B]">
             <button
               onClick={() => setActiveTab('recommendations')}
-              className="w-full py-2.5 px-4 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold rounded-xl shadow-glow-purple transition flex items-center justify-center gap-2"
+              className="w-full py-2.5 px-4 bg-gradient-to-r from-[#6B5B95] to-[#0D9488] hover:from-[#7E69AB] hover:to-[#2DD4BF] text-white text-xs font-bold rounded-xl shadow-glow-manganese transition flex items-center justify-center gap-2 cursor-pointer font-sans"
             >
               <Sparkles className="w-4 h-4" /> Open Prescriptive Engine ({summary?.pendingRecommendationsCount || 3} Actions)
             </button>

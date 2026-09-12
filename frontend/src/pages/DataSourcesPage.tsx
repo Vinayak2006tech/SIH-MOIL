@@ -60,19 +60,19 @@ export const DataSourcesPage: React.FC = () => {
   const syntheticCount = dataSources.filter((s) => s.isSynthetic).length;
 
   return (
-    <div className="p-6 space-y-6 animate-fadeIn">
+    <div className="p-6 space-y-6 animate-fadeIn text-[#E8E6E3]">
       {/* Header Banner */}
-      <div className="glass-panel p-6 rounded-3xl border border-slate-800 flex items-start justify-between flex-wrap gap-4">
+      <div className="glass-panel bg-[#161D22]/85 p-6 rounded-3xl border border-[#26333B] flex items-start justify-between flex-wrap gap-4 shadow-xl">
         <div>
-          <span className="text-xs font-mono uppercase font-bold text-purple-400 flex items-center gap-1.5">
+          <span className="text-xs font-mono uppercase font-bold text-tech-teal flex items-center gap-1.5">
             <ShieldCheck className="w-4 h-4 text-emerald-400" /> Data Provenance & Audit Registry
           </span>
-          <h2 className="text-xl font-bold text-white mt-1">
+          <h2 className="text-xl font-bold text-[#E8E6E3] mt-1">
             Data Lineage, Provenance & Verification Index
           </h2>
-          <p className="text-xs text-slate-400 mt-1 max-w-3xl leading-relaxed">
+          <p className="text-xs text-[#94A3B8] mt-1 max-w-3xl leading-relaxed">
             Every metric, chart, and ML prediction across MOIL ReserveIQ is traceable to its verified source.
-            Statutory disclosures from <strong>MOIL Limited</strong>, <strong>Indian Bureau of Mines (IBM)</strong>, and <strong>Copernicus / NASA Earth Observation</strong> are strictly segregated from labeled demonstration inputs.
+            Statutory disclosures from <strong className="text-tech-teal">MOIL Limited</strong>, <strong className="text-manganese-300">Indian Bureau of Mines (IBM)</strong>, and <strong className="text-tech-cyan">Copernicus / NASA Earth Observation</strong> are strictly segregated from labeled demonstration inputs.
           </p>
         </div>
 
@@ -90,9 +90,9 @@ export const DataSourcesPage: React.FC = () => {
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#26333B] pb-3">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs text-slate-400 font-bold mr-1">Source Type:</span>
+          <span className="text-xs text-[#94A3B8] font-bold mr-1">Source Type:</span>
           {[
             { id: 'ALL', label: 'All Sources' },
             { id: 'OFFICIAL', label: 'Official MOIL PSU' },
@@ -104,8 +104,8 @@ export const DataSourcesPage: React.FC = () => {
               key={tab.id}
               onClick={() => setSelectedFilter(tab.id)}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition ${selectedFilter === tab.id
-                ? 'bg-purple-600 text-white shadow-glow-purple'
-                : 'bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800'
+                ? 'bg-tech-teal text-[#0F1214] font-extrabold shadow-glow-teal'
+                : 'bg-[#161D22] hover:bg-[#1B2226] text-[#94A3B8] hover:text-[#E8E6E3] border border-[#26333B]'
                 }`}
             >
               {tab.label}
@@ -119,7 +119,7 @@ export const DataSourcesPage: React.FC = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search datasets, URLs, citations..."
-            className="w-full pl-8 pr-3 py-1.5 bg-slate-950 border border-slate-700 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-purple-500 font-mono"
+            className="w-full pl-8 pr-3 py-1.5 bg-[#0F1214] border border-[#26333B] rounded-lg text-xs text-[#E8E6E3] placeholder-slate-500 focus:outline-none focus:border-tech-teal font-mono"
           />
           <Search className="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-1/2 -translate-y-1/2" />
         </div>
@@ -143,17 +143,17 @@ export const DataSourcesPage: React.FC = () => {
                   : isSat
                     ? 'border-cyan-800/80 bg-cyan-950/20 hover:border-cyan-700'
                     : isGov
-                      ? 'border-blue-800/80 bg-blue-950/20 hover:border-blue-700'
+                      ? 'border-[#26333B] bg-[#161D22]/85 hover:border-tech-teal/50'
                       : 'border-emerald-800/80 bg-emerald-950/20 hover:border-emerald-700'
                   }`}
               >
                 {/* Card Header */}
                 <div className="flex items-start justify-between gap-3">
                   <div className="space-y-1">
-                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded uppercase bg-slate-950/80 border border-slate-800 text-slate-300">
+                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded uppercase bg-[#0F1214]/90 border border-[#26333B] text-slate-300">
                       {source.sourceId}
                     </span>
-                    <h3 className="text-sm font-bold text-white leading-snug">{source.datasetName}</h3>
+                    <h3 className="text-sm font-bold text-[#E8E6E3] leading-snug">{source.datasetName}</h3>
                   </div>
 
                   <ProvenanceBadge
@@ -168,24 +168,24 @@ export const DataSourcesPage: React.FC = () => {
                 <p className="text-xs text-slate-300 leading-relaxed">{source.description}</p>
 
                 {/* Originating Source & Timestamps */}
-                <div className="p-3 rounded-xl bg-slate-950/50 border border-slate-800/80 space-y-1.5 text-xs font-mono">
-                  <div className="flex items-center justify-between text-slate-400">
+                <div className="p-3 rounded-xl bg-[#0F1214]/80 border border-[#26333B] space-y-1.5 text-xs font-mono">
+                  <div className="flex items-center justify-between text-[#94A3B8]">
                     <span>Publisher / Source:</span>
                     <span className="font-semibold text-slate-200 text-right truncate max-w-xs">{source.sourceName}</span>
                   </div>
-                  <div className="flex items-center justify-between text-slate-400">
+                  <div className="flex items-center justify-between text-[#94A3B8]">
                     <span>Publication Date:</span>
                     <span className="text-slate-300">{source.publicationDate}</span>
                   </div>
-                  <div className="flex items-center justify-between text-slate-400">
+                  <div className="flex items-center justify-between text-[#94A3B8]">
                     <span>Verification / Access Date:</span>
                     <span className="text-slate-300">{source.accessedDate}</span>
                   </div>
                 </div>
 
                 {/* License & Source URL Link */}
-                <div className="flex items-center justify-between pt-2 border-t border-slate-800/80 text-[11px]">
-                  <span className="text-slate-400 truncate max-w-xs">
+                <div className="flex items-center justify-between pt-2 border-t border-[#26333B] text-[11px]">
+                  <span className="text-[#94A3B8] truncate max-w-xs">
                     {source.license}
                   </span>
 
@@ -194,7 +194,7 @@ export const DataSourcesPage: React.FC = () => {
                       href={source.sourceUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 font-bold text-purple-400 hover:text-purple-300 transition"
+                      className="flex items-center gap-1 font-bold text-tech-teal hover:text-tech-cyan transition"
                     >
                       <span>Direct Official Source</span>
                       <ExternalLink className="w-3 h-3" />
@@ -212,17 +212,17 @@ export const DataSourcesPage: React.FC = () => {
       )}
 
       {/* SIH Judge Q&A Audit Table */}
-      <div className="glass-panel p-6 rounded-3xl border border-slate-800 space-y-4">
+      <div className="glass-panel bg-[#161D22]/85 p-6 rounded-3xl border border-[#26333B] space-y-4 shadow-xl">
         <div className="flex items-center gap-2">
-          <FileText className="w-5 h-5 text-purple-400" />
-          <h3 className="text-sm font-bold text-white">
+          <FileText className="w-5 h-5 text-tech-teal" />
+          <h3 className="text-sm font-bold text-[#E8E6E3]">
             Evaluation Audit Matrix: "Where Did This Number Come From?"
           </h3>
         </div>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs font-sans">
-            <thead className="bg-slate-950/80 text-slate-400 uppercase font-mono text-[10px] border-b border-slate-800">
+            <thead className="bg-[#0F1214]/90 text-[#94A3B8] uppercase font-mono text-[10px] border-b border-[#26333B]">
               <tr>
                 <th className="py-2.5 px-3">Dashboard Metric / Layer</th>
                 <th className="py-2.5 px-3">Display Value</th>
@@ -231,44 +231,44 @@ export const DataSourcesPage: React.FC = () => {
                 <th className="py-2.5 px-3">Traceability Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/60 font-mono text-[11px]">
+            <tbody className="divide-y divide-[#26333B]/60 font-mono text-[11px]">
               <tr>
-                <td className="py-3 px-3 font-sans font-semibold text-white">National Manganese Reserves & Resources</td>
-                <td className="py-3 px-3 text-purple-300 font-bold">121.97 Million Tonnes</td>
+                <td className="py-3 px-3 font-sans font-semibold text-[#E8E6E3]">National Manganese Reserves & Resources</td>
+                <td className="py-3 px-3 text-manganese-300 font-bold">121.97 Million Tonnes</td>
                 <td className="py-3 px-3 text-slate-300 font-sans">Indian Bureau of Mines (IBM) NMI & MOIL Disclosures</td>
                 <td className="py-3 px-3"><ProvenanceBadge dataType="PUBLIC_GOVERNMENT" isSynthetic={false} /></td>
                 <td className="py-3 px-3 text-emerald-400 font-sans">Verified Public Record</td>
               </tr>
               <tr>
-                <td className="py-3 px-3 font-sans font-semibold text-white">FY 2025-26 Annual Ore Production</td>
-                <td className="py-3 px-3 text-purple-300 font-bold">19.07 Lakh Tonnes (1.907 Mt)</td>
+                <td className="py-3 px-3 font-sans font-semibold text-[#E8E6E3]">FY 2025-26 Annual Ore Production</td>
+                <td className="py-3 px-3 text-manganese-300 font-bold">19.07 Lakh Tonnes (1.907 Mt)</td>
                 <td className="py-3 px-3 text-slate-300 font-sans">MOIL Limited 64th Annual Operational Review & PIB</td>
                 <td className="py-3 px-3"><ProvenanceBadge dataType="OFFICIAL_MOIL" isSynthetic={false} /></td>
                 <td className="py-3 px-3 text-emerald-400 font-sans">Verified Public Record</td>
               </tr>
               <tr>
-                <td className="py-3 px-3 font-sans font-semibold text-white">FY 2025-26 Annual Ore Sales</td>
-                <td className="py-3 px-3 text-purple-300 font-bold">15.89 Lakh Tonnes (1.589 Mt)</td>
+                <td className="py-3 px-3 font-sans font-semibold text-[#E8E6E3]">FY 2025-26 Annual Ore Sales</td>
+                <td className="py-3 px-3 text-manganese-300 font-bold">15.89 Lakh Tonnes (1.589 Mt)</td>
                 <td className="py-3 px-3 text-slate-300 font-sans">MOIL Investor Disclosures & Audited Financials</td>
                 <td className="py-3 px-3"><ProvenanceBadge dataType="OFFICIAL_MOIL" isSynthetic={false} /></td>
                 <td className="py-3 px-3 text-emerald-400 font-sans">Verified Public Record</td>
               </tr>
               <tr>
-                <td className="py-3 px-3 font-sans font-semibold text-white">11 Core Operating Mine Leases & Coordinates</td>
-                <td className="py-3 px-3 text-purple-300 font-bold">Balaghat, Dongri Buzurg, Kandri, Mansar, etc.</td>
+                <td className="py-3 px-3 font-sans font-semibold text-[#E8E6E3]">11 Core Operating Mine Leases & Coordinates</td>
+                <td className="py-3 px-3 text-manganese-300 font-bold">Balaghat, Dongri Buzurg, Kandri, Mansar, etc.</td>
                 <td className="py-3 px-3 text-slate-300 font-sans">Ministry of Mines Leases & MOIL Mining Divisions</td>
                 <td className="py-3 px-3"><ProvenanceBadge dataType="OFFICIAL_MOIL" isSynthetic={false} /></td>
                 <td className="py-3 px-3 text-emerald-400 font-sans">Verified Public Record</td>
               </tr>
               <tr>
-                <td className="py-3 px-3 font-sans font-semibold text-white">Geospatial NDVI Vegetation & Bench Saturation</td>
-                <td className="py-3 px-3 text-purple-300 font-bold">Live Bands 4/8 (NDVI 0.29-0.42)</td>
+                <td className="py-3 px-3 font-sans font-semibold text-[#E8E6E3]">Geospatial NDVI Vegetation & Bench Saturation</td>
+                <td className="py-3 px-3 text-tech-teal font-bold">Live Bands 4/8 (NDVI 0.29-0.42)</td>
                 <td className="py-3 px-3 text-slate-300 font-sans">Copernicus Sentinel-2 MSI & NASA MODIS Earthdata</td>
                 <td className="py-3 px-3"><ProvenanceBadge dataType="PUBLIC_SATELLITE" isSynthetic={false} /></td>
                 <td className="py-3 px-3 text-cyan-400 font-sans">Open Satellite Telemetry</td>
               </tr>
               <tr>
-                <td className="py-3 px-3 font-sans font-semibold text-white">Simulated Sub-surface Borehole Assays</td>
+                <td className="py-3 px-3 font-sans font-semibold text-[#E8E6E3]">Simulated Sub-surface Borehole Assays</td>
                 <td className="py-3 px-3 text-amber-300 font-bold">64+ Synthetic Core Drills</td>
                 <td className="py-3 px-3 text-slate-300 font-sans">MOIL ReserveIQ Synthetic Geological Simulation Engine</td>
                 <td className="py-3 px-3"><ProvenanceBadge dataType="SYNTHETIC_DEMO" isSynthetic={true} /></td>

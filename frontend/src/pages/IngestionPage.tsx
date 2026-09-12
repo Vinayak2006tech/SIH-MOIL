@@ -275,19 +275,19 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
   return (
     <div className="p-6 space-y-6 animate-fadeIn">
       {/* Header Banner */}
-      <div className="glass-panel p-6 rounded-2xl border border-slate-800 flex items-start justify-between flex-wrap gap-4 bg-gradient-to-r from-slate-900 via-slate-900 to-purple-950/30">
+      <div className="glass-panel p-6 rounded-2xl border border-[#26333B] flex items-start justify-between flex-wrap gap-4 bg-gradient-to-r from-[#12181A] via-[#161D22] to-[#12181A]">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-xs font-mono uppercase font-bold text-purple-400 flex items-center gap-1.5">
-              <Database className="w-3.5 h-3.5 text-purple-400" /> Data Ingestion Hub & Multimodal Telemetry
+            <span className="text-xs font-mono uppercase font-bold text-manganese-400 flex items-center gap-1.5">
+              <Database className="w-3.5 h-3.5 text-tech-teal" /> Data Ingestion Hub & Multimodal Telemetry
             </span>
             {totalBoreholeCount !== null && (
-              <span className="text-[10px] px-2 py-0.5 rounded-full font-mono bg-purple-950 text-purple-300 border border-purple-800">
+              <span className="text-[10px] px-2 py-0.5 rounded-full font-mono bg-manganese-950 text-manganese-300 border border-manganese-800">
                 {totalBoreholeCount} Active Boreholes
               </span>
             )}
           </div>
-          <h2 className="text-xl font-bold text-white mt-1">
+          <h2 className="text-xl font-bold text-[#E8E6E3] mt-1">
             Multimodal Data Ingestion & Earth Observation Pipeline
           </h2>
           <p className="text-xs text-slate-400 mt-1 max-w-2xl leading-relaxed">
@@ -300,24 +300,24 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
           <div className="flex items-center gap-2">
             <button
               onClick={() => onNavigate('reserve-map')}
-              className="py-2 px-3 bg-slate-900 hover:bg-slate-800 text-purple-300 hover:text-white text-xs font-semibold rounded-xl border border-purple-800/60 transition flex items-center gap-1.5 shadow-sm"
+              className="py-2 px-3 bg-[#12181A] hover:bg-[#1B2226] text-tech-teal hover:text-[#E8E6E3] text-xs font-semibold rounded-xl border border-tech-teal/40 transition flex items-center gap-1.5 shadow-sm"
             >
-              <MapPin className="w-3.5 h-3.5 text-purple-400" /> View GIS 3D Borehole Map
+              <MapPin className="w-3.5 h-3.5 text-tech-teal" /> View GIS 3D Borehole Map
             </button>
           </div>
         )}
       </div>
 
       {/* Ingestion Sub-Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-800 pb-3 flex-wrap">
+      <div className="flex items-center gap-2 border-b border-[#26333B] pb-3 flex-wrap">
         <button
           onClick={() => {
             setActiveTab('drilling');
             handleClearFile();
           }}
           className={`flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-xl transition ${activeTab === 'drilling'
-            ? 'bg-purple-600 text-white shadow-glow-purple'
-            : 'text-slate-400 hover:text-white hover:bg-slate-800/80'
+            ? 'bg-tech-teal text-[#0F1214] font-extrabold shadow-glow-teal'
+            : 'text-slate-400 hover:text-[#E8E6E3] hover:bg-[#161D22]'
             }`}
         >
           <Database className="w-4 h-4" /> Diamond Drilling Logs (CSV)
@@ -329,8 +329,8 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
             handleClearFile();
           }}
           className={`flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-xl transition ${activeTab === 'production'
-            ? 'bg-purple-600 text-white shadow-glow-purple'
-            : 'text-slate-400 hover:text-white hover:bg-slate-800/80'
+            ? 'bg-tech-teal text-[#0F1214] font-extrabold shadow-glow-teal'
+            : 'text-slate-400 hover:text-[#E8E6E3] hover:bg-[#161D22]'
             }`}
         >
           <FileSpreadsheet className="w-4 h-4" /> Production Records (CSV)
@@ -342,8 +342,8 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
             handleClearFile();
           }}
           className={`flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-xl transition ${activeTab === 'satellite'
-            ? 'bg-purple-600 text-white shadow-glow-purple'
-            : 'text-slate-400 hover:text-white hover:bg-slate-800/80'
+            ? 'bg-tech-teal text-[#0F1214] font-extrabold shadow-glow-teal'
+            : 'text-slate-400 hover:text-[#E8E6E3] hover:bg-[#161D22]'
             }`}
         >
           <Satellite className="w-4 h-4" /> Satellite Pass Synchronizer (Sentinel-2 / MODIS)
@@ -354,10 +354,10 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
       {(activeTab === 'drilling' || activeTab === 'production') && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Left 2 Cols: Interactive Drag & Drop Upload Zone */}
-          <div className="lg:col-span-2 glass-panel rounded-2xl p-6 border border-slate-800 space-y-5">
+          <div className="lg:col-span-2 glass-panel rounded-2xl p-6 border border-[#26333B] bg-[#161D22]/85 space-y-5">
             <div className="flex items-center justify-between flex-wrap gap-2">
-              <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-                <UploadCloud className="w-4 h-4 text-purple-400" />
+              <h3 className="text-sm font-bold text-[#E8E6E3] uppercase tracking-wider flex items-center gap-2">
+                <UploadCloud className="w-4 h-4 text-tech-teal" />
                 {activeTab === 'drilling'
                   ? 'Drilling Assay Borehole Ingestion'
                   : 'Monthly Extraction Records Ingestion'}
@@ -370,12 +370,12 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
             </div>
 
             {/* Target Mine Dropdown */}
-            <div className="flex items-center gap-3 text-xs bg-slate-950/60 p-3 rounded-xl border border-slate-800">
+            <div className="flex items-center gap-3 text-xs bg-[#0F1214]/60 p-3 rounded-xl border border-[#26333B]">
               <span className="text-slate-400 font-semibold shrink-0">Target Mine Context:</span>
               <select
                 value={targetMineId}
                 onChange={(e) => setTargetMineId(e.target.value)}
-                className="flex-1 px-3 py-1.5 bg-slate-900 border border-slate-700 text-xs font-semibold text-white rounded-lg focus:outline-none focus:border-purple-500 cursor-pointer"
+                className="flex-1 px-3 py-1.5 bg-[#12181A] border border-[#26333B] text-xs font-semibold text-[#E8E6E3] rounded-lg focus:outline-none focus:border-tech-teal cursor-pointer"
               >
                 {mines.map((m) => (
                   <option key={m.mineId} value={m.mineId}>
@@ -393,10 +393,10 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
               onDrop={handleDrop}
               onClick={() => fileInputRef.current?.click()}
               className={`relative p-8 border-2 border-dashed rounded-2xl text-center transition-all duration-200 cursor-pointer flex flex-col items-center justify-center space-y-3 ${isDragging
-                ? 'border-purple-400 bg-purple-950/40 shadow-glow-purple scale-[1.01]'
+                ? 'border-tech-teal bg-teal-950/40 shadow-glow-teal scale-[1.01]'
                 : file
                   ? 'border-emerald-500/70 bg-emerald-950/10'
-                  : 'border-slate-700 hover:border-purple-500/80 bg-slate-950/50 hover:bg-slate-950/80'
+                  : 'border-[#26333B] hover:border-tech-teal/80 bg-[#0F1214]/50 hover:bg-[#0F1214]/80'
                 }`}
             >
               <input
@@ -410,17 +410,17 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
               {/* Glowing Icon */}
               <div
                 className={`p-4 rounded-2xl transition-transform ${isDragging
-                  ? 'bg-purple-600 text-white scale-110 shadow-glow-purple animate-bounce'
+                  ? 'bg-tech-teal text-[#0F1214] scale-110 shadow-glow-teal animate-bounce'
                   : file
                     ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
-                    : 'bg-purple-500/10 text-purple-400 border border-purple-500/20'
+                    : 'bg-tech-teal/10 text-tech-teal border border-tech-teal/20'
                   }`}
               >
                 {file ? <FileSpreadsheet className="w-8 h-8" /> : <UploadCloud className="w-8 h-8" />}
               </div>
 
               <div>
-                <p className="text-sm font-bold text-white">
+                <p className="text-sm font-bold text-[#E8E6E3]">
                   {isDragging
                     ? 'Drop CSV dataset now to analyze'
                     : file
@@ -441,7 +441,7 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
                     e.stopPropagation();
                     fileInputRef.current?.click();
                   }}
-                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold rounded-xl border border-slate-700 transition shadow-sm"
+                  className="px-4 py-2 bg-[#12181A] hover:bg-[#1B2226] text-[#E8E6E3] text-xs font-bold rounded-xl border border-[#26333B] transition shadow-sm"
                 >
                   Browse CSV File
                 </button>
@@ -450,15 +450,15 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
 
             {/* Client-Side CSV Preview Panel */}
             {csvPreview && file && (
-              <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-3 animate-fadeIn">
-                <div className="flex items-center justify-between border-b border-slate-800 pb-2 flex-wrap gap-2">
+              <div className="p-4 rounded-2xl bg-[#0F1214]/80 border border-[#26333B] space-y-3 animate-fadeIn">
+                <div className="flex items-center justify-between border-b border-[#26333B] pb-2 flex-wrap gap-2">
                   <div className="flex items-center gap-2">
-                    <Table className="w-4 h-4 text-purple-400" />
-                    <span className="text-xs font-bold text-white">Dataset Structure Preview</span>
-                    <span className="text-[10px] px-2 py-0.5 rounded font-mono bg-slate-900 text-purple-300 border border-slate-700">
+                    <Table className="w-4 h-4 text-tech-teal" />
+                    <span className="text-xs font-bold text-[#E8E6E3]">Dataset Structure Preview</span>
+                    <span className="text-[10px] px-2 py-0.5 rounded font-mono bg-[#161D22] text-tech-teal border border-[#26333B]">
                       {csvPreview.totalRows} Total Records
                     </span>
-                    <span className="text-[10px] px-2 py-0.5 rounded font-mono bg-slate-900 text-slate-400 border border-slate-700">
+                    <span className="text-[10px] px-2 py-0.5 rounded font-mono bg-[#161D22] text-slate-400 border border-[#26333B]">
                       {csvPreview.headers.length} Columns
                     </span>
                   </div>
@@ -466,7 +466,7 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
                   <button
                     type="button"
                     onClick={handleClearFile}
-                    className="text-xs text-red-400 hover:text-red-300 font-semibold flex items-center gap-1 transition"
+                    className="text-xs text-[#DC5F4E] hover:text-red-300 font-semibold flex items-center gap-1 transition"
                   >
                     <Trash2 className="w-3.5 h-3.5" /> Remove File
                   </button>
@@ -477,7 +477,7 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
                   {csvPreview.headers.map((h, i) => (
                     <span
                       key={i}
-                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-900 text-slate-300 border border-slate-800"
+                      className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#161D22] text-slate-300 border border-[#26333B]"
                     >
                       {h}
                     </span>
@@ -485,9 +485,9 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
                 </div>
 
                 {/* Table Preview */}
-                <div className="overflow-x-auto rounded-xl border border-slate-800">
+                <div className="overflow-x-auto rounded-xl border border-[#26333B]">
                   <table className="w-full text-[11px] text-left">
-                    <thead className="bg-slate-900/90 text-slate-400 uppercase font-mono text-[10px] border-b border-slate-800">
+                    <thead className="bg-[#12181A] text-slate-400 uppercase font-mono text-[10px] border-b border-[#26333B]">
                       <tr>
                         {csvPreview.headers.slice(0, 7).map((h, i) => (
                           <th key={i} className="px-3 py-2 font-bold whitespace-nowrap">
@@ -496,9 +496,9 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
                         ))}
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-800/60 bg-slate-950/50">
+                    <tbody className="divide-y divide-[#26333B]/60 bg-[#0F1214]/50">
                       {csvPreview.rows.map((row, rIdx) => (
-                        <tr key={rIdx} className="hover:bg-slate-900/40">
+                        <tr key={rIdx} className="hover:bg-[#161D22]">
                           {row.slice(0, 7).map((cell, cIdx) => (
                             <td key={cIdx} className="px-3 py-1.5 whitespace-nowrap text-slate-300 font-mono">
                               {cell}
@@ -524,7 +524,7 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
                     type="button"
                     onClick={handleClearFile}
                     disabled={uploading}
-                    className="py-2.5 px-4 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-xl transition"
+                    className="py-2.5 px-4 bg-[#12181A] hover:bg-[#1B2226] text-slate-300 text-xs font-semibold rounded-xl transition"
                   >
                     Clear
                   </button>
@@ -532,15 +532,15 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
                 <button
                   onClick={activeTab === 'drilling' ? handleUploadDrilling : handleUploadProduction}
                   disabled={!file || uploading}
-                  className="py-2.5 px-6 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold rounded-xl shadow-glow-purple transition disabled:opacity-50 flex items-center gap-2 cursor-pointer"
+                  className="py-2.5 px-6 bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-[#0F1214] text-xs font-extrabold rounded-xl shadow-glow-teal transition disabled:opacity-50 flex items-center gap-2 cursor-pointer"
                 >
                   {uploading ? (
                     <>
-                      <RefreshCw className="w-4 h-4 animate-spin" /> Ingesting & Validating Dataset...
+                      <RefreshCw className="w-4 h-4 animate-spin text-[#0F1214]" /> Ingesting & Validating Dataset...
                     </>
                   ) : (
                     <>
-                      <CheckCircle2 className="w-4 h-4" /> Parse & Ingest Records
+                      <CheckCircle2 className="w-4 h-4 text-[#0F1214]" /> Parse & Ingest Records
                     </>
                   )}
                 </button>
@@ -591,17 +591,17 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
 
             {/* Error Message */}
             {uploadError && (
-              <div className="p-4 rounded-xl bg-red-950/50 border border-red-800 text-xs text-red-300 flex items-center gap-2 animate-fadeIn">
-                <AlertTriangle className="w-4 h-4 text-red-400 shrink-0" />
+              <div className="p-4 rounded-xl bg-red-950/50 border border-red-800 text-xs text-[#DC5F4E] flex items-center gap-2 animate-fadeIn">
+                <AlertTriangle className="w-4 h-4 text-[#DC5F4E] shrink-0" />
                 <span>{uploadError}</span>
               </div>
             )}
           </div>
 
           {/* Right 1 Col: Schema Guidelines & Sample Templates */}
-          <div className="glass-panel rounded-2xl p-6 border border-slate-800 space-y-5">
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-purple-400" />
+          <div className="glass-panel rounded-2xl p-6 border border-[#26333B] bg-[#161D22]/85 space-y-5">
+            <h3 className="text-sm font-bold text-[#E8E6E3] uppercase tracking-wider flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-tech-teal" />
               Required CSV Schema Fields
             </h3>
 
@@ -610,7 +610,7 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
                 <p className="text-slate-300 text-[11px] leading-relaxed">
                   Borehole CSV must contain the following core assay columns:
                 </p>
-                <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 font-mono text-[11px] text-purple-300 space-y-1">
+                <div className="p-3 rounded-xl bg-[#0F1214]/80 border border-[#26333B] font-mono text-[11px] text-tech-teal space-y-1">
                   <p>boreholeId (string)</p>
                   <p>collarLatitude, collarLongitude (float)</p>
                   <p>totalDepthMeters (float)</p>
@@ -627,7 +627,7 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
                 <p className="text-slate-300 text-[11px] leading-relaxed">
                   Monthly Production CSV must include operational variance columns:
                 </p>
-                <div className="p-3 rounded-xl bg-slate-950/80 border border-slate-800 font-mono text-[11px] text-purple-300 space-y-1">
+                <div className="p-3 rounded-xl bg-[#0F1214]/80 border border-[#26333B] font-mono text-[11px] text-tech-teal space-y-1">
                   <p>date (YYYY-MM)</p>
                   <p>targetTonnes (float)</p>
                   <p>actualTonnes (float)</p>
@@ -641,16 +641,16 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
             )}
 
             {/* 1-Click Demonstration Datasets */}
-            <div className="pt-3 border-t border-slate-800 space-y-2.5">
+            <div className="pt-3 border-t border-[#26333B] space-y-2.5">
               <span className="text-[11px] font-bold text-slate-300 block">
                 Sample Datasets with Instant Load & Ingest:
               </span>
               <div className="space-y-2">
                 {/* Drilling Sample */}
-                <div className="p-3 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2">
+                <div className="p-3 rounded-xl bg-[#12181A] border border-[#26333B] space-y-2">
                   <div className="flex items-center justify-between text-xs font-semibold text-slate-200">
                     <span className="flex items-center gap-1.5">
-                      <Database className="w-3.5 h-3.5 text-purple-400" /> Balaghat Deep Core Assays (14 BH)
+                      <Database className="w-3.5 h-3.5 text-tech-teal" /> Balaghat Deep Core Assays (14 BH)
                     </span>
                     <a
                       href="/sample-data/drilling_logs_balaghat_deep.csv"
@@ -668,7 +668,7 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
                         setActiveTab('drilling');
                         loadSampleFile('drilling', false);
                       }}
-                      className="flex-1 py-1.5 px-2 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-[11px] font-semibold rounded-lg border border-slate-700 transition text-center"
+                      className="flex-1 py-1.5 px-2 bg-[#161D22] hover:bg-[#1B2226] text-slate-300 hover:text-[#E8E6E3] text-[11px] font-semibold rounded-lg border border-[#26333B] transition text-center"
                     >
                       Load into Uploader
                     </button>
@@ -678,7 +678,7 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
                         setActiveTab('drilling');
                         loadSampleFile('drilling', true);
                       }}
-                      className="py-1.5 px-3 bg-purple-600 hover:bg-purple-500 text-white text-[11px] font-bold rounded-lg shadow-glow-purple transition"
+                      className="py-1.5 px-3 bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-[#0F1214] text-[11px] font-extrabold rounded-lg shadow-glow-teal transition"
                     >
                       ⚡ Ingest Now
                     </button>
@@ -686,10 +686,10 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
                 </div>
 
                 {/* Production Sample */}
-                <div className="p-3 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2">
+                <div className="p-3 rounded-xl bg-[#12181A] border border-[#26333B] space-y-2">
                   <div className="flex items-center justify-between text-xs font-semibold text-slate-200">
                     <span className="flex items-center gap-1.5">
-                      <FileSpreadsheet className="w-3.5 h-3.5 text-blue-400" /> MOIL Production Logs (24 Months)
+                      <FileSpreadsheet className="w-3.5 h-3.5 text-tech-teal" /> MOIL Production Logs (24 Months)
                     </span>
                     <a
                       href="/sample-data/production_records_2025_2026.csv"
@@ -707,7 +707,7 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
                         setActiveTab('production');
                         loadSampleFile('production', false);
                       }}
-                      className="flex-1 py-1.5 px-2 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-[11px] font-semibold rounded-lg border border-slate-700 transition text-center"
+                      className="flex-1 py-1.5 px-2 bg-[#161D22] hover:bg-[#1B2226] text-slate-300 hover:text-[#E8E6E3] text-[11px] font-semibold rounded-lg border border-[#26333B] transition text-center"
                     >
                       Load into Uploader
                     </button>
@@ -717,7 +717,7 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
                         setActiveTab('production');
                         loadSampleFile('production', true);
                       }}
-                      className="py-1.5 px-3 bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-bold rounded-lg transition"
+                      className="py-1.5 px-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-[#0F1214] text-[11px] font-extrabold rounded-lg transition"
                     >
                       ⚡ Ingest Now
                     </button>
@@ -732,11 +732,11 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
       {/* Tab 3: Satellite Telemetry Ingestion Simulator */}
       {activeTab === 'satellite' && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 glass-panel rounded-2xl p-6 border border-slate-800 space-y-6">
+          <div className="lg:col-span-2 glass-panel rounded-2xl p-6 border border-[#26333B] bg-[#161D22]/85 space-y-6">
             <div className="flex items-center justify-between flex-wrap gap-2">
               <div>
-                <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-                  <Satellite className="w-4 h-4 text-purple-400 animate-pulse" /> Copernicus Sentinel-2 & NASA MODIS Orbit Synchronizer
+                <h3 className="text-sm font-bold text-[#E8E6E3] uppercase tracking-wider flex items-center gap-2">
+                  <Satellite className="w-4 h-4 text-tech-teal animate-pulse" /> Copernicus Sentinel-2 & NASA MODIS Orbit Synchronizer
                 </h3>
                 <p className="text-xs text-slate-400 mt-0.5">
                   Fetch latest multispectral Earth Observation proxies (NDVI, soil moisture saturation %, thermal LST)
@@ -747,7 +747,7 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
               <select
                 value={targetMineId}
                 onChange={(e) => setTargetMineId(e.target.value)}
-                className="px-3 py-1.5 bg-slate-900 border border-slate-700 text-xs font-semibold text-white rounded-lg focus:outline-none focus:border-purple-500 cursor-pointer"
+                className="px-3 py-1.5 bg-[#12181A] border border-[#26333B] text-xs font-semibold text-[#E8E6E3] rounded-lg focus:outline-none focus:border-tech-teal cursor-pointer"
               >
                 {mines.map((m) => (
                   <option key={m.mineId} value={m.mineId}>
@@ -758,7 +758,7 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
             </div>
 
             {/* Sentinel-2 Surface Scanning Visualizer */}
-            <div className="relative rounded-2xl overflow-hidden border border-purple-500/50 shadow-2xl bg-slate-950 group">
+            <div className="relative rounded-2xl overflow-hidden border border-tech-teal/40 shadow-2xl bg-[#0F1214] group">
               <img
                 src="/images/sentinel-2-surface-scan.jpg"
                 alt="ESA Copernicus Sentinel-2 multispectral scanner projecting active telemetry grid onto open-cast manganese mine"
@@ -766,15 +766,15 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
               />
               
               {/* Dynamic Laser Scanning Line Animation */}
-              <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-scanline pointer-events-none shadow-[0_0_20px_#22d3ee]" />
+              <div className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-teal-400 to-transparent animate-scanline pointer-events-none shadow-[0_0_20px_#2DD4BF]" />
 
               {/* Top HUD Telemetry Badges */}
               <div className="absolute top-3 left-3 right-3 flex items-center justify-between gap-2 flex-wrap">
                 <div className="flex items-center gap-2">
-                  <span className="px-3 py-1 rounded-xl bg-slate-950/90 text-cyan-300 font-mono text-[11px] font-bold border border-cyan-500/60 backdrop-blur-md flex items-center gap-1.5 shadow-lg">
-                    <Satellite className="w-3.5 h-3.5 text-cyan-400 animate-pulse" /> Sentinel-2A MSI • 10m Spatial Res
+                  <span className="px-3 py-1 rounded-xl bg-[#0F1214]/90 text-tech-teal font-mono text-[11px] font-bold border border-tech-teal/60 backdrop-blur-md flex items-center gap-1.5 shadow-lg">
+                    <Satellite className="w-3.5 h-3.5 text-tech-teal animate-pulse" /> Sentinel-2A MSI • 10m Spatial Res
                   </span>
-                  <span className="px-2.5 py-1 rounded-xl bg-slate-950/80 text-purple-300 font-mono text-[10px] border border-purple-500/40 backdrop-blur-md">
+                  <span className="px-2.5 py-1 rounded-xl bg-[#0F1214]/80 text-manganese-300 font-mono text-[10px] border border-manganese-500/40 backdrop-blur-md">
                     Swath: 290 km • SSO Orbit
                   </span>
                 </div>
@@ -785,7 +785,7 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
               </div>
 
               {/* Bottom Interactive Scanner Overlay */}
-              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-slate-950 via-slate-950/90 to-transparent p-4 pt-8 flex items-center justify-between flex-wrap gap-2">
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-[#0F1214] via-[#0F1214]/90 to-transparent p-4 pt-8 flex items-center justify-between flex-wrap gap-2">
                 <div>
                   <span className="text-white font-bold text-xs block">Active Surface Overpass • {mines.find(m => m.mineId === targetMineId)?.name || 'Balaghat Mine'}</span>
                   <span className="text-[11px] text-slate-400">Multispectral bands B04 (Red), B08 (NIR), and SWIR active</span>
@@ -794,9 +794,9 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
                 <button
                   onClick={handleTriggerSatelliteSync}
                   disabled={syncingSatellite}
-                  className="btn-shimmer px-5 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold rounded-xl shadow-glow-purple transition flex items-center gap-2 disabled:opacity-50 cursor-pointer"
+                  className="btn-shimmer px-5 py-2 bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-[#0F1214] text-xs font-extrabold rounded-xl shadow-glow-teal transition flex items-center gap-2 disabled:opacity-50 cursor-pointer"
                 >
-                  <RefreshCw className={`w-3.5 h-3.5 ${syncingSatellite ? 'animate-spin' : ''}`} />
+                  <RefreshCw className={`w-3.5 h-3.5 text-[#0F1214] ${syncingSatellite ? 'animate-spin' : ''}`} />
                   {syncingSatellite ? 'Acquiring Orbit Pass...' : 'Trigger Live Sentinel-2 Sync'}
                 </button>
               </div>
@@ -804,11 +804,11 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
 
             {/* Satellite Result Output Card */}
             {satelliteResult && (
-              <div className="p-5 rounded-2xl bg-slate-950/80 border border-purple-500/40 space-y-4 animate-fadeIn">
-                <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+              <div className="p-5 rounded-2xl bg-[#0F1214]/80 border border-tech-teal/40 space-y-4 animate-fadeIn">
+                <div className="flex items-center justify-between border-b border-[#26333B] pb-3">
                   <div className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                    <span className="text-xs font-bold text-white">{satelliteResult.message}</span>
+                    <span className="text-xs font-bold text-[#E8E6E3]">{satelliteResult.message}</span>
                   </div>
                   <span className="text-[10px] text-slate-400 font-mono">
                     Sensor: {satelliteResult.telemetry.sensor}
@@ -816,27 +816,27 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-center text-xs">
-                  <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 card-hover">
+                  <div className="p-3 rounded-xl bg-[#161D22] border border-[#26333B] card-hover">
                     <span className="text-[10px] text-slate-400 block font-mono">NDVI Index</span>
-                    <span className="text-lg font-bold text-purple-400 font-mono">{satelliteResult.telemetry.ndvi}</span>
+                    <span className="text-lg font-bold text-tech-teal font-mono">{satelliteResult.telemetry.ndvi}</span>
                   </div>
-                  <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 card-hover">
+                  <div className="p-3 rounded-xl bg-[#161D22] border border-[#26333B] card-hover">
                     <span className="text-[10px] text-slate-400 block font-mono">Soil Moisture</span>
-                    <span className="text-lg font-bold text-blue-400 font-mono">{satelliteResult.telemetry.soil_moisture_pct}%</span>
+                    <span className="text-lg font-bold text-tech-teal font-mono">{satelliteResult.telemetry.soil_moisture_pct}%</span>
                   </div>
-                  <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 card-hover">
+                  <div className="p-3 rounded-xl bg-[#161D22] border border-[#26333B] card-hover">
                     <span className="text-[10px] text-slate-400 block font-mono">Precipitation</span>
                     <span className="text-lg font-bold text-amber-400 font-mono">{satelliteResult.telemetry.precipitation_rate_mm} mm</span>
                   </div>
-                  <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 card-hover">
+                  <div className="p-3 rounded-xl bg-[#161D22] border border-[#26333B] card-hover">
                     <span className="text-[10px] text-slate-400 block font-mono">Surface Temp</span>
                     <span className="text-lg font-bold text-slate-200 font-mono">{satelliteResult.telemetry.land_surface_temp_c} °C</span>
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-slate-900 border border-slate-800 text-xs space-y-1">
+                <div className="p-3.5 rounded-xl bg-[#161D22] border border-[#26333B] text-xs space-y-1">
                   <p className="text-slate-300">
-                    <span className="font-bold text-white">Pit Slope Stability Advisory: </span>
+                    <span className="font-bold text-[#E8E6E3]">Pit Slope Stability Advisory: </span>
                     <span className="text-amber-400 font-semibold">{satelliteResult.telemetry.geotechnical_pit_stability_risk}</span>
                   </p>
                   <p className="text-slate-400 text-[11px]">
@@ -849,21 +849,21 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
           </div>
 
           {/* Right 1 Col: Satellite Proxy Mapping Explanation & Orbit Pass Image */}
-          <div className="glass-panel rounded-2xl p-6 border border-slate-800 space-y-5">
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-              <Globe2 className="w-4 h-4 text-purple-400" />
+          <div className="glass-panel rounded-2xl p-6 border border-[#26333B] bg-[#161D22]/85 space-y-5">
+            <h3 className="text-sm font-bold text-[#E8E6E3] uppercase tracking-wider flex items-center gap-2">
+              <Globe2 className="w-4 h-4 text-tech-teal" />
               Earth Observation Telemetry
             </h3>
 
             {/* Orbit Pass Image */}
-            <div className="relative rounded-xl overflow-hidden border border-slate-700/80 shadow-md">
+            <div className="relative rounded-xl overflow-hidden border border-[#26333B] shadow-md">
               <img
                 src="/images/sentinel-2-multispectral-orbit.jpg"
                 alt="Copernicus Sentinel-2 orbital multi-spectral pass over mining terrain"
                 className="w-full h-36 object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-transparent p-2.5 flex items-end">
-                <span className="text-[10px] font-mono font-bold text-purple-300">Central India Mining Corridor Pass</span>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0F1214]/90 via-transparent to-transparent p-2.5 flex items-end">
+                <span className="text-[10px] font-mono font-bold text-tech-teal">Central India Mining Corridor Pass</span>
               </div>
             </div>
 
@@ -872,21 +872,21 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
             </p>
 
             <div className="space-y-3 text-xs">
-              <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800">
-                <span className="font-bold text-purple-400 block mb-1">NDVI Vegetation Index (B04/B08)</span>
+              <div className="p-3 rounded-xl bg-[#0F1214]/60 border border-[#26333B]">
+                <span className="font-bold text-tech-teal block mb-1">NDVI Vegetation Index (B04/B08)</span>
                 <p className="text-[11px] text-slate-400">
                   Monitors vegetative loss at quarry bounds, indicating active ground clearing and overburden spread.
                 </p>
               </div>
 
-              <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800">
-                <span className="font-bold text-blue-400 block mb-1">Soil Moisture Saturation %</span>
+              <div className="p-3 rounded-xl bg-[#0F1214]/60 border border-[#26333B]">
+                <span className="font-bold text-tech-teal block mb-1">Soil Moisture Saturation %</span>
                 <p className="text-[11px] text-slate-400">
                   Radar soil proxy alerts mine planners to saturated bench slopes before deep-hole charging.
                 </p>
               </div>
 
-              <div className="p-3 rounded-xl bg-slate-950/60 border border-slate-800">
+              <div className="p-3 rounded-xl bg-[#0F1214]/60 border border-[#26333B]">
                 <span className="font-bold text-amber-400 block mb-1">Land Surface Temp (LST)</span>
                 <p className="text-[11px] text-slate-400">
                   Identifies thermal anomalies around tailing sumps and underground ventilation air shafts.

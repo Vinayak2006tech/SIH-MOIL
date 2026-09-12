@@ -4,20 +4,15 @@ import {
   AlertTriangle,
   Sliders,
   Sparkles,
-  Info,
   ChevronDown,
   ChevronUp,
   Cpu,
   CloudRain,
-  Truck,
-  Layers,
-  ArrowRight,
-  ShieldCheck,
-  CheckCircle2
+  Truck
 } from 'lucide-react';
 import { useMine } from '../context/MineContext';
 import { api } from '../services/api';
-import type { ShortfallRisk, RiskLevel } from '../types';
+import type { RiskLevel } from '../types';
 import { RiskBadge } from '../components/common/RiskBadge';
 import { ProvenanceBadge } from '../components/common/ProvenanceBadge';
 import { LoadingSkeleton } from '../components/common/LoadingSkeleton';
@@ -90,10 +85,10 @@ export const ShortfallRiskPage: React.FC = () => {
   return (
     <div className="p-6 space-y-6 animate-fadeIn">
       {/* Top Header Card */}
-      <div className="glass-panel p-6 rounded-2xl border border-slate-800 flex items-start justify-between flex-wrap gap-4">
+      <div className="glass-panel p-6 rounded-2xl border border-[#26333B] flex items-start justify-between flex-wrap gap-4">
         <div>
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-xs font-mono uppercase font-bold text-purple-400">
+            <span className="text-xs font-mono uppercase font-bold text-teal-400">
               Scikit-Learn ML Model / Time-Series Forecasting
             </span>
             <ProvenanceBadge
@@ -107,7 +102,7 @@ export const ShortfallRiskPage: React.FC = () => {
               sourceName="IMD Rainfall Seasonality"
             />
           </div>
-          <h2 className="text-xl font-bold text-white mt-1">
+          <h2 className="text-xl font-bold text-[#E8E6E3] mt-1 font-sans">
             Manganese Production Shortfall & Probabilistic Risk Engine
           </h2>
           <p className="text-xs text-slate-400 mt-1 max-w-2xl">
@@ -118,7 +113,7 @@ export const ShortfallRiskPage: React.FC = () => {
         <div className="flex items-center gap-3">
           <div className="text-right">
             <span className="text-xs text-slate-400 block font-mono">Total Monitored Leases</span>
-            <span className="text-lg font-bold text-white">{risks.length} Mines</span>
+            <span className="text-lg font-bold text-[#E8E6E3] font-sans">{risks.length} Mines</span>
           </div>
         </div>
       </div>
@@ -127,14 +122,14 @@ export const ShortfallRiskPage: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left 2 Cols: Shortfall Event Risk Table & Feature Importance */}
         <div className="lg:col-span-2 space-y-4">
-          <div className="glass-panel rounded-2xl border border-slate-800 overflow-hidden">
-            <div className="p-4 border-b border-slate-800 flex items-center justify-between">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-white">
+          <div className="glass-panel rounded-2xl border border-[#26333B] overflow-hidden">
+            <div className="p-4 border-b border-[#26333B] flex items-center justify-between">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-[#E8E6E3] font-mono">
                 Ranked Shortfall Risk Assessments (Next 30-90 Days)
               </h3>
             </div>
 
-            <div className="divide-y divide-slate-800/60">
+            <div className="divide-y divide-[#26333B]/60">
               {risks.map((risk) => {
                 const isExpanded = expandedMineId === risk.mineId;
                 const h30 = risk.horizons?.[0] || risk.forecast_horizons?.[0];
@@ -157,14 +152,14 @@ export const ShortfallRiskPage: React.FC = () => {
                     {/* Collapsible Row Header */}
                     <div
                       onClick={() => setExpandedMineId(isExpanded ? null : (risk.mineId || risk.mine_id))}
-                      className="p-4 hover:bg-slate-800/40 cursor-pointer flex items-center justify-between gap-4"
+                      className="p-4 hover:bg-[#1B2226]/50 cursor-pointer flex items-center justify-between gap-4"
                     >
                       <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-lg bg-slate-900 border border-slate-800 text-purple-400">
+                        <div className="p-2 rounded-lg bg-[#0F1214] border border-[#26333B] text-teal-400">
                           <TrendingDown className="w-4 h-4" />
                         </div>
                         <div>
-                          <h4 className="text-sm font-bold text-white">{risk.mineName || risk.mine_name}</h4>
+                          <h4 className="text-sm font-bold text-[#E8E6E3] font-sans">{risk.mineName || risk.mine_name}</h4>
                           <p className="text-xs text-slate-400">
                             Bottleneck: <span className="text-slate-300 font-semibold">{bottleneckText}</span>
                           </p>
@@ -173,10 +168,10 @@ export const ShortfallRiskPage: React.FC = () => {
 
                       <div className="flex items-center gap-4">
                         <div className="text-right">
-                          <span className="text-xs font-bold text-red-400 font-mono block">
+                          <span className="text-xs font-bold text-[#DC5F4E] font-mono block">
                             -{h30 ? ((h30.predicted_shortfall_tonnes ?? h30.shortfall_tonnes ?? 3500)).toLocaleString() : '3,500'} t
                           </span>
-                          <span className="text-[10px] text-slate-400">
+                          <span className="text-[10px] text-slate-400 font-mono">
                             ₹{revenueRisk} Cr at Risk
                           </span>
                         </div>
@@ -193,11 +188,11 @@ export const ShortfallRiskPage: React.FC = () => {
 
                     {/* Expanded Detail Panel */}
                     {isExpanded && (
-                      <div className="p-6 bg-slate-950/60 border-t border-slate-800/80 space-y-6 animate-fadeIn">
+                      <div className="p-6 bg-[#0F1214]/80 border-t border-[#26333B] space-y-6 animate-fadeIn">
                         {/* Explain this Prediction Text Box */}
-                        <div className="p-4 rounded-xl bg-slate-900/80 border border-purple-500/20 space-y-2">
-                          <div className="flex items-center gap-2 text-xs font-bold text-purple-300">
-                            <Sparkles className="w-4 h-4 text-purple-400" />
+                        <div className="p-4 rounded-xl bg-[#161D22] border border-teal-500/30 space-y-2">
+                          <div className="flex items-center gap-2 text-xs font-bold text-teal-300 font-sans">
+                            <Sparkles className="w-4 h-4 text-teal-400" />
                             <span>Explain This Prediction (AI Synthesis)</span>
                           </div>
                           <p className="text-xs text-slate-300 leading-relaxed">
@@ -208,7 +203,7 @@ export const ShortfallRiskPage: React.FC = () => {
                         {/* SHAP Feature Importance Waterfall Chart */}
                         {featItems.length > 0 && (
                           <div>
-                            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">
+                            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 font-mono">
                               Top Contributing Risk Factors (Feature Importance)
                             </h4>
                             <div className="space-y-2.5">
@@ -216,11 +211,11 @@ export const ShortfallRiskPage: React.FC = () => {
                                 <div key={idx} className="space-y-1">
                                   <div className="flex justify-between text-xs">
                                     <span className="font-semibold text-slate-200">{feat.feature}</span>
-                                    <span className="font-mono font-bold text-red-400">+{feat.impact_pct}% Risk</span>
+                                    <span className="font-mono font-bold text-[#DC5F4E]">+{feat.impact_pct}% Risk</span>
                                   </div>
-                                  <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                                  <div className="w-full h-2 bg-[#161D22] border border-[#26333B] rounded-full overflow-hidden">
                                     <div
-                                      className="h-full rounded-full bg-gradient-to-r from-amber-500 to-red-500"
+                                      className="h-full rounded-full bg-gradient-to-r from-amber-500 to-[#DC5F4E]"
                                       style={{ width: `${Math.min(100, (feat.impact_pct || 20) * 2)}%` }}
                                     />
                                   </div>
@@ -236,7 +231,7 @@ export const ShortfallRiskPage: React.FC = () => {
                         {/* Forecast Horizon Cards */}
                         {horizonsList.length > 0 && (
                           <div>
-                            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">
+                            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 font-mono">
                               Multi-Horizon Forecast Interval (Tonnes)
                             </h4>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -249,18 +244,18 @@ export const ShortfallRiskPage: React.FC = () => {
                                 return (
                                   <div
                                     key={h.horizon_days}
-                                    className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 text-center"
+                                    className="p-3.5 rounded-xl bg-[#161D22] border border-[#26333B] text-center"
                                   >
-                                    <span className="text-[10px] font-bold text-purple-400 uppercase font-mono block">
+                                    <span className="text-[10px] font-bold text-teal-400 uppercase font-mono block">
                                       {h.horizon_days} Days Horizon
                                     </span>
-                                    <span className="text-base font-extrabold text-white font-mono block mt-1">
+                                    <span className="text-base font-extrabold text-[#E8E6E3] font-mono block mt-1">
                                       {prodTonnes.toLocaleString()} t
                                     </span>
-                                    <span className="text-[10px] text-red-400 block font-mono">
+                                    <span className="text-[10px] text-[#DC5F4E] block font-mono">
                                       Shortfall: -{shortTonnes.toLocaleString()} t
                                     </span>
-                                    <span className="text-[9px] text-slate-400 block mt-1">
+                                    <span className="text-[9px] text-slate-400 block mt-1 font-mono">
                                       Band: {lower.toLocaleString()} - {upper.toLocaleString()} t
                                     </span>
                                   </div>
@@ -279,10 +274,10 @@ export const ShortfallRiskPage: React.FC = () => {
         </div>
 
         {/* Right 1 Col: Dynamic "What-If" Scenario Simulator */}
-        <div className="glass-panel rounded-2xl p-6 border border-slate-800 space-y-6">
+        <div className="glass-panel rounded-2xl p-6 border border-[#26333B] space-y-6">
           <div>
-            <div className="flex items-center gap-2 text-sm font-bold text-white uppercase tracking-wider">
-              <Sliders className="w-4 h-4 text-purple-400" /> Dynamic "What-If" Simulator
+            <div className="flex items-center gap-2 text-sm font-bold text-[#E8E6E3] uppercase tracking-wider font-mono">
+              <Sliders className="w-4 h-4 text-teal-400" /> Dynamic "What-If" Simulator
             </div>
             <p className="text-xs text-slate-400 mt-1">
               Adjust operational levers in real time to simulate shortfall risk reduction.
@@ -293,9 +288,9 @@ export const ShortfallRiskPage: React.FC = () => {
           <div className="space-y-2">
             <div className="flex justify-between text-xs">
               <span className="text-slate-300 font-semibold flex items-center gap-1.5">
-                <Cpu className="w-3.5 h-3.5 text-purple-400" /> Fleet Uptime
+                <Cpu className="w-3.5 h-3.5 text-teal-400" /> Fleet Uptime
               </span>
-              <span className="font-bold text-white font-mono">{simUptime}%</span>
+              <span className="font-bold text-[#E8E6E3] font-mono">{simUptime}%</span>
             </div>
             <input
               type="range"
@@ -305,7 +300,7 @@ export const ShortfallRiskPage: React.FC = () => {
               value={simUptime}
               onChange={(e) => setSimUptime(Number(e.target.value))}
               aria-label="Fleet Uptime Percentage"
-              className="w-full accent-purple-500 cursor-pointer"
+              className="w-full accent-teal-400 cursor-pointer"
             />
             <div className="flex justify-between text-[10px] text-slate-400 font-mono">
               <span>50% (High Breakdown)</span>
@@ -317,9 +312,9 @@ export const ShortfallRiskPage: React.FC = () => {
           <div className="space-y-2">
             <div className="flex justify-between text-xs">
               <span className="text-slate-300 font-semibold flex items-center gap-1.5">
-                <CloudRain className="w-3.5 h-3.5 text-blue-400" /> 30d Rainfall Forecast
+                <CloudRain className="w-3.5 h-3.5 text-cyan-400" /> 30d Rainfall Forecast
               </span>
-              <span className="font-bold text-white font-mono">{simRainfall} mm</span>
+              <span className="font-bold text-[#E8E6E3] font-mono">{simRainfall} mm</span>
             </div>
             <input
               type="range"
@@ -329,7 +324,7 @@ export const ShortfallRiskPage: React.FC = () => {
               value={simRainfall}
               onChange={(e) => setSimRainfall(Number(e.target.value))}
               aria-label="30-day Rainfall Forecast in mm"
-              className="w-full accent-blue-500 cursor-pointer"
+              className="w-full accent-cyan-400 cursor-pointer"
             />
             <div className="flex justify-between text-[10px] text-slate-400 font-mono">
               <span>0 mm (Dry Season)</span>
@@ -343,7 +338,7 @@ export const ShortfallRiskPage: React.FC = () => {
               <span className="text-slate-300 font-semibold flex items-center gap-1.5">
                 <Truck className="w-3.5 h-3.5 text-amber-400" /> Active Dumper Fleet
               </span>
-              <span className="font-bold text-white font-mono">{simDumpers} Trucks</span>
+              <span className="font-bold text-[#E8E6E3] font-mono">{simDumpers} Trucks</span>
             </div>
             <input
               type="range"
@@ -353,7 +348,7 @@ export const ShortfallRiskPage: React.FC = () => {
               value={simDumpers}
               onChange={(e) => setSimDumpers(Number(e.target.value))}
               aria-label="Active Dumper Fleet Count"
-              className="w-full accent-amber-500 cursor-pointer"
+              className="w-full accent-amber-400 cursor-pointer"
             />
             <div className="flex justify-between text-[10px] text-slate-400 font-mono">
               <span>8 Dumpers (Deficit)</span>
@@ -365,17 +360,17 @@ export const ShortfallRiskPage: React.FC = () => {
           <button
             onClick={handleRunSimulation}
             disabled={simulating}
-            className="w-full py-3 px-4 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold rounded-xl shadow-glow-purple transition flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full py-3 px-4 bg-gradient-to-r from-[#6B5B95] to-[#0D9488] hover:from-[#7E69AB] hover:to-[#2DD4BF] text-white text-xs font-bold rounded-xl shadow-glow-manganese transition flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer font-sans"
           >
-            <Sparkles className="w-4 h-4" />
+            <Sparkles className="w-4 h-4 text-teal-300" />
             {simulating ? 'Computing ML Regression Model...' : 'Simulate Scenario Impact'}
           </button>
 
           {/* Simulation Output Card */}
           {simulationResult && simulationResult.simulation && (
-            <div className="p-4 rounded-xl bg-slate-950/80 border border-purple-500/40 space-y-3 animate-fadeIn">
-              <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-                <span className="text-xs font-bold text-white">Recalculated Outcome</span>
+            <div className="p-4 rounded-xl bg-[#0F1214] border border-teal-500/40 space-y-3 animate-fadeIn">
+              <div className="flex items-center justify-between border-b border-[#26333B] pb-2">
+                <span className="text-xs font-bold text-[#E8E6E3] font-sans">Recalculated Outcome</span>
                 <RiskBadge level={simulationResult.simulation.overall_risk_level || simulationResult.simulation.riskLevel || 'MODERATE'} size="sm" />
               </div>
 
@@ -392,13 +387,13 @@ export const ShortfallRiskPage: React.FC = () => {
                 </div>
                 <div className="flex justify-between">
                   <span className="text-slate-400">Revenue at Risk:</span>
-                  <span className="text-red-400 font-bold">
+                  <span className="text-[#DC5F4E] font-bold">
                     ₹{simulationResult.simulation.estimated_revenue_risk_inr_crores ?? 2.4} Cr
                   </span>
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-slate-800 text-[11px] text-slate-300">
+              <div className="pt-2 border-t border-[#26333B] text-[11px] text-slate-300">
                 <p className="font-sans">
                   {simulationResult.simulation.plain_language_explanation || simulationResult.simulation.aiExplanation}
                 </p>

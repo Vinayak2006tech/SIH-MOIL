@@ -12,24 +12,27 @@
       "ALL"
     ],
     "isGoogleAuth": false,
-    "lastLogin": "2026-09-09T17:58:37.895Z",
-    "updatedAt": "2026-09-09T17:58:37.957Z"
+    "lastLogin": "2026-09-12T06:42:35.199Z",
+    "updatedAt": "2026-09-12T06:42:35.457Z"
   },
   {
-    "_id": "usr-admin-02",
-    "name": "MOIL System Administrator",
+    "_id": "6aa19ce6cde598854cfa63da",
     "email": "admin@moil.gov.in",
-    "passwordHash": "$2a$10$tZ2Pkn8Fp0qXGZomv5v4EekH1lV7f6E8bXUuK1UfX4P9b4F7G0GOm",
-    "role": "ADMIN",
-    "status": "APPROVED",
-    "emailVerified": true,
+    "__v": 0,
+    "approvedAt": "2026-01-01T00:00:00.000Z",
+    "createdAt": "2026-09-09T17:52:38.270Z",
     "department": "Central IT & Mine Safety Directorate",
+    "emailVerified": true,
+    "isGoogleAuth": false,
     "mineAccess": [
       "ALL"
     ],
-    "isGoogleAuth": false,
-    "createdAt": "2026-01-01T00:00:00.000Z",
-    "approvedAt": "2026-01-01T00:00:00.000Z"
+    "name": "MOIL System Administrator",
+    "passwordHash": "$2a$10$UT1PJOIakY0JWGNihHe0G.cJ3ucSRzs5Pb8j7ncFJUDV6ZS4g49ze",
+    "role": "ADMIN",
+    "status": "APPROVED",
+    "updatedAt": "2026-09-09T17:59:15.176Z",
+    "lastLogin": "2026-09-09T17:59:15.118Z"
   },
   {
     "_id": "6aa06c49cde598854cfa5459",
@@ -42,7 +45,7 @@
     "department": "Mine Planning & Operations Directorate",
     "emailVerified": true,
     "isGoogleAuth": false,
-    "lastLogin": "2026-09-09T17:54:49.757Z",
+    "lastLogin": "2026-09-09T17:59:15.310Z",
     "mineAccess": [
       "ALL"
     ],
@@ -54,7 +57,7 @@
     "status": "APPROVED",
     "suspendedAt": null,
     "suspensionReason": null,
-    "updatedAt": "2026-09-09T17:54:49.810Z"
+    "updatedAt": "2026-09-09T17:59:15.367Z"
   },
   {
     "_id": "6aa06c49cde598854cfa545c",
@@ -71,7 +74,7 @@
     "passwordHash": "$2a$10$eShm1wQ54bvpI8QxviDrc.b1E2sncyGxlGaAeZzcS0eqES2zPtNOu",
     "role": "ADMIN",
     "status": "APPROVED",
-    "updatedAt": "2026-09-09T17:54:50.006Z",
+    "updatedAt": "2026-09-09T17:59:15.564Z",
     "activationToken": "c153e9da8f8bb118064af5bfb7d9a7fee620288d1a4036d49353261fd8fb3c04",
     "activationTokenExpiry": "2026-09-11T15:13:58.001Z",
     "approvedAt": "2026-01-01T00:00:00.000Z",
@@ -79,7 +82,7 @@
     "rejectionReason": null,
     "suspendedAt": null,
     "suspensionReason": null,
-    "lastLogin": "2026-09-09T17:54:49.952Z"
+    "lastLogin": "2026-09-09T17:59:15.506Z"
   },
   {
     "_id": "6aa19835cde598854cfa6367",
@@ -103,8 +106,8 @@
     "status": "APPROVED",
     "suspendedAt": null,
     "suspensionReason": null,
-    "updatedAt": "2026-09-09T17:54:50.219Z",
-    "lastLogin": "2026-09-09T17:54:50.157Z"
+    "updatedAt": "2026-09-09T17:59:15.757Z",
+    "lastLogin": "2026-09-09T17:59:15.697Z"
   },
   {
     "_id": "6aa06c49cde598854cfa545b",
@@ -122,8 +125,8 @@
     "passwordHash": "$2a$10$eShm1wQ54bvpI8QxviDrc.b1E2sncyGxlGaAeZzcS0eqES2zPtNOu",
     "role": "ADMIN",
     "status": "APPROVED",
-    "updatedAt": "2026-09-09T17:54:50.462Z",
-    "lastLogin": "2026-09-09T17:54:50.351Z"
+    "updatedAt": "2026-09-09T17:59:15.945Z",
+    "lastLogin": "2026-09-09T17:59:15.894Z"
   },
   {
     "_id": "6aa06c49cde598854cfa5455",
@@ -140,8 +143,8 @@
       "mine-kandri-03"
     ],
     "isGoogleAuth": false,
-    "lastLogin": "2026-09-09T17:55:03.805Z",
-    "updatedAt": "2026-09-09T17:55:03.869Z"
+    "lastLogin": "2026-09-09T17:59:16.075Z",
+    "updatedAt": "2026-09-09T17:59:16.139Z"
   },
   {
     "_id": "6aa06c49cde598854cfa5456",
@@ -156,8 +159,8 @@
       "ALL"
     ],
     "isGoogleAuth": false,
-    "lastLogin": "2026-09-09T17:55:11.923Z",
-    "updatedAt": "2026-09-09T17:55:11.980Z"
+    "lastLogin": "2026-09-09T17:59:16.277Z",
+    "updatedAt": "2026-09-09T17:59:16.345Z"
   },
   {
     "_id": "6aa06c49cde598854cfa5457",
@@ -174,25 +177,6 @@
     "isGoogleAuth": false,
     "lastLogin": "2026-09-09T17:55:12.131Z",
     "updatedAt": "2026-09-09T17:55:12.185Z"
-  },
-  {
-    "_id": "6aa19ce6cde598854cfa63da",
-    "email": "admin@moil.gov.in",
-    "__v": 0,
-    "approvedAt": "2026-01-01T00:00:00.000Z",
-    "createdAt": "2026-09-09T17:52:38.270Z",
-    "department": "Central IT & Mine Safety Directorate",
-    "emailVerified": true,
-    "isGoogleAuth": false,
-    "mineAccess": [
-      "ALL"
-    ],
-    "name": "MOIL System Administrator",
-    "passwordHash": "$2a$10$UT1PJOIakY0JWGNihHe0G.cJ3ucSRzs5Pb8j7ncFJUDV6ZS4g49ze",
-    "role": "ADMIN",
-    "status": "APPROVED",
-    "updatedAt": "2026-09-09T17:57:07.838Z",
-    "lastLogin": "2026-09-09T17:57:07.837Z"
   },
   {
     "name": "Chief Mining Engineer",

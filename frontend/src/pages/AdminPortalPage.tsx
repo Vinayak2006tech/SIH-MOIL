@@ -280,13 +280,13 @@ export const AdminPortalPage: React.FC = () => {
   const getRoleBadge = (role: UserRole) => {
     switch (role) {
       case 'ADMIN':
-        return <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-950/80 text-purple-300 border border-purple-700 whitespace-nowrap">Administrator</span>;
+        return <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-manganese-900/80 text-manganese-200 border border-manganese-700 whitespace-nowrap">Administrator</span>;
       case 'MINE_PLANNER':
-        return <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-950/80 text-blue-300 border border-blue-700 whitespace-nowrap">Mine Planner</span>;
+        return <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-tech-teal/20 text-tech-teal border border-tech-teal/40 whitespace-nowrap">Mine Planner</span>;
       case 'VIEWER':
         return <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-950/80 text-emerald-300 border border-emerald-700 whitespace-nowrap">Ministry Auditor</span>;
       default:
-        return <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-800 text-slate-300 whitespace-nowrap">{role}</span>;
+        return <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#0F1214] text-[#94A3B8] border border-[#26333B] whitespace-nowrap">{role}</span>;
     }
   };
 
@@ -316,7 +316,7 @@ export const AdminPortalPage: React.FC = () => {
         );
       case 'SUSPENDED':
         return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-slate-800/90 text-slate-300 border border-slate-600 shadow-sm">
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold bg-[#161D22] text-[#94A3B8] border border-[#26333B] shadow-sm">
             <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
             Suspended
           </span>
@@ -325,7 +325,7 @@ export const AdminPortalPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-4 sm:space-y-6 animate-fadeIn text-slate-100 w-full max-w-full min-w-0">
+    <div className="space-y-4 sm:space-y-6 animate-fadeIn text-[#E8E6E3] w-full max-w-full min-w-0">
       {/* Toast Notification */}
       {toast && (
         <div
@@ -333,7 +333,7 @@ export const AdminPortalPage: React.FC = () => {
             ? 'bg-emerald-950/95 border-emerald-500 text-emerald-100'
             : toast.type === 'error'
               ? 'bg-rose-950/95 border-rose-500 text-rose-100'
-              : 'bg-indigo-950/95 border-indigo-500 text-indigo-100'
+              : 'bg-[#161D22]/95 border-tech-teal text-tech-teal'
             }`}
         >
           {toast.type === 'success' ? (
@@ -341,27 +341,27 @@ export const AdminPortalPage: React.FC = () => {
           ) : toast.type === 'error' ? (
             <AlertCircle className="w-5 h-5 text-rose-400 shrink-0" />
           ) : (
-            <Sparkles className="w-5 h-5 text-indigo-400 shrink-0" />
+            <Sparkles className="w-5 h-5 text-tech-teal shrink-0" />
           )}
           <span className="font-medium leading-relaxed">{toast.message}</span>
         </div>
       )}
 
       {/* Top Banner & Header */}
-      <div className="glass-panel p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-slate-800 relative overflow-hidden bg-gradient-to-r from-slate-900 via-slate-900 to-purple-950/40">
+      <div className="glass-panel bg-[#161D22]/85 p-4 sm:p-6 rounded-2xl sm:rounded-3xl border border-[#26333B] relative overflow-hidden shadow-xl">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1.5 min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-purple-900/60 text-purple-300 border border-purple-700">
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-manganese-900/60 text-manganese-200 border border-manganese-700">
                 ADMINISTRATION & SECURITY PORTAL
               </span>
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+              <span className="w-2 h-2 rounded-full bg-tech-teal animate-pulse shrink-0" />
             </div>
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-black text-white tracking-tight flex items-center gap-2.5 sm:gap-3 flex-wrap">
-              <Shield className="w-6 h-6 sm:w-8 sm:h-8 text-purple-400 shrink-0" />
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-black text-[#E8E6E3] tracking-tight flex items-center gap-2.5 sm:gap-3 flex-wrap">
+              <Shield className="w-6 h-6 sm:w-8 sm:h-8 text-tech-teal shrink-0" />
               <span className="break-words">Personnel Access & Approval Registry</span>
             </h1>
-            <p className="text-xs text-slate-300 max-w-2xl leading-relaxed">
+            <p className="text-xs text-[#94A3B8] max-w-2xl leading-relaxed">
               Authorized administrators can review personnel registration requests, grant clearance, assign operational roles, and manage access security.
             </p>
           </div>
@@ -369,7 +369,7 @@ export const AdminPortalPage: React.FC = () => {
           <div className="flex items-center gap-2 self-stretch sm:self-auto shrink-0 flex-wrap">
             <button
               onClick={handleOpenCreateUserModal}
-              className="w-full sm:w-auto px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-glow-purple transition cursor-pointer"
+              className="w-full sm:w-auto px-4 py-2 rounded-xl bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-[#0F1214] font-extrabold text-xs flex items-center justify-center gap-2 shadow-glow-teal transition cursor-pointer"
             >
               <UserPlus className="w-3.5 h-3.5" />
               <span>+ Provision Personnel / Admin</span>
@@ -377,7 +377,7 @@ export const AdminPortalPage: React.FC = () => {
             <button
               onClick={fetchUsersAndStats}
               disabled={loading}
-              className="w-full sm:w-auto px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-semibold flex items-center justify-center gap-2 transition cursor-pointer"
+              className="w-full sm:w-auto px-3.5 py-2 rounded-xl bg-[#0F1214] hover:bg-[#1B2226] border border-[#26333B] text-[#E8E6E3] text-xs font-semibold flex items-center justify-center gap-2 transition cursor-pointer"
             >
               <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
               <span>Refresh Records</span>
@@ -391,16 +391,16 @@ export const AdminPortalPage: React.FC = () => {
         <div
           onClick={() => setActiveTab('ALL')}
           className={`glass-panel p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border transition cursor-pointer ${activeTab === 'ALL'
-            ? 'border-purple-500/80 bg-purple-950/20 shadow-glow-purple'
-            : 'border-slate-800/80 hover:border-slate-700'
+            ? 'border-tech-teal/80 bg-tech-teal/10 shadow-glow-teal'
+            : 'border-[#26333B] bg-[#161D22]/85 hover:border-slate-600'
             }`}
         >
-          <div className="flex items-center justify-between text-slate-400 text-xs font-semibold mb-1.5 sm:mb-2 gap-1">
+          <div className="flex items-center justify-between text-[#94A3B8] text-xs font-semibold mb-1.5 sm:mb-2 gap-1">
             <span className="truncate">Total Personnel</span>
-            <Users className="w-4 h-4 text-purple-400 shrink-0" />
+            <Users className="w-4 h-4 text-tech-teal shrink-0" />
           </div>
-          <div className="text-xl sm:text-2xl font-black text-white">{stats.totalUsers}</div>
-          <p className="text-[10px] text-slate-400 mt-1 truncate">All registered accounts</p>
+          <div className="text-xl sm:text-2xl font-black text-[#E8E6E3]">{stats.totalUsers}</div>
+          <p className="text-[10px] text-[#94A3B8] mt-1 truncate">All registered accounts</p>
         </div>
 
         <div
@@ -409,7 +409,7 @@ export const AdminPortalPage: React.FC = () => {
             ? 'border-amber-500/80 bg-amber-950/20 shadow-glow-amber'
             : stats.pendingUsers > 0
               ? 'border-amber-700/60 bg-amber-950/10'
-              : 'border-slate-800/80 hover:border-slate-700'
+              : 'border-[#26333B] bg-[#161D22]/85 hover:border-slate-600'
             }`}
         >
           {stats.pendingUsers > 0 && (
@@ -427,7 +427,7 @@ export const AdminPortalPage: React.FC = () => {
           onClick={() => setActiveTab('APPROVED')}
           className={`glass-panel p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border transition cursor-pointer ${activeTab === 'APPROVED'
             ? 'border-emerald-500/80 bg-emerald-950/20 shadow-glow-emerald'
-            : 'border-slate-800/80 hover:border-slate-700'
+            : 'border-[#26333B] bg-[#161D22]/85 hover:border-slate-600'
             }`}
         >
           <div className="flex items-center justify-between text-emerald-300 text-xs font-semibold mb-1.5 sm:mb-2 gap-1">
@@ -441,8 +441,8 @@ export const AdminPortalPage: React.FC = () => {
         <div
           onClick={() => setActiveTab('SUSPENDED')}
           className={`glass-panel p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border transition cursor-pointer ${activeTab === 'SUSPENDED'
-            ? 'border-slate-500 bg-slate-800/40'
-            : 'border-slate-800/80 hover:border-slate-700'
+            ? 'border-slate-500 bg-[#1B2226]'
+            : 'border-[#26333B] bg-[#161D22]/85 hover:border-slate-600'
             }`}
         >
           <div className="flex items-center justify-between text-slate-300 text-xs font-semibold mb-1.5 sm:mb-2 gap-1">
@@ -450,14 +450,14 @@ export const AdminPortalPage: React.FC = () => {
             <ShieldAlert className="w-4 h-4 text-slate-400 shrink-0" />
           </div>
           <div className="text-xl sm:text-2xl font-black text-slate-300">{stats.suspendedUsers}</div>
-          <p className="text-[10px] text-slate-400 mt-1 truncate">Temporarily locked</p>
+          <p className="text-[10px] text-[#94A3B8] mt-1 truncate">Temporarily locked</p>
         </div>
 
         <div
           onClick={() => setActiveTab('REJECTED')}
           className={`glass-panel p-3.5 sm:p-4 rounded-xl sm:rounded-2xl border transition cursor-pointer col-span-2 sm:col-span-1 ${activeTab === 'REJECTED'
             ? 'border-rose-500/80 bg-rose-950/20'
-            : 'border-slate-800/80 hover:border-slate-700'
+            : 'border-[#26333B] bg-[#161D22]/85 hover:border-slate-600'
             }`}
         >
           <div className="flex items-center justify-between text-rose-300 text-xs font-semibold mb-1.5 sm:mb-2 gap-1">
@@ -470,7 +470,7 @@ export const AdminPortalPage: React.FC = () => {
       </div>
 
       {/* Filter Tabs & Search Controls */}
-      <div className="glass-panel p-3.5 sm:p-4 rounded-2xl border border-slate-800 space-y-3 sm:space-y-4">
+      <div className="glass-panel bg-[#161D22]/85 p-3.5 sm:p-4 rounded-2xl border border-[#26333B] space-y-3 sm:space-y-4 shadow-xl">
         <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3">
           {/* Tab buttons */}
           <div className="flex items-center gap-1.5 overflow-x-auto pb-1 lg:pb-0 scrollbar-thin max-w-full">
@@ -488,16 +488,16 @@ export const AdminPortalPage: React.FC = () => {
                 onClick={() => setActiveTab(t.key)}
                 className={`px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 whitespace-nowrap cursor-pointer shrink-0 ${activeTab === t.key
                   ? t.highlight && t.count > 0
-                    ? 'bg-amber-500 text-slate-950 shadow-glow-amber'
-                    : 'bg-purple-600 text-white shadow-glow-purple'
-                  : 'bg-slate-900/80 hover:bg-slate-800 text-slate-300 border border-slate-800'
+                    ? 'bg-amber-500 text-[#0F1214] shadow-glow-amber'
+                    : 'bg-tech-teal text-[#0F1214] font-extrabold shadow-glow-teal'
+                  : 'bg-[#0F1214] hover:bg-[#1B2226] text-[#94A3B8] hover:text-[#E8E6E3] border border-[#26333B]'
                   }`}
               >
                 <span>{t.label}</span>
                 <span
                   className={`px-1.5 py-0.5 rounded-full text-[10px] font-mono ${activeTab === t.key
                     ? 'bg-black/20 text-current'
-                    : 'bg-slate-800 text-slate-400'
+                    : 'bg-[#161D22] text-[#94A3B8]'
                     }`}
                 >
                   {t.count}
@@ -514,7 +514,7 @@ export const AdminPortalPage: React.FC = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search name, email, department..."
-                className="w-full pl-9 pr-3 py-2 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-purple-500"
+                className="w-full pl-9 pr-3 py-2 bg-[#0F1214] border border-[#26333B] rounded-xl text-xs text-[#E8E6E3] placeholder:text-slate-500 focus:outline-none focus:border-tech-teal font-mono"
               />
               <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
             </div>
@@ -522,7 +522,7 @@ export const AdminPortalPage: React.FC = () => {
             <select
               value={roleFilter}
               onChange={(e) => setRoleFilter(e.target.value)}
-              className="px-3 py-2 bg-slate-950 border border-slate-700 rounded-xl text-xs text-white focus:outline-none focus:border-purple-500 cursor-pointer"
+              className="px-3 py-2 bg-[#0F1214] border border-[#26333B] rounded-xl text-xs text-[#E8E6E3] focus:outline-none focus:border-tech-teal cursor-pointer"
             >
               <option value="ALL">All Roles</option>
               <option value="MINE_PLANNER">Mine Planners</option>
@@ -534,11 +534,11 @@ export const AdminPortalPage: React.FC = () => {
       </div>
 
       {/* Users Registry Table & Cards */}
-      <div className="glass-panel rounded-2xl sm:rounded-3xl border border-slate-800 overflow-hidden">
+      <div className="glass-panel bg-[#161D22]/85 rounded-2xl sm:rounded-3xl border border-[#26333B] overflow-hidden shadow-xl">
         {/* Desktop / Tablet Table View (>= 768px) */}
         <div className="hidden md:block overflow-x-auto w-full scrollbar-thin">
           <table className="w-full min-w-[880px] text-left text-xs">
-            <thead className="bg-slate-950/80 text-slate-400 uppercase tracking-wider text-[10px] border-b border-slate-800">
+            <thead className="bg-[#0F1214]/90 text-[#94A3B8] uppercase tracking-wider text-[10px] border-b border-[#26333B]">
               <tr>
                 <th className="px-5 py-3.5 font-bold min-w-[220px]">Personnel Details</th>
                 <th className="px-4 py-3.5 font-bold whitespace-nowrap min-w-[130px]">Assigned Role</th>
@@ -548,20 +548,20 @@ export const AdminPortalPage: React.FC = () => {
                 <th className="px-5 py-3.5 font-bold text-right whitespace-nowrap min-w-[170px]">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/60">
+            <tbody className="divide-y divide-[#26333B]/60">
               {loading ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-12 text-center text-slate-400">
-                    <RefreshCw className="w-6 h-6 animate-spin mx-auto text-purple-400 mb-2" />
+                  <td colSpan={6} className="px-6 py-12 text-center text-[#94A3B8]">
+                    <RefreshCw className="w-6 h-6 animate-spin mx-auto text-tech-teal mb-2" />
                     <span>Loading authorized personnel records...</span>
                   </td>
                 </tr>
               ) : users.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="px-6 py-12 text-center text-slate-400">
+                  <td colSpan={6} className="px-6 py-12 text-center text-[#94A3B8]">
                     <Users className="w-8 h-8 mx-auto text-slate-600 mb-2" />
                     <p className="font-semibold text-slate-300">No personnel records found.</p>
-                    <p className="text-[11px] text-slate-500">Try changing filter tab or search keywords.</p>
+                    <p className="text-[11px] text-[#94A3B8]">Try changing filter tab or search keywords.</p>
                   </td>
                 </tr>
               ) : (
@@ -571,23 +571,23 @@ export const AdminPortalPage: React.FC = () => {
                   const status = u.status || 'APPROVED';
 
                   return (
-                    <tr key={uId} className="hover:bg-slate-800/40 transition">
+                    <tr key={uId} className="hover:bg-[#1B2226]/60 transition">
                       {/* Name & Email */}
                       <td className="px-5 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-700 to-indigo-900 border border-purple-500/30 flex items-center justify-center font-bold text-white text-xs shrink-0 shadow-sm">
+                          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-manganese-700 to-tech-teal/80 border border-tech-teal/30 flex items-center justify-center font-bold text-[#0F1214] text-xs shrink-0 shadow-sm">
                             {u.name.substring(0, 2).toUpperCase()}
                           </div>
                           <div className="min-w-0">
-                            <div className="font-bold text-white flex items-center gap-1.5">
+                            <div className="font-bold text-[#E8E6E3] flex items-center gap-1.5">
                               <span className="truncate">{u.name}</span>
                               {isCurrent && (
-                                <span className="px-1.5 py-0.2 rounded text-[9px] bg-purple-900 text-purple-200 border border-purple-700 shrink-0">
+                                <span className="px-1.5 py-0.2 rounded text-[9px] bg-tech-teal/20 text-tech-teal border border-tech-teal/40 shrink-0">
                                   You
                                 </span>
                               )}
                             </div>
-                            <div className="text-[11px] text-slate-400 font-mono flex items-center gap-1 mt-0.5">
+                            <div className="text-[11px] text-[#94A3B8] font-mono flex items-center gap-1 mt-0.5">
                               <Mail className="w-3 h-3 text-slate-500 shrink-0" />
                               <span className="truncate">{u.email}</span>
                             </div>
@@ -616,7 +616,7 @@ export const AdminPortalPage: React.FC = () => {
                             </div>
                           )}
                           {u.suspensionReason && status === 'SUSPENDED' && (
-                            <div className="text-[10px] text-slate-400 italic max-w-xs truncate">
+                            <div className="text-[10px] text-[#94A3B8] italic max-w-xs truncate">
                               Reason: {u.suspensionReason}
                             </div>
                           )}
@@ -624,7 +624,7 @@ export const AdminPortalPage: React.FC = () => {
                       </td>
 
                       {/* Dates */}
-                      <td className="px-4 py-4 text-[11px] text-slate-400 whitespace-nowrap">
+                      <td className="px-4 py-4 text-[11px] text-[#94A3B8] whitespace-nowrap font-mono">
                         <div className="space-y-0.5">
                           {u.createdAt && (
                             <div className="flex items-center gap-1">
@@ -666,17 +666,17 @@ export const AdminPortalPage: React.FC = () => {
                             <>
                               <button
                                 onClick={() => handleOpenEditRoleModal(u)}
-                                className="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-[11px] font-semibold flex items-center gap-1 transition cursor-pointer shrink-0"
+                                className="px-2.5 py-1.5 rounded-lg bg-[#0F1214] hover:bg-[#1B2226] border border-[#26333B] text-[#E8E6E3] text-[11px] font-semibold flex items-center gap-1 transition cursor-pointer shrink-0"
                                 title="Edit Role & Department"
                               >
-                                <Edit3 className="w-3 h-3 text-purple-400" />
+                                <Edit3 className="w-3 h-3 text-tech-teal" />
                                 <span>Edit</span>
                               </button>
 
                               {!isCurrent && (
                                 <button
                                   onClick={() => handleOpenSuspendModal(u)}
-                                  className="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-amber-950/60 text-amber-300 border border-slate-700 hover:border-amber-700 text-[11px] font-semibold flex items-center gap-1 transition cursor-pointer shrink-0"
+                                  className="px-2.5 py-1.5 rounded-lg bg-[#0F1214] hover:bg-amber-950/60 text-amber-300 border border-[#26333B] hover:border-amber-700 text-[11px] font-semibold flex items-center gap-1 transition cursor-pointer shrink-0"
                                   title="Suspend Access"
                                 >
                                   <ShieldAlert className="w-3 h-3" />
@@ -716,17 +716,17 @@ export const AdminPortalPage: React.FC = () => {
         </div>
 
         {/* Mobile Cards View (< 768px) */}
-        <div className="block md:hidden divide-y divide-slate-800/80">
+        <div className="block md:hidden divide-y divide-[#26333B]/80">
           {loading ? (
-            <div className="p-8 text-center text-slate-400">
-              <RefreshCw className="w-6 h-6 animate-spin mx-auto text-purple-400 mb-2" />
+            <div className="p-8 text-center text-[#94A3B8]">
+              <RefreshCw className="w-6 h-6 animate-spin mx-auto text-tech-teal mb-2" />
               <span>Loading personnel records...</span>
             </div>
           ) : users.length === 0 ? (
-            <div className="p-8 text-center text-slate-400">
+            <div className="p-8 text-center text-[#94A3B8]">
               <Users className="w-8 h-8 mx-auto text-slate-600 mb-2" />
               <p className="font-semibold text-slate-300">No personnel records found.</p>
-              <p className="text-[11px] text-slate-500 mt-1">Try changing filter tab or search keywords.</p>
+              <p className="text-[11px] text-[#94A3B8] mt-1">Try changing filter tab or search keywords.</p>
             </div>
           ) : (
             users.map((u) => {
@@ -735,28 +735,28 @@ export const AdminPortalPage: React.FC = () => {
               const status = u.status || 'APPROVED';
 
               return (
-                <div key={uId} className="p-4 space-y-3 hover:bg-slate-800/30 transition">
+                <div key={uId} className="p-4 space-y-3 hover:bg-[#1B2226]/40 transition">
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex items-center gap-2.5 min-w-0">
-                      <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-purple-700 to-indigo-900 border border-purple-500/30 flex items-center justify-center font-bold text-white text-xs shrink-0 shadow-sm">
+                      <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-manganese-700 to-tech-teal/80 border border-tech-teal/30 flex items-center justify-center font-bold text-[#0F1214] text-xs shrink-0 shadow-sm">
                         {u.name.substring(0, 2).toUpperCase()}
                       </div>
                       <div className="min-w-0">
-                        <div className="font-bold text-white text-sm flex items-center gap-1.5 flex-wrap">
+                        <div className="font-bold text-[#E8E6E3] text-sm flex items-center gap-1.5 flex-wrap">
                           <span className="truncate">{u.name}</span>
                           {isCurrent && (
-                            <span className="px-1.5 py-0.2 rounded text-[9px] bg-purple-900 text-purple-200 border border-purple-700 shrink-0">
+                            <span className="px-1.5 py-0.2 rounded text-[9px] bg-tech-teal/20 text-tech-teal border border-tech-teal/40 shrink-0">
                               You
                             </span>
                           )}
                         </div>
-                        <div className="text-[11px] text-slate-400 font-mono truncate">{u.email}</div>
+                        <div className="text-[11px] text-[#94A3B8] font-mono truncate">{u.email}</div>
                       </div>
                     </div>
                     <div className="shrink-0">{getStatusBadge(status)}</div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2 text-xs bg-slate-950/60 p-3 rounded-xl border border-slate-800/80">
+                  <div className="grid grid-cols-2 gap-2 text-xs bg-[#0F1214]/80 p-3 rounded-xl border border-[#26333B]">
                     <div>
                       <span className="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">Role</span>
                       <div className="mt-1">{getRoleBadge(u.role)}</div>
@@ -766,7 +766,7 @@ export const AdminPortalPage: React.FC = () => {
                       <div className="mt-1 text-slate-300 truncate text-[11px]">{u.department || 'MOIL HQ'}</div>
                     </div>
                     {u.createdAt && (
-                      <div className="col-span-2 pt-1 border-t border-slate-800/60 flex items-center justify-between text-[11px] text-slate-400">
+                      <div className="col-span-2 pt-1 border-t border-[#26333B] flex items-center justify-between text-[11px] text-[#94A3B8] font-mono">
                         <span>Joined: {new Date(u.createdAt).toLocaleDateString()}</span>
                         {u.lastLogin && <span>Active: {new Date(u.lastLogin).toLocaleDateString()}</span>}
                       </div>
@@ -780,7 +780,7 @@ export const AdminPortalPage: React.FC = () => {
                   )}
 
                   {u.suspensionReason && status === 'SUSPENDED' && (
-                    <div className="text-[11px] text-slate-300 bg-slate-900/80 p-2.5 rounded-lg border border-slate-700 italic">
+                    <div className="text-[11px] text-[#94A3B8] bg-[#0F1214] p-2.5 rounded-lg border border-[#26333B] italic">
                       Suspension Reason: {u.suspensionReason}
                     </div>
                   )}
@@ -810,16 +810,16 @@ export const AdminPortalPage: React.FC = () => {
                       <>
                         <button
                           onClick={() => handleOpenEditRoleModal(u)}
-                          className="flex-1 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold flex items-center justify-center gap-1.5 transition"
+                          className="flex-1 py-2 rounded-xl bg-[#0F1214] hover:bg-[#1B2226] border border-[#26333B] text-[#E8E6E3] text-xs font-semibold flex items-center justify-center gap-1.5 transition"
                         >
-                          <Edit3 className="w-3.5 h-3.5 text-purple-400" />
+                          <Edit3 className="w-3.5 h-3.5 text-tech-teal" />
                           <span>Edit Role</span>
                         </button>
 
                         {!isCurrent && (
                           <button
                             onClick={() => handleOpenSuspendModal(u)}
-                            className="flex-1 py-2 rounded-xl bg-slate-800 hover:bg-amber-950/60 text-amber-300 border border-slate-700 hover:border-amber-700 text-xs font-semibold flex items-center justify-center gap-1.5 transition"
+                            className="flex-1 py-2 rounded-xl bg-[#0F1214] hover:bg-amber-950/60 text-amber-300 border border-[#26333B] hover:border-amber-700 text-xs font-semibold flex items-center justify-center gap-1.5 transition"
                           >
                             <ShieldAlert className="w-3.5 h-3.5" />
                             <span>Suspend</span>
@@ -841,7 +841,7 @@ export const AdminPortalPage: React.FC = () => {
                     {!isCurrent && (
                       <button
                         onClick={() => handleOpenDeleteModal(u)}
-                        className="p-2 rounded-xl text-slate-500 hover:text-rose-400 bg-slate-900/80 hover:bg-rose-950/40 border border-slate-800 transition"
+                        className="p-2 rounded-xl text-slate-500 hover:text-rose-400 bg-[#0F1214] hover:bg-rose-950/40 border border-[#26333B] transition"
                         title="Delete Account"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -858,20 +858,20 @@ export const AdminPortalPage: React.FC = () => {
       {/* APPROVE USER MODAL */}
       {modalType === 'APPROVE' && selectedUser && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
-          <div className="w-full max-w-md glass-panel bg-slate-900 border border-slate-700 rounded-2xl sm:rounded-3xl p-5 sm:p-6 space-y-4 sm:space-y-5 shadow-2xl animate-fadeIn my-auto max-h-[90vh] overflow-y-auto">
+          <div className="w-full max-w-md glass-panel bg-[#161D22] border border-[#26333B] rounded-2xl sm:rounded-3xl p-5 sm:p-6 space-y-4 sm:space-y-5 shadow-2xl animate-fadeIn my-auto max-h-[90vh] overflow-y-auto">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0">
                 <CheckCircle2 className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-white">Approve Personnel Registration</h3>
-                <p className="text-xs text-slate-400">Send official clearance & activation email</p>
+                <h3 className="text-base font-bold text-[#E8E6E3]">Approve Personnel Registration</h3>
+                <p className="text-xs text-[#94A3B8]">Send official clearance & activation email</p>
               </div>
             </div>
 
-            <div className="bg-slate-950/80 p-3.5 rounded-xl border border-slate-800 text-xs space-y-1.5">
+            <div className="bg-[#0F1214] p-3.5 rounded-xl border border-[#26333B] text-xs space-y-1.5">
               <div className="text-slate-300 font-semibold">{selectedUser.name}</div>
-              <div className="text-slate-400 font-mono text-[11px] truncate">{selectedUser.email}</div>
+              <div className="text-[#94A3B8] font-mono text-[11px] truncate">{selectedUser.email}</div>
             </div>
 
             <div className="space-y-3 text-xs">
@@ -880,7 +880,7 @@ export const AdminPortalPage: React.FC = () => {
                 <select
                   value={editRole}
                   onChange={(e) => setEditRole(e.target.value as UserRole)}
-                  className="w-full px-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:outline-none focus:border-emerald-500 cursor-pointer"
+                  className="w-full px-3 py-2.5 bg-[#0F1214] border border-[#26333B] rounded-xl text-[#E8E6E3] text-xs focus:outline-none focus:border-emerald-500 cursor-pointer"
                 >
                   <option value="MINE_PLANNER">Mine Planner (Balaghat / Dongri / Kandri)</option>
                   <option value="VIEWER">Ministry Auditor (Auditor / Oversight)</option>
@@ -894,7 +894,7 @@ export const AdminPortalPage: React.FC = () => {
                   type="text"
                   value={editDepartment}
                   onChange={(e) => setEditDepartment(e.target.value)}
-                  className="w-full px-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:outline-none focus:border-emerald-500"
+                  className="w-full px-3 py-2.5 bg-[#0F1214] border border-[#26333B] rounded-xl text-[#E8E6E3] text-xs focus:outline-none focus:border-emerald-500"
                 />
               </div>
             </div>
@@ -907,14 +907,14 @@ export const AdminPortalPage: React.FC = () => {
               <button
                 onClick={closeModal}
                 disabled={actionLoading}
-                className="w-full sm:w-auto px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition cursor-pointer text-center"
+                className="w-full sm:w-auto px-4 py-2 rounded-xl bg-[#0F1214] hover:bg-[#1B2226] border border-[#26333B] text-[#94A3B8] text-xs font-semibold transition cursor-pointer text-center"
               >
                 Cancel
               </button>
               <button
                 onClick={handleApprove}
                 disabled={actionLoading}
-                className="w-full sm:w-auto px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold shadow-lg transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                className="w-full sm:w-auto px-5 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-tech-teal hover:from-emerald-500 hover:to-tech-teal text-[#0F1214] font-bold text-xs shadow-lg transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
               >
                 {actionLoading ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <CheckCircle2 className="w-3.5 h-3.5" />}
                 <span>Confirm & Send Activation</span>
@@ -927,20 +927,20 @@ export const AdminPortalPage: React.FC = () => {
       {/* REJECT USER MODAL */}
       {modalType === 'REJECT' && selectedUser && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
-          <div className="w-full max-w-md glass-panel bg-slate-900 border border-slate-700 rounded-2xl sm:rounded-3xl p-5 sm:p-6 space-y-4 sm:space-y-5 shadow-2xl animate-fadeIn my-auto max-h-[90vh] overflow-y-auto">
+          <div className="w-full max-w-md glass-panel bg-[#161D22] border border-[#26333B] rounded-2xl sm:rounded-3xl p-5 sm:p-6 space-y-4 sm:space-y-5 shadow-2xl animate-fadeIn my-auto max-h-[90vh] overflow-y-auto">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-rose-400 shrink-0">
                 <XCircle className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-white">Disapprove Registration Request</h3>
-                <p className="text-xs text-slate-400">Reject applicant and send notification</p>
+                <h3 className="text-base font-bold text-[#E8E6E3]">Disapprove Registration Request</h3>
+                <p className="text-xs text-[#94A3B8]">Reject applicant and send notification</p>
               </div>
             </div>
 
-            <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800 text-xs space-y-1">
+            <div className="bg-[#0F1214] p-3 rounded-xl border border-[#26333B] text-xs space-y-1">
               <div className="text-slate-300 font-semibold">{selectedUser.name}</div>
-              <div className="text-slate-400 font-mono text-[11px] truncate">{selectedUser.email}</div>
+              <div className="text-[#94A3B8] font-mono text-[11px] truncate">{selectedUser.email}</div>
             </div>
 
             <div className="space-y-1 text-xs">
@@ -950,7 +950,7 @@ export const AdminPortalPage: React.FC = () => {
                 onChange={(e) => setActionReason(e.target.value)}
                 placeholder="e.g. Clearance verification failed / Invalid departmental authorization."
                 rows={3}
-                className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:outline-none focus:border-rose-500 resize-none"
+                className="w-full px-3 py-2 bg-[#0F1214] border border-[#26333B] rounded-xl text-[#E8E6E3] text-xs focus:outline-none focus:border-rose-500 resize-none"
               />
             </div>
 
@@ -958,7 +958,7 @@ export const AdminPortalPage: React.FC = () => {
               <button
                 onClick={closeModal}
                 disabled={actionLoading}
-                className="w-full sm:w-auto px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition cursor-pointer text-center"
+                className="w-full sm:w-auto px-4 py-2 rounded-xl bg-[#0F1214] hover:bg-[#1B2226] border border-[#26333B] text-[#94A3B8] text-xs font-semibold transition cursor-pointer text-center"
               >
                 Cancel
               </button>
@@ -978,20 +978,20 @@ export const AdminPortalPage: React.FC = () => {
       {/* SUSPEND USER MODAL */}
       {modalType === 'SUSPEND' && selectedUser && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
-          <div className="w-full max-w-md glass-panel bg-slate-900 border border-slate-700 rounded-2xl sm:rounded-3xl p-5 sm:p-6 space-y-4 sm:space-y-5 shadow-2xl animate-fadeIn my-auto max-h-[90vh] overflow-y-auto">
+          <div className="w-full max-w-md glass-panel bg-[#161D22] border border-[#26333B] rounded-2xl sm:rounded-3xl p-5 sm:p-6 space-y-4 sm:space-y-5 shadow-2xl animate-fadeIn my-auto max-h-[90vh] overflow-y-auto">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 shrink-0">
                 <ShieldAlert className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-white">Suspend Personnel Access</h3>
-                <p className="text-xs text-slate-400">Temporarily revoke platform login capability</p>
+                <h3 className="text-base font-bold text-[#E8E6E3]">Suspend Personnel Access</h3>
+                <p className="text-xs text-[#94A3B8]">Temporarily revoke platform login capability</p>
               </div>
             </div>
 
-            <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800 text-xs space-y-1">
+            <div className="bg-[#0F1214] p-3 rounded-xl border border-[#26333B] text-xs space-y-1">
               <div className="text-slate-300 font-semibold">{selectedUser.name}</div>
-              <div className="text-slate-400 font-mono text-[11px] truncate">{selectedUser.email}</div>
+              <div className="text-[#94A3B8] font-mono text-[11px] truncate">{selectedUser.email}</div>
             </div>
 
             <div className="space-y-1 text-xs">
@@ -1001,7 +1001,7 @@ export const AdminPortalPage: React.FC = () => {
                 onChange={(e) => setActionReason(e.target.value)}
                 placeholder="e.g. Routine administrative clearance audit."
                 rows={3}
-                className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:outline-none focus:border-amber-500 resize-none"
+                className="w-full px-3 py-2 bg-[#0F1214] border border-[#26333B] rounded-xl text-[#E8E6E3] text-xs focus:outline-none focus:border-amber-500 resize-none"
               />
             </div>
 
@@ -1009,14 +1009,14 @@ export const AdminPortalPage: React.FC = () => {
               <button
                 onClick={closeModal}
                 disabled={actionLoading}
-                className="w-full sm:w-auto px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition cursor-pointer text-center"
+                className="w-full sm:w-auto px-4 py-2 rounded-xl bg-[#0F1214] hover:bg-[#1B2226] border border-[#26333B] text-[#94A3B8] text-xs font-semibold transition cursor-pointer text-center"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSuspend}
                 disabled={actionLoading}
-                className="w-full sm:w-auto px-5 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-slate-950 text-xs font-bold shadow-lg transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                className="w-full sm:w-auto px-5 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-[#0F1214] text-xs font-bold shadow-lg transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
               >
                 {actionLoading ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <ShieldAlert className="w-3.5 h-3.5" />}
                 <span>Suspend Account</span>
@@ -1029,20 +1029,20 @@ export const AdminPortalPage: React.FC = () => {
       {/* EDIT ROLE MODAL */}
       {modalType === 'EDIT_ROLE' && selectedUser && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
-          <div className="w-full max-w-md glass-panel bg-slate-900 border border-slate-700 rounded-2xl sm:rounded-3xl p-5 sm:p-6 space-y-4 sm:space-y-5 shadow-2xl animate-fadeIn my-auto max-h-[90vh] overflow-y-auto">
+          <div className="w-full max-w-md glass-panel bg-[#161D22] border border-[#26333B] rounded-2xl sm:rounded-3xl p-5 sm:p-6 space-y-4 sm:space-y-5 shadow-2xl animate-fadeIn my-auto max-h-[90vh] overflow-y-auto">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-400 shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-tech-teal/20 border border-tech-teal/40 flex items-center justify-center text-tech-teal shrink-0">
                 <Edit3 className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-white">Update Permissions & Unit</h3>
-                <p className="text-xs text-slate-400">Modify operational privileges</p>
+                <h3 className="text-base font-bold text-[#E8E6E3]">Update Permissions & Unit</h3>
+                <p className="text-xs text-[#94A3B8]">Modify operational privileges</p>
               </div>
             </div>
 
-            <div className="bg-slate-950/80 p-3 rounded-xl border border-slate-800 text-xs space-y-1">
+            <div className="bg-[#0F1214] p-3 rounded-xl border border-[#26333B] text-xs space-y-1">
               <div className="text-slate-300 font-semibold">{selectedUser.name}</div>
-              <div className="text-slate-400 font-mono text-[11px] truncate">{selectedUser.email}</div>
+              <div className="text-[#94A3B8] font-mono text-[11px] truncate">{selectedUser.email}</div>
             </div>
 
             <div className="space-y-3 text-xs">
@@ -1051,7 +1051,7 @@ export const AdminPortalPage: React.FC = () => {
                 <select
                   value={editRole}
                   onChange={(e) => setEditRole(e.target.value as UserRole)}
-                  className="w-full px-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:outline-none focus:border-purple-500 cursor-pointer"
+                  className="w-full px-3 py-2.5 bg-[#0F1214] border border-[#26333B] rounded-xl text-[#E8E6E3] text-xs focus:outline-none focus:border-tech-teal cursor-pointer"
                 >
                   <option value="MINE_PLANNER">Mine Planner</option>
                   <option value="VIEWER">Ministry Auditor</option>
@@ -1065,7 +1065,7 @@ export const AdminPortalPage: React.FC = () => {
                   type="text"
                   value={editDepartment}
                   onChange={(e) => setEditDepartment(e.target.value)}
-                  className="w-full px-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:outline-none focus:border-purple-500"
+                  className="w-full px-3 py-2.5 bg-[#0F1214] border border-[#26333B] rounded-xl text-[#E8E6E3] text-xs focus:outline-none focus:border-tech-teal"
                 />
               </div>
             </div>
@@ -1074,14 +1074,14 @@ export const AdminPortalPage: React.FC = () => {
               <button
                 onClick={closeModal}
                 disabled={actionLoading}
-                className="w-full sm:w-auto px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition cursor-pointer text-center"
+                className="w-full sm:w-auto px-4 py-2 rounded-xl bg-[#0F1214] hover:bg-[#1B2226] border border-[#26333B] text-[#94A3B8] text-xs font-semibold transition cursor-pointer text-center"
               >
                 Cancel
               </button>
               <button
                 onClick={handleUpdateRole}
                 disabled={actionLoading}
-                className="w-full sm:w-auto px-5 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold shadow-lg transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                className="w-full sm:w-auto px-5 py-2 rounded-xl bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-[#0F1214] font-extrabold text-xs shadow-lg transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
               >
                 {actionLoading ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <CheckCircle2 className="w-3.5 h-3.5" />}
                 <span>Save Permissions</span>
@@ -1094,13 +1094,13 @@ export const AdminPortalPage: React.FC = () => {
       {/* DELETE USER MODAL */}
       {modalType === 'DELETE' && selectedUser && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
-          <div className="w-full max-w-md glass-panel bg-slate-900 border border-rose-800/80 rounded-2xl sm:rounded-3xl p-5 sm:p-6 space-y-4 sm:space-y-5 shadow-2xl animate-fadeIn my-auto max-h-[90vh] overflow-y-auto">
+          <div className="w-full max-w-md glass-panel bg-[#161D22] border border-rose-800/80 rounded-2xl sm:rounded-3xl p-5 sm:p-6 space-y-4 sm:space-y-5 shadow-2xl animate-fadeIn my-auto max-h-[90vh] overflow-y-auto">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-rose-400 shrink-0">
                 <AlertTriangle className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-white">Permanently Delete Account</h3>
+                <h3 className="text-base font-bold text-[#E8E6E3]">Permanently Delete Account</h3>
                 <p className="text-xs text-rose-300">Irreversible administrative action</p>
               </div>
             </div>
@@ -1113,7 +1113,7 @@ export const AdminPortalPage: React.FC = () => {
               <button
                 onClick={closeModal}
                 disabled={actionLoading}
-                className="w-full sm:w-auto px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition cursor-pointer text-center"
+                className="w-full sm:w-auto px-4 py-2 rounded-xl bg-[#0F1214] hover:bg-[#1B2226] border border-[#26333B] text-[#94A3B8] text-xs font-semibold transition cursor-pointer text-center"
               >
                 Cancel
               </button>
@@ -1133,14 +1133,14 @@ export const AdminPortalPage: React.FC = () => {
       {/* CREATE PERSONNEL / ADMIN MODAL */}
       {modalType === 'CREATE_USER' && (
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
-          <div className="w-full max-w-lg glass-panel bg-slate-900 border border-purple-500/50 rounded-2xl sm:rounded-3xl p-5 sm:p-6 space-y-4 shadow-2xl animate-fadeIn my-auto max-h-[90vh] overflow-y-auto">
+          <div className="w-full max-w-lg glass-panel bg-[#161D22] border border-[#26333B] rounded-2xl sm:rounded-3xl p-5 sm:p-6 space-y-4 shadow-2xl animate-fadeIn my-auto max-h-[90vh] overflow-y-auto">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-400 shrink-0">
+              <div className="w-10 h-10 rounded-xl bg-tech-teal/20 border border-tech-teal/40 flex items-center justify-center text-tech-teal shrink-0">
                 <UserPlus className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-white">Directly Provision New Account</h3>
-                <p className="text-xs text-slate-400">Create pre-approved Administrator or Staff credentials</p>
+                <h3 className="text-base font-bold text-[#E8E6E3]">Directly Provision New Account</h3>
+                <p className="text-xs text-[#94A3B8]">Create pre-approved Administrator or Staff credentials</p>
               </div>
             </div>
 
@@ -1153,7 +1153,7 @@ export const AdminPortalPage: React.FC = () => {
                   value={newUserName}
                   onChange={(e) => setNewUserName(e.target.value)}
                   placeholder="e.g. Dr. Rajeshwar Sharma"
-                  className="w-full px-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:outline-none focus:border-purple-500"
+                  className="w-full px-3 py-2.5 bg-[#0F1214] border border-[#26333B] rounded-xl text-[#E8E6E3] text-xs focus:outline-none focus:border-tech-teal"
                 />
               </div>
 
@@ -1165,7 +1165,7 @@ export const AdminPortalPage: React.FC = () => {
                   value={newUserEmail}
                   onChange={(e) => setNewUserEmail(e.target.value)}
                   placeholder="name@moil.gov.in"
-                  className="w-full px-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white font-mono text-xs focus:outline-none focus:border-purple-500"
+                  className="w-full px-3 py-2.5 bg-[#0F1214] border border-[#26333B] rounded-xl text-[#E8E6E3] font-mono text-xs focus:outline-none focus:border-tech-teal"
                 />
               </div>
 
@@ -1175,7 +1175,7 @@ export const AdminPortalPage: React.FC = () => {
                   <select
                     value={newUserRole}
                     onChange={(e) => setNewUserRole(e.target.value as UserRole)}
-                    className="w-full px-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:outline-none focus:border-purple-500 cursor-pointer"
+                    className="w-full px-3 py-2.5 bg-[#0F1214] border border-[#26333B] rounded-xl text-[#E8E6E3] text-xs focus:outline-none focus:border-tech-teal cursor-pointer"
                   >
                     <option value="ADMIN">System Administrator (Full Control)</option>
                     <option value="MINE_PLANNER">Mine Planner</option>
@@ -1188,7 +1188,7 @@ export const AdminPortalPage: React.FC = () => {
                   <select
                     value={newUserStatus}
                     onChange={(e) => setNewUserStatus(e.target.value as 'APPROVED' | 'PENDING')}
-                    className="w-full px-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:outline-none focus:border-purple-500 cursor-pointer"
+                    className="w-full px-3 py-2.5 bg-[#0F1214] border border-[#26333B] rounded-xl text-[#E8E6E3] text-xs focus:outline-none focus:border-tech-teal cursor-pointer"
                   >
                     <option value="APPROVED">Approved (Immediate Login)</option>
                     <option value="PENDING">Pending (Requires Activation)</option>
@@ -1204,7 +1204,7 @@ export const AdminPortalPage: React.FC = () => {
                   value={newUserDepartment}
                   onChange={(e) => setNewUserDepartment(e.target.value)}
                   placeholder="e.g. Central Administration Directorate"
-                  className="w-full px-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:outline-none focus:border-purple-500"
+                  className="w-full px-3 py-2.5 bg-[#0F1214] border border-[#26333B] rounded-xl text-[#E8E6E3] text-xs focus:outline-none focus:border-tech-teal"
                 />
               </div>
 
@@ -1217,7 +1217,7 @@ export const AdminPortalPage: React.FC = () => {
                     value={newUserPassword}
                     onChange={(e) => setNewUserPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full pl-9 pr-10 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-white text-xs focus:outline-none focus:border-purple-500"
+                    className="w-full pl-9 pr-10 py-2.5 bg-[#0F1214] border border-[#26333B] rounded-xl text-[#E8E6E3] text-xs focus:outline-none focus:border-tech-teal"
                   />
                   <Lock className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
                   <button
@@ -1230,19 +1230,19 @@ export const AdminPortalPage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col-reverse sm:flex-row sm:items-center justify-end gap-2 pt-3 border-t border-slate-800">
+              <div className="flex flex-col-reverse sm:flex-row sm:items-center justify-end gap-2 pt-3 border-t border-[#26333B]">
                 <button
                   type="button"
                   onClick={closeModal}
                   disabled={actionLoading}
-                  className="w-full sm:w-auto px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition cursor-pointer text-center"
+                  className="w-full sm:w-auto px-4 py-2 rounded-xl bg-[#0F1214] hover:bg-[#1B2226] border border-[#26333B] text-[#94A3B8] text-xs font-semibold transition cursor-pointer text-center"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={actionLoading}
-                  className="w-full sm:w-auto px-5 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold shadow-lg transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                  className="w-full sm:w-auto px-5 py-2 rounded-xl bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-[#0F1214] font-extrabold text-xs shadow-lg transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                 >
                   {actionLoading ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <UserPlus className="w-3.5 h-3.5" />}
                   <span>Provision Account</span>

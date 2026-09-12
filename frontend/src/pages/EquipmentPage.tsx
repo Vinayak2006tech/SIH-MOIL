@@ -106,10 +106,10 @@ export const EquipmentPage: React.FC = () => {
   return (
     <div className="p-6 space-y-6 animate-fadeIn">
       {/* Top Header Card */}
-      <div className="glass-panel p-6 rounded-2xl border border-slate-800 flex items-start justify-between flex-wrap gap-4">
+      <div className="glass-panel p-6 rounded-2xl border border-[#26333B] bg-[#161D22]/85 flex items-start justify-between flex-wrap gap-4">
         <div>
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-xs font-mono uppercase font-bold text-purple-400">
+            <span className="text-xs font-mono uppercase font-bold text-manganese-400">
               Fleet Asset Reliability & Predictive Maintenance
             </span>
             <ProvenanceBadge
@@ -119,7 +119,7 @@ export const EquipmentPage: React.FC = () => {
               sourceName="Calibrated HEMM SCADA Telemetry Engine"
             />
           </div>
-          <h2 className="text-xl font-bold text-white mt-1">
+          <h2 className="text-xl font-bold text-[#E8E6E3] mt-1">
             Mining Equipment & Machinery Registry
           </h2>
           <p className="text-xs text-slate-400 mt-1 max-w-2xl">
@@ -144,9 +144,9 @@ export const EquipmentPage: React.FC = () => {
               });
               setIsModalOpen(true);
             }}
-            className="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold rounded-xl shadow-glow-purple transition"
+            className="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-[#0F1214] text-xs font-extrabold rounded-xl shadow-glow-teal transition"
           >
-            <Plus className="w-4 h-4" /> Register New Machinery
+            <Plus className="w-4 h-4 text-[#0F1214]" /> Register New Machinery
           </button>
         )}
       </div>
@@ -154,40 +154,40 @@ export const EquipmentPage: React.FC = () => {
       {/* Stats Row */}
       {stats && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="glass-panel p-4 rounded-xl border border-slate-800">
+          <div className="glass-panel p-4 rounded-xl border border-[#26333B] bg-[#161D22]/85">
             <span className="text-xs text-slate-400 font-bold uppercase block mb-1">Total Fleet Size</span>
-            <span className="text-2xl font-bold text-white font-mono">{stats.totalFleet} Units</span>
+            <span className="text-2xl font-bold text-[#E8E6E3] font-mono">{stats.totalFleet} Units</span>
             <span className="text-[11px] text-slate-400 block mt-1">Registered Across Mines</span>
           </div>
 
-          <div className="glass-panel p-4 rounded-xl border border-slate-800">
+          <div className="glass-panel p-4 rounded-xl border border-[#26333B] bg-[#161D22]/85">
             <span className="text-xs text-slate-400 font-bold uppercase block mb-1">Operational</span>
             <span className="text-2xl font-bold text-emerald-400 font-mono">{stats.operationalCount} Active</span>
             <span className="text-[11px] text-emerald-400/80 block mt-1">Ready on Extraction Bench</span>
           </div>
 
-          <div className="glass-panel p-4 rounded-xl border border-slate-800">
+          <div className="glass-panel p-4 rounded-xl border border-[#26333B] bg-[#161D22]/85">
             <span className="text-xs text-slate-400 font-bold uppercase block mb-1">Under Maintenance</span>
             <span className="text-2xl font-bold text-amber-400 font-mono">{stats.underMaintenanceCount} Overhauls</span>
             <span className="text-[11px] text-amber-400/80 block mt-1">Preventive Service</span>
           </div>
 
-          <div className="glass-panel p-4 rounded-xl border border-slate-800">
+          <div className="glass-panel p-4 rounded-xl border border-[#26333B] bg-[#161D22]/85">
             <span className="text-xs text-slate-400 font-bold uppercase block mb-1">Breakdown Stoppages</span>
-            <span className="text-2xl font-bold text-red-400 font-mono">{stats.breakdownCount} Critical</span>
-            <span className="text-[11px] text-red-400/80 block mt-1">Requires Immediate Spares</span>
+            <span className="text-2xl font-bold text-[#DC5F4E] font-mono">{stats.breakdownCount} Critical</span>
+            <span className="text-[11px] text-[#DC5F4E]/80 block mt-1">Requires Immediate Spares</span>
           </div>
         </div>
       )}
 
       {/* Filters Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#26333B] pb-3">
         <div className="flex items-center gap-2">
           <span className="text-xs text-slate-400 font-bold">Status:</span>
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-3 py-1.5 bg-slate-900 border border-slate-700 text-xs font-semibold text-white rounded-lg focus:outline-none focus:border-purple-500 cursor-pointer"
+            className="px-3 py-1.5 bg-[#12181A] border border-[#26333B] text-xs font-semibold text-[#E8E6E3] rounded-lg focus:outline-none focus:border-tech-teal cursor-pointer"
           >
             <option value="ALL">All Statuses</option>
             <option value="OPERATIONAL">Operational</option>
@@ -202,7 +202,7 @@ export const EquipmentPage: React.FC = () => {
           <select
             value={filterType}
             onChange={(e) => setFilterType(e.target.value)}
-            className="px-3 py-1.5 bg-slate-900 border border-slate-700 text-xs font-semibold text-white rounded-lg focus:outline-none focus:border-purple-500 cursor-pointer"
+            className="px-3 py-1.5 bg-[#12181A] border border-[#26333B] text-xs font-semibold text-[#E8E6E3] rounded-lg focus:outline-none focus:border-tech-teal cursor-pointer"
           >
             <option value="ALL">All Equipment Types</option>
             <option value="Excavator">Excavator / Shovel</option>
@@ -223,26 +223,26 @@ export const EquipmentPage: React.FC = () => {
           return (
             <div
               key={eq.code}
-              className={`glass-panel rounded-2xl p-5 border transition-all duration-200 ${isBreakdown
+              className={`glass-panel rounded-2xl p-5 border transition-all duration-200 bg-[#161D22]/85 ${isBreakdown
                 ? 'border-red-800/80 bg-red-950/20 shadow-glow-red'
                 : isMaintenance
                   ? 'border-amber-800/80 bg-amber-950/20'
-                  : 'border-slate-800 hover:border-slate-700'
+                  : 'border-[#26333B] hover:border-tech-teal/50'
                 }`}
             >
               {/* Header */}
               <div className="flex items-start justify-between gap-2 mb-2.5">
                 <div>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded font-mono uppercase bg-slate-950 text-slate-300 border border-slate-800">
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded font-mono uppercase bg-[#0F1214] text-slate-300 border border-[#26333B]">
                     {eq.code}
                   </span>
-                  <h3 className="text-sm font-bold text-white mt-1">{eq.name}</h3>
+                  <h3 className="text-sm font-bold text-[#E8E6E3] mt-1">{eq.name}</h3>
                   <p className="text-[11px] text-slate-400">{eq.mineName}</p>
                 </div>
 
                 <span
                   className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase font-mono ${isBreakdown
-                    ? 'bg-red-950 text-red-400 border border-red-800 animate-pulse'
+                    ? 'bg-red-950 text-[#DC5F4E] border border-red-800 animate-pulse'
                     : isMaintenance
                       ? 'bg-amber-950 text-amber-400 border border-amber-800'
                       : 'bg-emerald-950 text-emerald-400 border border-emerald-800'
@@ -253,7 +253,7 @@ export const EquipmentPage: React.FC = () => {
               </div>
 
               {/* Specs Grid */}
-              <div className="grid grid-cols-2 gap-2 my-3 p-3 rounded-xl bg-slate-950/50 border border-slate-800/80 text-xs">
+              <div className="grid grid-cols-2 gap-2 my-3 p-3 rounded-xl bg-[#0F1214]/60 border border-[#26333B] text-xs">
                 <div>
                   <span className="text-[10px] text-slate-400 block font-mono">Model / Capacity</span>
                   <span className="font-semibold text-slate-200 truncate block">
@@ -262,7 +262,7 @@ export const EquipmentPage: React.FC = () => {
                 </div>
                 <div>
                   <span className="text-[10px] text-slate-400 block font-mono">Uptime Availability</span>
-                  <span className="font-bold text-purple-400 font-mono">{eq.uptimePct}%</span>
+                  <span className="font-bold text-tech-teal font-mono">{eq.uptimePct}%</span>
                 </div>
                 <div>
                   <span className="text-[10px] text-slate-400 block font-mono">MTBF Reliability</span>
@@ -276,29 +276,29 @@ export const EquipmentPage: React.FC = () => {
 
               {/* Critical Alert Banner if breakdown */}
               {eq.criticalAlert && (
-                <div className="p-2.5 rounded-lg bg-red-950/40 border border-red-900/60 text-xs text-red-300 mb-3 flex items-center gap-2">
-                  <AlertTriangle className="w-3.5 h-3.5 text-red-400 shrink-0" />
+                <div className="p-2.5 rounded-lg bg-red-950/40 border border-red-900/60 text-xs text-[#DC5F4E] mb-3 flex items-center gap-2">
+                  <AlertTriangle className="w-3.5 h-3.5 text-[#DC5F4E] shrink-0" />
                   <span className="text-[11px]">{eq.criticalAlert}</span>
                 </div>
               )}
 
               {/* Actions Footer */}
               {user?.role !== 'VIEWER' && (
-                <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-800">
+                <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#26333B]">
                   <button
                     onClick={() => {
                       setModalMode('edit');
                       setFormData(eq);
                       setIsModalOpen(true);
                     }}
-                    className="p-1.5 text-slate-400 hover:text-purple-300 hover:bg-slate-800 rounded-lg text-xs transition flex items-center gap-1"
+                    className="p-1.5 text-slate-400 hover:text-tech-teal hover:bg-[#12181A] rounded-lg text-xs transition flex items-center gap-1"
                   >
                     <Edit2 className="w-3.5 h-3.5" /> Edit
                   </button>
                   {user?.role === 'ADMIN' && (
                     <button
                       onClick={() => handleDelete(eq.code)}
-                      className="p-1.5 text-slate-400 hover:text-red-400 hover:bg-slate-800 rounded-lg text-xs transition flex items-center gap-1"
+                      className="p-1.5 text-slate-400 hover:text-[#DC5F4E] hover:bg-[#12181A] rounded-lg text-xs transition flex items-center gap-1"
                     >
                       <Trash2 className="w-3.5 h-3.5" /> Decommission
                     </button>
@@ -313,9 +313,9 @@ export const EquipmentPage: React.FC = () => {
       {/* Modal: Register / Edit Equipment */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
-          <div className="w-full max-w-lg glass-panel bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl p-6 space-y-4">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-              <h3 className="text-sm font-bold text-white">
+          <div className="w-full max-w-lg glass-panel bg-[#161D22] border border-[#26333B] rounded-2xl shadow-2xl p-6 space-y-4">
+            <div className="flex items-center justify-between border-b border-[#26333B] pb-3">
+              <h3 className="text-sm font-bold text-[#E8E6E3]">
                 {modalMode === 'create' ? 'Register New HEMM Machinery' : `Edit Equipment ${formData.code}`}
               </h3>
               <button
@@ -336,7 +336,7 @@ export const EquipmentPage: React.FC = () => {
                     value={formData.code}
                     disabled={modalMode === 'edit'}
                     onChange={(e) => setFormData({ ...formData, code: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-white font-mono"
+                    className="w-full px-3 py-2 bg-[#0F1214] border border-[#26333B] rounded-lg text-white font-mono focus:outline-none focus:border-tech-teal"
                   />
                 </div>
                 <div>
@@ -347,7 +347,7 @@ export const EquipmentPage: React.FC = () => {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="e.g. Komatsu PC600-8"
-                    className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-white"
+                    className="w-full px-3 py-2 bg-[#0F1214] border border-[#26333B] rounded-lg text-white focus:outline-none focus:border-tech-teal"
                   />
                 </div>
               </div>
@@ -358,7 +358,7 @@ export const EquipmentPage: React.FC = () => {
                   <select
                     value={formData.mineId}
                     onChange={(e) => setFormData({ ...formData, mineId: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-white"
+                    className="w-full px-3 py-2 bg-[#0F1214] border border-[#26333B] rounded-lg text-white focus:outline-none focus:border-tech-teal"
                   >
                     {mines.map((m) => (
                       <option key={m.mineId} value={m.mineId}>
@@ -372,7 +372,7 @@ export const EquipmentPage: React.FC = () => {
                   <select
                     value={formData.type}
                     onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-white"
+                    className="w-full px-3 py-2 bg-[#0F1214] border border-[#26333B] rounded-lg text-white focus:outline-none focus:border-tech-teal"
                   >
                     <option value="Excavator">Excavator / Shovel</option>
                     <option value="Dumper Truck">Dumper Truck</option>
@@ -391,7 +391,7 @@ export const EquipmentPage: React.FC = () => {
                     value={formData.equipmentModel}
                     onChange={(e) => setFormData({ ...formData, equipmentModel: e.target.value })}
                     placeholder="e.g. Komatsu PC600"
-                    className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-white"
+                    className="w-full px-3 py-2 bg-[#0F1214] border border-[#26333B] rounded-lg text-white focus:outline-none focus:border-tech-teal"
                   />
                 </div>
                 <div>
@@ -401,7 +401,7 @@ export const EquipmentPage: React.FC = () => {
                     value={formData.capacity}
                     onChange={(e) => setFormData({ ...formData, capacity: e.target.value })}
                     placeholder="e.g. 3.5 m³ Bucket"
-                    className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-white"
+                    className="w-full px-3 py-2 bg-[#0F1214] border border-[#26333B] rounded-lg text-white focus:outline-none focus:border-tech-teal"
                   />
                 </div>
               </div>
@@ -412,7 +412,7 @@ export const EquipmentPage: React.FC = () => {
                   <select
                     value={formData.status}
                     onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-white"
+                    className="w-full px-3 py-2 bg-[#0F1214] border border-[#26333B] rounded-lg text-white focus:outline-none focus:border-tech-teal"
                   >
                     <option value="OPERATIONAL">OPERATIONAL</option>
                     <option value="UNDER_MAINTENANCE">UNDER MAINTENANCE</option>
@@ -426,22 +426,22 @@ export const EquipmentPage: React.FC = () => {
                     type="date"
                     value={formData.nextScheduledMaintenance}
                     onChange={(e) => setFormData({ ...formData, nextScheduledMaintenance: e.target.value })}
-                    className="w-full px-3 py-2 bg-slate-950 border border-slate-700 rounded-lg text-white font-mono"
+                    className="w-full px-3 py-2 bg-[#0F1214] border border-[#26333B] rounded-lg text-white font-mono focus:outline-none focus:border-tech-teal"
                   />
                 </div>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-4 border-t border-slate-800">
+              <div className="flex items-center justify-end gap-2 pt-4 border-t border-[#26333B]">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-lg"
+                  className="px-4 py-2 bg-[#12181A] hover:bg-[#1B2226] border border-[#26333B] text-slate-300 font-bold rounded-lg"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded-lg shadow-glow-purple"
+                  className="px-5 py-2 bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-[#0F1214] font-extrabold rounded-lg shadow-glow-teal"
                 >
                   Save Record
                 </button>

@@ -11,16 +11,16 @@ export const ProblemStatementModal: React.FC<ProblemStatementModalProps> = ({ is
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
-      <div className="relative w-full max-w-3xl glass-panel bg-slate-900/95 border border-purple-500/30 rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col">
+      <div className="relative w-full max-w-3xl glass-panel bg-[#161D22]/98 border border-[#26333B] rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] flex flex-col">
         {/* Header */}
-        <div className="px-6 py-5 border-b border-slate-800 flex items-center justify-between bg-gradient-to-r from-purple-950/40 via-slate-900 to-slate-900">
+        <div className="px-6 py-5 border-b border-[#26333B] flex items-center justify-between bg-gradient-to-r from-[#6B5B95]/30 via-[#161D22] to-[#161D22]">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-xl bg-purple-500/20 border border-purple-500/30 text-purple-400">
+            <div className="p-2 rounded-xl bg-teal-500/15 border border-teal-500/30 text-teal-300">
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                MOIL ReserveIQ <span className="text-xs px-2 py-0.5 rounded-full bg-purple-950 text-purple-300 border border-purple-800">Smart India Hackathon</span>
+              <h2 className="text-lg font-bold text-[#E8E6E3] flex items-center gap-2 font-sans">
+                MOIL ReserveIQ <span className="text-xs px-2 py-0.5 rounded-full bg-teal-950 text-teal-300 border border-teal-800 font-mono font-bold">Smart India Hackathon</span>
               </h2>
               <p className="text-xs text-slate-400">
                 Ministry of Steel / MOIL Limited Problem Statement Architecture
@@ -29,7 +29,7 @@ export const ProblemStatementModal: React.FC<ProblemStatementModalProps> = ({ is
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition"
+            className="p-2 rounded-lg text-slate-400 hover:text-[#E8E6E3] hover:bg-[#1B2226] transition cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -38,30 +38,30 @@ export const ProblemStatementModal: React.FC<ProblemStatementModalProps> = ({ is
         {/* Content Body */}
         <div className="p-6 overflow-y-auto space-y-6 text-sm text-slate-300">
           {/* Problem Statement */}
-          <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800">
-            <h4 className="font-semibold text-purple-300 mb-2 flex items-center gap-2">
-              <Layers className="w-4 h-4" /> The Operational Challenge
+          <div className="p-4 rounded-xl bg-[#0F1214]/80 border border-[#26333B]">
+            <h4 className="font-semibold text-teal-300 mb-2 flex items-center gap-2 font-sans">
+              <Layers className="w-4 h-4 text-teal-400" /> The Operational Challenge
             </h4>
-            <p className="text-xs leading-relaxed text-slate-300">
+            <p className="text-xs leading-relaxed text-[#E8E6E3]/90">
               <strong>MOIL Limited</strong> (India's largest manganese ore producer, meeting over 50% of domestic demand) currently estimates reserves and plans monthly extraction using manual surveys, paper drilling logs, and isolated blast records. This creates severe mismatch between expected and actual output, leading to unplanned production shortfalls, equipment bottlenecks, and contract penalties.
             </p>
           </div>
 
           {/* Multimodal 4-Pillar Integration */}
           <div>
-            <h4 className="font-semibold text-white mb-3">Multimodal AI/ML Architecture</h4>
+            <h4 className="font-semibold text-[#E8E6E3] mb-3 font-sans">Multimodal AI/ML Architecture</h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <div className="p-3.5 rounded-xl bg-slate-800/40 border border-slate-700/50">
-                <div className="flex items-center gap-2 text-purple-400 font-semibold text-xs mb-1">
-                  <Layers className="w-4 h-4" /> 1. Sub-Surface Geology
+              <div className="p-3.5 rounded-xl bg-[#1B2226]/60 border border-[#26333B]">
+                <div className="flex items-center gap-2 text-[#BFB2D3] font-semibold text-xs mb-1 font-sans">
+                  <Layers className="w-4 h-4 text-[#9B8BBF]" /> 1. Sub-Surface Geology
                 </div>
                 <p className="text-[11px] text-slate-400">
                   Diamond core drilling logs, RQD hardness, seam depth & thickness, ore grade assays (% Mn, % Fe, % SiO2, % P) mapped to UNFC/JORC reserve categories.
                 </p>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-slate-800/40 border border-slate-700/50">
-                <div className="flex items-center gap-2 text-emerald-400 font-semibold text-xs mb-1">
+              <div className="p-3.5 rounded-xl bg-[#1B2226]/60 border border-[#26333B]">
+                <div className="flex items-center gap-2 text-emerald-400 font-semibold text-xs mb-1 font-sans">
                   <Activity className="w-4 h-4" /> 2. Operational & Equipment IoT
                 </div>
                 <p className="text-[11px] text-slate-400">
@@ -69,8 +69,8 @@ export const ProblemStatementModal: React.FC<ProblemStatementModalProps> = ({ is
                 </p>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-slate-800/40 border border-slate-700/50">
-                <div className="flex items-center gap-2 text-amber-400 font-semibold text-xs mb-1">
+              <div className="p-3.5 rounded-xl bg-[#1B2226]/60 border border-[#26333B]">
+                <div className="flex items-center gap-2 text-amber-400 font-semibold text-xs mb-1 font-sans">
                   <Satellite className="w-4 h-4" /> 3. Earth Observation Proxies
                 </div>
                 <p className="text-[11px] text-slate-400">
@@ -78,9 +78,9 @@ export const ProblemStatementModal: React.FC<ProblemStatementModalProps> = ({ is
                 </p>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-slate-800/40 border border-slate-700/50">
-                <div className="flex items-center gap-2 text-blue-400 font-semibold text-xs mb-1">
-                  <ShieldCheck className="w-4 h-4" /> 4. Prescriptive Action AI
+              <div className="p-3.5 rounded-xl bg-[#1B2226]/60 border border-[#26333B]">
+                <div className="flex items-center gap-2 text-teal-300 font-semibold text-xs mb-1 font-sans">
+                  <ShieldCheck className="w-4 h-4 text-teal-400" /> 4. Prescriptive Action AI
                 </div>
                 <p className="text-[11px] text-slate-400">
                   Automated mitigation engine generating actionable interventions (blasting shifts, equipment transfers, ore grade blending) with closed-loop outcome tracking.
@@ -90,8 +90,8 @@ export const ProblemStatementModal: React.FC<ProblemStatementModalProps> = ({ is
           </div>
 
           {/* Key Deliverables */}
-          <div className="p-4 rounded-xl bg-purple-950/20 border border-purple-800/40">
-            <h4 className="font-semibold text-purple-300 mb-2">Key Demonstration Highlights</h4>
+          <div className="p-4 rounded-xl bg-[#6B5B95]/15 border border-[#6B5B95]/30">
+            <h4 className="font-semibold text-[#BFB2D3] mb-2 font-sans">Key Demonstration Highlights</h4>
             <ul className="text-xs space-y-1.5 list-disc list-inside text-slate-300">
               <li><strong>Interactive GIS Reserve Map:</strong> Geospatial drilldown into 10 operating MOIL mines (Balaghat, Dongri Buzurg, Kandri, Mansar, Gumgaon, Tirodi, Chikla, Ukwa, Beldongri, Sitapatore), 6 processing plants, 3 greenfield exploration blocks, and 23 collar borehole logs with NDVI overlays.</li>
               <li><strong>Explainable Shortfall AI:</strong> 30/60/90-day probabilistic forecasting with SHAP-like feature importance breakdowns.</li>
@@ -102,11 +102,11 @@ export const ProblemStatementModal: React.FC<ProblemStatementModalProps> = ({ is
         </div>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-slate-800 bg-slate-950/60 flex items-center justify-between">
-          <span className="text-xs text-slate-500">MOIL ReserveIQ v1.0 • Enterprise Mine Planning System</span>
+        <div className="px-6 py-4 border-t border-[#26333B] bg-[#0F1214]/80 flex items-center justify-between">
+          <span className="text-xs text-slate-500 font-mono">MOIL ReserveIQ v1.0 • Enterprise Mine Planning System</span>
           <button
             onClick={onClose}
-            className="px-5 py-2 bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold rounded-lg shadow-glow-purple transition"
+            className="px-5 py-2 bg-gradient-to-r from-[#6B5B95] to-[#0D9488] hover:from-[#7E69AB] hover:to-[#2DD4BF] text-[#E8E6E3] text-xs font-bold rounded-lg shadow-glow-manganese transition cursor-pointer"
           >
             Explore Dashboard
           </button>

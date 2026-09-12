@@ -4,52 +4,52 @@
 
 @layer base {
   body {
-    @apply bg-[#0B0F17] text-slate-100 font-sans antialiased overflow-x-hidden;
+    @apply bg-[#0F1214] text-[#E8E6E3] font-sans antialiased overflow-x-hidden;
     color-scheme: dark;
   }
 }
 
-/* Custom Industrial Dark Scrollbar */
+/* Custom Industrial Earth-Tech Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0B0F17;
+  background: #0F1214;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1E293B;
+  background: #26333B;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #374751;
 }
 
 /* Leaflet Map Custom Dark Theme & Popups */
 .leaflet-container {
   width: 100%;
   height: 100%;
-  background: #0B0F17 !important;
+  background: #0F1214 !important;
   font-family: inherit;
 }
 
 .leaflet-popup-content-wrapper {
-  background: #111827 !important;
-  color: #F3F4F6 !important;
-  border: 1px solid #1E293B !important;
+  background: #161D22 !important;
+  color: #E8E6E3 !important;
+  border: 1px solid #26333B !important;
   border-radius: 0.5rem !important;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6) !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.75) !important;
 }
 
 .leaflet-popup-tip {
-  background: #111827 !important;
+  background: #161D22 !important;
 }
 
 .leaflet-container a.leaflet-popup-close-button {
-  color: #9CA3AF !important;
+  color: #94A3B8 !important;
   padding: 8px !important;
 }
 
@@ -215,25 +215,30 @@
   background: linear-gradient(
     60deg,
     transparent,
-    rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.16),
     transparent
   );
   transform: rotate(25deg);
   animation: shimmer 3.5s infinite;
 }
 
-/* Background Cyber Grid */
+/* Background Earth-Tech Grid */
 .bg-grid-cyber {
-  background-image: radial-gradient(rgba(139, 92, 246, 0.15) 1px, transparent 1px);
+  background-image: radial-gradient(rgba(45, 212, 191, 0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.bg-grid-earth {
+  background-image: radial-gradient(rgba(107, 91, 149, 0.15) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
 /* Glassmorphic Panel */
 .glass-panel {
-  background: rgba(17, 24, 39, 0.75);
+  background: rgba(27, 34, 38, 0.82);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(38, 51, 59, 0.85);
 }
 
 /* Card Glow Transitions */
@@ -242,17 +247,32 @@
 }
 
 .card-hover:hover {
-  transform: translateY(-5px);
-  border-color: rgba(139, 92, 246, 0.6);
-  box-shadow: 0 15px 35px -5px rgba(139, 92, 246, 0.3);
+  transform: translateY(-4px);
+  border-color: rgba(45, 212, 191, 0.5);
+  box-shadow: 0 15px 35px -5px rgba(45, 212, 191, 0.2);
 }
 
 /* Glowing Neon Borders */
+.glow-border-teal {
+  box-shadow: 0 0 20px -3px rgba(45, 212, 191, 0.35);
+}
+
+.glow-border-manganese {
+  box-shadow: 0 0 20px -3px rgba(107, 91, 149, 0.45);
+}
+
 .glow-border-purple {
-  box-shadow: 0 0 20px -3px rgba(168, 85, 247, 0.35);
+  box-shadow: 0 0 20px -3px rgba(107, 91, 149, 0.40);
 }
 
 .glow-border-cyan {
-  box-shadow: 0 0 20px -3px rgba(6, 182, 212, 0.35);
+  box-shadow: 0 0 20px -3px rgba(0, 194, 204, 0.35);
 }
 
+.glow-border-amber {
+  box-shadow: 0 0 20px -3px rgba(245, 158, 11, 0.35);
+}
+
+.glow-border-red {
+  box-shadow: 0 0 20px -3px rgba(220, 95, 78, 0.35);
+}

@@ -14,14 +14,14 @@ export const RiskBadge: React.FC<RiskBadgeProps> = ({ level, showDot = true, siz
   let dotColor = 'bg-emerald-400';
 
   if (normLevel === 'CRITICAL') {
-    bgClasses = 'bg-red-950/70 text-red-400 border-red-800/80 shadow-glow-red';
-    dotColor = 'bg-red-500 animate-pulse';
+    bgClasses = 'bg-red-950/70 text-[#DC5F4E] border-red-800/80 shadow-glow-red';
+    dotColor = 'bg-[#DC5F4E] animate-pulse';
   } else if (normLevel === 'HIGH') {
     bgClasses = 'bg-amber-950/70 text-amber-400 border-amber-800/80 shadow-glow-amber';
     dotColor = 'bg-amber-400 animate-pulse';
   } else if (normLevel === 'MODERATE') {
-    bgClasses = 'bg-blue-950/60 text-blue-400 border-blue-800/60';
-    dotColor = 'bg-blue-400';
+    bgClasses = 'bg-teal-950/60 text-teal-300 border-teal-800/60';
+    dotColor = 'bg-teal-400';
   }
 
   const sizeClasses = {
@@ -32,7 +32,7 @@ export const RiskBadge: React.FC<RiskBadgeProps> = ({ level, showDot = true, siz
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full border uppercase ${bgClasses} ${sizeClasses} transition-all duration-200`}
+      className={`inline-flex items-center gap-1.5 rounded-full border uppercase font-mono ${bgClasses} ${sizeClasses} transition-all duration-200`}
     >
       {showDot && <span className={`w-1.5 h-1.5 rounded-full ${dotColor}`} />}
       {normLevel}

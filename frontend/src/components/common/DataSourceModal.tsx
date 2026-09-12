@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, ExternalLink, ShieldCheck, Database, Satellite, AlertTriangle, CheckCircle2, Calendar, FileText } from 'lucide-react';
+import { X, ExternalLink, ShieldCheck, Database, Satellite, AlertTriangle, CheckCircle2 } from 'lucide-react';
 import type { DataSource, DataSourceType } from '../../types';
 import { api } from '../../services/api';
 
@@ -56,9 +56,9 @@ export const DataSourceModal: React.FC<DataSourceModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn">
-      <div className="w-full max-w-lg glass-panel bg-slate-900 border border-slate-700 rounded-3xl p-6 shadow-2xl space-y-5 text-xs">
+      <div className="w-full max-w-lg glass-panel bg-[#161D22] border border-[#26333B] rounded-3xl p-6 shadow-2xl space-y-5 text-xs">
         {/* Header */}
-        <div className="flex items-start justify-between border-b border-slate-800 pb-3">
+        <div className="flex items-start justify-between border-b border-[#26333B] pb-3">
           <div className="flex items-center gap-2.5">
             <div
               className={`p-2 rounded-xl border ${source?.isSynthetic
@@ -69,17 +69,17 @@ export const DataSourceModal: React.FC<DataSourceModalProps> = ({
               {source?.isSynthetic ? <AlertTriangle className="w-5 h-5" /> : <ShieldCheck className="w-5 h-5" />}
             </div>
             <div>
-              <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-purple-400">
+              <span className="text-[10px] font-mono uppercase tracking-wider font-bold text-teal-400">
                 Data Provenance & Traceability
               </span>
-              <h3 className="text-sm font-bold text-white mt-0.5">
+              <h3 className="text-sm font-bold text-[#E8E6E3] mt-0.5 font-sans">
                 {source?.datasetName || 'Data Source Verification'}
               </h3>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-[#E8E6E3] hover:bg-[#1B2226] transition cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>
@@ -105,7 +105,7 @@ export const DataSourceModal: React.FC<DataSourceModalProps> = ({
                 <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
               )}
               <div className="space-y-0.5">
-                <span className="font-bold text-[11px] block">
+                <span className="font-bold text-[11px] block font-sans">
                   {source.isSynthetic
                     ? 'Demonstration Data Notice'
                     : 'Verified Authentic Public Source'}
@@ -119,14 +119,14 @@ export const DataSourceModal: React.FC<DataSourceModalProps> = ({
             </div>
 
             {/* Metadata Grid */}
-            <div className="grid grid-cols-2 gap-2.5 p-3 rounded-2xl bg-slate-950/60 border border-slate-800 font-mono">
+            <div className="grid grid-cols-2 gap-2.5 p-3 rounded-2xl bg-[#0F1214]/80 border border-[#26333B] font-mono">
               <div>
                 <span className="text-[10px] text-slate-400 block">Dataset Type</span>
-                <span className="font-bold text-white text-[11px]">{source.dataType.replace(/_/g, ' ')}</span>
+                <span className="font-bold text-[#E8E6E3] text-[11px]">{source.dataType.replace(/_/g, ' ')}</span>
               </div>
               <div>
                 <span className="text-[10px] text-slate-400 block">Source Identifier</span>
-                <span className="font-bold text-purple-400 text-[11px]">{source.sourceId}</span>
+                <span className="font-bold text-teal-400 text-[11px]">{source.sourceId}</span>
               </div>
               <div>
                 <span className="text-[10px] text-slate-400 block">Publication Date</span>
@@ -140,14 +140,14 @@ export const DataSourceModal: React.FC<DataSourceModalProps> = ({
 
             {/* Source Details */}
             <div className="space-y-1.5">
-              <span className="text-[10px] text-slate-400 font-bold uppercase block">Originating Source</span>
-              <p className="text-slate-200 font-semibold">{source.sourceName}</p>
+              <span className="text-[10px] text-slate-400 font-bold uppercase block font-mono">Originating Source</span>
+              <p className="text-[#E8E6E3] font-semibold">{source.sourceName}</p>
               <p className="text-[11px] text-slate-400 leading-relaxed">{source.description}</p>
             </div>
 
             {/* License & External Link */}
-            <div className="pt-2 border-t border-slate-800 flex items-center justify-between gap-2 flex-wrap">
-              <span className="text-[10px] text-slate-400 max-w-xs truncate">
+            <div className="pt-2 border-t border-[#26333B] flex items-center justify-between gap-2 flex-wrap">
+              <span className="text-[10px] text-slate-400 max-w-xs truncate font-mono">
                 License: {source.license}
               </span>
               {source.sourceUrl && !source.sourceUrl.startsWith('local://') ? (
@@ -155,12 +155,12 @@ export const DataSourceModal: React.FC<DataSourceModalProps> = ({
                   href={source.sourceUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-1 px-3 py-1.5 bg-purple-600/20 hover:bg-purple-600/30 text-purple-300 font-bold rounded-lg border border-purple-500/40 transition"
+                  className="flex items-center gap-1 px-3 py-1.5 bg-teal-600/20 hover:bg-teal-600/30 text-teal-300 font-bold rounded-lg border border-teal-500/40 transition cursor-pointer"
                 >
                   <ExternalLink className="w-3 h-3" /> View Public Source
                 </a>
               ) : (
-                <span className="text-[10px] text-slate-400 font-mono px-2 py-1 rounded bg-slate-800">
+                <span className="text-[10px] text-slate-400 font-mono px-2 py-1 rounded bg-[#0F1214] border border-[#26333B]">
                   Internal Test Asset
                 </span>
               )}
