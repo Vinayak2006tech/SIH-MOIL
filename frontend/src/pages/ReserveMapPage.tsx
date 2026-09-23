@@ -508,14 +508,18 @@ export const ReserveMapPage: React.FC = () => {
   const allLocations = [
     ...mines.map((m) => ({ id: m.mineId, name: m.name, type: `${m.type} Mine`, state: `${m.district}, ${m.state}`, reserves: `${m.totalReservesMt} Mt`, lat: m.latitude, lng: m.longitude, raw: m, category: 'MINE' as const })),
     ...facilities.map((f) => ({ id: f.facilityId, name: f.name, type: f.type, state: `${f.district}, ${f.state}`, reserves: f.capacity, lat: f.latitude, lng: f.longitude, raw: f, category: 'FACILITY' as const })),
-    ...explorationBlocks.map((b) => ({ id: b.blockId, name: b.name, type: 'Greenfield Block', state: `${b.district}, ${b.state}`, reserves: `~${b.estimatedPotentialMt} Mt Pot.`, lat: b.latitude, lng: b.longitude, raw: b, category: 'EXPLORATION' as const }))
+    ...explorationBlocks.map((b) => ({ id: b.blockId, name: b.name || b.blockName || 'Exploration Block', type: 'Greenfield Block', state: `${b.district}, ${b.state}`, reserves: `~${b.estimatedPotentialMt || b.estimatedResourceMt || 10} Mt Pot.`, lat: b.latitude, lng: b.longitude, raw: b, category: 'EXPLORATION' as const }))
   ];
 
   const filteredLocations = allLocations.filter((loc) => {
     const matchesCat = filterCategory === 'ALL' || loc.category === filterCategory;
-    const matchesSearch = loc.name.toLowerCase().includes(searchLocation.toLowerCase()) ||
-      loc.type.toLowerCase().includes(searchLocation.toLowerCase()) ||
-      loc.state.toLowerCase().includes(searchLocation.toLowerCase());
+    const locName = loc.name || '';
+    const locType = loc.type || '';
+    const locState = loc.state || '';
+    const search = searchLocation.toLowerCase();
+    const matchesSearch = locName.toLowerCase().includes(search) ||
+      locType.toLowerCase().includes(search) ||
+      locState.toLowerCase().includes(search);
     return matchesCat && matchesSearch;
   });
 
@@ -718,7 +722,7 @@ export const ReserveMapPage: React.FC = () => {
                       <button
                         key={loc.id}
                         onClick={() => {
-                          handleFlyTo(loc.lat, loc.lng, 13);
+                          handleFlyTo(loc.lat ?? 21.8, loc.lng ?? 79.8, 13);
                           if (loc.category === 'MINE') {
                             setSelectedMineId(loc.id);
                             const mz = zones.find((z) => z.mineId === loc.id);
@@ -1189,7 +1193,7 @@ export const ReserveMapPage: React.FC = () => {
 
           {/* Geological Confidence Polygons */}
           {showConfidencePolygons &&
-            zones.map((zone) => {
+            zones.filter((z) => z.polygon && z.polygon.length > 0).map((zone) => {
               const isSelected = selectedZone?.zoneId === zone.zoneId;
               const fillColor =
                 zone.confidenceCategory === 'HIGH_CONFIDENCE_PROVED'
@@ -1201,7 +1205,7 @@ export const ReserveMapPage: React.FC = () => {
               return (
                 <Polygon
                   key={zone.zoneId}
-                  positions={zone.polygon}
+                  positions={zone.polygon!}
                   pathOptions={{
                     color: fillColor,
                     weight: isSelected ? 3 : 1.5,
@@ -1261,57 +1265,64 @@ export const ReserveMapPage: React.FC = () => {
 
           {/* Operating Mine Markers (10 MOIL Leases) */}
           {showMines &&
-            mines.map((mine) => (
-              <Marker
-                key={mine.mineId}
-                position={[mine.latitude, mine.longitude]}
-                icon={createMineMarker(mine.type, mine.currentShortfallRiskLevel, mine.name)}
-                eventHandlers={{
-                  click: () => {
-                    setSelectedMineId(mine.mineId);
-                    const matchedZone = zones.find((z) => z.mineId === mine.mineId);
-                    if (matchedZone) setSelectedZone(matchedZone);
-                    const topCell = allProbabilityCells.find((c) => c.mineId === mine.mineId && c.isCoreZone);
-                    if (topCell) setSelectedProbabilityCell(topCell);
-                    setSelectedFacility(null);
-                    setSelectedBlock(null);
-                    setIsDrawerOpen(true);
-                  }
-                }}
-              >
-                <Popup>
-                  <div className="p-1.5 space-y-1.5 text-xs font-sans">
-                    <h4 className="font-bold text-slate-900 text-sm">{mine.name}</h4>
-                    <p className="text-slate-600 font-medium">{mine.district}, {mine.state}</p>
-                    <div className="grid grid-cols-2 gap-2 text-xs font-mono py-1">
-                      <div className="bg-slate-100 p-1.5 rounded">
-                        <span className="text-[10px] text-slate-500 font-sans block">Total Reserves</span>
-                        <span className="font-bold text-purple-700">{mine.totalReservesMt} Mt</span>
+            mines.map((mine) => {
+              const mLat = mine.latitude ?? (mine.coordinates && !Array.isArray(mine.coordinates) ? (mine.coordinates as any).lat : Array.isArray(mine.coordinates) ? mine.coordinates[0] : 21.8);
+              const mLng = mine.longitude ?? (mine.coordinates && !Array.isArray(mine.coordinates) ? (mine.coordinates as any).lng : Array.isArray(mine.coordinates) ? mine.coordinates[1] : 79.8);
+              return (
+                <Marker
+                  key={mine.mineId}
+                  position={[mLat, mLng]}
+                  icon={createMineMarker(mine.type, mine.currentShortfallRiskLevel, mine.name)}
+                  eventHandlers={{
+                    click: () => {
+                      setSelectedMineId(mine.mineId);
+                      const matchedZone = zones.find((z) => z.mineId === mine.mineId);
+                      if (matchedZone) setSelectedZone(matchedZone);
+                      const topCell = allProbabilityCells.find((c) => c.mineId === mine.mineId && c.isCoreZone);
+                      if (topCell) setSelectedProbabilityCell(topCell);
+                      setSelectedFacility(null);
+                      setSelectedBlock(null);
+                      setIsDrawerOpen(true);
+                    }
+                  }}
+                >
+                  <Popup>
+                    <div className="p-1.5 space-y-1.5 text-xs font-sans">
+                      <h4 className="font-bold text-slate-900 text-sm">{mine.name}</h4>
+                      <p className="text-slate-600 font-medium">{mine.district}, {mine.state}</p>
+                      <div className="grid grid-cols-2 gap-2 text-xs font-mono py-1">
+                        <div className="bg-slate-100 p-1.5 rounded">
+                          <span className="text-[10px] text-slate-500 font-sans block">Total Reserves</span>
+                          <span className="font-bold text-purple-700">{mine.totalReservesMt} Mt</span>
+                        </div>
+                        <div className="bg-slate-100 p-1.5 rounded">
+                          <span className="text-[10px] text-slate-500 font-sans block">Monthly Capacity</span>
+                          <span className="font-bold text-slate-800">{mine.annualCapacityTonnes ? (mine.annualCapacityTonnes / 12).toFixed(0) : (mine.targetMonthlyTonnes || 25000).toLocaleString()} t</span>
+                        </div>
                       </div>
-                      <div className="bg-slate-100 p-1.5 rounded">
-                        <span className="text-[10px] text-slate-500 font-sans block">Monthly Capacity</span>
-                        <span className="font-bold text-slate-800">{mine.annualCapacityTonnes ? (mine.annualCapacityTonnes / 12).toFixed(0) : (mine.targetMonthlyTonnes || 25000).toLocaleString()} t</span>
+                      <p className="text-[11px] text-slate-700"><strong>Mineralogy:</strong> {mine.keyMineralogy || 'Braunite, Gondite'}</p>
+                      <p className="text-[11px] text-slate-700"><strong>Processing:</strong> {mine.onSiteProcessing || 'Screening & Sizing'}</p>
+                      <div className="pt-1 flex items-center justify-between">
+                        <RiskBadge level={mine.currentShortfallRiskLevel} size="sm" />
+                        <span className="text-[10px] text-slate-500 font-mono">Est. {mine.commissioningYear || 1905}</span>
                       </div>
                     </div>
-                    <p className="text-[11px] text-slate-700"><strong>Mineralogy:</strong> {mine.keyMineralogy || 'Braunite, Gondite'}</p>
-                    <p className="text-[11px] text-slate-700"><strong>Processing:</strong> {mine.onSiteProcessing || 'Screening & Sizing'}</p>
-                    <div className="pt-1 flex items-center justify-between">
-                      <RiskBadge level={mine.currentShortfallRiskLevel} size="sm" />
-                      <span className="text-[10px] text-slate-500 font-mono">Est. {mine.commissioningYear || 1905}</span>
-                    </div>
-                  </div>
-                </Popup>
-              </Marker>
-            ))}
+                  </Popup>
+                </Marker>
+              );
+            })}
 
           {/* Industrial & Corporate Facilities (6 Facilities) */}
           {showFacilities &&
-            facilities.map((fac) => (
-              <Marker
-                key={fac.facilityId}
-                position={[fac.latitude, fac.longitude]}
-                icon={createFacilityMarker(fac.type, fac.name)}
-                eventHandlers={{
+            facilities.map((fac) => {
+              const facLat = fac.latitude ?? (fac.coordinates && !Array.isArray(fac.coordinates) ? (fac.coordinates as any).lat : Array.isArray(fac.coordinates) ? fac.coordinates[0] : 21.8);
+              const facLng = fac.longitude ?? (fac.coordinates && !Array.isArray(fac.coordinates) ? (fac.coordinates as any).lng : Array.isArray(fac.coordinates) ? fac.coordinates[1] : 79.8);
+              return (
+                <Marker
+                  key={fac.facilityId}
+                  position={[facLat, facLng]}
+                  icon={createFacilityMarker(fac.type, fac.name)}
+                  eventHandlers={{
                   click: () => {
                     setSelectedFacility(fac);
                     setSelectedZone(null);
@@ -1333,39 +1344,45 @@ export const ReserveMapPage: React.FC = () => {
                   </div>
                 </Popup>
               </Marker>
-            ))}
+            );
+          })}
 
           {/* Greenfield Exploration Blocks (3 Blocks) */}
           {showExplorationBlocks &&
-            explorationBlocks.map((block) => (
-              <Marker
-                key={block.blockId}
-                position={[block.latitude, block.longitude]}
-                icon={createExplorationMarker(block.name)}
-                eventHandlers={{
-                  click: () => {
-                    setSelectedBlock(block);
-                    setSelectedZone(null);
-                    setSelectedFacility(null);
-                    setSelectedProbabilityCell(null);
-                    setIsDrawerOpen(true);
-                  }
-                }}
-              >
-                <Popup>
-                  <div className="p-1.5 space-y-1.5 text-xs font-sans max-w-xs">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-pink-600 bg-pink-50 px-2 py-0.5 rounded-full">
-                      Greenfield Exploration
-                    </span>
-                    <h4 className="font-bold text-slate-900 text-sm mt-1">{block.name}</h4>
-                    <p className="text-slate-600">{block.district}, {block.state} ({block.leaseAreaHectares} Ha)</p>
-                    <p className="text-pink-700 font-mono font-bold">Estimated Potential: ~{block.estimatedPotentialMt} Mt</p>
-                    <p className="text-slate-700 text-[11px]"><strong>Target Formation:</strong> {block.targetFormation}</p>
-                    <p className="text-slate-600 text-[10px]">Status: {block.status.replace(/_/g, ' ')}</p>
-                  </div>
-                </Popup>
-              </Marker>
-            ))}
+            explorationBlocks.map((block) => {
+              const bLat = block.latitude ?? (block.coordinates && !Array.isArray(block.coordinates) ? (block.coordinates as any).lat : Array.isArray(block.coordinates) ? block.coordinates[0] : 21.8);
+              const bLng = block.longitude ?? (block.coordinates && !Array.isArray(block.coordinates) ? (block.coordinates as any).lng : Array.isArray(block.coordinates) ? block.coordinates[1] : 79.8);
+              const bName = block.name || block.blockName || 'Exploration Block';
+              return (
+                <Marker
+                  key={block.blockId}
+                  position={[bLat, bLng]}
+                  icon={createExplorationMarker(bName)}
+                  eventHandlers={{
+                    click: () => {
+                      setSelectedBlock(block);
+                      setSelectedZone(null);
+                      setSelectedFacility(null);
+                      setSelectedProbabilityCell(null);
+                      setIsDrawerOpen(true);
+                    }
+                  }}
+                >
+                  <Popup>
+                    <div className="p-1.5 space-y-1.5 text-xs font-sans max-w-xs">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-pink-600 bg-pink-50 px-2 py-0.5 rounded-full">
+                        Greenfield Exploration
+                      </span>
+                      <h4 className="font-bold text-slate-900 text-sm mt-1">{bName}</h4>
+                      <p className="text-slate-600">{block.district}, {block.state} ({block.leaseAreaHectares || 100} Ha)</p>
+                      <p className="text-pink-700 font-mono font-bold">Estimated Potential: ~{block.estimatedPotentialMt || block.estimatedResourceMt || 10} Mt</p>
+                      <p className="text-slate-700 text-[11px]"><strong>Target Formation:</strong> {block.targetFormation || 'Sausar Group / Mansar Formation'}</p>
+                      <p className="text-slate-600 text-[10px]">Status: {(block.status || block.explorationStage || 'G4 Reconnaissance').replace(/_/g, ' ')}</p>
+                    </div>
+                  </Popup>
+                </Marker>
+              );
+            })}
         </MapContainer>
       </div>
 
@@ -1439,7 +1456,7 @@ export const ReserveMapPage: React.FC = () => {
                     >
                       {selectedProbabilityCell
                         ? `${selectedProbabilityCell.confidenceTier.replace(/_/g, ' ')} (${selectedProbabilityCell.probabilityPct}% P)`
-                        : selectedZone?.confidenceCategory.replace(/_/g, ' ')}
+                        : (selectedZone?.confidenceCategory || 'HIGH_CONFIDENCE_PROVED').replace(/_/g, ' ')}
                     </span>
                     <ProvenanceBadge sourceId="src-ibm-nmi-manganese" compact />
                   </div>
@@ -1756,7 +1773,7 @@ export const ReserveMapPage: React.FC = () => {
                 <div className="glass-panel p-4 rounded-xl border border-slate-800 space-y-2 text-xs">
                   <p className="text-slate-300"><strong>Target Geological Horizon:</strong> {selectedBlock.targetFormation}</p>
                   <p className="text-slate-300"><strong>Expected Mineralogy:</strong> {selectedBlock.keyMineralogy}</p>
-                  <p className="text-slate-400 text-[11px] pt-1">Exploration Status: <strong className="text-pink-300">{selectedBlock.status.replace(/_/g, ' ')}</strong></p>
+                  <p className="text-slate-400 text-[11px] pt-1">Exploration Status: <strong className="text-pink-300">{(selectedBlock.status || selectedBlock.explorationStage || 'Active').replace(/_/g, ' ')}</strong></p>
                 </div>
               </>
             ) : (

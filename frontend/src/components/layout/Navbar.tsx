@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { useMine } from '../../context/MineContext';
 import { useAuth } from '../../context/AuthContext';
+import { ThemeToggle } from '../common/ThemeToggle';
 import type { TabType } from './Sidebar';
 
 interface NavbarProps {
@@ -196,6 +197,9 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onOpenReport, onToggl
           <FileText className="w-3.5 h-3.5" />
           <span className="hidden sm:inline">Executive Report</span>
         </button>
+
+        {/* Theme Toggle (Light / Dark Mode) */}
+        <ThemeToggle variant="icon" />
 
         {/* Notification Bell with Outside Click Dismiss */}
         <div className="relative shrink-0" ref={notificationRef}>

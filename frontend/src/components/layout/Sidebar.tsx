@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useMine } from '../../context/MineContext';
+import { ThemeToggle } from '../common/ThemeToggle';
 
 export type TabType =
   | 'landing'
@@ -245,6 +246,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
               );
             })}
           </nav>
+        </div>
+
+        {/* Sidebar Lower Bottom Section: Theme Mode (Icon Only) */}
+        <div className="p-3 border-t border-[#26333B] bg-[#0F1214] flex items-center justify-center">
+          <ThemeToggle
+            variant="icon"
+            className="w-10 h-10 rounded-xl"
+          />
         </div>
       </aside>
     </>

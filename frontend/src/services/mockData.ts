@@ -137,7 +137,11 @@ export const MOCK_MINES: Mine[] = [
     totalReservesMt: 19.2,
     avgMnGradePct: 46.5,
     coordinates: { lat: 21.8125, lng: 80.1812 },
-    lastUpdated: '2026-03-01'
+    lastUpdated: '2026-03-01',
+    code: '',
+    latitude: 0,
+    longitude: 0,
+    operationalStatus: ''
   },
   {
     mineId: 'mine-dongri-02',
@@ -162,7 +166,11 @@ export const MOCK_MINES: Mine[] = [
     totalReservesMt: 14.4,
     avgMnGradePct: 42.0,
     coordinates: { lat: 21.5312, lng: 79.6845 },
-    lastUpdated: '2026-03-01'
+    lastUpdated: '2026-03-01',
+    code: '',
+    latitude: 0,
+    longitude: 0,
+    operationalStatus: ''
   },
   {
     mineId: 'mine-kandri-03',
@@ -187,7 +195,11 @@ export const MOCK_MINES: Mine[] = [
     totalReservesMt: 8.6,
     avgMnGradePct: 44.8,
     coordinates: { lat: 21.4312, lng: 79.2812 },
-    lastUpdated: '2026-03-01'
+    lastUpdated: '2026-03-01',
+    code: '',
+    latitude: 0,
+    longitude: 0,
+    operationalStatus: ''
   },
   {
     mineId: 'mine-mansar-04',
@@ -212,7 +224,11 @@ export const MOCK_MINES: Mine[] = [
     totalReservesMt: 6.8,
     avgMnGradePct: 41.5,
     coordinates: { lat: 21.4012, lng: 79.2712 },
-    lastUpdated: '2026-03-01'
+    lastUpdated: '2026-03-01',
+    code: '',
+    latitude: 0,
+    longitude: 0,
+    operationalStatus: ''
   },
   {
     mineId: 'mine-gumgaon-05',
@@ -237,7 +253,11 @@ export const MOCK_MINES: Mine[] = [
     totalReservesMt: 5.9,
     avgMnGradePct: 43.2,
     coordinates: { lat: 21.3612, lng: 79.0312 },
-    lastUpdated: '2026-03-01'
+    lastUpdated: '2026-03-01',
+    code: '',
+    latitude: 0,
+    longitude: 0,
+    operationalStatus: ''
   },
   {
     mineId: 'mine-tirodi-06',
@@ -262,7 +282,11 @@ export const MOCK_MINES: Mine[] = [
     totalReservesMt: 5.0,
     avgMnGradePct: 40.5,
     coordinates: { lat: 21.6812, lng: 79.7112 },
-    lastUpdated: '2026-03-01'
+    lastUpdated: '2026-03-01',
+    code: '',
+    latitude: 0,
+    longitude: 0,
+    operationalStatus: ''
   },
   {
     mineId: 'mine-chikla-07',
@@ -287,7 +311,11 @@ export const MOCK_MINES: Mine[] = [
     totalReservesMt: 4.4,
     avgMnGradePct: 42.8,
     coordinates: { lat: 21.5612, lng: 79.7712 },
-    lastUpdated: '2026-03-01'
+    lastUpdated: '2026-03-01',
+    code: '',
+    latitude: 0,
+    longitude: 0,
+    operationalStatus: ''
   },
   {
     mineId: 'mine-ukwa-08',
@@ -312,7 +340,11 @@ export const MOCK_MINES: Mine[] = [
     totalReservesMt: 4.0,
     avgMnGradePct: 45.0,
     coordinates: { lat: 21.9612, lng: 80.4612 },
-    lastUpdated: '2026-03-01'
+    lastUpdated: '2026-03-01',
+    code: '',
+    latitude: 0,
+    longitude: 0,
+    operationalStatus: ''
   },
   {
     mineId: 'mine-beldongri-09',
@@ -337,7 +369,11 @@ export const MOCK_MINES: Mine[] = [
     totalReservesMt: 1.8,
     avgMnGradePct: 39.5,
     coordinates: { lat: 21.3412, lng: 79.3112 },
-    lastUpdated: '2026-03-01'
+    lastUpdated: '2026-03-01',
+    code: '',
+    latitude: 0,
+    longitude: 0,
+    operationalStatus: ''
   },
   {
     mineId: 'mine-sitapatore-10',
@@ -362,7 +398,11 @@ export const MOCK_MINES: Mine[] = [
     totalReservesMt: 1.4,
     avgMnGradePct: 38.0,
     coordinates: { lat: 21.7312, lng: 79.8212 },
-    lastUpdated: '2026-03-01'
+    lastUpdated: '2026-03-01',
+    code: '',
+    latitude: 0,
+    longitude: 0,
+    operationalStatus: ''
   }
 ];
 
@@ -402,7 +442,17 @@ export const MOCK_EXPLORATION_BLOCKS: ExplorationBlock[] = [
     estimatedResourceMt: 8.5,
     explorationStage: 'G2 (General Exploration)',
     avgMnGradePct: 44.5,
-    coordinates: { lat: 21.982, lng: 80.485 }
+    coordinates: { lat: 21.982, lng: 80.485 },
+    code: '',
+    name: '',
+    latitude: 0,
+    longitude: 0,
+    leaseAreaHectares: 0,
+    targetFormation: '',
+    estimatedPotentialMt: 0,
+    status: '',
+    targetSeamDepthM: 0,
+    keyMineralogy: ''
   },
   {
     blockId: 'blk-mansar-north-02',
@@ -412,7 +462,17 @@ export const MOCK_EXPLORATION_BLOCKS: ExplorationBlock[] = [
     estimatedResourceMt: 6.2,
     explorationStage: 'G3 (Prospecting)',
     avgMnGradePct: 41.0,
-    coordinates: { lat: 21.415, lng: 79.288 }
+    coordinates: { lat: 21.415, lng: 79.288 },
+    code: '',
+    name: '',
+    latitude: 0,
+    longitude: 0,
+    leaseAreaHectares: 0,
+    targetFormation: '',
+    estimatedPotentialMt: 0,
+    status: '',
+    targetSeamDepthM: 0,
+    keyMineralogy: ''
   }
 ];
 
@@ -530,7 +590,7 @@ export const MOCK_EQUIPMENT: Equipment[] = [
     type: 'Shaft Hoist',
     equipmentModel: 'ABB 1200kW Double Drum Friction Hoist',
     capacity: '150 Tonnes/Hour',
-    status: 'Operational',
+    status: 'OPERATIONAL',
     uptimePct: 94.5,
     mtbfHours: 480.0,
     lastMaintenanceDate: '2026-02-15',
@@ -548,7 +608,7 @@ export const MOCK_EQUIPMENT: Equipment[] = [
     type: 'Hydraulic Shovel',
     equipmentModel: 'Komatsu PC1250-8',
     capacity: '6.5 m3 Bucket',
-    status: 'Operational',
+    status: 'OPERATIONAL',
     uptimePct: 91.2,
     mtbfHours: 360.0,
     lastMaintenanceDate: '2026-02-20',
@@ -566,7 +626,7 @@ export const MOCK_EQUIPMENT: Equipment[] = [
     type: 'Drill Rig',
     equipmentModel: 'Sandvik DD422i Twin Boom',
     capacity: '65 mm Hole Diameter',
-    status: 'Under Maintenance',
+    status: 'UNDER_MAINTENANCE',
     uptimePct: 64.0,
     mtbfHours: 110.0,
     lastMaintenanceDate: '2026-02-28',
@@ -579,11 +639,26 @@ export const MOCK_EQUIPMENT: Equipment[] = [
 ];
 
 export const MOCK_ANNUAL_PRODUCTION: AnnualProductionRecord[] = [
-  { financialYear: '2020-21', productionTonnes: 1143000, salesTonnes: 1108000, revenueInrCrores: 1177.0, avgRealizationPerTonne: 10622, verifiedPublicReportUrl: 'https://www.moil.nic.in/annual-reports' },
-  { financialYear: '2021-22', productionTonnes: 1231000, salesTonnes: 1212000, revenueInrCrores: 1436.0, avgRealizationPerTonne: 11848, verifiedPublicReportUrl: 'https://www.moil.nic.in/annual-reports' },
-  { financialYear: '2022-23', productionTonnes: 1302000, salesTonnes: 1178000, revenueInrCrores: 1344.0, avgRealizationPerTonne: 11409, verifiedPublicReportUrl: 'https://www.moil.nic.in/annual-reports' },
-  { financialYear: '2023-24', productionTonnes: 1756000, salesTonnes: 1536000, revenueInrCrores: 1440.0, avgRealizationPerTonne: 9375, verifiedPublicReportUrl: 'https://www.moil.nic.in/annual-reports' },
-  { financialYear: '2024-25', productionTonnes: 1820000, salesTonnes: 1650000, revenueInrCrores: 1520.0, avgRealizationPerTonne: 9212, verifiedPublicReportUrl: 'https://www.moil.nic.in/annual-reports' }
+  {
+    financialYear: '2020-21', productionTonnes: 1143000, salesTonnes: 1108000, revenueInrCrores: 1177.0, avgRealizationPerTonne: 10622, verifiedPublicReportUrl: 'https://www.moil.nic.in/annual-reports',
+    fiscalYear: ''
+  },
+  {
+    financialYear: '2021-22', productionTonnes: 1231000, salesTonnes: 1212000, revenueInrCrores: 1436.0, avgRealizationPerTonne: 11848, verifiedPublicReportUrl: 'https://www.moil.nic.in/annual-reports',
+    fiscalYear: ''
+  },
+  {
+    financialYear: '2022-23', productionTonnes: 1302000, salesTonnes: 1178000, revenueInrCrores: 1344.0, avgRealizationPerTonne: 11409, verifiedPublicReportUrl: 'https://www.moil.nic.in/annual-reports',
+    fiscalYear: ''
+  },
+  {
+    financialYear: '2023-24', productionTonnes: 1756000, salesTonnes: 1536000, revenueInrCrores: 1440.0, avgRealizationPerTonne: 9375, verifiedPublicReportUrl: 'https://www.moil.nic.in/annual-reports',
+    fiscalYear: ''
+  },
+  {
+    financialYear: '2024-25', productionTonnes: 1820000, salesTonnes: 1650000, revenueInrCrores: 1520.0, avgRealizationPerTonne: 9212, verifiedPublicReportUrl: 'https://www.moil.nic.in/annual-reports',
+    fiscalYear: ''
+  }
 ];
 
 export const MOCK_SHORTFALL_RISKS: ShortfallRisk[] = [
@@ -849,7 +924,7 @@ export const generateMockProductionLogs = (): ProductionLog[] => {
         salesTonnes: sales,
         varianceTonnes: actual - target,
         compliancePct: Number(((actual / target) * 100).toFixed(1)),
-        avgMnGradePct: mine.avgMnGradePct,
+        avgMnGradePct: mine.avgMnGradePct ?? 44.5,
         equipmentUptimePct: isMonsoon ? 76.5 : 88.0,
         rainfallMm: isMonsoon ? 180 : 15,
         blastingShiftsCount: isMonsoon ? 12 : 24,

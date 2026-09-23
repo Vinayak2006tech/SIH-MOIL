@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { MineProvider } from './context/MineContext';
 import { Sidebar } from './components/layout/Sidebar';
@@ -71,11 +72,11 @@ const AppContent: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#0F1214] flex flex-col items-center justify-center space-y-4">
-        <div className="w-12 h-12 rounded-2xl bg-teal-600/20 border border-teal-500/40 flex items-center justify-center animate-spin">
-          <div className="w-6 h-6 border-2 border-teal-400 border-t-transparent rounded-full" />
+      <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#0F1214] flex flex-col items-center justify-center space-y-4">
+        <div className="w-12 h-12 rounded-2xl bg-teal-600/15 border border-teal-500/40 flex items-center justify-center animate-spin shadow-sm">
+          <div className="w-6 h-6 border-2 border-teal-600 dark:border-teal-400 border-t-transparent rounded-full" />
         </div>
-        <p className="text-xs text-slate-400 font-mono tracking-wider uppercase">
+        <p className="text-xs text-slate-500 dark:text-slate-400 font-mono tracking-wider uppercase">
           Initializing MOIL ReserveIQ Intelligence Engine...
         </p>
       </div>
@@ -154,7 +155,7 @@ const AppContent: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0F1214] text-[#E8E6E3] flex">
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#0F1214] text-[#0F172A] dark:text-[#E8E6E3] flex">
       {/* Responsive Sidebar (Off-Canvas on Mobile, Collapsible Rail on Desktop) */}
       <Sidebar
         activeTab={activeTab}
@@ -202,11 +203,13 @@ const AppContent: React.FC = () => {
 
 export function App() {
   return (
-    <AuthProvider>
-      <MineProvider>
-        <AppContent />
-      </MineProvider>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <MineProvider>
+          <AppContent />
+        </MineProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 

@@ -21,6 +21,8 @@ import {
   FileText
 } from 'lucide-react';
 import type { TabType } from '../components/layout/Sidebar';
+import { ThemeToggle } from '../components/common/ThemeToggle';
+import GlyphPortalDemo from '@/components/ui/glyph-portal-demo';
 
 interface LandingPageProps {
   setActiveTab: (tab: TabType) => void;
@@ -238,7 +240,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         <div className="absolute -bottom-24 left-1/3 w-80 h-80 bg-teal-600/10 rounded-full blur-3xl pointer-events-none animate-float-reverse" />
 
         <div className="relative z-10 max-w-5xl mx-auto text-center space-y-8">
-          {/* Top National Initiative Pills */}
+          {/* Top National Initiative Pills & Theme Switcher */}
           <div className="flex items-center justify-center gap-2.5 flex-wrap">
             <span className="px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#6B5B95]/20 text-[#BFB2D3] border border-[#6B5B95]/40 flex items-center gap-2 shadow-glow-manganese animate-float font-sans">
               <Building2 className="w-3.5 h-3.5 text-teal-400" />
@@ -249,6 +251,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <Sparkles className="w-3.5 h-3.5 text-teal-400" />
               AI/ML + Earth Observation Platform
             </span>
+            <div className="flex items-center gap-1.5 pl-1">
+              <ThemeToggle variant="switch" />
+            </div>
           </div>
 
           {/* Mega Title with Earth-Tech Gradient Typography */}
@@ -527,6 +532,28 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 🔮 INTERACTIVE 3D GLYPH PORTAL: STEP INSIDE MOIL RESERVES */}
+      {/* ============================================================ */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 space-y-4">
+        <div className="text-center space-y-2 max-w-3xl mx-auto">
+          <span className="text-xs font-mono uppercase font-bold text-teal-400 tracking-wider flex items-center justify-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-teal-400" />
+            Interactive 3D Subsurface Exploration
+          </span>
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-[#E8E6E3] tracking-tight font-sans">
+            Scroll-Driven Subsurface Camera Portal
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+            Hover or select any letter in the live 3D typography below and scroll to step inside MOIL's geostatistical ore strata and telemetry layers.
+          </p>
+        </div>
+
+        <div className="pt-2">
+          <GlyphPortalDemo word="RESERVE" scrollLength={2.4} interactive={true} annotations={false} />
         </div>
       </section>
 

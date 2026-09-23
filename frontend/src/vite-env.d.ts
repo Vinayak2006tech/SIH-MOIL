@@ -11,3 +11,11 @@ interface ImportMetaEnv {
 interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
+
+import 'react';
+
+declare module 'react' {
+  interface HTMLAttributes<T> {
+    inert?: boolean | '' | undefined;
+  }
+}

@@ -46,6 +46,9 @@ export function generateReserveProbabilityGrid(
     const baseMn = mine.avgOreGradeMnPct || mine.avgMnGradePct || 42.5;
     const baseDepth = mine.depthMeters || (mine.type === 'Underground' ? 320 : 85);
     const provedRatio = (mine.provedReservesMt || 10) / (mine.totalReservesMt || 20);
+    const mineLat = mine.latitude ?? (mine.coordinates && !Array.isArray(mine.coordinates) ? (mine.coordinates as any).lat : Array.isArray(mine.coordinates) ? mine.coordinates[0] : 21.8);
+    const mineLng = mine.longitude ?? (mine.coordinates && !Array.isArray(mine.coordinates) ? (mine.coordinates as any).lng : Array.isArray(mine.coordinates) ? mine.coordinates[1] : 79.8);
+    const mineCode = mine.code || mine.mineId || 'MINE';
 
     // Create a 5x5 micro-grid of geostatistical cells around each mine deposit (25 spatial cells per mine = 250+ across MOIL)
     const gridDim = 5;
@@ -60,8 +63,8 @@ export function generateReserveProbabilityGrid(
         const rotDx = dx * COS_STRIKE - dy * SIN_STRIKE;
         const rotDy = dx * SIN_STRIKE + dy * COS_STRIKE;
 
-        const cellLat = mine.latitude + rotDy;
-        const cellLng = mine.longitude + rotDx;
+        const cellLat = mineLat + rotDy;
+        const cellLng = mineLng + rotDx;
 
         // Radial distance from ore body central core
         const distFromCenter = Math.sqrt(r * r + c * c);
@@ -143,10 +146,10 @@ export function generateReserveProbabilityGrid(
         const p4: [number, number] = [cellLat - halfSize, cellLng - halfSize];
 
         cells.push({
-          cellId: `cell-${mine.code.toLowerCase()}-${r + halfGrid}-${c + halfGrid}`,
+          cellId: `cell-${mineCode.toLowerCase()}-${r + halfGrid}-${c + halfGrid}`,
           mineId: mine.mineId,
           mineName: mine.name,
-          code: mine.code,
+          code: mineCode,
           center: [cellLat, cellLng],
           polygon: [p1, p2, p3, p4],
           probabilityPct: probPct,

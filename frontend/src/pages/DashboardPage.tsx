@@ -107,7 +107,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({ setActiveTab }) =>
   return (
     <div className="p-6 space-y-6 animate-fadeIn">
       {/* Top Banner Alert if Critical Risk */}
-      {summary && (summary.criticalMinesCount > 0 || summary.highRiskMinesCount > 0) && (
+      {summary && (((summary.criticalMinesCount ?? 0) > 0) || ((summary.highRiskMinesCount ?? 0) > 0)) && (
         <div className="p-4 rounded-xl bg-gradient-to-r from-red-950/80 via-[#161D22] to-amber-950/80 border border-[#DC5F4E]/60 shadow-glow-red flex items-center justify-between flex-wrap gap-3">
           <div className="flex items-center gap-3">
             <div className="p-2 rounded-lg bg-red-500/20 text-[#DC5F4E]">

@@ -66,11 +66,11 @@ export interface Mine {
   _id?: string;
   mineId: string;
   name: string;
-  code: string;
+  code?: string;
   state: string;
   district: string;
-  latitude: number;
-  longitude: number;
+  latitude?: number;
+  longitude?: number;
   type: 'Underground' | 'Opencast' | 'Mixed';
   depthMeters?: number;
   leaseAreaHectares?: number;
@@ -85,13 +85,15 @@ export interface Mine {
   avgFeGradePct?: number;
   avgSiO2GradePct?: number;
   annualCapacityTonnes?: number;
+  currentMonthlyCapacityTonnes?: number;
   targetMonthlyTonnes: number;
   currentMonthlyProductionTonnes: number;
   currentShortfallRiskLevel: RiskLevel;
   currentShortfallProbabilityPct: number;
   equipmentUptimePct: number;
   activeEquipmentCount: number;
-  operationalStatus: string;
+  operationalStatus?: string;
+  status?: string;
   geologicalConfidencePct: number;
   satelliteStabilityScore: number;
   keyMineralogy?: string;
@@ -102,61 +104,79 @@ export interface Mine {
   sourceUrl?: string;
   dataType?: DataSourceType;
   isSynthetic?: boolean;
+  coordinates?: [number, number] | { lat: number; lng: number };
+  lastUpdated?: string;
 }
 
 export interface Facility {
   facilityId: string;
-  code: string;
+  code?: string;
   name: string;
   type: string;
-  state: string;
-  district: string;
-  latitude: number;
-  longitude: number;
-  description: string;
+  state?: string;
+  district?: string;
+  location?: string;
+  coordinates?: [number, number] | { lat: number; lng: number };
+  latitude?: number;
+  longitude?: number;
+  description?: string;
   capacity: string;
-  commissioningYear: number;
-  status: string;
+  commissioningYear?: number;
+  status?: string;
 }
 
 export interface ExplorationBlock {
   blockId: string;
-  code: string;
-  name: string;
+  code?: string;
+  name?: string;
+  blockName?: string;
   state: string;
   district: string;
-  latitude: number;
-  longitude: number;
-  leaseAreaHectares: number;
-  targetFormation: string;
-  estimatedPotentialMt: number;
-  status: string;
-  targetSeamDepthM: number;
-  keyMineralogy: string;
+  latitude?: number;
+  longitude?: number;
+  coordinates?: [number, number] | { lat: number; lng: number };
+  leaseAreaHectares?: number;
+  targetFormation?: string;
+  estimatedPotentialMt?: number;
+  estimatedResourceMt?: number;
+  explorationStage?: string;
+  status?: string;
+  targetSeamDepthM?: number;
+  keyMineralogy?: string;
+  avgMnGradePct?: number;
 }
 
 export interface MineZone {
   zoneId: string;
   mineId: string;
-  mineName: string;
-  code: string;
+  mineName?: string;
+  zoneName?: string;
+  code?: string;
   state?: string;
   district?: string;
-  center: [number, number];
-  polygon: [number, number][];
-  confidenceCategory: 'HIGH_CONFIDENCE_PROVED' | 'MODERATE_CONFIDENCE_PROBABLE' | 'INFERRED_SURVEY';
-  estimatedReservesMt: number;
+  center?: [number, number];
+  polygon?: [number, number][];
+  confidenceCategory?: 'HIGH_CONFIDENCE_PROVED' | 'MODERATE_CONFIDENCE_PROBABLE' | 'INFERRED_SURVEY';
+  estimatedReservesMt?: number;
   provedReservesMt: number;
   probableReservesMt: number;
   inferredResourcesMt?: number;
-  avgMnGrade: number;
-  avgFeGrade: number;
-  avgSiO2Grade: number;
-  depthMeters: number;
+  avgMnGrade?: number;
+  avgMnGradePct?: number;
+  avgFeGrade?: number;
+  avgFeGradePct?: number;
+  avgSiO2Grade?: number;
+  avgSiO2GradePct?: number;
+  avgPGradePct?: number;
+  depthMeters?: number;
+  densityTonnesPerM3?: number;
+  stripRatio?: number;
+  geologicalConfidencePct?: number;
+  extractionRiskLevel?: 'LOW' | 'MODERATE' | 'HIGH' | 'CRITICAL';
   leaseAreaHectares?: number;
-  boreholeCount: number;
-  avgCoreRecoveryPct: number;
-  satelliteStabilityScore: number;
+  boreholeCount?: number;
+  avgCoreRecoveryPct?: number;
+  satelliteStabilityScore?: number;
   dataSources?: string[];
   isSyntheticBoreholes?: boolean;
   sourceMetadata?: {
@@ -271,12 +291,16 @@ export interface ProductionLog {
 }
 
 export interface AnnualProductionRecord {
-  fiscalYear: string;
+  fiscalYear?: string;
+  financialYear?: string;
   productionTonnes: number;
   salesTonnes: number;
   grossRevenueInrCrores?: number;
+  revenueInrCrores?: number;
+  avgRealizationPerTonne?: number;
   netProfitInrCrores?: number;
   growthRatePct?: number;
+  verifiedPublicReportUrl?: string;
   notes?: string;
 }
 
@@ -333,9 +357,9 @@ export interface ForecastHorizonItem {
   shortfall_tonnes?: number;
   confidence_lower_tonnes: number;
   confidence_upper_tonnes: number;
-  shortfall_probability_pct: number;
+  shortfall_probability_pct?: number;
   probability_pct?: number;
-  risk_level: RiskLevel;
+  risk_level?: RiskLevel;
 }
 
 export interface FeatureImportanceItem {
@@ -403,22 +427,36 @@ export interface DashboardSummary {
   totalNationalReservesAndResourcesMt?: number;
   provedProbableReservesMt?: number;
   remainingResourcesMt?: number;
-  totalEstimatedReservesMt: number;
-  totalMonthlyTargetTonnes: number;
-  totalCurrentMonthlyProductionTonnes: number;
-  productionFulfillmentPct: number;
-  avgEquipmentUptimePct: number;
-  activeMinesCount: number;
-  overallRiskStatus: RiskLevel | string;
-  criticalMinesCount: number;
-  highRiskMinesCount: number;
-  pendingRecommendationsCount: number;
-  totalEquipmentCount: number;
-  operationalEquipmentCount: number;
+  totalEstimatedReservesMt?: number;
+  totalProvedReservesMt?: number;
+  totalProbableReservesMt?: number;
+  totalReservesMt?: number;
+  ytdProductionTonnes?: number;
+  ytdTargetTonnes?: number;
+  ytdSalesTonnes?: number;
+  overallCompliancePct?: number;
+  operationalMinesCount?: number;
+  criticalMinesCount?: number;
+  criticalRiskMinesCount?: number;
+  highRiskMinesCount?: number;
+  averageEquipmentUptimePct?: number;
+  activeShortfallMitigationPlans?: number;
+  estimatedTonnageRecovered?: number;
+  totalRevenueAtRiskInrCrores?: number;
+  lastSyncTimestamp?: string;
+  totalMonthlyTargetTonnes?: number;
+  totalCurrentMonthlyProductionTonnes?: number;
+  productionFulfillmentPct?: number;
+  avgEquipmentUptimePct?: number;
+  activeMinesCount?: number;
+  overallRiskStatus?: RiskLevel | string;
+  pendingRecommendationsCount?: number;
+  totalEquipmentCount?: number;
+  operationalEquipmentCount?: number;
   latestAnnualRecordTonnes?: number;
   latestAnnualSalesTonnes?: number;
   annualSummary?: AnnualProductionRecord[];
-  activeAlerts: ActiveAlertItem[];
+  activeAlerts?: ActiveAlertItem[];
   sourceMetadata?: {
     sourceId: string;
     sourceName: string;

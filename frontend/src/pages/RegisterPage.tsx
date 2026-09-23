@@ -16,6 +16,7 @@ import {
   FileText
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { ThemeToggle } from '../components/common/ThemeToggle';
 import type { UserRole } from '../types';
 
 interface RegisterPageProps {
@@ -62,6 +63,11 @@ export const RegisterPage: React.FC<RegisterPageProps> = ({ onGoToLogin }) => {
 
   return (
     <div className="min-h-screen bg-[#0F1214] text-[#E8E6E3] flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
+      {/* Top right Theme Toggle */}
+      <div className="absolute top-4 right-4 z-50">
+        <ThemeToggle />
+      </div>
+
       {/* Background glow orbs */}
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-manganese-600/15 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-tech-teal/15 rounded-full blur-3xl pointer-events-none" />
