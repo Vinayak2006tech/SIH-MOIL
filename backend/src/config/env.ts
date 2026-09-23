@@ -19,7 +19,9 @@ for (const envPath of candidatePaths) {
 export const config = {
   PORT: parseInt(process.env.PORT || '5001', 10),
   NODE_ENV: process.env.NODE_ENV || 'development',
-  MONGO_URI: process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/moil_reserveiq',
+  MONGO_URI: process.env.MONGO_URI || (process.env.NODE_ENV === 'production'
+    ? 'mongodb+srv://vaishayvinayak_db_user:SHFKDAjZFFItOnRU@cluster0.tmx2kxe.mongodb.net/moil_reserveiq?retryWrites=true&w=majority'
+    : 'mongodb://127.0.0.1:27017/moil_reserveiq'),
   JWT_SECRET: process.env.JWT_SECRET || 'moil_reserveiq_secret_super_secure_key_2026',
   JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN || '7d',
   ML_SERVICE_URL: process.env.ML_SERVICE_URL || (process.env.NODE_ENV === 'production' ? 'https://sih-moil-1.onrender.com' : 'http://localhost:8000'),

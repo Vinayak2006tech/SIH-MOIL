@@ -1,7 +1,7 @@
 services:
   # Node.js + Express + MongoDB REST API Backend
   - type: web
-    name: moil-reserveiq-backend
+    name: sih-moil
     env: node
     plan: free
     rootDir: backend
@@ -14,21 +14,19 @@ services:
       - key: PORT
         value: 10000
       - key: MONGO_URI
-        sync: false
+        value: mongodb+srv://vaishayvinayak_db_user:SHFKDAjZFFItOnRU@cluster0.tmx2kxe.mongodb.net/moil_reserveiq?retryWrites=true&w=majority
       - key: JWT_SECRET
-        generateValue: true
+        value: moil_reserveiq_secret_super_secure_key_2026
       - key: JWT_EXPIRES_IN
         value: 7d
       - key: ADMIN_EMAIL
         value: vaishayvinayak@gmail.com
       - key: ADMIN_PASSWORD
-        sync: false
-      - key: FRONTEND_URL
-        sync: false
-      - key: CORS_ORIGIN
-        sync: false
+        value: vinayak@2006
       - key: ML_SERVICE_URL
         value: https://sih-moil-1.onrender.com
+      - key: CORS_ORIGIN
+        value: "*"
 
   # Python + FastAPI + Scikit-learn AI/ML Microservice
   - type: web
