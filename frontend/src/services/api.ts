@@ -48,6 +48,25 @@ apiClient.interceptors.request.use((config) => {
   return config;
 });
 
+// Automatic resilient fallback if pointing to wrong ML host or offline dev proxy
+apiClient.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+    if (originalRequest && !originalRequest._retry) {
+      const isWrongRenderHost = typeof originalRequest.baseURL === 'string' && originalRequest.baseURL.includes('sih-moil-1.onrender.com');
+      const isConnectionFailure = error.code === 'ERR_NETWORK' || error.response?.status === 502 || error.response?.status === 504;
+
+      if ((isWrongRenderHost || isConnectionFailure) && originalRequest.baseURL !== 'https://sih-moil.onrender.com/api') {
+        originalRequest._retry = true;
+        originalRequest.baseURL = 'https://sih-moil.onrender.com/api';
+        return apiClient(originalRequest);
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
 // LocalStorage helpers for offline mining data
 export function getStoredEquipment(): Equipment[] {
   try {

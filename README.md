@@ -128,8 +128,9 @@ npm run dev
 | Role | Email | Password | Permissions |
 | :--- | :--- | :--- | :--- |
 | **Director / Admin** | `vaishayvinayak@gmail.com` | `vinayak@2006` | Full Control, Data Ingestion, Fleet Management, Prescriptive Overrides |
-| **Mine Planner** | `planner@balaghat.moil.gov.in` | `planner123` | Simulation & What-If Sandbox, Re-Estimation, Action Approvals |
-| **Executive Viewer** | `auditor@steel.gov.in` | `auditor123` | Read-Only KPI Analytics, GIS Maps, Export Reports |
+| **MOIL Admin** | `admin@moil.gov.in` | `admin@2026` | Administrative Control, User Account Approvals |
+| **Mine Planner** | `planner@balaghat.moil.gov.in` | `planner@123` *(or `planner123`)* | Simulation & What-If Sandbox, Re-Estimation, Action Approvals |
+| **Executive Viewer** | `auditor@steel.gov.in` | `auditor@123` *(or `auditor123`)* | Read-Only KPI Analytics, GIS Maps, Export Reports |
 ---
 
 ## 📊 SIH Hackathon Evaluation Highlights
