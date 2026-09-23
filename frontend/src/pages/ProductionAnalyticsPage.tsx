@@ -110,23 +110,23 @@ export const ProductionAnalyticsPage: React.FC = () => {
         </div>
 
         {/* Annual Trajectory Cards Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 bg-white">
           {annualSummary.map((yr) => (
-            <div key={yr.fiscalYear} className="p-4 rounded-2xl bg-[#0F1214]/80 border border-[#26333B] space-y-1.5 font-mono">
-              <div className="flex items-center justify-between text-xs text-slate-400">
-                <span className="font-bold text-manganese-400">{yr.fiscalYear}</span>
+            <div key={yr.fiscalYear} className="p-4 rounded-2xl bg-white border border-slate-200 space-y-1.5 font-mono shadow-sm">
+              <div className="flex items-center justify-between text-xs text-black">
+                <span className="font-bold text-teal-700">{yr.fiscalYear}</span>
                 {yr.growthRatePct && (
-                  <span className="text-[10px] text-emerald-400 font-bold bg-emerald-950/80 px-1.5 py-0.5 rounded border border-emerald-800/60">
+                  <span className="text-[10px] text-emerald-700 font-bold bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200">
                     +{yr.growthRatePct}% YoY
                   </span>
                 )}
               </div>
-              <div className="text-xl font-extrabold text-[#E8E6E3]">
-                {(yr.productionTonnes / 100000).toFixed(2)} <span className="text-xs font-normal text-slate-400">Lakh Tonnes</span>
+              <div className="text-xl font-extrabold text-black">
+                {(yr.productionTonnes / 100000).toFixed(2)} <span className="text-xs font-normal text-black">Lakh Tonnes</span>
               </div>
-              <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1 border-t border-[#26333B]">
+              <div className="flex items-center justify-between text-[11px] text-black pt-1 border-t border-slate-200">
                 <span>Sales:</span>
-                <span className="text-slate-200 font-semibold">{(yr.salesTonnes / 100000).toFixed(2)} L t</span>
+                <span className="text-black font-semibold">{(yr.salesTonnes / 100000).toFixed(2)} L t</span>
               </div>
             </div>
           ))}
@@ -134,17 +134,17 @@ export const ProductionAnalyticsPage: React.FC = () => {
       </div>
 
       {/* Monthly Extraction vs Quota Chart */}
-      <div className="glass-panel p-6 rounded-2xl border border-[#26333B] bg-[#161D22]/80">
+      <div className="p-6 rounded-2xl border border-slate-200 bg-white shadow-sm">
         <div className="flex items-center justify-between flex-wrap gap-2 mb-6">
           <div>
             <div className="flex items-center gap-2 flex-wrap">
-              <h3 className="text-sm font-bold text-[#E8E6E3] flex items-center gap-2">
-                <BarChart3 className="w-4 h-4 text-tech-teal" />
+              <h3 className="text-sm font-bold text-black flex items-center gap-2">
+                <BarChart3 className="w-4 h-4 text-teal-700" />
                 Monthly Extraction vs Target Quota (Past 12 Months)
               </h3>
               <ProvenanceBadge sourceId="src-moil-ar-2025" dataType="OFFICIAL_MOIL" />
             </div>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs text-black mt-0.5">
               Comparing monthly extraction milestones against planned dispatch commitments
             </p>
           </div>
@@ -153,39 +153,39 @@ export const ProductionAnalyticsPage: React.FC = () => {
         <div className="h-72 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={logs} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#26333B" vertical={false} />
-              <XAxis dataKey="date" stroke="#64748B" fontSize={11} tickLine={false} />
-              <YAxis stroke="#64748B" fontSize={11} tickLine={false} unit=" t" />
+              <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" vertical={false} />
+              <XAxis dataKey="date" stroke="#000000" fontSize={11} tickLine={false} />
+              <YAxis stroke="#000000" fontSize={11} tickLine={false} unit=" t" />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#161D22',
-                  borderColor: '#26333B',
+                  backgroundColor: '#FFFFFF',
+                  borderColor: '#E2E8F0',
                   borderRadius: '0.5rem',
                   fontSize: '12px',
-                  color: '#E8E6E3'
+                  color: '#000000'
                 }}
               />
-              <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px' }} />
-              <Bar dataKey="actualTonnes" name="Actual Extraction (Tonnes)" fill="#7E69AB" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="targetTonnes" name="Planned Target Quota (Tonnes)" fill="#26333B" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="salesTonnes" name="Realized Domestic Sales (Tonnes)" fill="#2DD4BF" radius={[4, 4, 0, 0]} />
+              <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px', color: '#000000' }} />
+              <Bar dataKey="actualTonnes" name="Actual Extraction (Tonnes)" fill="#0D9488" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="targetTonnes" name="Planned Target Quota (Tonnes)" fill="#94A3B8" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="salesTonnes" name="Realized Domestic Sales (Tonnes)" fill="#10B981" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
       </div>
 
       {/* Grid Row: Downtime Causes & Rainfall Correlation */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 bg-white">
         {/* Downtime Breakdown */}
-        <div className="glass-panel p-6 rounded-2xl border border-[#26333B] bg-[#161D22]/80 space-y-4">
+        <div className="p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm">
           <div>
             <div className="flex items-center gap-2 flex-wrap">
-              <h3 className="text-sm font-bold text-[#E8E6E3] flex items-center gap-2">
-                <Wrench className="w-4 h-4 text-amber-400" /> Operational Downtime Cause Breakdown
+              <h3 className="text-sm font-bold text-black flex items-center gap-2">
+                <Wrench className="w-4 h-4 text-amber-600" /> Operational Downtime Cause Breakdown
               </h3>
               <ProvenanceBadge sourceId="src-synthetic-equipment" dataType="SYNTHETIC_DEMO" isSynthetic={true} />
             </div>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs text-black mt-0.5">
               Hourly idle cause categorization across mechanical, weather, and logistical bottlenecks
             </p>
           </div>
@@ -209,29 +209,29 @@ export const ProductionAnalyticsPage: React.FC = () => {
                 </Pie>
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#161D22',
-                    borderColor: '#26333B',
+                    backgroundColor: '#FFFFFF',
+                    borderColor: '#CBD5E1',
                     borderRadius: '0.5rem',
                     fontSize: '11px',
-                    color: '#E8E6E3'
+                    color: '#000000'
                   }}
                 />
-                <Legend wrapperStyle={{ fontSize: '10px' }} layout="vertical" align="right" verticalAlign="middle" />
+                <Legend wrapperStyle={{ fontSize: '10px', color: '#000000' }} layout="vertical" align="right" verticalAlign="middle" />
               </PieChart>
             </ResponsiveContainer>
           </div>
         </div>
 
         {/* Rainfall vs Production Dip Correlation */}
-        <div className="glass-panel p-6 rounded-2xl border border-[#26333B] bg-[#161D22]/80 space-y-4">
+        <div className="p-6 rounded-2xl border border-slate-200 bg-white space-y-4 shadow-sm">
           <div>
             <div className="flex items-center gap-2 flex-wrap">
-              <h3 className="text-sm font-bold text-[#E8E6E3] flex items-center gap-2">
-                <CloudRain className="w-4 h-4 text-tech-teal" /> Rainfall vs Production Variance Correlation
+              <h3 className="text-sm font-bold text-black flex items-center gap-2">
+                <CloudRain className="w-4 h-4 text-teal-700" /> Rainfall vs Production Variance Correlation
               </h3>
               <ProvenanceBadge sourceId="src-imd-weather" dataType="PUBLIC_WEATHER" />
             </div>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs text-black mt-0.5">
               Impact of monsoon precipitation (mm) on open bench extraction and haulage slippage
             </p>
           </div>
@@ -239,22 +239,22 @@ export const ProductionAnalyticsPage: React.FC = () => {
           <div className="h-60 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={correlationPoints} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#26333B" vertical={false} />
-                <XAxis dataKey="month" stroke="#64748B" fontSize={11} tickLine={false} />
-                <YAxis yAxisId="left" stroke="#7E69AB" fontSize={11} tickLine={false} unit=" t" />
-                <YAxis yAxisId="right" orientation="right" stroke="#2DD4BF" fontSize={11} tickLine={false} unit="mm" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" vertical={false} />
+                <XAxis dataKey="month" stroke="#000000" fontSize={11} tickLine={false} />
+                <YAxis yAxisId="left" stroke="#0F766E" fontSize={11} tickLine={false} unit=" t" />
+                <YAxis yAxisId="right" orientation="right" stroke="#0369A1" fontSize={11} tickLine={false} unit="mm" />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#161D22',
-                    borderColor: '#26333B',
+                    backgroundColor: '#FFFFFF',
+                    borderColor: '#CBD5E1',
                     borderRadius: '0.5rem',
                     fontSize: '12px',
-                    color: '#E8E6E3'
+                    color: '#000000'
                   }}
                 />
-                <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px' }} />
-                <Line yAxisId="left" type="monotone" dataKey="actualProductionTonnes" name="Production (t)" stroke="#7E69AB" strokeWidth={2} dot={{ r: 3 }} />
-                <Line yAxisId="right" type="monotone" dataKey="rainfallMm" name="Precipitation (mm)" stroke="#2DD4BF" strokeWidth={2} strokeDasharray="4 4" dot={{ r: 3 }} />
+                <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px', color: '#000000' }} />
+                <Line yAxisId="left" type="monotone" dataKey="actualProductionTonnes" name="Production (t)" stroke="#0F766E" strokeWidth={2} dot={{ r: 3 }} />
+                <Line yAxisId="right" type="monotone" dataKey="rainfallMm" name="Precipitation (mm)" stroke="#0284C7" strokeWidth={2} strokeDasharray="4 4" dot={{ r: 3 }} />
               </LineChart>
             </ResponsiveContainer>
           </div>

@@ -172,7 +172,7 @@ export const RecommendationsPage: React.FC = () => {
       </div>
 
       {/* Active Action Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white">
         {filteredRecs.map((rec) => {
           const Icon = getCategoryIcon(rec.category);
           const isPending = rec.status === 'PENDING';
@@ -182,33 +182,33 @@ export const RecommendationsPage: React.FC = () => {
           return (
             <div
               key={rec.recommendationId || rec._id}
-              className={`glass-panel rounded-2xl p-6 border transition-all duration-300 bg-[#161D22]/85 ${isPending
-                ? 'border-[#26333B] hover:border-tech-teal/50 hover:shadow-glow-teal'
+              className={`rounded-2xl p-6 border transition-all duration-300 bg-white shadow-sm ${isPending
+                ? 'border-slate-200 hover:border-teal-700'
                 : isAccepted
-                  ? 'border-emerald-800/60 bg-emerald-950/20'
-                  : 'border-[#26333B]/60 opacity-70'
+                  ? 'border-emerald-300 bg-emerald-50/30'
+                  : 'border-slate-200 opacity-70'
                 }`}
             >
               {/* Card Header */}
               <div className="flex items-start justify-between gap-3 mb-3">
                 <div className="flex items-center gap-2.5">
-                  <div className="p-2 rounded-xl bg-manganese-500/10 border border-manganese-500/20 text-manganese-400">
+                  <div className="p-2 rounded-xl bg-teal-50 border border-teal-200 text-teal-700">
                     <Icon className="w-4 h-4" />
                   </div>
                   <div>
-                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded font-mono uppercase bg-manganese-950 text-manganese-300 border border-manganese-800">
+                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded font-mono uppercase bg-slate-100 text-black border border-slate-300">
                       {rec.category}
                     </span>
-                    <span className="text-xs text-slate-400 font-semibold ml-2">{rec.mineName}</span>
+                    <span className="text-xs text-black font-semibold ml-2">{rec.mineName}</span>
                   </div>
                 </div>
 
                 <span
                   className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase font-mono ${rec.urgency === 'CRITICAL'
-                    ? 'bg-red-950 text-[#DC5F4E] border border-red-800 animate-pulse'
+                    ? 'bg-red-100 text-red-800 border border-red-300 animate-pulse'
                     : rec.urgency === 'HIGH'
-                      ? 'bg-amber-950 text-amber-400 border border-amber-800'
-                      : 'bg-tech-teal/10 text-tech-teal border border-tech-teal/30'
+                      ? 'bg-amber-100 text-amber-800 border border-amber-300'
+                      : 'bg-teal-50 text-teal-800 border border-teal-200'
                     }`}
                 >
                   {rec.urgency} Urgency
@@ -216,20 +216,20 @@ export const RecommendationsPage: React.FC = () => {
               </div>
 
               {/* Title & Description */}
-              <h3 className="text-sm font-bold text-[#E8E6E3] mb-2">{rec.title}</h3>
-              <p className="text-xs text-slate-300 leading-relaxed mb-4">{rec.description}</p>
+              <h3 className="text-sm font-bold text-black mb-2">{rec.title}</h3>
+              <p className="text-xs text-black leading-relaxed mb-4">{rec.description}</p>
 
               {/* Action Steps Checklist */}
               {rec.actionSteps && rec.actionSteps.length > 0 && (
-                <div className="p-3 rounded-xl bg-[#0F1214]/70 border border-[#26333B] mb-4 space-y-1.5">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">
+                <div className="p-3 rounded-xl bg-slate-50 border border-slate-200 mb-4 space-y-1.5">
+                  <span className="text-[10px] font-bold text-black uppercase tracking-wider block">
                     Execution Directives
                   </span>
-                  <ul className="space-y-1 text-xs text-slate-300">
+                  <ul className="space-y-1 text-xs text-black">
                     {rec.actionSteps.map((step, idx) => (
                       <li key={idx} className="flex items-start gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-tech-teal shrink-0 mt-0.5" />
-                        <span className="text-[11px] leading-tight">{step}</span>
+                        <CheckCircle2 className="w-3.5 h-3.5 text-teal-700 shrink-0 mt-0.5" />
+                        <span className="text-[11px] leading-tight text-black">{step}</span>
                       </li>
                     ))}
                   </ul>
@@ -237,18 +237,18 @@ export const RecommendationsPage: React.FC = () => {
               )}
 
               {/* Simulated Impact Metrics */}
-              <div className="grid grid-cols-3 gap-2 py-2.5 px-3 rounded-xl bg-[#0F1214]/60 border border-[#26333B] mb-4 text-center">
+              <div className="grid grid-cols-3 gap-2 py-2.5 px-3 rounded-xl bg-white border border-slate-200 mb-4 text-center shadow-sm">
                 <div>
-                  <span className="text-[10px] text-slate-400 block font-mono">Risk Reduction</span>
-                  <span className="text-xs font-bold text-emerald-400">-{rec.expectedRiskReductionPct}%</span>
+                  <span className="text-[10px] text-black block font-mono">Risk Reduction</span>
+                  <span className="text-xs font-bold text-emerald-700">-{rec.expectedRiskReductionPct}%</span>
                 </div>
                 <div>
-                  <span className="text-[10px] text-slate-400 block font-mono">Tonnage Gain</span>
-                  <span className="text-xs font-bold text-tech-teal">+{rec.expectedTonnageGain} t</span>
+                  <span className="text-[10px] text-black block font-mono">Tonnage Gain</span>
+                  <span className="text-xs font-bold text-teal-700">+{rec.expectedTonnageGain} t</span>
                 </div>
                 <div>
-                  <span className="text-[10px] text-slate-400 block font-mono">Est. ROI Impact</span>
-                  <span className="text-xs font-bold text-[#E8E6E3]">₹{rec.estimatedRoiInrLakhs} L</span>
+                  <span className="text-[10px] text-black block font-mono">Est. ROI Impact</span>
+                  <span className="text-xs font-bold text-black">₹{rec.estimatedRoiInrLakhs} L</span>
                 </div>
               </div>
 

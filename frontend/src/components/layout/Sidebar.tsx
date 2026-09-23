@@ -106,7 +106,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* 🖥️ RESPONSIVE SIDEBAR CONTAINER */}
       {/* ============================================================ */}
       <aside
-        className={`fixed top-0 left-0 h-screen z-50 bg-[#0F1214] border-r border-[#26333B] shadow-2xl flex flex-col justify-between transition-all duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 h-screen z-50 bg-white border-r border-slate-200 shadow-xl flex flex-col justify-between transition-all duration-300 ease-in-out ${
           // Mobile state: off-canvas drawer
           mobileOpen
             ? 'translate-x-0 w-72'
@@ -117,20 +117,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
           }`}
       >
         {/* Top Section */}
-        <div className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-[#26333B]">
+        <div className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-thin scrollbar-thumb-slate-200">
           {/* Brand Header */}
-          <div className="h-16 px-4 border-b border-[#26333B] flex items-center justify-between bg-[#0F1214]">
+          <div className="h-16 px-4 border-b border-slate-200 flex items-center justify-between bg-white">
             {/* Expanded Header */}
             {(!collapsed || mobileOpen) && (
               <div className="flex items-center gap-2.5 overflow-hidden">
-                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#6B5B95] to-[#0D9488] flex items-center justify-center text-white shadow-glow-manganese shrink-0">
+                <div className="w-8 h-8 rounded-xl bg-teal-600 flex items-center justify-center text-white shadow-sm shrink-0">
                   <Layers className="w-4.5 h-4.5" />
                 </div>
                 <div className="truncate">
-                  <h1 className="text-sm font-extrabold text-[#E8E6E3] tracking-wide flex items-center gap-1 font-sans">
-                    MOIL <span className="text-teal-400">ReserveIQ</span>
+                  <h1 className="text-sm font-black text-black tracking-wide flex items-center gap-1 font-sans">
+                    <span className="text-black font-black">MOIL</span> <span className="text-teal-700 font-black">ReserveIQ</span>
                   </h1>
-                  <p className="text-[9px] text-slate-400 uppercase tracking-widest font-mono truncate">
+                  <p className="text-[9px] text-black font-bold uppercase tracking-widest font-mono truncate">
                     Ministry of Steel • Govt. of India
                   </p>
                 </div>
@@ -139,7 +139,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
             {/* Collapsed Rail Header (Desktop) */}
             {collapsed && !mobileOpen && (
-              <div className="w-9 h-9 mx-auto rounded-xl bg-gradient-to-br from-[#6B5B95] to-[#0D9488] flex items-center justify-center text-white shadow-glow-manganese shrink-0">
+              <div className="w-9 h-9 mx-auto rounded-xl bg-teal-600 flex items-center justify-center text-white shadow-sm shrink-0">
                 <Layers className="w-5 h-5" />
               </div>
             )}
@@ -150,7 +150,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               {mobileOpen && (
                 <button
                   onClick={() => setMobileOpen(false)}
-                  className="p-1.5 rounded-lg text-slate-400 hover:text-[#E8E6E3] hover:bg-[#161D22] lg:hidden transition"
+                  className="p-1.5 rounded-lg text-black hover:text-black hover:bg-slate-100 lg:hidden transition"
                   aria-label="Close sidebar"
                 >
                   <X className="w-5 h-5" />
@@ -161,7 +161,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
               {!mobileOpen && (
                 <button
                   onClick={() => setCollapsed(!collapsed)}
-                  className="hidden lg:flex p-1.5 rounded-lg text-slate-400 hover:text-[#E8E6E3] hover:bg-[#161D22] transition cursor-pointer"
+                  className="hidden lg:flex p-1.5 rounded-lg text-black hover:text-black hover:bg-slate-100 transition cursor-pointer"
                   aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
                   title={collapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
                 >
@@ -173,11 +173,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
           {/* Active Target Mine Banner */}
           {(!collapsed || mobileOpen) && selectedMine && (
-            <div className="px-4 py-2.5 bg-gradient-to-r from-[#6B5B95]/20 via-[#161D22] to-[#161D22] border-b border-[#26333B] flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse shrink-0" />
+            <div className="px-4 py-2.5 bg-slate-50 border-b border-slate-200 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-teal-600 animate-pulse shrink-0" />
               <div className="overflow-hidden">
-                <p className="text-[9px] uppercase font-bold tracking-wider text-teal-400 font-mono">Target Mine Context</p>
-                <p className="text-xs font-semibold text-[#E8E6E3] truncate">{selectedMine.name}</p>
+                <p className="text-[9px] uppercase font-bold tracking-wider text-teal-800 font-mono">Target Mine Context</p>
+                <p className="text-xs font-bold text-black truncate">{selectedMine.name}</p>
               </div>
             </div>
           )}
@@ -198,30 +198,30 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 >
                   <button
                     onClick={() => handleNavClick(item.id as TabType)}
-                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all duration-200 cursor-pointer ${isCollapsed ? 'justify-center px-0' : ''
+                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-bold transition-all duration-200 cursor-pointer ${isCollapsed ? 'justify-center px-0' : ''
                       } ${isActive
-                        ? 'bg-gradient-to-r from-teal-500/20 via-[#6B5B95]/20 to-transparent text-teal-300 border border-teal-500/40 shadow-glow-teal'
-                        : 'text-slate-400 hover:text-[#E8E6E3] hover:bg-[#161D22] border border-transparent'
+                        ? 'bg-teal-50 text-teal-900 border border-teal-400 shadow-sm'
+                        : 'text-black hover:text-black hover:bg-slate-100 border border-transparent'
                       }`}
                     aria-current={isActive ? 'page' : undefined}
                   >
                     <Icon
-                      className={`w-4 h-4 shrink-0 transition-colors ${isActive ? 'text-teal-400' : 'text-slate-400 group-hover:text-white'
+                      className={`w-4 h-4 shrink-0 transition-colors ${isActive ? 'text-teal-700' : 'text-black'
                         }`}
                     />
 
                     {(!collapsed || mobileOpen) && (
                       <span className="flex-1 text-left truncate flex items-center justify-between">
-                        <span className="truncate">{item.label}</span>
+                        <span className="truncate text-black font-bold">{item.label}</span>
                         {item.badge && (
                           <span
                             className={`text-[9px] px-1.5 py-0.5 rounded font-mono font-bold shrink-0 ml-1.5 ${item.badge === 'AI'
-                              ? 'bg-teal-950 text-teal-300 border border-teal-800'
+                              ? 'bg-teal-100 text-teal-900 border border-teal-300'
                               : item.badge === 'Prescriptive'
-                                ? 'bg-[#2D2338] text-purple-300 border border-[#564879]'
+                                ? 'bg-purple-100 text-purple-900 border border-purple-300'
                                 : item.badge === 'USGS'
-                                  ? 'bg-amber-950/80 text-amber-300 border border-amber-800'
-                                  : 'bg-emerald-950/80 text-emerald-300 border border-emerald-800'
+                                  ? 'bg-amber-100 text-amber-900 border border-amber-300'
+                                  : 'bg-emerald-100 text-emerald-900 border border-emerald-300'
                               }`}
                           >
                             {item.badge}
@@ -233,10 +233,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
                   {/* Desktop Hover Floating Tooltip on Collapsed Rail */}
                   {isCollapsed && hoveredTab === item.id && (
-                    <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 z-50 bg-[#161D22] border border-[#26333B] text-[#E8E6E3] text-xs font-semibold px-3 py-1.5 rounded-xl shadow-2xl whitespace-nowrap flex items-center gap-2 pointer-events-none animate-fadeIn">
+                    <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 z-50 bg-white border border-slate-300 text-black text-xs font-bold px-3 py-1.5 rounded-xl shadow-2xl whitespace-nowrap flex items-center gap-2 pointer-events-none animate-fadeIn">
                       <span>{item.label}</span>
                       {item.badge && (
-                        <span className="text-[9px] px-1.5 py-0.5 rounded font-mono font-bold bg-teal-950 text-teal-300 border border-teal-800">
+                        <span className="text-[9px] px-1.5 py-0.5 rounded font-mono font-bold bg-teal-100 text-teal-900 border border-teal-300">
                           {item.badge}
                         </span>
                       )}
@@ -249,7 +249,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         {/* Sidebar Lower Bottom Section: Theme Mode (Icon Only) */}
-        <div className="p-3 border-t border-[#26333B] bg-[#0F1214] flex items-center justify-center">
+        <div className="p-3 border-t border-slate-200 bg-white flex items-center justify-center">
           <ThemeToggle
             variant="icon"
             className="w-10 h-10 rounded-xl"

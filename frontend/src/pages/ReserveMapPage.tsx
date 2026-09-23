@@ -533,24 +533,24 @@ export const ReserveMapPage: React.FC = () => {
         {/* ============================================================ */}
         <div className="absolute top-3 left-3 right-3 lg:right-auto z-[1000] flex flex-col gap-2 w-auto max-w-[calc(100vw-1.5rem)] sm:max-w-2xl pointer-events-auto">
           {/* Main Top Header Card */}
-          <div className="glass-panel bg-[#161D22]/95 border border-[#26333B] rounded-2xl shadow-2xl p-2.5 sm:p-3 backdrop-blur-md">
+          <div className="glass-panel bg-white/95 dark:bg-[#161D22]/95 border border-slate-200 dark:border-[#26333B] rounded-2xl shadow-2xl p-2.5 sm:p-3 backdrop-blur-md">
             <div className="flex items-center justify-between gap-2 flex-wrap sm:flex-nowrap">
               {/* Title and Stats */}
               <div className="flex items-center gap-2 min-w-0 flex-1">
-                <div className="w-8 h-8 rounded-xl bg-teal-500/15 border border-teal-500/30 flex items-center justify-center text-teal-300 shrink-0">
+                <div className="w-8 h-8 rounded-xl bg-teal-500/15 border border-teal-500/30 flex items-center justify-center text-teal-600 dark:text-teal-300 shrink-0">
                   <Target className="w-4 h-4" />
                 </div>
                 <div className="min-w-0">
                   <div className="flex items-center gap-1.5 flex-wrap">
-                    <h3 className="text-xs font-extrabold text-[#E8E6E3] truncate leading-tight font-sans">
+                    <h3 className="text-xs font-extrabold text-slate-900 dark:text-[#E8E6E3] truncate leading-tight font-sans">
                       MOIL GIS Reserve & Probability Map
                     </h3>
-                    <span className="text-[9px] px-1.5 py-0.2 rounded-full font-mono bg-teal-950 text-teal-300 border border-teal-800 flex items-center gap-1 shrink-0">
-                      <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
+                    <span className="text-[9px] px-1.5 py-0.2 rounded-full font-mono bg-teal-100 text-teal-800 border border-teal-300 dark:bg-teal-950 dark:text-teal-300 dark:border-teal-800 flex items-center gap-1 shrink-0 font-bold">
+                      <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse" />
                       Kriging
                     </span>
                   </div>
-                  <p className="text-[10px] text-slate-400 truncate">
+                  <p className="text-[10px] text-slate-600 dark:text-slate-400 font-medium truncate">
                     10 Mines • {filteredProbabilityCells.length} Cells • {totalProbabilityReservesMt} Mt Modelled
                   </p>
                 </div>
@@ -561,14 +561,14 @@ export const ReserveMapPage: React.FC = () => {
                 {/* Reserve Probability Layer Quick Toggle Pill */}
                 <button
                   onClick={() => setShowReserveProbability(!showReserveProbability)}
-                  className={`px-2 py-1.5 rounded-lg text-xs font-bold border transition flex items-center gap-1 shrink-0 cursor-pointer ${showReserveProbability
-                    ? 'bg-gradient-to-r from-[#6B5B95] to-[#0D9488] text-white border-teal-400 shadow-glow-teal'
-                    : 'bg-[#0F1214] text-slate-400 border-[#26333B] hover:text-white'
+                  className={`px-2.5 py-1.5 rounded-lg text-xs font-bold border transition flex items-center gap-1.5 shrink-0 cursor-pointer shadow-sm ${showReserveProbability
+                    ? 'bg-teal-600 text-white border-teal-300 font-extrabold shadow-md'
+                    : 'bg-white text-black border-slate-300 hover:bg-slate-50'
                     }`}
                   title="Toggle 2D/3D Reserve Probability Field (Indicator Kriging)"
                 >
-                  <Target className="w-3.5 h-3.5 text-teal-300" />
-                  <span className="hidden md:inline">Reserve Prob.</span>
+                  <Target className={`w-3.5 h-3.5 ${showReserveProbability ? 'text-white' : 'text-teal-600'}`} />
+                  <span className="hidden md:inline font-bold">Reserve Prob.</span>
                 </button>
 
                 {/* Probability Filter Sliders Button */}
@@ -581,9 +581,9 @@ export const ReserveMapPage: React.FC = () => {
                     }
                     setIsProbabilityControlOpen(!isProbabilityControlOpen);
                   }}
-                  className={`p-1.5 rounded-lg text-xs border transition shrink-0 relative cursor-pointer ${isProbabilityControlOpen || minProbabilityCutoff !== 25 || gradeCutoffMn !== 20
-                    ? 'bg-gradient-to-r from-[#6B5B95] to-[#0D9488] text-white border-teal-400'
-                    : 'bg-[#0F1214] text-slate-300 border-[#26333B] hover:bg-[#1B2226] hover:text-white'
+                  className={`p-1.5 rounded-lg text-xs border transition shrink-0 relative cursor-pointer shadow-sm ${isProbabilityControlOpen || minProbabilityCutoff !== 25 || gradeCutoffMn !== 20
+                    ? 'bg-purple-600 text-white border-purple-300 font-extrabold shadow-md'
+                    : 'bg-white text-black border-slate-300 hover:bg-slate-50'
                     }`}
                   title="Probability & Cutoff Filter Controls"
                 >
@@ -597,7 +597,7 @@ export const ReserveMapPage: React.FC = () => {
                 <select
                   value={baseLayer}
                   onChange={(e) => setBaseLayer(e.target.value as BaseLayerType)}
-                  className="px-1.5 py-1.5 rounded-lg text-[11px] font-semibold bg-[#0F1214] border border-[#26333B] text-teal-300 hover:border-teal-400 focus:outline-none cursor-pointer shadow-sm hidden lg:block max-w-[125px] truncate shrink-0 font-mono"
+                  className="px-2 py-1.5 rounded-lg text-[11px] font-bold bg-white border border-slate-300 text-black hover:border-teal-500 focus:outline-none cursor-pointer shadow-sm hidden lg:block max-w-[130px] truncate shrink-0 font-sans"
                   title="Select Base Imagery (Google Maps / Satellite)"
                 >
                   <option value="google-hybrid">🛰️ Satellite</option>
@@ -611,9 +611,9 @@ export const ReserveMapPage: React.FC = () => {
                 {/* Layers button */}
                 <button
                   onClick={() => setIsLayersOpen(!isLayersOpen)}
-                  className={`p-1.5 rounded-lg text-xs font-semibold border transition flex items-center gap-1 shrink-0 cursor-pointer ${isLayersOpen
-                    ? 'bg-gradient-to-r from-[#6B5B95] to-[#0D9488] text-white border-teal-400 shadow-glow-teal'
-                    : 'bg-[#0F1214] text-slate-300 border-[#26333B] hover:bg-[#1B2226] hover:text-white'
+                  className={`p-1.5 rounded-lg text-xs font-bold border transition flex items-center gap-1 shrink-0 cursor-pointer shadow-sm ${isLayersOpen
+                    ? 'bg-purple-600 text-white border-purple-300 font-extrabold shadow-md'
+                    : 'bg-white text-black border-slate-300 hover:bg-slate-50'
                     }`}
                   title="Toggle GIS Overlays & Base Imagery"
                 >
@@ -623,7 +623,7 @@ export const ReserveMapPage: React.FC = () => {
                 {/* Compass Reset Center */}
                 <button
                   onClick={() => handleFlyTo(21.65, 79.75, 9)}
-                  className="p-1.5 rounded-lg text-xs font-semibold bg-[#0F1214] hover:bg-[#1B2226] text-slate-300 hover:text-white border border-[#26333B] transition flex items-center shrink-0 cursor-pointer"
+                  className="p-1.5 rounded-lg text-xs font-bold bg-white hover:bg-slate-50 text-black border border-slate-300 transition flex items-center shrink-0 cursor-pointer shadow-sm"
                   title="Center Central India Corridor"
                 >
                   <Compass className="w-3.5 h-3.5" />
@@ -632,7 +632,7 @@ export const ReserveMapPage: React.FC = () => {
                 {/* Minimize / Maximize */}
                 <button
                   onClick={() => setIsFinderOpen(!isFinderOpen)}
-                  className="p-1.5 rounded-lg bg-[#0F1214] hover:bg-[#1B2226] text-slate-300 hover:text-white border border-[#26333B] transition shrink-0 cursor-pointer"
+                  className="p-1.5 rounded-lg bg-white hover:bg-slate-50 text-black border border-slate-300 transition shrink-0 cursor-pointer shadow-sm"
                   title={isFinderOpen ? 'Minimize Finder' : 'Expand Finder'}
                 >
                   {isFinderOpen ? <Minimize2 className="w-3.5 h-3.5" /> : <Maximize2 className="w-3.5 h-3.5" />}
@@ -642,21 +642,21 @@ export const ReserveMapPage: React.FC = () => {
 
             {/* Expanded Search & Category Filters */}
             {isFinderOpen && (
-              <div className="mt-3 space-y-2.5 border-t border-[#26333B] pt-2.5 animate-fadeIn">
+              <div className="mt-3 space-y-2.5 border-t border-slate-200 pt-2.5 animate-fadeIn">
                 {/* Search Bar */}
                 <div className="relative">
-                  <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-400" />
+                  <Search className="w-3.5 h-3.5 absolute left-3 top-2.5 text-black" />
                   <input
                     type="text"
                     placeholder="Search by mine, district, plant (e.g. Balaghat, Dongri, Kandri)..."
                     value={searchLocation}
                     onChange={(e) => setSearchLocation(e.target.value)}
-                    className="w-full bg-[#0F1214] text-xs text-[#E8E6E3] pl-8 pr-8 py-2 rounded-xl border border-[#26333B] focus:outline-none focus:border-teal-400 font-sans shadow-inner placeholder:text-slate-500"
+                    className="w-full bg-white text-xs text-black pl-8 pr-8 py-2 rounded-xl border border-slate-300 focus:outline-none focus:border-teal-500 font-sans shadow-inner placeholder:text-slate-500 font-semibold"
                   />
                   {searchLocation && (
                     <button
                       onClick={() => setSearchLocation('')}
-                      className="absolute right-2.5 top-2.5 text-slate-400 hover:text-white"
+                      className="absolute right-2.5 top-2.5 text-slate-500 hover:text-black"
                     >
                       <X className="w-3.5 h-3.5" />
                     </button>
@@ -667,36 +667,36 @@ export const ReserveMapPage: React.FC = () => {
                 <div className="flex items-center gap-1.5 overflow-x-auto pb-0.5 scrollbar-none text-[11px] font-mono">
                   <button
                     onClick={() => setFilterCategory('ALL')}
-                    className={`px-2.5 py-1 rounded-lg font-semibold shrink-0 transition cursor-pointer ${filterCategory === 'ALL'
-                      ? 'bg-gradient-to-r from-[#6B5B95] to-[#0D9488] text-white shadow-glow-teal'
-                      : 'bg-[#0F1214] text-slate-400 hover:text-white hover:bg-[#1B2226]'
+                    className={`px-2.5 py-1.5 rounded-lg font-bold shrink-0 transition border cursor-pointer ${filterCategory === 'ALL'
+                      ? 'bg-teal-600 text-white border-teal-300 font-extrabold shadow-md'
+                      : 'bg-white text-black border-slate-300 hover:bg-slate-50'
                       }`}
                   >
                     All ({allLocations.length})
                   </button>
                   <button
                     onClick={() => setFilterCategory('MINE')}
-                    className={`px-2.5 py-1 rounded-lg font-semibold shrink-0 transition flex items-center gap-1 ${filterCategory === 'MINE'
-                      ? 'bg-tech-teal text-[#0F1214] font-extrabold shadow-glow-teal'
-                      : 'bg-[#0F1214] text-slate-400 hover:text-white hover:bg-[#1B2226]'
+                    className={`px-2.5 py-1.5 rounded-lg font-bold shrink-0 transition flex items-center gap-1 border cursor-pointer ${filterCategory === 'MINE'
+                      ? 'bg-purple-600 text-white border-purple-300 font-extrabold shadow-md'
+                      : 'bg-white text-black border-slate-300 hover:bg-slate-50'
                       }`}
                   >
                     ⛏️ Mines ({mines.length})
                   </button>
                   <button
                     onClick={() => setFilterCategory('FACILITY')}
-                    className={`px-2.5 py-1 rounded-lg font-semibold shrink-0 transition flex items-center gap-1 ${filterCategory === 'FACILITY'
-                      ? 'bg-cyan-600 text-white shadow-glow-cyan'
-                      : 'bg-slate-950/60 text-slate-400 hover:text-white hover:bg-slate-800'
+                    className={`px-2.5 py-1.5 rounded-lg font-bold shrink-0 transition flex items-center gap-1 border cursor-pointer ${filterCategory === 'FACILITY'
+                      ? 'bg-cyan-600 text-white border-cyan-300 font-extrabold shadow-md'
+                      : 'bg-white text-black border-slate-300 hover:bg-slate-50'
                       }`}
                   >
                     🏭 Plants ({facilities.length})
                   </button>
                   <button
                     onClick={() => setFilterCategory('EXPLORATION')}
-                    className={`px-2.5 py-1 rounded-lg font-semibold shrink-0 transition flex items-center gap-1 ${filterCategory === 'EXPLORATION'
-                      ? 'bg-pink-600 text-white'
-                      : 'bg-slate-950/60 text-slate-400 hover:text-white hover:bg-slate-800'
+                    className={`px-2.5 py-1.5 rounded-lg font-bold shrink-0 transition flex items-center gap-1 border cursor-pointer ${filterCategory === 'EXPLORATION'
+                      ? 'bg-pink-600 text-white border-pink-300 font-extrabold shadow-md'
+                      : 'bg-white text-black border-slate-300 hover:bg-slate-50'
                       }`}
                   >
                     🔍 Exploration ({explorationBlocks.length})
@@ -704,7 +704,7 @@ export const ReserveMapPage: React.FC = () => {
                 </div>
 
                 {/* Filtered Location List */}
-                <div className="max-h-44 overflow-y-auto space-y-1 divide-y divide-slate-800/50 pr-1">
+                <div className="max-h-44 overflow-y-auto space-y-1 divide-y divide-slate-200 dark:divide-slate-800/50 pr-1">
                   {filteredLocations.map((loc) => {
                     const isSelected =
                       (loc.category === 'MINE' && (selectedZone?.mineId === loc.id || selectedProbabilityCell?.mineId === loc.id)) ||
@@ -713,10 +713,10 @@ export const ReserveMapPage: React.FC = () => {
 
                     const badgeColor =
                       loc.category === 'MINE'
-                        ? 'bg-purple-950 text-purple-300 border-purple-800'
+                        ? 'bg-purple-100 text-purple-900 border-purple-300 dark:bg-purple-950 dark:text-purple-200 dark:border-purple-700 font-bold'
                         : loc.category === 'FACILITY'
-                          ? 'bg-cyan-950 text-cyan-300 border-cyan-800'
-                          : 'bg-pink-950 text-pink-300 border-pink-800';
+                          ? 'bg-cyan-100 text-cyan-900 border-cyan-300 dark:bg-cyan-950 dark:text-cyan-200 dark:border-cyan-700 font-bold'
+                          : 'bg-pink-100 text-pink-900 border-pink-300 dark:bg-pink-950 dark:text-pink-200 dark:border-pink-700 font-bold';
 
                     return (
                       <button
@@ -743,23 +743,23 @@ export const ReserveMapPage: React.FC = () => {
                             setSelectedProbabilityCell(null);
                           }
                         }}
-                        className={`w-full text-left p-2 rounded-xl text-xs flex items-center justify-between transition ${isSelected
-                          ? 'bg-purple-950/60 border border-purple-600 text-white'
-                          : 'hover:bg-slate-800/70 text-slate-300'
+                        className={`w-full text-left p-2.5 rounded-xl text-xs flex items-center justify-between transition border ${isSelected
+                          ? 'bg-purple-50 border-purple-400 text-black shadow-sm'
+                          : 'bg-white border-slate-200 hover:bg-slate-50 text-black shadow-sm'
                           }`}
                       >
                         <div className="space-y-0.5">
                           <div className="flex items-center gap-1.5">
-                            <span className="font-bold text-white truncate max-w-[220px]">{loc.name}</span>
+                            <span className="font-bold text-black truncate max-w-[220px]">{loc.name}</span>
                             <span className={`text-[9px] px-1.5 py-0.2 rounded font-mono border ${badgeColor}`}>
                               {loc.type}
                             </span>
                           </div>
-                          <p className="text-[10px] text-slate-400 font-sans">{loc.state}</p>
+                          <p className="text-[10px] text-black font-sans font-medium">{loc.state}</p>
                         </div>
                         <div className="text-right shrink-0">
-                          <span className="text-[11px] font-mono font-bold text-purple-300">{loc.reserves}</span>
-                          <span className="text-[9px] text-slate-500 block">Click to Fly &rarr;</span>
+                          <span className="text-[11px] font-mono font-bold text-black">{loc.reserves}</span>
+                          <span className="text-[9px] text-teal-700 font-bold block">Click to Fly &rarr;</span>
                         </div>
                       </button>
                     );
@@ -771,23 +771,23 @@ export const ReserveMapPage: React.FC = () => {
 
           {/* Reserve Probability Cutoff & Filtering Control Card */}
           {isProbabilityControlOpen && (
-            <div className="glass-panel bg-slate-900/98 border border-purple-500/70 rounded-2xl p-3.5 shadow-2xl space-y-3 animate-fadeIn">
-              <div className="flex items-center justify-between border-b border-slate-800 pb-2">
+            <div className="glass-panel bg-white border-2 border-purple-400 rounded-2xl p-4 shadow-2xl space-y-3.5 animate-fadeIn">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-2">
                 <div className="flex items-center gap-1.5">
-                  <Target className="w-4 h-4 text-purple-400" />
-                  <span className="text-xs font-bold text-white">
+                  <Target className="w-4 h-4 text-purple-600" />
+                  <span className="text-xs font-bold text-black">
                     Reserve Probability Cutoff Controls
                   </span>
                 </div>
-                <button onClick={() => setIsProbabilityControlOpen(false)} className="text-slate-400 hover:text-white">
+                <button onClick={() => setIsProbabilityControlOpen(false)} className="text-black hover:text-slate-700 cursor-pointer">
                   <X className="w-3.5 h-3.5" />
                 </button>
               </div>
 
               {/* Real-time Preview Pill */}
-              <div className="p-2 rounded-xl bg-purple-950/40 border border-purple-900/60 flex items-center justify-between text-xs">
-                <span className="text-slate-400 text-[11px]">Matching Cells Preview:</span>
-                <span className="font-mono font-bold text-purple-300">
+              <div className="p-2.5 rounded-xl bg-white border-2 border-purple-300 flex items-center justify-between text-xs shadow-sm">
+                <span className="text-black text-[11px] font-bold">Matching Cells Preview:</span>
+                <span className="font-mono font-extrabold text-purple-700 text-xs">
                   {pendingPreviewCells.length} Cells • ~{pendingPreviewReservesMt} Mt
                 </span>
               </div>
@@ -795,8 +795,8 @@ export const ReserveMapPage: React.FC = () => {
               {/* Probability Threshold Selector */}
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="text-slate-400 font-medium">Min Probability Cutoff:</span>
-                  <span className="font-mono font-bold text-purple-400">P &ge; {pendingMinProbCutoff}%</span>
+                  <span className="text-black font-bold">Min Probability Cutoff:</span>
+                  <span className="font-mono font-extrabold text-purple-700">P &ge; {pendingMinProbCutoff}%</span>
                 </div>
                 <div className="grid grid-cols-4 gap-1.5 text-[10px] font-mono">
                   {[25, 50, 70, 85].map((cutoff) => (
@@ -804,9 +804,9 @@ export const ReserveMapPage: React.FC = () => {
                       key={cutoff}
                       type="button"
                       onClick={() => setPendingMinProbCutoff(cutoff)}
-                      className={`py-1.5 rounded-lg border transition ${pendingMinProbCutoff === cutoff
-                        ? 'bg-tech-teal text-[#0F1214] border-tech-teal shadow-glow-teal font-extrabold'
-                        : 'bg-[#0F1214] text-slate-400 border-[#26333B] hover:text-white hover:bg-[#1B2226]'
+                      className={`py-2 rounded-lg border-2 transition font-bold cursor-pointer shadow-sm ${pendingMinProbCutoff === cutoff
+                        ? 'bg-teal-600 text-white border-teal-300 shadow-md font-extrabold'
+                        : 'bg-white text-black border-slate-300 hover:border-teal-500 hover:bg-slate-50'
                         }`}
                     >
                       {cutoff === 85 ? 'Proved (85%)' : cutoff === 70 ? 'Probable (70%)' : cutoff === 50 ? 'Inferred (50%)' : 'All (25%)'}
@@ -818,8 +818,8 @@ export const ReserveMapPage: React.FC = () => {
               {/* Grade Cutoff Selector */}
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="text-slate-400 font-medium">Ore Grade Cutoff:</span>
-                  <span className="font-mono font-bold text-emerald-400">&ge; {pendingGradeCutoffMn}% Mn</span>
+                  <span className="text-black font-bold">Ore Grade Cutoff:</span>
+                  <span className="font-mono font-extrabold text-emerald-700">&ge; {pendingGradeCutoffMn}% Mn</span>
                 </div>
                 <div className="grid grid-cols-3 gap-1.5 text-[10px] font-mono">
                   {[20, 35, 44].map((g) => (
@@ -827,9 +827,9 @@ export const ReserveMapPage: React.FC = () => {
                       key={g}
                       type="button"
                       onClick={() => setPendingGradeCutoffMn(g)}
-                      className={`py-1.5 rounded-lg border transition ${pendingGradeCutoffMn === g
-                        ? 'bg-emerald-600 text-white border-emerald-400 font-bold'
-                        : 'bg-slate-950 text-slate-400 border-slate-800 hover:text-white hover:bg-slate-800'
+                      className={`py-2 rounded-lg border-2 transition font-bold cursor-pointer shadow-sm ${pendingGradeCutoffMn === g
+                        ? 'bg-emerald-600 text-white border-emerald-300 shadow-md font-extrabold'
+                        : 'bg-white text-black border-slate-300 hover:border-emerald-500 hover:bg-slate-50'
                         }`}
                     >
                       {g === 44 ? 'High (>=44%)' : g === 35 ? 'Med (>=35%)' : 'Low (>=20%)'}
@@ -841,8 +841,8 @@ export const ReserveMapPage: React.FC = () => {
               {/* Heatmap Opacity Slider */}
               <div className="space-y-1">
                 <div className="flex items-center justify-between text-xs">
-                  <span className="text-slate-400">Layer Opacity:</span>
-                  <span className="font-mono text-slate-300">{Math.round(pendingProbabilityOpacity * 100)}%</span>
+                  <span className="text-black font-bold">Layer Opacity:</span>
+                  <span className="font-mono text-black font-extrabold">{Math.round(pendingProbabilityOpacity * 100)}%</span>
                 </div>
                 <input
                   type="range"
@@ -851,31 +851,28 @@ export const ReserveMapPage: React.FC = () => {
                   step="0.05"
                   value={pendingProbabilityOpacity}
                   onChange={(e) => setPendingProbabilityOpacity(parseFloat(e.target.value))}
-                  className="w-full accent-purple-500 cursor-pointer h-1.5 bg-slate-950 rounded-lg"
+                  className="w-full accent-purple-600 cursor-pointer h-1.5 bg-slate-200 rounded-lg"
                 />
               </div>
 
               {/* Action Buttons: Apply Filters & Reset */}
-              <div className="pt-2 border-t border-slate-800 flex items-center gap-2">
+              <div className="pt-2 border-t border-slate-200 flex items-center gap-2">
                 <button
                   type="button"
                   onClick={handleResetFilters}
-                  className="px-3 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition flex items-center justify-center gap-1.5 shrink-0"
+                  className="px-3.5 py-2.5 rounded-xl text-xs font-bold bg-white hover:bg-slate-50 text-black border-2 border-slate-300 transition flex items-center justify-center gap-1.5 shrink-0 cursor-pointer shadow-sm"
                   title="Reset to default baseline"
                 >
-                  <RotateCcw className="w-3.5 h-3.5" />
-                  <span>Reset</span>
+                  <RotateCcw className="w-3.5 h-3.5 text-black" />
+                  <span className="text-black font-bold">Reset</span>
                 </button>
                 <button
                   type="button"
                   onClick={handleApplyFilters}
-                  className={`flex-1 py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 shadow-lg ${isFilterDirty
-                    ? 'bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-[#0F1214] font-extrabold shadow-glow-teal ring-2 ring-tech-teal/80'
-                    : 'bg-tech-teal text-[#0F1214] font-bold hover:bg-tech-teal/90'
-                    }`}
+                  className="flex-1 py-2.5 rounded-xl text-xs font-extrabold transition flex items-center justify-center gap-2 shadow-lg text-white bg-teal-600 hover:bg-teal-500 border-2 border-teal-300 cursor-pointer shadow-glow-teal"
                 >
-                  <Check className="w-4 h-4" />
-                  <span>Apply Filters ({pendingPreviewCells.length} Cells)</span>
+                  <Check className="w-4 h-4 text-white" />
+                  <span className="text-white font-extrabold">Apply Filters ({pendingPreviewCells.length} Cells)</span>
                 </button>
               </div>
             </div>
@@ -883,12 +880,17 @@ export const ReserveMapPage: React.FC = () => {
 
           {/* Feedback Toast Notification when filter is applied */}
           {filterAppliedMessage && (
-            <div className="p-2.5 rounded-xl bg-emerald-950/95 border border-emerald-500/80 text-emerald-300 text-xs font-medium flex items-center justify-between shadow-2xl animate-fadeIn backdrop-blur-md">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>{filterAppliedMessage}</span>
+            <div className="p-3.5 rounded-xl bg-emerald-600 text-white border-2 border-emerald-300 text-xs font-bold flex items-center justify-between shadow-2xl animate-fadeIn backdrop-blur-md">
+              <div className="flex items-center gap-2.5">
+                <CheckCircle2 className="w-4 h-4 text-white shrink-0" />
+                <span className="text-white font-extrabold">{filterAppliedMessage}</span>
               </div>
-              <button onClick={() => setFilterAppliedMessage(null)} className="text-emerald-400 hover:text-white">
+              <button
+                type="button"
+                onClick={() => setFilterAppliedMessage(null)}
+                className="text-white/90 hover:text-white hover:bg-emerald-700/60 p-1 rounded-lg transition cursor-pointer"
+                title="Dismiss"
+              >
                 <X className="w-3.5 h-3.5" />
               </button>
             </div>
@@ -896,24 +898,24 @@ export const ReserveMapPage: React.FC = () => {
 
           {/* Collapsible GIS Layers Popup Panel */}
           {isLayersOpen && (
-            <div className="glass-panel bg-slate-900/98 border border-slate-700 rounded-2xl p-3.5 shadow-2xl space-y-3 animate-fadeIn max-w-sm">
-              <div className="flex items-center justify-between border-b border-slate-800 pb-1.5">
-                <span className="text-xs font-bold text-white flex items-center gap-1.5">
-                  <Layers className="w-3.5 h-3.5 text-purple-400" /> GIS Layer Controls & Satellite Base
+            <div className="glass-panel bg-white border border-slate-200 rounded-2xl p-3.5 shadow-2xl space-y-3 animate-fadeIn max-w-sm">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-1.5">
+                <span className="text-xs font-bold text-black flex items-center gap-1.5">
+                  <Layers className="w-3.5 h-3.5 text-purple-600" /> GIS Layer Controls & Satellite Base
                 </span>
-                <button onClick={() => setIsLayersOpen(false)} className="text-slate-400 hover:text-white">
+                <button onClick={() => setIsLayersOpen(false)} className="text-black hover:text-slate-700">
                   <X className="w-3.5 h-3.5" />
                 </button>
               </div>
 
               {/* Google Maps Base Imagery Section */}
-              <div className="space-y-1.5 border-b border-slate-800 pb-2.5">
+              <div className="space-y-1.5 border-b border-slate-200 pb-2.5">
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+                  <span className="text-[10px] uppercase font-bold text-black tracking-wider">
                     Base Earth Imagery
                   </span>
-                  <span className="text-[9px] px-1.5 py-0.5 rounded font-mono bg-emerald-950 text-emerald-300 border border-emerald-800 flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> Google Maps API
+                  <span className="text-[9px] px-2 py-0.5 rounded-full font-mono bg-emerald-100 text-emerald-900 border border-emerald-300 flex items-center gap-1 font-bold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /> Google Maps API
                   </span>
                 </div>
                 <div className="grid grid-cols-2 gap-1.5 text-xs">
@@ -922,123 +924,129 @@ export const ReserveMapPage: React.FC = () => {
                       key={key}
                       type="button"
                       onClick={() => setBaseLayer(key as BaseLayerType)}
-                      className={`p-1.5 rounded-lg text-left font-semibold flex items-center gap-1.5 transition ${baseLayer === key
-                        ? 'bg-tech-teal text-[#0F1214] font-extrabold shadow-glow-teal'
-                        : 'bg-[#0F1214] text-slate-300 hover:text-white hover:bg-[#1B2226]'
+                      className={`p-2 rounded-lg text-left font-bold flex items-center gap-1.5 transition cursor-pointer border-2 shadow-sm ${baseLayer === key
+                        ? 'bg-teal-600 text-white border-teal-300 font-extrabold shadow-md'
+                        : 'bg-white text-black border-slate-300 hover:border-teal-500 hover:bg-slate-50'
                         }`}
                     >
                       <span className="text-xs">{config.icon}</span>
-                      <span className="truncate text-[10px]">{config.name}</span>
+                      <span className={`truncate text-[10px] ${baseLayer === key ? 'text-white font-extrabold' : 'text-black font-bold'}`}>{config.name}</span>
                     </button>
                   ))}
                 </div>
               </div>
 
               {/* Vector & Subsurface Overlays */}
-              <div className="space-y-1 text-xs text-slate-300">
-                <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-1">
+              <div className="space-y-1.5 text-xs">
+                <span className="text-[10px] uppercase font-bold text-black tracking-wider block mb-1">
                   Mining Telemetry Overlays
                 </span>
 
                 {/* Reserve Probability Field */}
-                <label className="flex items-center justify-between cursor-pointer hover:text-white p-1 rounded bg-purple-950/40 border border-purple-900/60">
+                <label className="flex items-center justify-between cursor-pointer p-2 rounded-xl transition border-2 bg-purple-100 text-purple-950 border-purple-400 shadow-sm">
                   <div className="flex items-center gap-2">
                     <input
                       type="checkbox"
                       checked={showReserveProbability}
                       onChange={(e) => setShowReserveProbability(e.target.checked)}
-                      className="rounded border-slate-700 text-purple-600 focus:ring-0"
+                      className="rounded border-slate-400 text-purple-600 focus:ring-0"
                     />
-                    <span className="font-bold text-purple-300">🎯 Reserve Probability (Kriging)</span>
+                    <span className="font-bold text-purple-950">🎯 Reserve Probability (Kriging)</span>
                   </div>
-                  <span className="text-[10px] text-purple-400 font-mono">{filteredProbabilityCells.length} Cells</span>
+                  <span className="text-[10px] text-purple-900 font-mono font-bold">{filteredProbabilityCells.length} Cells</span>
                 </label>
 
-                <label className="flex items-center justify-between cursor-pointer hover:text-white p-1 rounded hover:bg-slate-800/50">
+                {/* Operating Mines */}
+                <label className="flex items-center justify-between cursor-pointer p-2 rounded-xl transition border-2 border-slate-300 bg-white hover:bg-slate-50 text-black shadow-sm">
                   <div className="flex items-center gap-2">
                     <input
                       type="checkbox"
                       checked={showMines}
                       onChange={(e) => setShowMines(e.target.checked)}
-                      className="rounded border-slate-700 text-purple-600 focus:ring-0"
+                      className="rounded border-slate-400 text-purple-600 focus:ring-0"
                     />
-                    <span>⛏️ Operating Mines ({mines.length})</span>
+                    <span className="text-black font-bold">⛏️ Operating Mines ({mines.length})</span>
                   </div>
-                  <span className="text-[10px] text-slate-400 font-mono">10 Leases</span>
+                  <span className="text-[10px] text-black font-mono font-bold">10 Leases</span>
                 </label>
 
-                <label className="flex items-center justify-between cursor-pointer hover:text-white p-1 rounded hover:bg-slate-800/50">
+                {/* UNFC Reserve Boundary Zones */}
+                <label className="flex items-center justify-between cursor-pointer p-2 rounded-xl transition border-2 border-slate-300 bg-white hover:bg-slate-50 text-black shadow-sm">
                   <div className="flex items-center gap-2">
                     <input
                       type="checkbox"
                       checked={showConfidencePolygons}
                       onChange={(e) => setShowConfidencePolygons(e.target.checked)}
-                      className="rounded border-slate-700 text-purple-600 focus:ring-0"
+                      className="rounded border-slate-400 text-purple-600 focus:ring-0"
                     />
-                    <span>📐 UNFC Reserve Boundary Zones</span>
+                    <span className="text-black font-bold">📐 UNFC Reserve Boundary Zones</span>
                   </div>
                   <ProvenanceBadge sourceId="src-ibm-nmi-manganese" compact />
                 </label>
 
-                <label className="flex items-center justify-between cursor-pointer hover:text-white p-1 rounded hover:bg-slate-800/50">
+                {/* Borehole Drill Grid */}
+                <label className="flex items-center justify-between cursor-pointer p-2 rounded-xl transition border-2 border-slate-300 bg-white hover:bg-slate-50 text-black shadow-sm">
                   <div className="flex items-center gap-2">
                     <input
                       type="checkbox"
                       checked={showBoreholes}
                       onChange={(e) => setShowBoreholes(e.target.checked)}
-                      className="rounded border-slate-700 text-purple-600 focus:ring-0"
+                      className="rounded border-slate-400 text-purple-600 focus:ring-0"
                     />
-                    <span>🔬 Borehole Drill Grid ({boreholes.length})</span>
+                    <span className="text-black font-bold">🔬 Borehole Drill Grid ({boreholes.length})</span>
                   </div>
                   <ProvenanceBadge sourceId="src-synthetic-boreholes" compact />
                 </label>
 
-                <label className="flex items-center justify-between cursor-pointer hover:text-white p-1 rounded hover:bg-slate-800/50">
+                {/* Plants & HQ */}
+                <label className="flex items-center justify-between cursor-pointer p-2 rounded-xl transition border-2 border-slate-300 bg-white hover:bg-slate-50 text-black shadow-sm">
                   <div className="flex items-center gap-2">
                     <input
                       type="checkbox"
                       checked={showFacilities}
                       onChange={(e) => setShowFacilities(e.target.checked)}
-                      className="rounded border-slate-700 text-purple-600 focus:ring-0"
+                      className="rounded border-slate-400 text-purple-600 focus:ring-0"
                     />
-                    <span>🏭 Plants & HQ ({facilities.length})</span>
+                    <span className="text-black font-bold">🏭 Plants & HQ ({facilities.length})</span>
                   </div>
-                  <span className="text-[10px] text-cyan-400 font-mono">6 Units</span>
+                  <span className="text-[10px] text-cyan-800 font-mono font-bold">6 Units</span>
                 </label>
 
-                <label className="flex items-center justify-between cursor-pointer hover:text-white p-1 rounded hover:bg-slate-800/50">
+                {/* Greenfield Blocks */}
+                <label className="flex items-center justify-between cursor-pointer p-2 rounded-xl transition border-2 border-slate-300 bg-white hover:bg-slate-50 text-black shadow-sm">
                   <div className="flex items-center gap-2">
                     <input
                       type="checkbox"
                       checked={showExplorationBlocks}
                       onChange={(e) => setShowExplorationBlocks(e.target.checked)}
-                      className="rounded border-slate-700 text-purple-600 focus:ring-0"
+                      className="rounded border-slate-400 text-purple-600 focus:ring-0"
                     />
-                    <span>🔍 Greenfield Blocks ({explorationBlocks.length})</span>
+                    <span className="text-black font-bold">🔍 Greenfield Blocks ({explorationBlocks.length})</span>
                   </div>
-                  <span className="text-[10px] text-pink-400 font-mono">3 Blocks</span>
+                  <span className="text-[10px] text-pink-800 font-mono font-bold">3 Blocks</span>
                 </label>
 
-                <label className="flex items-center justify-between cursor-pointer hover:text-white p-1 rounded hover:bg-slate-800/50">
+                {/* Sentinel-2 NDVI Overlay */}
+                <label className="flex items-center justify-between cursor-pointer p-2 rounded-xl transition border-2 border-slate-300 bg-white hover:bg-slate-50 text-black shadow-sm">
                   <div className="flex items-center gap-2">
                     <input
                       type="checkbox"
                       checked={showNdviOverlay}
                       onChange={(e) => setShowNdviOverlay(e.target.checked)}
-                      className="rounded border-slate-700 text-purple-600 focus:ring-0"
+                      className="rounded border-slate-400 text-purple-600 focus:ring-0"
                     />
-                    <span>🛰️ Sentinel-2 NDVI Overlay</span>
+                    <span className="text-black font-bold">🛰️ Sentinel-2 NDVI Overlay</span>
                   </div>
                   <ProvenanceBadge sourceId="src-copernicus-sentinel2" compact />
                 </label>
               </div>
 
               {/* Apply Layers Action Button */}
-              <div className="pt-2 border-t border-slate-800 flex items-center justify-end">
+              <div className="pt-2 border-t border-slate-200 flex items-center justify-end">
                 <button
                   type="button"
                   onClick={() => setIsLayersOpen(false)}
-                  className="w-full py-2 rounded-xl text-xs font-extrabold bg-tech-teal hover:bg-tech-teal/90 text-[#0F1214] shadow-glow-teal transition flex items-center justify-center gap-1.5"
+                  className="w-full py-2 rounded-xl text-xs font-extrabold bg-gradient-to-r from-[#6B5B95] to-[#0D9488] hover:from-[#7E69AB] hover:to-[#2DD4BF] text-white shadow-glow-teal transition flex items-center justify-center gap-1.5 cursor-pointer"
                 >
                   <Check className="w-3.5 h-3.5" />
                   <span>Apply & Close</span>
@@ -1051,47 +1059,47 @@ export const ReserveMapPage: React.FC = () => {
         {/* ============================================================ */}
         {/* 🌈 BOTTOM FLOATING RESERVE PROBABILITY & GEOSTATISTICAL LEGEND */}
         {/* ============================================================ */}
-        <div className="absolute bottom-3 left-3 right-3 lg:right-auto z-[900] glass-panel bg-slate-900/95 border border-slate-800 rounded-2xl px-4 py-2.5 shadow-2xl flex flex-col sm:flex-row items-start sm:items-center gap-3 text-[11px] max-w-4xl">
+        <div className="absolute bottom-3 left-3 right-3 lg:right-auto z-[900] glass-panel bg-white border border-slate-200 rounded-2xl px-4 py-2.5 shadow-2xl flex flex-col sm:flex-row items-start sm:items-center gap-3 text-[11px] max-w-4xl">
           <div className="flex items-center gap-1.5 shrink-0">
-            <Target className="w-3.5 h-3.5 text-purple-400" />
-            <span className="font-extrabold text-white uppercase tracking-wider">Reserve Probability Spectrum:</span>
+            <Target className="w-3.5 h-3.5 text-purple-600" />
+            <span className="font-extrabold text-black uppercase tracking-wider">Reserve Probability Spectrum:</span>
           </div>
 
           <div className="flex items-center gap-2 overflow-x-auto scrollbar-none w-full sm:w-auto">
             <div className="flex items-center gap-1 shrink-0">
               <span className="w-3 h-3 rounded bg-[#8B5CF6] border border-[#C084FC]" />
-              <span className="text-purple-300 font-mono font-bold">&ge;85%</span>
-              <span className="text-slate-400 text-[10px]">Proved (111)</span>
+              <span className="text-purple-700 font-mono font-bold">&ge;85%</span>
+              <span className="text-black text-[10px] font-bold">Proved (111)</span>
             </div>
 
             <div className="flex items-center gap-1 shrink-0">
               <span className="w-3 h-3 rounded bg-[#3B82F6] border border-[#60A5FA]" />
-              <span className="text-blue-300 font-mono font-bold">70-85%</span>
-              <span className="text-slate-400 text-[10px]">Probable (122)</span>
+              <span className="text-blue-700 font-mono font-bold">70-85%</span>
+              <span className="text-black text-[10px] font-bold">Probable (122)</span>
             </div>
 
             <div className="flex items-center gap-1 shrink-0">
               <span className="w-3 h-3 rounded bg-[#10B981] border border-[#34D399]" />
-              <span className="text-emerald-300 font-mono font-bold">50-70%</span>
-              <span className="text-slate-400 text-[10px]">Inferred (333)</span>
+              <span className="text-emerald-700 font-mono font-bold">50-70%</span>
+              <span className="text-black text-[10px] font-bold">Inferred (333)</span>
             </div>
 
             <div className="flex items-center gap-1 shrink-0">
               <span className="w-3 h-3 rounded bg-[#F59E0B] border border-[#FCD34D]" />
-              <span className="text-amber-300 font-mono font-bold">30-50%</span>
-              <span className="text-slate-400 text-[10px]">Prospecting</span>
+              <span className="text-amber-700 font-mono font-bold">30-50%</span>
+              <span className="text-black text-[10px] font-bold">Prospecting</span>
             </div>
 
             <div className="flex items-center gap-1 shrink-0">
               <span className="w-3 h-3 rounded bg-[#64748B] border border-[#94A3B8]" />
-              <span className="text-slate-400 font-mono font-bold">&lt;30%</span>
-              <span className="text-slate-500 text-[10px]">Sterile Host</span>
+              <span className="text-black font-mono font-bold">&lt;30%</span>
+              <span className="text-black text-[10px] font-bold">Sterile Host</span>
             </div>
           </div>
 
-          <div className="hidden md:flex items-center gap-2 pl-3 border-l border-slate-800 shrink-0 text-slate-300">
-            <span className="text-[10px] text-slate-400">Total Filtered:</span>
-            <span className="font-mono font-bold text-purple-400">{totalProbabilityReservesMt} Mt</span>
+          <div className="hidden md:flex items-center gap-2 pl-3 border-l border-slate-200 shrink-0 text-black font-medium">
+            <span className="text-[10px] text-black font-bold">Total Filtered:</span>
+            <span className="font-mono font-bold text-purple-700">{totalProbabilityReservesMt} Mt</span>
           </div>
         </div>
 
@@ -1159,20 +1167,20 @@ export const ReserveMapPage: React.FC = () => {
                       </div>
 
                       <div className="grid grid-cols-2 gap-1.5 text-[11px] font-mono py-1">
-                        <div className="bg-slate-100 p-1 rounded">
-                          <span className="text-[9px] text-slate-500 font-sans block">Estimated Ore</span>
+                        <div className="bg-white border border-slate-300 p-1.5 rounded shadow-sm">
+                          <span className="text-[9px] text-black font-sans block font-bold">Estimated Ore</span>
                           <span className="font-bold text-purple-700">{cell.estimatedTonnageKt.toLocaleString()} kt</span>
                         </div>
-                        <div className="bg-slate-100 p-1 rounded">
-                          <span className="text-[9px] text-slate-500 font-sans block">Predicted Grade</span>
+                        <div className="bg-white border border-slate-300 p-1.5 rounded shadow-sm">
+                          <span className="text-[9px] text-black font-sans block font-bold">Predicted Grade</span>
                           <span className="font-bold text-emerald-700">{cell.predictedMnGradePct}% Mn</span>
                         </div>
-                        <div className="bg-slate-100 p-1 rounded">
-                          <span className="text-[9px] text-slate-500 font-sans block">Seam Depth</span>
-                          <span className="font-bold text-slate-800">{cell.seamDepthMeters}m (thick {cell.seamThicknessMeters}m)</span>
+                        <div className="bg-white border border-slate-300 p-1.5 rounded shadow-sm">
+                          <span className="text-[9px] text-black font-sans block font-bold">Seam Depth</span>
+                          <span className="font-bold text-black">{cell.seamDepthMeters}m (thick {cell.seamThicknessMeters}m)</span>
                         </div>
-                        <div className="bg-slate-100 p-1 rounded">
-                          <span className="text-[9px] text-slate-500 font-sans block">Kriging Variance</span>
+                        <div className="bg-white border border-slate-300 p-1.5 rounded shadow-sm">
+                          <span className="text-[9px] text-black font-sans block font-bold">Kriging Variance</span>
                           <span className="font-bold text-blue-700">σ² = {cell.krigingVariance}</span>
                         </div>
                       </div>
@@ -1291,13 +1299,13 @@ export const ReserveMapPage: React.FC = () => {
                       <h4 className="font-bold text-slate-900 text-sm">{mine.name}</h4>
                       <p className="text-slate-600 font-medium">{mine.district}, {mine.state}</p>
                       <div className="grid grid-cols-2 gap-2 text-xs font-mono py-1">
-                        <div className="bg-slate-100 p-1.5 rounded">
-                          <span className="text-[10px] text-slate-500 font-sans block">Total Reserves</span>
+                        <div className="bg-white border border-slate-300 p-1.5 rounded shadow-sm">
+                          <span className="text-[10px] text-black font-sans block font-bold">Total Reserves</span>
                           <span className="font-bold text-purple-700">{mine.totalReservesMt} Mt</span>
                         </div>
-                        <div className="bg-slate-100 p-1.5 rounded">
-                          <span className="text-[10px] text-slate-500 font-sans block">Monthly Capacity</span>
-                          <span className="font-bold text-slate-800">{mine.annualCapacityTonnes ? (mine.annualCapacityTonnes / 12).toFixed(0) : (mine.targetMonthlyTonnes || 25000).toLocaleString()} t</span>
+                        <div className="bg-white border border-slate-300 p-1.5 rounded shadow-sm">
+                          <span className="text-[10px] text-black font-sans block font-bold">Monthly Capacity</span>
+                          <span className="font-bold text-black">{mine.annualCapacityTonnes ? (mine.annualCapacityTonnes / 12).toFixed(0) : (mine.targetMonthlyTonnes || 25000).toLocaleString()} t</span>
                         </div>
                       </div>
                       <p className="text-[11px] text-slate-700"><strong>Mineralogy:</strong> {mine.keyMineralogy || 'Braunite, Gondite'}</p>
@@ -1390,19 +1398,19 @@ export const ReserveMapPage: React.FC = () => {
       {/* 📋 RESPONSIVE RIGHT DRAWER (INSPECTOR, PROBABILITY & SIMULATION) */}
       {/* ============================================================ */}
       <div
-        className={`transition-all duration-300 glass-panel bg-slate-900/98 border-l border-slate-800/90 h-full overflow-y-auto z-10 shadow-2xl flex flex-col justify-between ${isDrawerOpen ? 'w-full md:w-[420px] p-5' : 'w-0 p-0 border-l-0 overflow-hidden'
+        className={`transition-all duration-300 glass-panel bg-white border-l border-slate-200 h-full overflow-y-auto z-10 shadow-2xl flex flex-col justify-between ${isDrawerOpen ? 'w-full md:w-[420px] p-5' : 'w-0 p-0 border-l-0 overflow-hidden'
           }`}
       >
         {isDrawerOpen && (
           <div className="space-y-5">
             {/* Drawer Top Header with Close Button */}
-            <div className="flex items-center justify-between border-b border-slate-800 pb-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                <Target className="w-4 h-4 text-purple-400" /> Geostatistical Reserve Inspector
+            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-black flex items-center gap-1.5">
+                <Target className="w-4 h-4 text-purple-600" /> Geostatistical Reserve Inspector
               </span>
               <button
                 onClick={() => setIsDrawerOpen(false)}
-                className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition"
+                className="p-1 rounded-lg text-black hover:bg-slate-100 transition cursor-pointer"
                 title="Hide Inspector Drawer"
               >
                 <X className="w-4 h-4" />
@@ -1410,12 +1418,12 @@ export const ReserveMapPage: React.FC = () => {
             </div>
 
             {/* Navigation Tabs in Drawer */}
-            <div className="flex items-center gap-1 bg-[#0F1214] p-1 rounded-xl border border-[#26333B] text-xs">
+            <div className="flex items-center gap-1 bg-white p-1 rounded-xl border border-slate-300 text-xs shadow-sm">
               <button
                 onClick={() => setInspectorTab('PROBABILITY')}
-                className={`flex-1 py-1.5 rounded-lg font-bold transition flex items-center justify-center gap-1 ${inspectorTab === 'PROBABILITY'
-                  ? 'bg-tech-teal text-[#0F1214] font-extrabold shadow-glow-teal'
-                  : 'text-slate-400 hover:text-white'
+                className={`flex-1 py-1.5 rounded-lg font-bold transition flex items-center justify-center gap-1 cursor-pointer ${inspectorTab === 'PROBABILITY'
+                  ? 'bg-gradient-to-r from-[#6B5B95] to-[#0D9488] text-white font-extrabold shadow-glow-teal'
+                  : 'text-black hover:bg-slate-100 font-bold'
                   }`}
               >
                 <Target className="w-3.5 h-3.5" />
@@ -1423,9 +1431,9 @@ export const ReserveMapPage: React.FC = () => {
               </button>
               <button
                 onClick={() => setInspectorTab('ASSAYS')}
-                className={`flex-1 py-1.5 rounded-lg font-bold transition flex items-center justify-center gap-1 ${inspectorTab === 'ASSAYS'
-                  ? 'bg-tech-teal text-[#0F1214] font-extrabold shadow-glow-teal'
-                  : 'text-slate-400 hover:text-white'
+                className={`flex-1 py-1.5 rounded-lg font-bold transition flex items-center justify-center gap-1 cursor-pointer ${inspectorTab === 'ASSAYS'
+                  ? 'bg-gradient-to-r from-[#6B5B95] to-[#0D9488] text-white font-extrabold shadow-glow-teal'
+                  : 'text-black hover:bg-slate-100 font-bold'
                   }`}
               >
                 <Database className="w-3.5 h-3.5" />
@@ -1433,9 +1441,9 @@ export const ReserveMapPage: React.FC = () => {
               </button>
               <button
                 onClick={() => setInspectorTab('RE_ESTIMATE')}
-                className={`flex-1 py-1.5 rounded-lg font-bold transition flex items-center justify-center gap-1 ${inspectorTab === 'RE_ESTIMATE'
-                  ? 'bg-tech-teal text-[#0F1214] font-extrabold shadow-glow-teal'
-                  : 'text-slate-400 hover:text-white'
+                className={`flex-1 py-1.5 rounded-lg font-bold transition flex items-center justify-center gap-1 cursor-pointer ${inspectorTab === 'RE_ESTIMATE'
+                  ? 'bg-gradient-to-r from-[#6B5B95] to-[#0D9488] text-white font-extrabold shadow-glow-teal'
+                  : 'text-black hover:bg-slate-100 font-bold'
                   }`}
               >
                 <Sparkles className="w-3.5 h-3.5" />
@@ -1451,7 +1459,7 @@ export const ReserveMapPage: React.FC = () => {
                     <span
                       className={`text-[10px] px-2 py-0.5 rounded-full font-mono uppercase font-bold border ${selectedProbabilityCell
                         ? getProbabilityColor(selectedProbabilityCell.probabilityPct).bgBadge
-                        : 'bg-purple-950 text-purple-300 border-purple-800'
+                        : 'bg-purple-100 text-purple-800 border-purple-300 dark:bg-purple-950 dark:text-purple-300 dark:border-purple-800'
                         }`}
                     >
                       {selectedProbabilityCell
@@ -1460,11 +1468,11 @@ export const ReserveMapPage: React.FC = () => {
                     </span>
                     <ProvenanceBadge sourceId="src-ibm-nmi-manganese" compact />
                   </div>
-                  <h3 className="text-lg font-bold text-white mt-1.5">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mt-1.5">
                     {selectedProbabilityCell ? selectedProbabilityCell.mineName : selectedZone?.mineName}
                   </h3>
-                  <p className="text-xs text-slate-400 flex items-center gap-1 mt-0.5">
-                    <MapPin className="w-3.5 h-3.5 text-purple-400" />
+                  <p className="text-xs text-slate-600 dark:text-slate-300 flex items-center gap-1 mt-0.5 font-medium">
+                    <MapPin className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
                     {currentActiveMine?.district}, {currentActiveMine?.state} • Code: {currentActiveMine?.code}
                   </p>
                 </div>
@@ -1476,26 +1484,26 @@ export const ReserveMapPage: React.FC = () => {
                   <div className="space-y-4 animate-fadeIn">
                     {/* Probability & Tonnage Primary Metrics */}
                     <div className="grid grid-cols-2 gap-3">
-                      <div className="glass-panel p-3 rounded-xl border border-purple-900/60 bg-purple-950/20 space-y-1">
-                        <span className="text-[10px] text-slate-400 uppercase font-semibold flex items-center gap-1">
-                          <Target className="w-3 h-3 text-purple-400" /> Ore Occurrence Prob.
+                      <div className="glass-panel p-3 rounded-xl border border-purple-200 dark:border-purple-900/60 bg-purple-50/60 dark:bg-purple-950/20 space-y-1">
+                        <span className="text-[10px] text-slate-700 dark:text-slate-300 uppercase font-bold flex items-center gap-1">
+                          <Target className="w-3 h-3 text-purple-600 dark:text-purple-400" /> Ore Occurrence Prob.
                         </span>
-                        <div className="text-2xl font-extrabold text-purple-300 font-mono">
+                        <div className="text-2xl font-extrabold text-purple-700 dark:text-purple-300 font-mono">
                           {selectedProbabilityCell ? selectedProbabilityCell.probabilityPct : 92.4}%
                         </div>
-                        <span className="text-[10px] text-slate-400 block">
+                        <span className="text-[10px] text-slate-600 dark:text-slate-400 block font-medium">
                           Cutoff: &ge; {gradeCutoffMn}% Mn
                         </span>
                       </div>
 
-                      <div className="glass-panel p-3 rounded-xl border border-emerald-900/60 bg-emerald-950/20 space-y-1">
-                        <span className="text-[10px] text-slate-400 uppercase font-semibold flex items-center gap-1">
-                          <TrendingUp className="w-3 h-3 text-emerald-400" /> In-Situ Mn Grade
+                      <div className="glass-panel p-3 rounded-xl border border-emerald-200 dark:border-emerald-900/60 bg-emerald-50/60 dark:bg-emerald-950/20 space-y-1">
+                        <span className="text-[10px] text-slate-700 dark:text-slate-300 uppercase font-bold flex items-center gap-1">
+                          <TrendingUp className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> In-Situ Mn Grade
                         </span>
-                        <div className="text-2xl font-extrabold text-emerald-400 font-mono">
+                        <div className="text-2xl font-extrabold text-emerald-700 dark:text-emerald-400 font-mono">
                           {selectedProbabilityCell ? selectedProbabilityCell.predictedMnGradePct : currentActiveMine?.avgOreGradeMnPct || 43.5}%
                         </div>
-                        <span className="text-[10px] text-slate-400 block font-mono">
+                        <span className="text-[10px] text-slate-600 dark:text-slate-400 block font-mono font-medium">
                           Fe: {selectedProbabilityCell?.predictedFeGradePct || 5.8}% • SiO2: {selectedProbabilityCell?.predictedSiO2GradePct || 6.8}%
                         </span>
                       </div>
@@ -1503,37 +1511,37 @@ export const ReserveMapPage: React.FC = () => {
 
                     {/* P90 / P50 / P10 Reserve Percentile Confidence Cards */}
                     {percentileReport && (
-                      <div className="glass-panel p-3.5 rounded-xl border border-slate-800 space-y-2.5">
+                      <div className="glass-panel p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 space-y-2.5">
                         <div className="flex items-center justify-between">
-                          <span className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
-                            <ShieldCheck className="w-3.5 h-3.5 text-blue-400" /> Geostatistical Reserve Percentiles
+                          <span className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
+                            <ShieldCheck className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" /> Geostatistical Reserve Percentiles
                           </span>
-                          <span className="text-[10px] font-mono text-slate-400">UNFC 111/122</span>
+                          <span className="text-[10px] font-mono text-slate-600 dark:text-slate-400 font-bold">UNFC 111/122</span>
                         </div>
                         <div className="grid grid-cols-3 gap-2 text-center text-xs">
-                          <div className="bg-slate-950 p-2 rounded-lg border border-slate-800">
-                            <span className="text-[10px] text-slate-400 block">P90 (Conservative)</span>
-                            <span className="font-bold text-white font-mono text-sm">{percentileReport.p90ConservativeReservesMt} Mt</span>
+                          <div className="bg-white p-2.5 rounded-xl border-2 border-slate-300 shadow-sm">
+                            <span className="text-[10px] text-black block font-bold">P90 (Conservative)</span>
+                            <span className="font-extrabold text-black font-mono text-sm">{percentileReport.p90ConservativeReservesMt} Mt</span>
                           </div>
-                          <div className="bg-slate-950 p-2 rounded-lg border border-purple-800 bg-purple-950/30">
-                            <span className="text-[10px] text-purple-300 block">P50 (Expected)</span>
-                            <span className="font-bold text-purple-300 font-mono text-sm">{percentileReport.p50MedianReservesMt} Mt</span>
+                          <div className="bg-white p-2.5 rounded-xl border-2 border-purple-300 shadow-sm">
+                            <span className="text-[10px] text-purple-700 block font-bold">P50 (Expected)</span>
+                            <span className="font-extrabold text-black font-mono text-sm">{percentileReport.p50MedianReservesMt} Mt</span>
                           </div>
-                          <div className="bg-slate-950 p-2 rounded-lg border border-slate-800">
-                            <span className="text-[10px] text-slate-400 block">P10 (Optimistic)</span>
-                            <span className="font-bold text-emerald-400 font-mono text-sm">{percentileReport.p10OptimisticReservesMt} Mt</span>
+                          <div className="bg-white p-2.5 rounded-xl border-2 border-emerald-300 shadow-sm">
+                            <span className="text-[10px] text-emerald-700 block font-bold">P10 (Optimistic)</span>
+                            <span className="font-extrabold text-black font-mono text-sm">{percentileReport.p10OptimisticReservesMt} Mt</span>
                           </div>
                         </div>
                       </div>
                     )}
 
                     {/* Grade-Tonnage Distribution Chart (Recharts) */}
-                    <div className="glass-panel p-3.5 rounded-xl border border-slate-800 space-y-2">
+                    <div className="glass-panel p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 space-y-2">
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
-                          <BarChart3 className="w-3.5 h-3.5 text-purple-400" /> Grade-Tonnage & Cutoff Curve
+                        <span className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
+                          <BarChart3 className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" /> Grade-Tonnage & Cutoff Curve
                         </span>
-                        <span className="text-[10px] font-mono text-purple-300">Sausar Braunite Model</span>
+                        <span className="text-[10px] font-mono font-bold text-purple-700 dark:text-purple-300">Sausar Braunite Model</span>
                       </div>
 
                       <div className="h-40 w-full pt-2">
@@ -1545,18 +1553,18 @@ export const ReserveMapPage: React.FC = () => {
                                 <stop offset="95%" stopColor="#8B5CF6" stopOpacity={0.1} />
                               </linearGradient>
                             </defs>
-                            <CartesianGrid strokeDasharray="3 3" stroke="#1E293B" />
+                            <CartesianGrid strokeDasharray="3 3" stroke="#94A3B840" />
                             <XAxis
                               dataKey="cutoffGradePct"
-                              tick={{ fill: '#94A3B8', fontSize: 10 }}
+                              tick={{ fill: '#64748B', fontSize: 10 }}
                               unit="% Mn"
                             />
                             <YAxis
-                              tick={{ fill: '#94A3B8', fontSize: 10 }}
+                              tick={{ fill: '#64748B', fontSize: 10 }}
                               unit="Mt"
                             />
                             <RechartsTooltip
-                              contentStyle={{ backgroundColor: '#0B1120', borderColor: '#334155', borderRadius: '8px', fontSize: '11px' }}
+                              contentStyle={{ backgroundColor: '#0B1120', borderColor: '#334155', borderRadius: '8px', fontSize: '11px', color: '#F8FAFC' }}
                               labelFormatter={(v) => `Cutoff Grade: ${v}% Mn`}
                               formatter={(value: any, name: any) => [
                                 `${value} Mt`,
@@ -1566,7 +1574,7 @@ export const ReserveMapPage: React.FC = () => {
                             <Area
                               type="monotone"
                               dataKey="recoverableTonnageMt"
-                              stroke="#A78BFA"
+                              stroke="#8B5CF6"
                               strokeWidth={2}
                               fillOpacity={1}
                               fill="url(#tonnageGrad)"
@@ -1574,33 +1582,33 @@ export const ReserveMapPage: React.FC = () => {
                           </AreaChart>
                         </ResponsiveContainer>
                       </div>
-                      <p className="text-[10px] text-slate-400 text-center font-sans">
+                      <p className="text-[10px] text-slate-600 dark:text-slate-400 text-center font-sans font-medium">
                         Recoverable tonnage yield drops smoothly as cutoff grade increases from 20% to 48% Mn.
                       </p>
                     </div>
 
                     {/* Variogram Spatial Parameters */}
                     {activeVariogram && (
-                      <div className="glass-panel p-3.5 rounded-xl border border-slate-800 space-y-2 text-xs">
-                        <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider flex items-center gap-1">
-                          <Zap className="w-3 h-3 text-amber-400" /> Spherical Variogram Model (Kriging Covariance)
+                      <div className="glass-panel p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 space-y-2 text-xs">
+                        <span className="text-[10px] uppercase font-bold text-slate-800 dark:text-slate-200 tracking-wider flex items-center gap-1">
+                          <Zap className="w-3 h-3 text-amber-500 dark:text-amber-400" /> Spherical Variogram Model (Kriging Covariance)
                         </span>
                         <div className="grid grid-cols-2 gap-2 text-[11px] font-mono">
-                          <div className="bg-slate-950 p-2 rounded-lg">
-                            <span className="text-slate-500 text-[10px] block">Spatial Range (a)</span>
-                            <span className="font-bold text-white">{activeVariogram.rangeMeters} m</span>
+                          <div className="bg-white p-2.5 rounded-xl border border-slate-300 shadow-sm">
+                            <span className="text-black text-[10px] font-bold block">Spatial Range (a)</span>
+                            <span className="font-extrabold text-black">{activeVariogram.rangeMeters} m</span>
                           </div>
-                          <div className="bg-slate-950 p-2 rounded-lg">
-                            <span className="text-slate-500 text-[10px] block">Nugget / Sill (C0 / C)</span>
-                            <span className="font-bold text-purple-300">{activeVariogram.nugget} / {activeVariogram.sill}</span>
+                          <div className="bg-white p-2.5 rounded-xl border border-slate-300 shadow-sm">
+                            <span className="text-black text-[10px] font-bold block">Nugget / Sill (C0 / C)</span>
+                            <span className="font-extrabold text-purple-700">{activeVariogram.nugget} / {activeVariogram.sill}</span>
                           </div>
-                          <div className="bg-slate-950 p-2 rounded-lg">
-                            <span className="text-slate-500 text-[10px] block">Strike Azimuth</span>
-                            <span className="font-bold text-white">{activeVariogram.azimuthAngleDeg}° ENE</span>
+                          <div className="bg-white p-2.5 rounded-xl border border-slate-300 shadow-sm">
+                            <span className="text-black text-[10px] font-bold block">Strike Azimuth</span>
+                            <span className="font-extrabold text-black">{activeVariogram.azimuthAngleDeg}° ENE</span>
                           </div>
-                          <div className="bg-slate-950 p-2 rounded-lg">
-                            <span className="text-slate-500 text-[10px] block">Cross-Val R²</span>
-                            <span className="font-bold text-emerald-400">{activeVariogram.crossValidationR2}</span>
+                          <div className="bg-white p-2.5 rounded-xl border border-slate-300 shadow-sm">
+                            <span className="text-black text-[10px] font-bold block">Cross-Val R²</span>
+                            <span className="font-extrabold text-emerald-700">{activeVariogram.crossValidationR2}</span>
                           </div>
                         </div>
                       </div>
@@ -1613,38 +1621,38 @@ export const ReserveMapPage: React.FC = () => {
                 {/* ============================================================ */}
                 {inspectorTab === 'ASSAYS' && (
                   <div className="space-y-4 animate-fadeIn">
-                    <div className="glass-panel p-4 rounded-xl border border-slate-800 space-y-3">
-                      <h4 className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
-                        <Database className="w-3.5 h-3.5 text-purple-400" /> Diamond Core Drillhole Assays
+                    <div className="glass-panel p-4 rounded-xl border border-slate-200 space-y-3">
+                      <h4 className="text-xs font-bold text-black uppercase tracking-wider flex items-center gap-2">
+                        <Database className="w-3.5 h-3.5 text-purple-600" /> Diamond Core Drillhole Assays
                       </h4>
                       <div className="grid grid-cols-2 gap-2.5 text-xs">
-                        <div className="bg-slate-950/60 p-2 rounded-lg">
-                          <span className="text-slate-400 text-[10px] block">Diamond Boreholes</span>
-                          <span className="font-bold text-white font-mono">{selectedZone?.boreholeCount || 4} Logs Plotted</span>
+                        <div className="bg-white p-2.5 rounded-xl border border-slate-300 shadow-sm">
+                          <span className="text-black text-[10px] font-bold block">Diamond Boreholes</span>
+                          <span className="font-extrabold text-black font-mono">{selectedZone?.boreholeCount || 4} Logs Plotted</span>
                         </div>
-                        <div className="bg-slate-950/60 p-2 rounded-lg">
-                          <span className="text-slate-400 text-[10px] block">Avg Core Recovery</span>
-                          <span className="font-bold text-emerald-400 font-mono">{selectedZone?.avgCoreRecoveryPct || 86.5}%</span>
+                        <div className="bg-white p-2.5 rounded-xl border border-slate-300 shadow-sm">
+                          <span className="text-black text-[10px] font-bold block">Avg Core Recovery</span>
+                          <span className="font-extrabold text-emerald-700 font-mono">{selectedZone?.avgCoreRecoveryPct || 86.5}%</span>
                         </div>
-                        <div className="bg-slate-950/60 p-2 rounded-lg">
-                          <span className="text-slate-400 text-[10px] block">Seam Depth</span>
-                          <span className="font-bold text-white font-mono">{selectedZone?.depthMeters || 320} m</span>
+                        <div className="bg-white p-2.5 rounded-xl border border-slate-300 shadow-sm">
+                          <span className="text-black text-[10px] font-bold block">Seam Depth</span>
+                          <span className="font-extrabold text-black font-mono">{selectedZone?.depthMeters || 320} m</span>
                         </div>
-                        <div className="bg-slate-950/60 p-2 rounded-lg">
-                          <span className="text-slate-400 text-[10px] block">Satellite Stability</span>
-                          <span className="font-bold text-blue-400 font-mono">{selectedZone?.satelliteStabilityScore || 85}/100</span>
+                        <div className="bg-white p-2.5 rounded-xl border border-slate-300 shadow-sm">
+                          <span className="text-black text-[10px] font-bold block">Satellite Stability</span>
+                          <span className="font-extrabold text-blue-700 font-mono">{selectedZone?.satelliteStabilityScore || 85}/100</span>
                         </div>
                       </div>
                     </div>
 
-                    <div className="glass-panel p-3.5 rounded-xl border border-slate-800 space-y-2 text-xs">
-                      <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">
+                    <div className="glass-panel p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 space-y-2 text-xs">
+                      <span className="text-[10px] uppercase font-bold text-slate-800 dark:text-slate-200 tracking-wider block">
                         Lithology & Stratigraphy
                       </span>
-                      <p className="text-slate-300 leading-relaxed">
+                      <p className="text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
                         {selectedProbabilityCell?.lithology || 'Mansar Formation High-Grade Braunite-Psilomelane Reef intercalated with Gondite Quartzite.'}
                       </p>
-                      <div className="pt-1 text-[11px] text-purple-300 font-mono">
+                      <div className="pt-1 text-[11px] text-purple-700 dark:text-purple-300 font-mono font-semibold">
                         Structural Attitude: {selectedProbabilityCell?.strikeDip || 'N78°E / 72°NW (Sausar Synclinorium)'}
                       </div>
                     </div>
@@ -1656,22 +1664,22 @@ export const ReserveMapPage: React.FC = () => {
                 {/* ============================================================ */}
                 {inspectorTab === 'RE_ESTIMATE' && (
                   <div className="space-y-4 animate-fadeIn">
-                    <div className="p-4 rounded-xl bg-gradient-to-b from-purple-950/40 to-slate-900 border border-purple-900/60 space-y-3">
+                    <div className="p-4 rounded-xl bg-purple-50 dark:bg-gradient-to-b dark:from-purple-950/40 dark:to-slate-900 border border-purple-200 dark:border-purple-900/60 space-y-3">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <Sparkles className="w-4 h-4 text-purple-400" />
-                          <h4 className="text-xs font-bold text-white uppercase tracking-wider">AI Reserve Re-Estimation</h4>
+                          <Sparkles className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                          <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">AI Reserve Re-Estimation</h4>
                         </div>
-                        <span className="text-[10px] text-purple-300 font-mono">UNFC 111 Model</span>
+                        <span className="text-[10px] text-purple-700 dark:text-purple-300 font-mono font-bold">UNFC 111 Model</span>
                       </div>
-                      <p className="text-xs text-slate-300 leading-relaxed">
+                      <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
                         Run machine-learning kriging simulation fusing sub-surface drilling assays with Sentinel-2 multi-spectral NDVI surface clearance.
                       </p>
 
                       <button
                         onClick={handleRunReEstimate}
                         disabled={reEstimating}
-                        className="w-full py-2.5 bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-[#0F1214] text-xs font-extrabold rounded-xl shadow-glow-teal transition flex items-center justify-center gap-2 disabled:opacity-50"
+                        className="w-full py-2.5 bg-gradient-to-r from-[#6B5B95] to-[#0D9488] hover:from-[#7E69AB] hover:to-[#2DD4BF] text-white text-xs font-extrabold rounded-xl shadow-glow-teal transition flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
                       >
                         {reEstimating ? (
                           <>
@@ -1686,18 +1694,18 @@ export const ReserveMapPage: React.FC = () => {
                       </button>
 
                       {reEstimateResult && (
-                        <div className="p-3 bg-slate-950/80 rounded-xl border border-purple-800/80 space-y-2 animate-fadeIn text-xs">
-                          <div className="flex items-center justify-between text-emerald-400 font-bold">
+                        <div className="p-3 bg-white rounded-xl border border-purple-200 space-y-2 animate-fadeIn text-xs shadow-sm">
+                          <div className="flex items-center justify-between text-emerald-800 font-bold">
                             <span>Estimated Ore Tonnage</span>
                             <span className="font-mono">{reEstimateResult.data?.estimated_tonnes?.toLocaleString() || '34,800,000'} t</span>
                           </div>
-                          <div className="flex items-center justify-between text-slate-300">
+                          <div className="flex items-center justify-between text-black font-medium">
                             <span>Predicted In-Situ Mn</span>
-                            <span className="font-mono font-bold text-purple-300">{reEstimateResult.data?.predicted_mn_grade_pct || selectedZone?.avgMnGrade || 43.5}%</span>
+                            <span className="font-mono font-bold text-purple-700">{reEstimateResult.data?.predicted_mn_grade_pct || selectedZone?.avgMnGrade || 43.5}%</span>
                           </div>
-                          <div className="flex items-center justify-between text-slate-300">
+                          <div className="flex items-center justify-between text-black font-medium">
                             <span>Geostatistical Confidence</span>
-                            <span className="font-mono text-emerald-400">{reEstimateResult.data?.confidence_level || 'HIGH_CONFIDENCE'}</span>
+                            <span className="font-mono text-emerald-800 font-bold">{reEstimateResult.data?.confidence_level || 'HIGH_CONFIDENCE'}</span>
                           </div>
                         </div>
                       )}
@@ -1709,35 +1717,35 @@ export const ReserveMapPage: React.FC = () => {
               <>
                 {/* Facility Header */}
                 <div>
-                  <span className="text-[10px] px-2.5 py-0.5 rounded-full font-mono uppercase font-bold bg-cyan-950 text-cyan-300 border border-cyan-800">
+                  <span className="text-[10px] px-2.5 py-0.5 rounded-full font-mono uppercase font-bold bg-cyan-100 text-cyan-800 border border-cyan-300 dark:bg-cyan-950 dark:text-cyan-300 dark:border-cyan-800">
                     {selectedFacility.type}
                   </span>
-                  <h3 className="text-lg font-bold text-white mt-2">{selectedFacility.name}</h3>
-                  <p className="text-xs text-slate-400 flex items-center gap-1 mt-0.5">
-                    <MapPin className="w-3.5 h-3.5 text-cyan-400" />
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mt-2">{selectedFacility.name}</h3>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 flex items-center gap-1 mt-0.5 font-medium">
+                    <MapPin className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
                     {selectedFacility.district}, {selectedFacility.state}
                   </p>
                 </div>
 
-                <div className="glass-panel p-4 rounded-xl border border-slate-800 space-y-2">
-                  <span className="text-[10px] text-slate-400 uppercase font-semibold">Installed Capacity & Role</span>
-                  <div className="text-base font-bold text-cyan-300">{selectedFacility.capacity}</div>
-                  <p className="text-xs text-slate-300 leading-relaxed pt-1">{selectedFacility.description}</p>
+                <div className="glass-panel p-4 rounded-xl border border-slate-200 dark:border-slate-800 space-y-2">
+                  <span className="text-[10px] text-slate-600 dark:text-slate-400 uppercase font-semibold">Installed Capacity & Role</span>
+                  <div className="text-base font-bold text-cyan-700 dark:text-cyan-300">{selectedFacility.capacity}</div>
+                  <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed pt-1 font-medium">{selectedFacility.description}</p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2 text-xs font-mono">
-                  <div className="bg-slate-950/60 p-2.5 rounded-xl border border-slate-800">
-                    <span className="text-[10px] text-slate-400 font-sans block">Operational Status</span>
-                    <span className="font-bold text-emerald-400">{selectedFacility.status}</span>
+                  <div className="bg-white p-2.5 rounded-xl border border-slate-300 shadow-sm">
+                    <span className="text-[10px] text-black font-sans font-bold block">Operational Status</span>
+                    <span className="font-bold text-emerald-700">{selectedFacility.status}</span>
                   </div>
-                  <div className="bg-slate-950/60 p-2.5 rounded-xl border border-slate-800">
-                    <span className="text-[10px] text-slate-400 font-sans block">Established Year</span>
-                    <span className="font-bold text-white">{selectedFacility.commissioningYear}</span>
+                  <div className="bg-white p-2.5 rounded-xl border border-slate-300 shadow-sm">
+                    <span className="text-[10px] text-black font-sans font-bold block">Established Year</span>
+                    <span className="font-bold text-black">{selectedFacility.commissioningYear}</span>
                   </div>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-cyan-950/30 border border-cyan-800/50 text-xs text-cyan-200 flex items-center gap-2">
-                  <Factory className="w-4 h-4 text-cyan-400 shrink-0" />
+                <div className="p-3.5 rounded-xl bg-cyan-50 dark:bg-cyan-950/30 border border-cyan-200 dark:border-cyan-800/50 text-xs text-cyan-900 dark:text-cyan-200 flex items-center gap-2 font-medium">
+                  <Factory className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0" />
                   <span>Core industrial infrastructure sustaining downstream alloy smelting and domestic battery-grade precursor chemicals.</span>
                 </div>
               </>
@@ -1745,41 +1753,41 @@ export const ReserveMapPage: React.FC = () => {
               <>
                 {/* Exploration Block Header */}
                 <div>
-                  <span className="text-[10px] px-2.5 py-0.5 rounded-full font-mono uppercase font-bold bg-pink-950 text-pink-300 border border-pink-800">
+                  <span className="text-[10px] px-2.5 py-0.5 rounded-full font-mono uppercase font-bold bg-pink-100 text-pink-800 border border-pink-300 dark:bg-pink-950 dark:text-pink-300 dark:border-pink-800">
                     Greenfield Prospecting
                   </span>
-                  <h3 className="text-lg font-bold text-white mt-2">{selectedBlock.name}</h3>
-                  <p className="text-xs text-slate-400 flex items-center gap-1 mt-0.5">
-                    <MapPin className="w-3.5 h-3.5 text-pink-400" />
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white mt-2">{selectedBlock.name}</h3>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 flex items-center gap-1 mt-0.5 font-medium">
+                    <MapPin className="w-3.5 h-3.5 text-pink-600 dark:text-pink-400" />
                     {selectedBlock.district}, {selectedBlock.state} • {selectedBlock.leaseAreaHectares} Ha
                   </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="glass-panel p-3 rounded-xl border border-slate-800 space-y-1">
-                    <span className="text-[10px] text-slate-400 uppercase font-semibold">Estimated Potential</span>
-                    <div className="text-xl font-extrabold text-pink-400 font-mono">
-                      {selectedBlock.estimatedPotentialMt} <span className="text-xs font-bold text-slate-400">Mt</span>
+                  <div className="glass-panel p-3 rounded-xl border border-slate-200 dark:border-slate-800 space-y-1">
+                    <span className="text-[10px] text-slate-600 dark:text-slate-400 uppercase font-semibold">Estimated Potential</span>
+                    <div className="text-xl font-extrabold text-pink-700 dark:text-pink-400 font-mono">
+                      {selectedBlock.estimatedPotentialMt} <span className="text-xs font-bold text-slate-600 dark:text-slate-400">Mt</span>
                     </div>
                   </div>
-                  <div className="glass-panel p-3 rounded-xl border border-slate-800 space-y-1">
-                    <span className="text-[10px] text-slate-400 uppercase font-semibold">Target Seam Depth</span>
-                    <div className="text-xl font-extrabold text-white font-mono">
-                      {selectedBlock.targetSeamDepthM} <span className="text-xs font-bold text-slate-400">m</span>
+                  <div className="glass-panel p-3 rounded-xl border border-slate-200 dark:border-slate-800 space-y-1">
+                    <span className="text-[10px] text-slate-600 dark:text-slate-400 uppercase font-semibold">Target Seam Depth</span>
+                    <div className="text-xl font-extrabold text-slate-900 dark:text-white font-mono">
+                      {selectedBlock.targetSeamDepthM} <span className="text-xs font-bold text-slate-600 dark:text-slate-400">m</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="glass-panel p-4 rounded-xl border border-slate-800 space-y-2 text-xs">
-                  <p className="text-slate-300"><strong>Target Geological Horizon:</strong> {selectedBlock.targetFormation}</p>
-                  <p className="text-slate-300"><strong>Expected Mineralogy:</strong> {selectedBlock.keyMineralogy}</p>
-                  <p className="text-slate-400 text-[11px] pt-1">Exploration Status: <strong className="text-pink-300">{(selectedBlock.status || selectedBlock.explorationStage || 'Active').replace(/_/g, ' ')}</strong></p>
+                <div className="glass-panel p-4 rounded-xl border border-slate-200 dark:border-slate-800 space-y-2 text-xs">
+                  <p className="text-slate-700 dark:text-slate-300 font-medium"><strong>Target Geological Horizon:</strong> {selectedBlock.targetFormation}</p>
+                  <p className="text-slate-700 dark:text-slate-300 font-medium"><strong>Expected Mineralogy:</strong> {selectedBlock.keyMineralogy}</p>
+                  <p className="text-slate-600 dark:text-slate-400 text-[11px] pt-1">Exploration Status: <strong className="text-pink-700 dark:text-pink-300">{(selectedBlock.status || selectedBlock.explorationStage || 'Active').replace(/_/g, ' ')}</strong></p>
                 </div>
               </>
             ) : (
-              <div className="flex flex-col items-center justify-center h-64 text-center space-y-3 text-slate-400">
-                <Target className="w-8 h-8 text-slate-600" />
-                <p className="text-xs">Click any Reserve Probability cell or MOIL mine on the map to inspect its geostatistical kriging distribution.</p>
+              <div className="flex flex-col items-center justify-center h-64 text-center space-y-3 text-slate-600 dark:text-slate-400">
+                <Target className="w-8 h-8 text-slate-400 dark:text-slate-600" />
+                <p className="text-xs font-medium">Click any Reserve Probability cell or MOIL mine on the map to inspect its geostatistical kriging distribution.</p>
               </div>
             )}
           </div>
@@ -1790,7 +1798,7 @@ export const ReserveMapPage: React.FC = () => {
       {!isDrawerOpen && (
         <button
           onClick={() => setIsDrawerOpen(true)}
-          className="absolute right-4 top-4 z-[950] p-2.5 rounded-xl bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-[#0F1214] shadow-glow-teal transition flex items-center gap-1.5 text-xs font-extrabold cursor-pointer"
+          className="absolute right-4 top-4 z-[950] p-2.5 rounded-xl bg-gradient-to-r from-[#6B5B95] to-[#0D9488] hover:from-[#7E69AB] hover:to-[#2DD4BF] text-white shadow-glow-teal transition flex items-center gap-1.5 text-xs font-extrabold cursor-pointer"
           title="Open Geostatistical Inspector Drawer"
         >
           <Target className="w-4 h-4" />

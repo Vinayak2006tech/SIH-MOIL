@@ -113,30 +113,59 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onOpenReport, onToggl
     }
   };
 
+  const renderWithTealReserveIQ = (text: string) => {
+    if (!text || !text.includes('ReserveIQ')) return text;
+    const parts = text.split('ReserveIQ');
+    return (
+      <>
+        {parts.map((part, index) => (
+          <React.Fragment key={index}>
+            {part}
+            {index < parts.length - 1 && (
+              <span className="text-teal-700 font-black" style={{ color: '#0F766E' }}>
+                ReserveIQ
+              </span>
+            )}
+          </React.Fragment>
+        ))}
+      </>
+    );
+  };
+
   const currentTabInfo = tabTitles[activeTab] || tabTitles.dashboard;
 
   return (
-    <header className="sticky top-0 z-30 bg-[#0F1214]/95 backdrop-blur-md border-b border-[#26333B] px-3 sm:px-5 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-4 transition-all">
+    <header className="sticky top-0 z-30 bg-white backdrop-blur-md border-b border-slate-200 px-3 sm:px-5 lg:px-8 py-2.5 sm:py-3 flex items-center justify-between gap-2 sm:gap-4 transition-all">
       {/* Left: Mobile Menu Toggle + Adaptive Responsive Title Info */}
       <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
         {onToggleMobileMenu && (
           <button
             onClick={onToggleMobileMenu}
-            className="p-2 rounded-xl bg-[#161D22] border border-[#26333B] text-slate-400 hover:text-[#E8E6E3] hover:bg-[#1B2226] lg:hidden transition shrink-0 cursor-pointer"
+            className="p-2 rounded-xl bg-white border border-slate-300 text-black hover:bg-slate-100 lg:hidden transition shrink-0 cursor-pointer"
             aria-label="Toggle Navigation Menu"
             title="Open Menu"
           >
-            <Menu className="w-4 h-4 sm:w-5 sm:h-5" />
+            <Menu className="w-4 h-4 sm:w-5 sm:h-5 text-black" />
           </button>
         )}
 
+        {/* Top Bar Brand Pill */}
+        {activeTab !== 'landing' && (
+          <div className="hidden xs:flex items-center gap-1.5 px-2.5 py-1 bg-white border border-slate-200 rounded-lg text-xs font-black shadow-sm shrink-0">
+            <span className="text-black font-black">MOIL</span>
+            <span className="text-teal-700 font-black" style={{ color: '#0F766E' }}>
+              ReserveIQ
+            </span>
+          </div>
+        )}
+
         <div className="min-w-0 flex-1">
-          <h2 className="text-xs sm:text-sm md:text-base font-bold text-[#E8E6E3] tracking-tight leading-tight min-w-0 font-sans">
-            <span className="inline sm:hidden truncate block">{currentTabInfo.shortTitle}</span>
-            <span className="hidden sm:inline lg:hidden truncate">{currentTabInfo.mediumTitle}</span>
-            <span className="hidden lg:inline truncate">{currentTabInfo.title}</span>
+          <h2 className="text-xs sm:text-sm md:text-base font-black text-black tracking-tight leading-tight min-w-0 font-sans">
+            <span className="inline sm:hidden truncate block">{renderWithTealReserveIQ(currentTabInfo.shortTitle)}</span>
+            <span className="hidden sm:inline lg:hidden truncate">{renderWithTealReserveIQ(currentTabInfo.mediumTitle)}</span>
+            <span className="hidden lg:inline truncate">{renderWithTealReserveIQ(currentTabInfo.title)}</span>
           </h2>
-          <p className="text-[11px] text-slate-400 hidden md:block truncate max-w-[220px] lg:max-w-md xl:max-w-xl">
+          <p className="text-[11px] text-black font-medium hidden md:block truncate max-w-[220px] lg:max-w-md xl:max-w-xl">
             {currentTabInfo.subtitle}
           </p>
         </div>
@@ -151,51 +180,51 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onOpenReport, onToggl
               value={selectedMineId}
               onChange={(e) => setSelectedMineId(e.target.value)}
               aria-label="Filter by Mine Site"
-              className="appearance-none pl-7 sm:pl-8 pr-7 sm:pr-8 py-1.5 bg-[#161D22]/90 hover:bg-[#1B2226] border border-[#26333B] text-[11px] sm:text-xs font-semibold text-[#E8E6E3] rounded-lg focus:outline-none focus:border-teal-400 cursor-pointer shadow-sm transition max-w-[120px] xs:max-w-[150px] sm:max-w-[180px] md:max-w-[220px] truncate font-mono"
+              className="appearance-none pl-7 sm:pl-8 pr-7 sm:pr-8 py-1.5 bg-white hover:bg-slate-50 border border-slate-300 text-[11px] sm:text-xs font-bold text-black rounded-lg focus:outline-none focus:border-black cursor-pointer shadow-sm transition max-w-[120px] xs:max-w-[150px] sm:max-w-[180px] md:max-w-[220px] truncate font-mono"
               title="Filter by Mine Site"
             >
-              <option value="ALL">All Mines ({mines.length})</option>
+              <option value="ALL" className="bg-white text-black font-bold">All Mines ({mines.length})</option>
               {mines.map((m) => (
-                <option key={m.mineId} value={m.mineId}>
+                <option key={m.mineId} value={m.mineId} className="bg-white text-black font-bold">
                   {m.name} ({m.code})
                 </option>
               ))}
             </select>
-            <MapPin className="w-3.5 h-3.5 text-teal-400 absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none" />
-            <ChevronDown className="w-3 h-3 text-slate-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <MapPin className="w-3.5 h-3.5 text-black absolute left-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <ChevronDown className="w-3 h-3 text-black absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
           </div>
         </div>
 
         {/* Satellite Sync Pill - Desktop & Tablet */}
         <div
-          className="hidden xl:flex items-center gap-1.5 px-2.5 py-1.5 bg-[#161D22]/80 border border-[#26333B] rounded-lg text-[11px] text-slate-300 whitespace-nowrap"
+          className="hidden xl:flex items-center gap-1.5 px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-[11px] text-black whitespace-nowrap shadow-sm"
           title="ESA Copernicus Sentinel-2 MSI Multi-Spectral Telemetry Synced"
         >
-          <Satellite className="w-3.5 h-3.5 text-teal-400 shrink-0" />
-          <span className="text-slate-400 font-mono">Sentinel-2:</span>
-          <span className="text-teal-300 font-bold flex items-center gap-1 shrink-0">
-            <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
+          <Satellite className="w-3.5 h-3.5 text-teal-700 shrink-0" />
+          <span className="text-black font-mono font-bold">Sentinel-2:</span>
+          <span className="text-teal-800 font-bold flex items-center gap-1 shrink-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-teal-600 animate-pulse" />
             <span>Synced</span>
           </span>
         </div>
 
         {/* Compact Satellite Indicator for Medium/Large Screens */}
         <div
-          className="hidden md:flex xl:hidden items-center gap-1 px-2 py-1.5 bg-[#161D22]/80 border border-[#26333B] rounded-lg text-[11px]"
+          className="hidden md:flex xl:hidden items-center gap-1 px-2 py-1.5 bg-white border border-slate-200 rounded-lg text-[11px] text-black shadow-sm"
           title="Copernicus Sentinel-2 Orbit Pass Synced"
         >
-          <Satellite className="w-3.5 h-3.5 text-teal-400 shrink-0" />
-          <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse shrink-0" />
+          <Satellite className="w-3.5 h-3.5 text-teal-700 shrink-0" />
+          <span className="w-1.5 h-1.5 rounded-full bg-teal-600 animate-pulse shrink-0" />
         </div>
 
-        {/* Executive Report Button - Industrial Earth-Tech gradient */}
+        {/* Executive Report Button */}
         <button
           onClick={onOpenReport}
-          className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 bg-gradient-to-r from-[#6B5B95] via-[#564879] to-[#0D9488] hover:from-[#7E69AB] hover:to-[#2DD4BF] text-[#E8E6E3] text-xs font-bold rounded-lg shadow-glow-manganese transition cursor-pointer shrink-0"
+          className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 bg-teal-700 hover:bg-teal-800 text-black text-xs font-bold rounded-lg shadow-sm transition cursor-pointer shrink-0"
           title="Generate Executive Briefing Report"
         >
-          <FileText className="w-3.5 h-3.5" />
-          <span className="hidden sm:inline">Executive Report</span>
+          <FileText className="w-3.5 h-3.5 text-black" />
+          <span className="hidden sm:inline text-black">Executive Report</span>
         </button>
 
         {/* Theme Toggle (Light / Dark Mode) */}
@@ -205,50 +234,50 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onOpenReport, onToggl
         <div className="relative shrink-0" ref={notificationRef}>
           <button
             onClick={() => setShowNotifications(!showNotifications)}
-            className={`p-1.5 sm:p-2 rounded-lg border text-slate-400 hover:text-[#E8E6E3] transition cursor-pointer relative ${
+            className={`p-1.5 sm:p-2 rounded-lg border text-black hover:bg-slate-100 transition cursor-pointer relative ${
               showNotifications
-                ? 'bg-[#1B2226] border-teal-500/80 text-[#E8E6E3]'
-                : 'bg-[#161D22] border-[#26333B] hover:bg-[#1B2226]'
+                ? 'bg-slate-100 border-black text-black'
+                : 'bg-white border-slate-300'
             }`}
             title="AI Risk Alerts"
             aria-label="AI Risk Alerts"
           >
-            <Bell className="w-4 h-4" />
-            <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+            <Bell className="w-4 h-4 text-black" />
+            <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
           </button>
 
           {/* Notifications Dropdown */}
           {showNotifications && (
-            <div className="fixed sm:absolute top-14 sm:top-full right-2 sm:right-0 mt-1 sm:mt-2 w-[calc(100vw-1rem)] sm:w-80 max-w-sm glass-panel bg-[#161D22]/98 border border-[#26333B] rounded-2xl shadow-2xl p-4 z-50 animate-fadeIn">
-              <div className="flex items-center justify-between mb-3 border-b border-[#26333B] pb-2">
+            <div className="fixed sm:absolute top-14 sm:top-full right-2 sm:right-0 mt-1 sm:mt-2 w-[calc(100vw-1rem)] sm:w-80 max-w-sm bg-white border border-slate-300 rounded-2xl shadow-2xl p-4 z-50 animate-fadeIn">
+              <div className="flex items-center justify-between mb-3 border-b border-slate-200 pb-2">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold text-[#E8E6E3] uppercase tracking-wider">Live AI Risk Alerts</span>
-                  <span className="px-1.5 py-0.5 rounded-full text-[9px] font-mono bg-teal-950 text-teal-300 border border-teal-800 font-bold">
+                  <span className="text-xs font-black text-black uppercase tracking-wider">Live AI Risk Alerts</span>
+                  <span className="px-1.5 py-0.5 rounded-full text-[9px] font-mono bg-teal-100 text-teal-900 border border-teal-300 font-bold">
                     2 Active
                   </span>
                 </div>
                 <button
                   onClick={() => setShowNotifications(false)}
-                  className="text-slate-400 hover:text-[#E8E6E3] p-1 rounded-lg hover:bg-[#1B2226] transition cursor-pointer"
+                  className="text-black hover:bg-slate-100 p-1 rounded-lg transition cursor-pointer"
                   title="Close Alerts"
                 >
-                  <X className="w-3.5 h-3.5" />
+                  <X className="w-3.5 h-3.5 text-black" />
                 </button>
               </div>
               <div className="space-y-2 text-xs">
-                <div className="p-2.5 rounded-xl bg-red-950/40 border border-red-900/60">
-                  <p className="font-bold text-[#DC5F4E] flex items-center gap-1.5">
-                    <AlertTriangle className="w-3.5 h-3.5 shrink-0" /> Balaghat Underground
+                <div className="p-2.5 rounded-xl bg-white border border-red-300 shadow-sm">
+                  <p className="font-bold text-red-700 flex items-center gap-1.5">
+                    <AlertTriangle className="w-3.5 h-3.5 shrink-0 text-red-600" /> Balaghat Underground
                   </p>
-                  <p className="text-[11px] text-slate-300 mt-1">
+                  <p className="text-[11px] text-black mt-1 font-medium">
                     Heavy monsoon rainfall window predicted in 48h. Blasting reschedule advised.
                   </p>
                 </div>
-                <div className="p-2.5 rounded-xl bg-amber-950/40 border border-amber-900/60">
-                  <p className="font-bold text-amber-400 flex items-center gap-1.5">
-                    <AlertTriangle className="w-3.5 h-3.5 shrink-0" /> Kandri Mine
+                <div className="p-2.5 rounded-xl bg-white border border-amber-300 shadow-sm">
+                  <p className="font-bold text-amber-800 flex items-center gap-1.5">
+                    <AlertTriangle className="w-3.5 h-3.5 shrink-0 text-amber-600" /> Kandri Mine
                   </p>
-                  <p className="text-[11px] text-slate-300 mt-1">
+                  <p className="text-[11px] text-black mt-1 font-medium">
                     Jumbo drill DR-KND-01 breakdown causing 18% haulage queue delay.
                   </p>
                 </div>
@@ -259,38 +288,38 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onOpenReport, onToggl
 
         {/* User Profile & Sign Out Button */}
         {user && (
-          <div className="flex items-center gap-1.5 sm:gap-2 pl-1.5 sm:pl-2 border-l border-[#26333B] shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 pl-1.5 sm:pl-2 border-l border-slate-200 shrink-0">
             <div className="flex items-center gap-2">
               {user.googlePicture || user.picture ? (
                 <img
                   src={user.googlePicture || user.picture}
                   alt={user.name}
-                  className="w-7 h-7 rounded-full object-cover border border-teal-500/50 shrink-0"
+                  className="w-7 h-7 rounded-full object-cover border border-slate-300 shrink-0"
                   title={`${user.name} (${user.role})`}
                 />
               ) : (
                 <div
-                  className="w-7 h-7 rounded-full bg-gradient-to-tr from-[#6B5B95] to-[#0D9488] text-[#E8E6E3] font-bold flex items-center justify-center text-[10px] shadow-sm shrink-0"
+                  className="w-7 h-7 rounded-full bg-teal-600 text-white font-bold flex items-center justify-center text-[10px] shadow-sm shrink-0"
                   title={`${user.name} (${user.role})`}
                 >
                   {user.name ? user.name.split(' ').map((n) => n[0]).join('').substring(0, 2).toUpperCase() : 'MO'}
                 </div>
               )}
               <div className="hidden lg:block text-left">
-                <p className="text-xs font-bold text-[#E8E6E3] leading-tight truncate max-w-[110px] xl:max-w-[140px]">
+                <p className="text-xs font-black text-black leading-tight truncate max-w-[110px] xl:max-w-[140px]">
                   {user.name}
                 </p>
-                <p className="text-[10px] text-teal-400 font-mono leading-none">{user.role}</p>
+                <p className="text-[10px] text-black font-mono font-bold leading-none">{user.role}</p>
               </div>
             </div>
 
             <button
               onClick={logout}
               title="Sign Out to Welcome Portal"
-              className="py-1.5 px-2 sm:px-2.5 bg-[#161D22] hover:bg-red-950/40 border border-[#26333B] hover:border-red-800/80 text-slate-400 hover:text-red-300 text-xs font-semibold rounded-lg transition flex items-center gap-1.5 cursor-pointer shadow-sm shrink-0"
+              className="py-1.5 px-2 sm:px-2.5 bg-white hover:bg-slate-100 border border-slate-300 text-black text-xs font-bold rounded-lg transition flex items-center gap-1.5 cursor-pointer shadow-sm shrink-0"
             >
-              <LogOut className="w-3.5 h-3.5 text-[#DC5F4E] shrink-0" />
-              <span className="hidden md:inline text-[11px]">Sign Out</span>
+              <LogOut className="w-3.5 h-3.5 text-black shrink-0" />
+              <span className="hidden md:inline text-[11px] text-black">Sign Out</span>
             </button>
           </div>
         )}

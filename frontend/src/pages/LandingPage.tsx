@@ -242,13 +242,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         <div className="relative z-10 max-w-5xl mx-auto text-center space-y-8">
           {/* Top National Initiative Pills & Theme Switcher */}
           <div className="flex items-center justify-center gap-2.5 flex-wrap">
-            <span className="px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-[#6B5B95]/20 text-[#BFB2D3] border border-[#6B5B95]/40 flex items-center gap-2 shadow-glow-manganese animate-float font-sans">
-              <Building2 className="w-3.5 h-3.5 text-teal-400" />
-              Smart India Hackathon • Ministry of Steel, Govt. of India
+            <span className="px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-black border border-slate-300 flex items-center gap-2 shadow-sm font-sans">
+              <Building2 className="w-3.5 h-3.5 text-teal-600" />
+              Ministry of Steel, Govt. of India
             </span>
-            <span className="px-3.5 py-1.5 rounded-full text-xs font-mono font-bold bg-[#161D22]/90 text-slate-300 border border-[#26333B] flex items-center gap-1.5 shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-teal-400 animate-ping" />
-              <Sparkles className="w-3.5 h-3.5 text-teal-400" />
+            <span className="px-3.5 py-1.5 rounded-full text-xs font-mono font-bold bg-white text-black border border-slate-300 flex items-center gap-1.5 shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-teal-600 animate-ping" />
+              <Sparkles className="w-3.5 h-3.5 text-teal-600" />
               AI/ML + Earth Observation Platform
             </span>
             <div className="flex items-center gap-1.5 pl-1">
@@ -258,8 +258,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
           {/* Mega Title with Earth-Tech Gradient Typography */}
           <div className="space-y-3">
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-[#E8E6E3] tracking-tight leading-tight font-sans">
-              MOIL <span className="bg-gradient-to-r from-teal-300 via-[#BFB2D3] to-teal-400 bg-clip-text text-transparent animate-gradient-flow">ReserveIQ</span>
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-black tracking-tight leading-tight font-sans">
+              <span className="text-black font-black">MOIL</span> <span className="bg-gradient-to-r from-teal-600 via-purple-600 to-teal-500 bg-clip-text text-transparent animate-gradient-flow">ReserveIQ</span>
             </h1>
             <p className="text-lg sm:text-2xl font-extrabold text-slate-200 tracking-tight max-w-4xl mx-auto font-sans">
               Intelligent Manganese Ore Reserve Estimation & Production Shortfall Mitigation
@@ -710,8 +710,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       {/* 📌 FOOTER */}
       {/* ============================================================ */}
       <footer className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 border-t border-[#26333B] text-center space-y-2 text-xs text-slate-500">
-        <p className="text-slate-400 font-medium font-sans">
-          MOIL ReserveIQ • Smart India Hackathon Prototype • Ministry of Steel, Government of India
+        <p className="text-black font-semibold font-sans">
+          <span className="text-black font-bold">MOIL</span> ReserveIQ • Ministry of Steel, Government of India
         </p>
         <p className="text-[11px] text-slate-500 font-mono">
           Data Sources: MOIL Limited Statutory Disclosures • Indian Bureau of Mines (IBM) • USGS Mineral Commodity Summaries • ESA Copernicus Sentinel-2

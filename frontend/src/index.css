@@ -7,34 +7,34 @@
     --bg-page: #F8FAFC;
     --bg-surface: #FFFFFF;
     --bg-card: #FFFFFF;
-    --bg-hover: #F1F5F9;
-    --border-primary: #E2E8F0;
-    --border-subtle: #F1F5F9;
-    --text-primary: #0F172A;
-    --text-secondary: #334155;
-    --text-muted: #64748B;
+    --bg-hover: #FFFFFF;
+    --border-primary: #CBD5E1;
+    --border-subtle: #E2E8F0;
+    --text-primary: #000000;
+    --text-secondary: #000000;
+    --text-muted: #000000;
   }
 
   html.dark {
-    --bg-page: #0F1214;
-    --bg-surface: #161D22;
-    --bg-card: #1B2226;
-    --bg-hover: #222D33;
-    --border-primary: #26333B;
-    --border-subtle: #1E282E;
-    --text-primary: #E8E6E3;
-    --text-secondary: #94A3B8;
-    --text-muted: #64748B;
+    --bg-page: #FFFFFF;
+    --bg-surface: #FFFFFF;
+    --bg-card: #FFFFFF;
+    --bg-hover: #FFFFFF;
+    --border-primary: #CBD5E1;
+    --border-subtle: #E2E8F0;
+    --text-primary: #000000;
+    --text-secondary: #000000;
+    --text-muted: #000000;
   }
 
   body {
-    @apply bg-[#F8FAFC] text-[#0F172A] font-sans antialiased overflow-x-hidden transition-colors duration-200;
+    @apply bg-[#F8FAFC] text-black font-sans antialiased overflow-x-hidden transition-colors duration-200;
     color-scheme: light;
   }
 
   html.dark body {
-    @apply bg-[#0F1214] text-[#E8E6E3];
-    color-scheme: dark;
+    @apply bg-[#F8FAFC] text-black;
+    color-scheme: light;
   }
 }
 
@@ -43,17 +43,17 @@
 /* ============================================================ */
 html:not(.dark) .bg-\[\#0F1214\],
 html.light .bg-\[\#0F1214\] {
-  background-color: #F8FAFC !important;
+  background-color: #FFFFFF !important;
 }
 
 html:not(.dark) .bg-\[\#0F1214\]\/95,
 html.light .bg-\[\#0F1214\]\/95 {
-  background-color: rgba(255, 255, 255, 0.95) !important;
+  background-color: #FFFFFF !important;
 }
 
 html:not(.dark) .bg-\[\#12181A\],
 html.light .bg-\[\#12181A\] {
-  background-color: #F1F5F9 !important;
+  background-color: #FFFFFF !important;
 }
 
 html:not(.dark) .bg-\[\#161D22\],
@@ -69,7 +69,7 @@ html.light .bg-\[\#161D22\]\/80,
 html.light .bg-\[\#161D22\]\/90,
 html.light .bg-\[\#161D22\]\/95,
 html.light .bg-\[\#161D22\]\/98 {
-  background-color: rgba(255, 255, 255, 0.98) !important;
+  background-color: #FFFFFF !important;
 }
 
 html:not(.dark) .bg-\[\#1B2226\],
@@ -79,22 +79,55 @@ html.light .bg-\[\#1B2226\] {
 
 html:not(.dark) .bg-\[\#222D33\],
 html.light .bg-\[\#222D33\] {
-  background-color: #F1F5F9 !important;
+  background-color: #FFFFFF !important;
 }
 
 html:not(.dark) .border-\[\#26333B\],
 html.light .border-\[\#26333B\] {
-  border-color: #E2E8F0 !important;
+  border-color: #CBD5E1 !important;
 }
 
 html:not(.dark) .text-\[\#E8E6E3\],
 html.light .text-\[\#E8E6E3\] {
-  color: #0F172A !important;
+  color: #000000 !important;
+}
+
+/* Ensure text on gradient & solid buttons and badges stays pure crisp white in light mode */
+html:not(.dark) [class*="bg-gradient-"] .text-\[\#E8E6E3\],
+html:not(.dark) button[class*="bg-gradient-"],
+html:not(.dark) button[class*="bg-emerald"],
+html:not(.dark) button[class*="bg-cyan"],
+html:not(.dark) button[class*="bg-pink"],
+html:not(.dark) button[class*="bg-blue"],
+html:not(.dark) a[class*="bg-gradient-"],
+html:not(.dark) .btn-shimmer,
+html.light [class*="bg-gradient-"] .text-\[\#E8E6E3\],
+html.light button[class*="bg-gradient-"],
+html.light button[class*="bg-emerald"],
+html.light button[class*="bg-cyan"],
+html.light button[class*="bg-pink"],
+html.light button[class*="bg-blue"],
+html.light a[class*="bg-gradient-"],
+html.light .btn-shimmer {
+  color: #FFFFFF !important;
+}
+
+html:not(.dark) button[class*="bg-emerald"] *,
+html:not(.dark) button[class*="bg-cyan"] *,
+html:not(.dark) button[class*="bg-pink"] *,
+html:not(.dark) button[class*="bg-blue"] *,
+html:not(.dark) button[class*="bg-gradient"] *,
+html.light button[class*="bg-emerald"] *,
+html.light button[class*="bg-cyan"] *,
+html.light button[class*="bg-pink"] *,
+html.light button[class*="bg-blue"] *,
+html.light button[class*="bg-gradient"] * {
+  color: #FFFFFF !important;
 }
 
 html:not(.dark) .hover\:bg-\[\#1B2226\]:hover,
 html.light .hover\:bg-\[\#1B2226\]:hover {
-  background-color: #F1F5F9 !important;
+  background-color: #F8FAFC !important;
 }
 
 html:not(.dark) .hover\:bg-\[\#161D22\]:hover,
@@ -104,46 +137,255 @@ html.light .hover\:bg-\[\#161D22\]:hover {
 
 html:not(.dark) .hover\:text-\[\#E8E6E3\]:hover,
 html.light .hover\:text-\[\#E8E6E3\]:hover {
-  color: #0F172A !important;
+  color: #000000 !important;
 }
 
+/* Light Mode High-Contrast Solid Pure Black Text Hierarchy */
 html:not(.dark) .text-slate-400,
-html.light .text-slate-400 {
-  color: #64748B !important;
-}
-
+html.light .text-slate-400,
+html:not(.dark) .text-slate-500,
+html.light .text-slate-500,
+html:not(.dark) .text-slate-600,
+html.light .text-slate-600,
 html:not(.dark) .text-slate-300,
-html.light .text-slate-300 {
-  color: #334155 !important;
-}
-
+html.light .text-slate-300,
 html:not(.dark) .text-slate-200,
-html.light .text-slate-200 {
-  color: #1E293B !important;
-}
-
+html.light .text-slate-200,
 html:not(.dark) .text-slate-100,
-html.light .text-slate-100 {
-  color: #0F172A !important;
+html.light .text-slate-100,
+html:not(.dark) .text-slate-900,
+html.light .text-slate-900,
+html:not(.dark) .text-slate-800,
+html.light .text-slate-800,
+html:not(.dark) .text-slate-700,
+html.light .text-slate-700,
+html:not(.dark) .text-gray-900,
+html.light .text-gray-900,
+html:not(.dark) .text-gray-800,
+html.light .text-gray-800,
+html:not(.dark) .text-gray-700,
+html.light .text-gray-700,
+html:not(.dark) .text-gray-600,
+html.light .text-gray-600,
+html:not(.dark) .text-gray-500,
+html.light .text-gray-500,
+html:not(.dark) .text-gray-400,
+html.light .text-gray-400,
+html:not(.dark) .text-zinc-900,
+html.light .text-zinc-900,
+html:not(.dark) .text-zinc-800,
+html.light .text-zinc-800,
+html:not(.dark) .text-zinc-700,
+html.light .text-zinc-700,
+html:not(.dark) .text-zinc-600,
+html.light .text-zinc-600,
+html:not(.dark) .text-zinc-500,
+html.light .text-zinc-500,
+html:not(.dark) .text-zinc-400,
+html.light .text-zinc-400,
+html:not(.dark) .text-neutral-900,
+html.light .text-neutral-900,
+html:not(.dark) .text-neutral-800,
+html.light .text-neutral-800,
+html:not(.dark) .text-neutral-700,
+html.light .text-neutral-700,
+html:not(.dark) .text-neutral-600,
+html.light .text-neutral-600,
+html:not(.dark) .text-neutral-500,
+html.light .text-neutral-500,
+html:not(.dark) .text-neutral-400,
+html.light .text-neutral-400,
+html:not(.dark) .text-\[\#E8E6E3\],
+html.light .text-\[\#E8E6E3\],
+html:not(.dark) .text-\[\#94A3B8\],
+html.light .text-\[\#94A3B8\],
+html:not(.dark) .text-\[\#64748B\],
+html.light .text-\[\#64748B\],
+html:not(.dark) .text-\[\#475569\],
+html.light .text-\[\#475569\],
+html:not(.dark) .text-\[\#334155\],
+html.light .text-\[\#334155\],
+html:not(.dark) .text-\[\#1E293B\],
+html.light .text-\[\#1E293B\],
+html:not(.dark) .text-\[\#0F172A\],
+html.light .text-\[\#0F172A\] {
+  color: #000000 !important;
 }
 
-/* Form Inputs & Selects in Light Mode */
-html:not(.dark) input,
+/* Eliminate grey box backgrounds and enforce pure crisp white box backgrounds */
+html:not(.dark) .bg-slate-100,
+html.light .bg-slate-100,
+html:not(.dark) .bg-slate-50,
+html.light .bg-slate-50,
+html:not(.dark) .bg-slate-200,
+html.light .bg-slate-200,
+html:not(.dark) .bg-slate-300,
+html.light .bg-slate-300,
+html:not(.dark) .bg-gray-100,
+html.light .bg-gray-100,
+html:not(.dark) .bg-gray-50,
+html.light .bg-gray-50,
+html:not(.dark) .bg-gray-200,
+html.light .bg-gray-200,
+html:not(.dark) .bg-zinc-100,
+html.light .bg-zinc-100,
+html:not(.dark) .bg-zinc-50,
+html.light .bg-zinc-50,
+html:not(.dark) .bg-neutral-100,
+html.light .bg-neutral-100,
+html:not(.dark) .bg-neutral-50,
+html.light .bg-neutral-50,
+html:not(.dark) .bg-\[\#222D33\],
+html.light .bg-\[\#222D33\],
+html:not(.dark) .bg-\[\#1B2226\],
+html.light .bg-\[\#1B2226\],
+html:not(.dark) .bg-\[\#12181A\],
+html.light .bg-\[\#12181A\],
+html:not(.dark) .bg-\[\#161D22\],
+html.light .bg-\[\#161D22\],
+html:not(.dark) .bg-\[\#26333B\],
+html.light .bg-\[\#26333B\],
+html:not(.dark) .bg-\[\#2D2338\],
+html.light .bg-\[\#2D2338\],
+html:not(.dark) .glass-panel,
+html.light .glass-panel {
+  background-color: #FFFFFF !important;
+}
+
+/* Background utility for dark mode skeletons and tabs in light mode */
+html:not(.dark) .bg-\[\#26333B\],
+html.light .bg-\[\#26333B\] {
+  background-color: #FFFFFF !important;
+}
+
+/* Leaflet Popups: pure white background with black text */
+.leaflet-popup-content-wrapper {
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+  border: 1px solid #CBD5E1 !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15) !important;
+}
+.leaflet-popup-tip {
+  background-color: #FFFFFF !important;
+}
+.leaflet-popup-content-wrapper .bg-slate-100,
+.leaflet-popup-content-wrapper .bg-slate-50,
+.leaflet-popup-content-wrapper .bg-slate-200 {
+  background-color: #FFFFFF !important;
+}
+html.dark .leaflet-popup-content-wrapper .text-purple-700,
+html.dark .leaflet-popup-content-wrapper .text-purple-600 {
+  color: #C084FC !important;
+}
+html.dark .leaflet-popup-content-wrapper .text-emerald-700,
+html.dark .leaflet-popup-content-wrapper .text-emerald-600 {
+  color: #34D399 !important;
+}
+html.dark .leaflet-popup-content-wrapper .text-blue-700,
+html.dark .leaflet-popup-content-wrapper .text-blue-600 {
+  color: #60A5FA !important;
+}
+html.dark .leaflet-popup-content-wrapper .text-pink-700,
+html.dark .leaflet-popup-content-wrapper .text-pink-600 {
+  color: #F472B6 !important;
+}
+html.dark .leaflet-popup-content-wrapper .text-cyan-700,
+html.dark .leaflet-popup-content-wrapper .text-cyan-600 {
+  color: #22D3EE !important;
+}
+html.dark .leaflet-popup-content-wrapper .bg-purple-100 {
+  background-color: #3B0764 !important;
+}
+html.dark .leaflet-popup-content-wrapper .bg-cyan-50 {
+  background-color: #083344 !important;
+}
+html.dark .leaflet-popup-content-wrapper .bg-pink-50 {
+  background-color: #500724 !important;
+}
+
+/* Appearance Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ============================================================ */
+/* 📋 SELECT DROPDOWNS & INPUTS: 100% BLACK TEXT & WHITE BOXES */
+/* ============================================================ */
+select,
+select option,
+select optgroup,
+option,
+optgroup,
+input,
+textarea,
+html select,
+html.dark select,
 html:not(.dark) select,
-html:not(.dark) textarea,
-html.light input,
-html.light select,
-html.light textarea {
-  color-scheme: light;
-  background-color: #FFFFFF;
-  color: #0F172A;
-  border-color: #CBD5E1;
+html select option,
+html.dark select option,
+html:not(.dark) select option,
+html select optgroup,
+html.dark select optgroup,
+html:not(.dark) select optgroup,
+html input,
+html.dark input,
+html:not(.dark) input,
+html textarea,
+html.dark textarea,
+html:not(.dark) textarea {
+  color-scheme: light !important;
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+  border-color: #CBD5E1 !important;
 }
 
-html:not(.dark) select option,
-html.light select option {
-  background-color: #FFFFFF;
-  color: #0F172A;
+select:focus,
+select:hover,
+select:active,
+select option:hover,
+select option:focus,
+select option:checked,
+input:focus,
+textarea:focus {
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+}
+
+/* Ensure dark mode boxes and text also adhere to pure white boxes and black text */
+html.dark .bg-\[\#0F1214\],
+html.dark .bg-\[\#12181A\],
+html.dark .bg-\[\#161D22\],
+html.dark .bg-\[\#1B2226\],
+html.dark .bg-\[\#222D33\],
+html.dark .bg-\[\#26333B\],
+html.dark .bg-\[\#2D2338\],
+html.dark .bg-slate-900,
+html.dark .bg-slate-800,
+html.dark .bg-slate-100,
+html.dark .bg-slate-50,
+html.dark .bg-slate-200,
+html.dark .glass-panel {
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+}
+
+html.dark .text-\[\#E8E6E3\],
+html.dark .text-slate-400,
+html.dark .text-slate-300,
+html.dark .text-slate-200,
+html.dark .text-slate-100 {
+  color: #000000 !important;
 }
 
 /* Badges in Light Mode */
@@ -198,16 +440,16 @@ html.light .text-amber-400 {
   color: #B45309 !important;
 }
 
-html:not(.dark) .bg-emerald-950\/80,
-html:not(.dark) .bg-emerald-950\/40,
-html.light .bg-emerald-950\/80,
-html.light .bg-emerald-950\/40 {
+html:not(.dark) [class*="bg-emerald-950"],
+html.light [class*="bg-emerald-950"] {
   background-color: #D1FAE5 !important;
 }
 
-html:not(.dark) .border-emerald-800,
-html.light .border-emerald-800 {
-  border-color: #A7F3D0 !important;
+html:not(.dark) [class*="border-emerald-800"],
+html:not(.dark) [class*="border-emerald-500"],
+html.light [class*="border-emerald-800"],
+html.light [class*="border-emerald-500"] {
+  border-color: #6EE7B7 !important;
 }
 
 html:not(.dark) .text-emerald-300,
@@ -219,7 +461,7 @@ html.light .text-emerald-400 {
 
 html:not(.dark) .bg-\[\#2D2338\],
 html.light .bg-\[\#2D2338\] {
-  background-color: #EDE9F3 !important;
+  background-color: #FFFFFF !important;
 }
 
 html:not(.dark) .text-purple-300,
@@ -235,9 +477,27 @@ html.light .border-\[\#564879\] {
 /* Glassmorphic Panel in Light Mode */
 html:not(.dark) .glass-panel,
 html.light .glass-panel {
-  background: rgba(255, 255, 255, 0.95) !important;
-  border-color: rgba(226, 232, 240, 0.95) !important;
+  background: #FFFFFF !important;
+  border-color: #CBD5E1 !important;
   box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.08) !important;
+}
+
+/* Ensure bare text-white inside glass-panel in light mode flips to high-contrast dark text unless on a colored background or button */
+html:not(.dark) .glass-panel h1.text-white:not([class*="bg-"]):not([class*="from-"]),
+html:not(.dark) .glass-panel h2.text-white:not([class*="bg-"]):not([class*="from-"]),
+html:not(.dark) .glass-panel h3.text-white:not([class*="bg-"]):not([class*="from-"]),
+html:not(.dark) .glass-panel h4.text-white:not([class*="bg-"]):not([class*="from-"]),
+html:not(.dark) .glass-panel p.text-white:not([class*="bg-"]):not([class*="from-"]),
+html:not(.dark) .glass-panel :not(button):not(a):not([class*="bg-"]) > span.text-white:not([class*="bg-"]):not([class*="from-"]),
+html:not(.dark) .glass-panel :not(button):not(a):not([class*="bg-"]) > div.text-white:not([class*="bg-"]):not([class*="from-"]),
+html.light .glass-panel h1.text-white:not([class*="bg-"]):not([class*="from-"]),
+html.light .glass-panel h2.text-white:not([class*="bg-"]):not([class*="from-"]),
+html.light .glass-panel h3.text-white:not([class*="bg-"]):not([class*="from-"]),
+html.light .glass-panel h4.text-white:not([class*="bg-"]):not([class*="from-"]),
+html.light .glass-panel p.text-white:not([class*="bg-"]):not([class*="from-"]),
+html.light .glass-panel :not(button):not(a):not([class*="bg-"]) > span.text-white:not([class*="bg-"]):not([class*="from-"]),
+html.light .glass-panel :not(button):not(a):not([class*="bg-"]) > div.text-white:not([class*="bg-"]):not([class*="from-"]) {
+  color: #000000 !important;
 }
 
 /* Hero gradient in Light Mode */
@@ -514,35 +774,31 @@ html.dark .recharts-tooltip-item {
 }
 
 /* Background Grids */
-.bg-grid-cyber {
-  background-image: radial-gradient(rgba(13, 148, 136, 0.15) 1px, transparent 1px);
-  background-size: 28px 28px;
-}
-
+.bg-grid-cyber,
 html.dark .bg-grid-cyber {
-  background-image: radial-gradient(rgba(45, 212, 191, 0.12) 1px, transparent 1px);
+  background-color: #FFFFFF !important;
+  background-image: radial-gradient(#CBD5E1 1px, transparent 1px) !important;
+  background-size: 28px 28px !important;
 }
 
-.bg-grid-earth {
-  background-image: radial-gradient(rgba(107, 91, 149, 0.15) 1px, transparent 1px);
-  background-size: 28px 28px;
-}
-
+.bg-grid-earth,
 html.dark .bg-grid-earth {
-  background-image: radial-gradient(rgba(107, 91, 149, 0.15) 1px, transparent 1px);
+  background-color: #FFFFFF !important;
+  background-image: radial-gradient(#CBD5E1 1px, transparent 1px) !important;
+  background-size: 28px 28px !important;
 }
 
 /* Glassmorphic Panel Base */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.95);
+  background: #FFFFFF !important;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(226, 232, 240, 0.9);
+  border: 1px solid #CBD5E1 !important;
 }
 
 html.dark .glass-panel {
-  background: rgba(27, 34, 38, 0.82);
-  border: 1px solid rgba(38, 51, 59, 0.85);
+  background: #FFFFFF !important;
+  border: 1px solid #CBD5E1 !important;
 }
 
 /* Card Glow Transitions */
@@ -585,3 +841,220 @@ html.dark .card-hover:hover {
 .glow-border-red {
   box-shadow: 0 0 20px -3px rgba(220, 95, 78, 0.25);
 }
+
+/* ============================================================ */
+/* 🌐 COMPREHENSIVE GRID ENFORCEMENT: WHITE BOXES & BLACK TEXT */
+/* ============================================================ */
+
+/* 1. All layout grid containers */
+.grid,
+[class*="grid-cols-"],
+[class*="grid-rows-"],
+[data-slipstream-features] {
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+}
+
+/* 2. Direct children and descendant cards/boxes inside any grid */
+.grid > div:not([class*="btn"]):not(button):not([role="button"]),
+.grid > section,
+.grid > article,
+.grid > ul,
+.grid > li,
+[class*="grid-cols-"] > div:not([class*="btn"]):not(button):not([role="button"]),
+[class*="grid-cols-"] > section,
+[class*="grid-cols-"] > article,
+[class*="grid-rows-"] > div:not([class*="btn"]):not(button):not([role="button"]) {
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+  border-color: #E2E8F0 !important;
+}
+
+/* Nested containers & cards inside grid */
+.grid .glass-panel,
+.grid .card,
+.grid .p-3,
+.grid .p-4,
+.grid .p-5,
+.grid .p-6,
+.grid .rounded-xl,
+.grid .rounded-2xl,
+[class*="grid-cols-"] .glass-panel,
+[class*="grid-cols-"] .card,
+[class*="grid-cols-"] .p-3,
+[class*="grid-cols-"] .p-4,
+[class*="grid-cols-"] .p-5,
+[class*="grid-cols-"] .p-6 {
+  background-color: #FFFFFF !important;
+  border-color: #E2E8F0 !important;
+  color: #000000 !important;
+}
+
+/* ============================================================ */
+/* 🟢 TEAL BACKGROUNDS: 100% SOLID BLACK TEXT ON ALL ELEMENTS */
+/* ============================================================ */
+[class*="bg-teal"],
+[class*="bg-tech-teal"],
+button[class*="bg-teal"],
+button[class*="bg-tech-teal"],
+a[class*="bg-teal"],
+a[class*="bg-tech-teal"],
+[class*="bg-teal"] *,
+[class*="bg-tech-teal"] *,
+button[class*="bg-teal"] *,
+button[class*="bg-tech-teal"] *,
+a[class*="bg-teal"] *,
+a[class*="bg-tech-teal"] *,
+.bg-teal-50,
+.bg-teal-100,
+.bg-teal-200,
+.bg-teal-500,
+.bg-teal-600,
+.bg-teal-700,
+.bg-teal-800,
+.bg-teal-900,
+.bg-teal-950,
+.bg-teal-50 *,
+.bg-teal-100 *,
+.bg-teal-200 *,
+.bg-teal-500 *,
+.bg-teal-600 *,
+.bg-teal-700 *,
+.bg-teal-800 *,
+.bg-teal-900 *,
+.bg-teal-950 * {
+  color: #000000 !important;
+  fill: #000000 !important;
+}
+
+/* ============================================================ */
+/* 🟣 MANGANESE & MOIL BACKGROUNDS: 100% SOLID BLACK TEXT */
+/* ============================================================ */
+[class*="bg-manganese"],
+[class*="bg-moil"],
+[class*="bg-\[\#6B5B95\]"],
+[class*="bg-\[\#7E69AB\]"],
+[class*="bg-\[\#564879\]"],
+[class*="bg-\[\#42375C\]"],
+[class*="bg-\[\#2F2742\]"],
+.bg-\[\#6B5B95\],
+.bg-\[\#7E69AB\],
+.bg-\[\#564879\],
+.bg-\[\#42375C\],
+.bg-\[\#2F2742\],
+button[class*="bg-manganese"],
+a[class*="bg-manganese"],
+[class*="bg-manganese"] *,
+[class*="bg-moil"] *,
+.bg-\[\#6B5B95\] *,
+.bg-\[\#7E69AB\] *,
+.bg-\[\#564879\] *,
+.bg-\[\#42375C\] *,
+.bg-\[\#2F2742\] *,
+button[class*="bg-manganese"] *,
+a[class*="bg-manganese"] *,
+.bg-manganese-50,
+.bg-manganese-100,
+.bg-manganese-200,
+.bg-manganese-300,
+.bg-manganese-400,
+.bg-manganese-500,
+.bg-manganese-600,
+.bg-manganese-700,
+.bg-manganese-800,
+.bg-manganese-900,
+.bg-manganese-950,
+.bg-manganese-50 *,
+.bg-manganese-100 *,
+.bg-manganese-200 *,
+.bg-manganese-300 *,
+.bg-manganese-400 *,
+.bg-manganese-500 *,
+.bg-manganese-600 *,
+.bg-manganese-700 *,
+.bg-manganese-800 *,
+.bg-manganese-900 *,
+.bg-manganese-950 * {
+  color: #000000 !important;
+  fill: #000000 !important;
+}
+
+/* ============================================================ */
+/* 🟣 PURPLE BACKGROUNDS: 100% SOLID BLACK TEXT ON ALL ELEMENTS */
+/* ============================================================ */
+[class*="bg-purple"],
+button[class*="bg-purple"],
+a[class*="bg-purple"],
+[class*="bg-purple"] *,
+button[class*="bg-purple"] *,
+a[class*="bg-purple"] *,
+.bg-purple-50,
+.bg-purple-100,
+.bg-purple-200,
+.bg-purple-300,
+.bg-purple-400,
+.bg-purple-500,
+.bg-purple-600,
+.bg-purple-700,
+.bg-purple-800,
+.bg-purple-900,
+.bg-purple-950,
+.bg-purple-50 *,
+.bg-purple-100 *,
+.bg-purple-200 *,
+.bg-purple-300 *,
+.bg-purple-400 *,
+.bg-purple-500 *,
+.bg-purple-600 *,
+.bg-purple-700 *,
+.bg-purple-800 *,
+.bg-purple-900 *,
+.bg-purple-950 * {
+  color: #000000 !important;
+  fill: #000000 !important;
+}
+
+/* ============================================================ */
+/* 🌐 GRID: 100% SOLID BLACK TEXT ON ALL ELEMENTS IN EVERY GRID */
+/* ============================================================ */
+.grid,
+.grid *,
+[class*="grid-cols-"],
+[class*="grid-cols-"] *,
+[class*="grid-rows-"],
+[class*="grid-rows-"] *,
+[data-slipstream-features],
+[data-slipstream-features] * {
+  color: #000000 !important;
+}
+
+/* 4. Chart Cartesian Grids (Recharts) */
+.recharts-cartesian-grid line,
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: #E2E8F0 !important;
+  stroke-opacity: 1 !important;
+}
+
+.recharts-cartesian-grid-bg,
+.recharts-wrapper,
+.recharts-surface {
+  background-color: #FFFFFF !important;
+}
+
+.recharts-text,
+.recharts-cartesian-axis-tick text,
+.recharts-legend-item-text,
+.recharts-tooltip-item-name,
+.recharts-tooltip-item-value {
+  color: #000000 !important;
+  fill: #000000 !important;
+}
+
+.recharts-default-tooltip {
+  background-color: #FFFFFF !important;
+  border: 1px solid #CBD5E1 !important;
+  color: #000000 !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1) !important;
+}
+

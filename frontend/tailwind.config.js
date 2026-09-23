@@ -41,7 +41,12 @@ export default {
           800: '#42375C',
           900: '#2F2742',
         },
+        'tech-teal': '#0D9488',
+        'tech-cyan': '#00C2CC',
         tech: {
+          DEFAULT: '#0D9488',
+          teal: '#0D9488',
+          cyan: '#00C2CC',
           50: '#F0FDFA',
           100: '#CCFBF1',
           200: '#99F6E4',

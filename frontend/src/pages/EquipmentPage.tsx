@@ -153,41 +153,41 @@ export const EquipmentPage: React.FC = () => {
 
       {/* Stats Row */}
       {stats && (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="glass-panel p-4 rounded-xl border border-[#26333B] bg-[#161D22]/85">
-            <span className="text-xs text-slate-400 font-bold uppercase block mb-1">Total Fleet Size</span>
-            <span className="text-2xl font-bold text-[#E8E6E3] font-mono">{stats.totalFleet} Units</span>
-            <span className="text-[11px] text-slate-400 block mt-1">Registered Across Mines</span>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-white">
+          <div className="p-4 rounded-xl border border-slate-200 bg-white shadow-sm">
+            <span className="text-xs text-black font-bold uppercase block mb-1">Total Fleet Size</span>
+            <span className="text-2xl font-bold text-black font-mono">{stats.totalFleet} Units</span>
+            <span className="text-[11px] text-black block mt-1">Registered Across Mines</span>
           </div>
 
-          <div className="glass-panel p-4 rounded-xl border border-[#26333B] bg-[#161D22]/85">
-            <span className="text-xs text-slate-400 font-bold uppercase block mb-1">Operational</span>
-            <span className="text-2xl font-bold text-emerald-400 font-mono">{stats.operationalCount} Active</span>
-            <span className="text-[11px] text-emerald-400/80 block mt-1">Ready on Extraction Bench</span>
+          <div className="p-4 rounded-xl border border-slate-200 bg-white shadow-sm">
+            <span className="text-xs text-black font-bold uppercase block mb-1">Operational</span>
+            <span className="text-2xl font-bold text-emerald-700 font-mono">{stats.operationalCount} Active</span>
+            <span className="text-[11px] text-emerald-700 block mt-1">Ready on Extraction Bench</span>
           </div>
 
-          <div className="glass-panel p-4 rounded-xl border border-[#26333B] bg-[#161D22]/85">
-            <span className="text-xs text-slate-400 font-bold uppercase block mb-1">Under Maintenance</span>
-            <span className="text-2xl font-bold text-amber-400 font-mono">{stats.underMaintenanceCount} Overhauls</span>
-            <span className="text-[11px] text-amber-400/80 block mt-1">Preventive Service</span>
+          <div className="p-4 rounded-xl border border-slate-200 bg-white shadow-sm">
+            <span className="text-xs text-black font-bold uppercase block mb-1">Under Maintenance</span>
+            <span className="text-2xl font-bold text-amber-700 font-mono">{stats.underMaintenanceCount} Overhauls</span>
+            <span className="text-[11px] text-amber-700 block mt-1">Preventive Service</span>
           </div>
 
-          <div className="glass-panel p-4 rounded-xl border border-[#26333B] bg-[#161D22]/85">
-            <span className="text-xs text-slate-400 font-bold uppercase block mb-1">Breakdown Stoppages</span>
-            <span className="text-2xl font-bold text-[#DC5F4E] font-mono">{stats.breakdownCount} Critical</span>
-            <span className="text-[11px] text-[#DC5F4E]/80 block mt-1">Requires Immediate Spares</span>
+          <div className="p-4 rounded-xl border border-slate-200 bg-white shadow-sm">
+            <span className="text-xs text-black font-bold uppercase block mb-1">Breakdown Stoppages</span>
+            <span className="text-2xl font-bold text-red-700 font-mono">{stats.breakdownCount} Critical</span>
+            <span className="text-[11px] text-red-700 block mt-1">Requires Immediate Spares</span>
           </div>
         </div>
       )}
 
       {/* Filters Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#26333B] pb-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-3 bg-white">
         <div className="flex items-center gap-2">
-          <span className="text-xs text-slate-400 font-bold">Status:</span>
+          <span className="text-xs text-black font-bold">Status:</span>
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-3 py-1.5 bg-[#12181A] border border-[#26333B] text-xs font-semibold text-[#E8E6E3] rounded-lg focus:outline-none focus:border-tech-teal cursor-pointer"
+            className="px-3 py-1.5 bg-white border border-slate-300 text-xs font-semibold text-black rounded-lg focus:outline-none focus:border-teal-700 cursor-pointer"
           >
             <option value="ALL">All Statuses</option>
             <option value="OPERATIONAL">Operational</option>
@@ -198,11 +198,11 @@ export const EquipmentPage: React.FC = () => {
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="text-xs text-slate-400 font-bold">Equipment Type:</span>
+          <span className="text-xs text-black font-bold">Equipment Type:</span>
           <select
             value={filterType}
             onChange={(e) => setFilterType(e.target.value)}
-            className="px-3 py-1.5 bg-[#12181A] border border-[#26333B] text-xs font-semibold text-[#E8E6E3] rounded-lg focus:outline-none focus:border-tech-teal cursor-pointer"
+            className="px-3 py-1.5 bg-white border border-slate-300 text-xs font-semibold text-black rounded-lg focus:outline-none focus:border-teal-700 cursor-pointer"
           >
             <option value="ALL">All Equipment Types</option>
             <option value="Excavator">Excavator / Shovel</option>
@@ -215,7 +215,7 @@ export const EquipmentPage: React.FC = () => {
       </div>
 
       {/* Equipment Cards Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 bg-white">
         {filteredEquipment.map((eq) => {
           const isBreakdown = eq.status === 'BREAKDOWN';
           const isMaintenance = eq.status === 'UNDER_MAINTENANCE';
@@ -223,29 +223,29 @@ export const EquipmentPage: React.FC = () => {
           return (
             <div
               key={eq.code}
-              className={`glass-panel rounded-2xl p-5 border transition-all duration-200 bg-[#161D22]/85 ${isBreakdown
-                ? 'border-red-800/80 bg-red-950/20 shadow-glow-red'
+              className={`rounded-2xl p-5 border transition-all duration-200 bg-white shadow-sm ${isBreakdown
+                ? 'border-red-300 bg-red-50/30'
                 : isMaintenance
-                  ? 'border-amber-800/80 bg-amber-950/20'
-                  : 'border-[#26333B] hover:border-tech-teal/50'
+                  ? 'border-amber-300 bg-amber-50/30'
+                  : 'border-slate-200 hover:border-teal-700'
                 }`}
             >
               {/* Header */}
               <div className="flex items-start justify-between gap-2 mb-2.5">
                 <div>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded font-mono uppercase bg-[#0F1214] text-slate-300 border border-[#26333B]">
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded font-mono uppercase bg-slate-100 text-black border border-slate-300">
                     {eq.code}
                   </span>
-                  <h3 className="text-sm font-bold text-[#E8E6E3] mt-1">{eq.name}</h3>
-                  <p className="text-[11px] text-slate-400">{eq.mineName}</p>
+                  <h3 className="text-sm font-bold text-black mt-1">{eq.name}</h3>
+                  <p className="text-[11px] text-black">{eq.mineName}</p>
                 </div>
 
                 <span
                   className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase font-mono ${isBreakdown
-                    ? 'bg-red-950 text-[#DC5F4E] border border-red-800 animate-pulse'
+                    ? 'bg-red-100 text-red-800 border border-red-300 animate-pulse'
                     : isMaintenance
-                      ? 'bg-amber-950 text-amber-400 border border-amber-800'
-                      : 'bg-emerald-950 text-emerald-400 border border-emerald-800'
+                      ? 'bg-amber-100 text-amber-800 border border-amber-300'
+                      : 'bg-emerald-100 text-emerald-800 border border-emerald-300'
                     }`}
                 >
                   {eq.status.replace(/_/g, ' ')}
@@ -253,24 +253,24 @@ export const EquipmentPage: React.FC = () => {
               </div>
 
               {/* Specs Grid */}
-              <div className="grid grid-cols-2 gap-2 my-3 p-3 rounded-xl bg-[#0F1214]/60 border border-[#26333B] text-xs">
+              <div className="grid grid-cols-2 gap-2 my-3 p-3 rounded-xl bg-white border border-slate-200 text-xs">
                 <div>
-                  <span className="text-[10px] text-slate-400 block font-mono">Model / Capacity</span>
-                  <span className="font-semibold text-slate-200 truncate block">
+                  <span className="text-[10px] text-black block font-mono">Model / Capacity</span>
+                  <span className="font-semibold text-black truncate block">
                     {eq.equipmentModel} ({eq.capacity})
                   </span>
                 </div>
                 <div>
-                  <span className="text-[10px] text-slate-400 block font-mono">Uptime Availability</span>
-                  <span className="font-bold text-tech-teal font-mono">{eq.uptimePct}%</span>
+                  <span className="text-[10px] text-black block font-mono">Uptime Availability</span>
+                  <span className="font-bold text-teal-700 font-mono">{eq.uptimePct}%</span>
                 </div>
                 <div>
-                  <span className="text-[10px] text-slate-400 block font-mono">MTBF Reliability</span>
-                  <span className="font-semibold text-slate-200 font-mono">{eq.mtbfHours} Hours</span>
+                  <span className="text-[10px] text-black block font-mono">MTBF Reliability</span>
+                  <span className="font-semibold text-black font-mono">{eq.mtbfHours} Hours</span>
                 </div>
                 <div>
-                  <span className="text-[10px] text-slate-400 block font-mono">Next Overhaul</span>
-                  <span className="font-semibold text-slate-200 font-mono">{eq.nextScheduledMaintenance}</span>
+                  <span className="text-[10px] text-black block font-mono">Next Overhaul</span>
+                  <span className="font-semibold text-black font-mono">{eq.nextScheduledMaintenance}</span>
                 </div>
               </div>
 
