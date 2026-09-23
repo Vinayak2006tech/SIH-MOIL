@@ -259,7 +259,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           {/* Mega Title with Earth-Tech Gradient Typography */}
           <div className="space-y-3">
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight leading-tight font-sans">
-              <span className="text-white font-black drop-shadow-md">MOIL</span> <span className="bg-gradient-to-r from-teal-400 via-purple-300 to-teal-300 bg-clip-text text-transparent animate-gradient-flow drop-shadow-sm">ReserveIQ</span>
+              <span className="text-black font-black bg-white px-3.5 sm:px-4.5 py-0.5 sm:py-1 rounded-2xl border border-slate-300 shadow-md inline-block mr-1.5 sm:mr-2 align-baseline">MOIL</span> <span className="bg-gradient-to-r from-teal-400 via-purple-300 to-teal-300 bg-clip-text text-transparent animate-gradient-flow drop-shadow-sm">ReserveIQ</span>
             </h1>
             <p className="text-lg sm:text-2xl font-extrabold text-white tracking-tight max-w-4xl mx-auto font-sans">
               Intelligent Manganese Ore Reserve Estimation & Production Shortfall Mitigation
