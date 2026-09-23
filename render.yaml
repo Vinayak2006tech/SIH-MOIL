@@ -28,10 +28,7 @@ services:
       - key: CORS_ORIGIN
         sync: false
       - key: ML_SERVICE_URL
-        fromService:
-          name: moil-reserveiq-ml
-          type: web
-          property: host
+        value: https://sih-moil-1.onrender.com
 
   # Python + FastAPI + Scikit-learn AI/ML Microservice
   - type: web

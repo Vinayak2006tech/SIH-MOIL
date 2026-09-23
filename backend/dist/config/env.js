@@ -25,7 +25,7 @@ exports.config = {
     MONGO_URI: process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/moil_reserveiq',
     JWT_SECRET: process.env.JWT_SECRET || 'moil_reserveiq_secret_super_secure_key_2026',
     JWT_EXPIRES_IN: process.env.JWT_EXPIRES_IN || '7d',
-    ML_SERVICE_URL: process.env.ML_SERVICE_URL || 'http://localhost:8000',
+    ML_SERVICE_URL: process.env.ML_SERVICE_URL || (process.env.NODE_ENV === 'production' ? 'https://sih-moil-1.onrender.com' : 'http://localhost:8000'),
     CORS_ORIGIN: process.env.CORS_ORIGIN || 'http://localhost:5173',
     FRONTEND_URL: process.env.FRONTEND_URL || 'http://localhost:5173',
     EMAIL_HOST: process.env.EMAIL_HOST || '',
