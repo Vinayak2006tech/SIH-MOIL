@@ -5,6 +5,16 @@
 
 ---
 
+## 🌐 Live Production Deployments
+
+| Component | Platform | Live URL | Health Status |
+| :--- | :--- | :--- | :--- |
+| **Frontend Web App** | Vercel | [sih-moil-bsri.vercel.app](https://sih-moil-bsri-8dgqhjj3u-vinayak2006techs-projects.vercel.app) | `200 OK` |
+| **REST API Backend** | Render | [sih-moil.onrender.com](https://sih-moil.onrender.com) | `200 OK` |
+| **AI/ML Engine** | Render | [sih-moil-1.onrender.com](https://sih-moil-1.onrender.com) | `200 OK` |
+
+---
+
 ## 📌 Problem Context & Executive Summary
 **MOIL Limited** is India’s largest manganese ore producer, meeting over 50% of the nation's domestic steel industry requirement through key underground and opencast mines in Central India (Balaghat, Bhandara, and Nagpur districts). 
 

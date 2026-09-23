@@ -25,6 +25,8 @@ services:
         value: vinayak@2006
       - key: ML_SERVICE_URL
         value: https://sih-moil-1.onrender.com
+      - key: FRONTEND_URL
+        value: https://sih-moil-bsri-8dgqhjj3u-vinayak2006techs-projects.vercel.app
       - key: CORS_ORIGIN
         value: "*"
 
