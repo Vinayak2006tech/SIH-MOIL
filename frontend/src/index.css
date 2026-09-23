@@ -500,11 +500,6 @@ html.light .glass-panel :not(button):not(a):not([class*="bg-"]) > div.text-white
   color: #000000 !important;
 }
 
-/* Hero gradient in Light Mode */
-html:not(.dark) .bg-gradient-to-b.from-\[\#161D22\],
-html.light .bg-gradient-to-b.from-\[\#161D22\] {
-  background-image: linear-gradient(to bottom, #FFFFFF, #F8FAFC, #F1F5F9) !important;
-}
 
 /* Custom Scrollbars */
 ::-webkit-scrollbar {

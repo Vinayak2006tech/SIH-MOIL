@@ -258,18 +258,18 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
           {/* Mega Title with Earth-Tech Gradient Typography */}
           <div className="space-y-3">
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-black tracking-tight leading-tight font-sans">
-              <span className="text-black font-black">MOIL</span> <span className="bg-gradient-to-r from-teal-600 via-purple-600 to-teal-500 bg-clip-text text-transparent animate-gradient-flow">ReserveIQ</span>
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight leading-tight font-sans">
+              <span className="text-white font-black drop-shadow-md">MOIL</span> <span className="bg-gradient-to-r from-teal-400 via-purple-300 to-teal-300 bg-clip-text text-transparent animate-gradient-flow drop-shadow-sm">ReserveIQ</span>
             </h1>
-            <p className="text-lg sm:text-2xl font-extrabold text-slate-200 tracking-tight max-w-4xl mx-auto font-sans">
+            <p className="text-lg sm:text-2xl font-extrabold text-white tracking-tight max-w-4xl mx-auto font-sans">
               Intelligent Manganese Ore Reserve Estimation & Production Shortfall Mitigation
             </p>
           </div>
 
           {/* Subtitle / Description */}
-          <p className="text-sm sm:text-base text-slate-300 max-w-3xl mx-auto leading-relaxed font-sans">
-            A state-of-the-art mineral intelligence platform developed for <strong>Manganese Ore (India) Limited (MOIL)</strong>. 
-            Seamlessly integrating <strong>ESA Copernicus Sentinel-2 satellite telemetry</strong> with <strong>sub-surface diamond core assays</strong> and <strong>predictive machine-learning time-series forecasting</strong> to maximize national mineral security and achieve India's Vision 2030 target of 3.5 Million Tonnes per annum.
+          <p className="text-sm sm:text-base text-slate-200 max-w-3xl mx-auto leading-relaxed font-sans">
+            A state-of-the-art mineral intelligence platform developed for <strong className="text-white font-bold">Manganese Ore (India) Limited (MOIL)</strong>. 
+            Seamlessly integrating <strong className="text-white font-bold">ESA Copernicus Sentinel-2 satellite telemetry</strong> with <strong className="text-white font-bold">sub-surface diamond core assays</strong> and <strong className="text-white font-bold">predictive machine-learning time-series forecasting</strong> to maximize national mineral security and achieve India's Vision 2030 target of 3.5 Million Tonnes per annum.
           </p>
 
           {/* ============================================================ */}
