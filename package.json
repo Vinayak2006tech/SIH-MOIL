@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "MOIL ReserveIQ - AI/ML Manganese Reserve Estimation and Production Shortfall Prediction System",
   "scripts": {
+    "dev": "concurrently -n \"BACKEND,FRONTEND\" -c \"blue,green\" \"npm run start:backend\" \"npm run start:frontend\"",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
     "build": "cd frontend && npm install && npm run build",
     "start:ml": "./ml-service/.venv/bin/uvicorn app.main:app --app-dir ml-service --host 0.0.0.0 --port 8000 --reload",
     "start:backend": "cd backend && npm run dev",
@@ -23,5 +26,8 @@
   "license": "MIT",
   "dependencies": {
     "mongoose": "^9.9.5"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5"
   }
 }
