@@ -276,29 +276,29 @@ export const EquipmentPage: React.FC = () => {
 
               {/* Critical Alert Banner if breakdown */}
               {eq.criticalAlert && (
-                <div className="p-2.5 rounded-lg bg-red-950/40 border border-red-900/60 text-xs text-[#DC5F4E] mb-3 flex items-center gap-2">
-                  <AlertTriangle className="w-3.5 h-3.5 text-[#DC5F4E] shrink-0" />
-                  <span className="text-[11px]">{eq.criticalAlert}</span>
+                <div className="p-2.5 rounded-lg bg-red-50 border border-red-200 text-xs text-red-800 mb-3 flex items-center gap-2 font-medium">
+                  <AlertTriangle className="w-3.5 h-3.5 text-red-600 shrink-0" />
+                  <span className="text-[11px] font-semibold text-red-800">{eq.criticalAlert}</span>
                 </div>
               )}
 
               {/* Actions Footer */}
               {user?.role !== 'VIEWER' && (
-                <div className="flex items-center justify-end gap-2 pt-2 border-t border-[#26333B]">
+                <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-200">
                   <button
                     onClick={() => {
                       setModalMode('edit');
                       setFormData(eq);
                       setIsModalOpen(true);
                     }}
-                    className="p-1.5 text-slate-400 hover:text-tech-teal hover:bg-[#12181A] rounded-lg text-xs transition flex items-center gap-1"
+                    className="p-1.5 text-slate-600 hover:text-teal-700 hover:bg-slate-100 rounded-lg text-xs transition flex items-center gap-1 font-medium"
                   >
                     <Edit2 className="w-3.5 h-3.5" /> Edit
                   </button>
                   {user?.role === 'ADMIN' && (
                     <button
                       onClick={() => handleDelete(eq.code)}
-                      className="p-1.5 text-slate-400 hover:text-[#DC5F4E] hover:bg-[#12181A] rounded-lg text-xs transition flex items-center gap-1"
+                      className="p-1.5 text-slate-600 hover:text-red-700 hover:bg-red-50 rounded-lg text-xs transition flex items-center gap-1 font-medium"
                     >
                       <Trash2 className="w-3.5 h-3.5" /> Decommission
                     </button>
