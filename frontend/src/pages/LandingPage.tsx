@@ -268,8 +268,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
           {/* Subtitle / Description */}
           <p className="text-sm sm:text-base text-slate-200 max-w-3xl mx-auto leading-relaxed font-sans">
-            A state-of-the-art mineral intelligence platform developed for <strong className="text-white font-bold">Manganese Ore (India) Limited (MOIL)</strong>. 
-            Seamlessly integrating <strong className="text-white font-bold">ESA Copernicus Sentinel-2 satellite telemetry</strong> with <strong className="text-white font-bold">sub-surface diamond core assays</strong> and <strong className="text-white font-bold">predictive machine-learning time-series forecasting</strong> to maximize national mineral security and achieve India's Vision 2030 target of 3.5 Million Tonnes per annum.
+            A state-of-the-art mineral intelligence platform developed for <strong className="text-teal-400 font-bold">Manganese Ore (India) Limited (MOIL)</strong>. 
+            Seamlessly integrating <strong className="text-teal-400 font-bold">ESA Copernicus Sentinel-2 satellite telemetry</strong> with <strong className="text-teal-400 font-bold">sub-surface diamond core assays</strong> and <strong className="text-teal-400 font-bold">predictive machine-learning time-series forecasting</strong> to maximize national mineral security and achieve India's Vision 2030 target of 3.5 Million Tonnes per annum.
           </p>
 
           {/* ============================================================ */}
