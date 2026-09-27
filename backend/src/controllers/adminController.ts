@@ -244,16 +244,65 @@ export const updateUserRole = async (req: AuthRequest, res: Response) => {
       return res.status(404).json({ success: false, message: 'User not found.' });
     }
 
+    const currentAdminId = String(req.user?.id || req.user?._id || '');
+    const currentAdminEmail = String(req.user?.email || '').toLowerCase().trim();
+    const targetUserId = String(user._id || user.id || '');
+    const targetUserEmail = String(user.email || '').toLowerCase().trim();
+
+    const isSelf = targetUserId === currentAdminId || targetUserEmail === currentAdminEmail;
+
+    // Protection against self-modification of assigned role (prevents self-demotion / lockout)
+    if (isSelf && role && role !== user.role) {
+      return res.status(400).json({
+        success: false,
+        message: 'Security safeguard: Administrators cannot change their own assigned role. Another administrator must perform this action.'
+      });
+    }
+
+    // Protection against demoting primary system administrator account
+    if (targetUserEmail === 'vaishayvinayak@gmail.com' && role && role !== 'ADMIN') {
+      return res.status(400).json({
+        success: false,
+        message: 'Security safeguard: The primary system administrator account cannot be demoted from Administrator.'
+      });
+    }
+
+    // Role validation
+    const validRoles = ['ADMIN', 'MINE_PLANNER', 'VIEWER', 'USER'];
+    if (role && !validRoles.includes(role)) {
+      return res.status(400).json({
+        success: false,
+        message: `Invalid role specified (${role}). Valid roles are: ${validRoles.join(', ')}`
+      });
+    }
+
+    const previousRole = user.role;
     const updates: any = {};
     if (role) updates.role = role;
-    if (department) updates.department = department;
-    if (mineAccess) updates.mineAccess = mineAccess;
+    if (department !== undefined) updates.department = department.trim();
+    if (mineAccess !== undefined) updates.mineAccess = mineAccess;
 
-    const updated = await store.updateUser(id, updates);
+    const updated = await store.updateUser(user._id || user.id || id, updates);
+
+    // Send role updated email notification if role changed
+    if (role && role !== previousRole) {
+      try {
+        await emailService.sendRoleUpdatedEmail(
+          user.email,
+          user.name,
+          role,
+          updates.department || user.department
+        );
+      } catch (emailErr) {
+        console.warn('[Admin] Failed to send role updated email:', emailErr);
+      }
+    }
 
     return res.status(200).json({
       success: true,
-      message: `User permissions for ${user.name} updated.`,
+      message: role && role !== previousRole
+        ? `Assigned role for ${user.name} (${user.email}) changed from ${previousRole} to ${role}.`
+        : `User permissions for ${user.name} updated.`,
       user: sanitizeUser(updated || user)
     });
   } catch (error: any) {

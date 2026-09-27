@@ -213,6 +213,49 @@ export class EmailService {
 
     return this.send({ to, subject, html, text });
   }
+
+  // 5. Role Updated
+  public async sendRoleUpdatedEmail(to: string, name: string, newRole: string, department?: string) {
+    const roleLabels: Record<string, string> = {
+      ADMIN: 'System Administrator (Full Enterprise Clearance)',
+      MINE_PLANNER: 'Mine Planner (Operational Access)',
+      VIEWER: 'Ministry Auditor (Auditor & Oversight Clearance)',
+      USER: 'Standard Personnel'
+    };
+    const roleLabel = roleLabels[newRole] || newRole;
+    const subject = 'Assigned Role Updated - MOIL ReserveIQ';
+    const text = `Hello ${name},\n\nYour assigned system role within MOIL ReserveIQ has been updated by an administrator to: ${roleLabel}${department ? ` (Department: ${department})` : ''}.\n\nYour updated permissions take effect immediately.\n\nMOIL Limited • Ministry of Steel, Govt. of India`;
+    const html = `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 600px; margin: 0 auto; background: #0B0F19; color: #F1F5F9; border-radius: 16px; overflow: hidden; border: 1px solid #1E293B;">
+        <div style="background: linear-gradient(135deg, #7C3AED, #4F46E5); padding: 32px 24px; text-align: center;">
+          <h1 style="color: #FFFFFF; margin: 0; font-size: 24px; font-weight: 800;">MOIL ReserveIQ</h1>
+          <p style="color: #DDD6FE; margin: 8px 0 0 0; font-size: 12px; text-transform: uppercase;">Personnel Access Management</p>
+        </div>
+        <div style="padding: 32px 24px; line-height: 1.6;">
+          <h2 style="color: #FFFFFF; font-size: 18px; margin-top: 0;">Operational Role Updated</h2>
+          <p style="color: #CBD5E1;">Dear <strong>${name}</strong>,</p>
+          <p style="color: #CBD5E1;">Your operational role in the MOIL ReserveIQ National Enterprise Mining Portal has been updated by an administrator.</p>
+
+          <div style="background: #131D31; border: 1px solid #334155; border-radius: 12px; padding: 20px; margin: 24px 0;">
+            <div style="margin-bottom: 12px;">
+              <span style="color: #94A3B8; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;">New Assigned Role</span>
+              <p style="color: #A78BFA; font-weight: 700; font-size: 15px; margin: 4px 0 0 0;">${roleLabel}</p>
+            </div>
+            ${department ? `
+            <div>
+              <span style="color: #94A3B8; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;">Department / Division</span>
+              <p style="color: #F1F5F9; font-weight: 600; font-size: 13px; margin: 4px 0 0 0;">${department}</p>
+            </div>` : ''}
+          </div>
+
+          <p style="color: #94A3B8; font-size: 12px;">These permission adjustments take effect immediately on your active session and future sign ins.</p>
+          <p style="color: #64748B; font-size: 11px; margin-top: 24px;">MOIL Limited • Miniratna CPSE, Ministry of Steel, Govt. of India</p>
+        </div>
+      </div>
+    `;
+
+    return this.send({ to, subject, html, text });
+  }
 }
 
 export const emailService = new EmailService();

@@ -25,7 +25,11 @@ import {
   UserPlus,
   Lock,
   Eye,
-  EyeOff
+  EyeOff,
+  ChevronDown,
+  UserCog,
+  Layers,
+  ShieldCheck
 } from 'lucide-react';
 import { api } from '../services/api';
 import type { User, UserRole, UserStatus, UserStats } from '../types';
@@ -63,6 +67,7 @@ export const AdminPortalPage: React.FC = () => {
   const [newUserRole, setNewUserRole] = useState<UserRole>('ADMIN');
   const [newUserDepartment, setNewUserDepartment] = useState('Central Administration Directorate');
   const [newUserStatus, setNewUserStatus] = useState<'APPROVED' | 'PENDING'>('APPROVED');
+  const [changingRoleId, setChangingRoleId] = useState<string | null>(null);
 
   const fetchUsersAndStats = async () => {
     setLoading(true);
@@ -116,10 +121,47 @@ export const AdminPortalPage: React.FC = () => {
   };
 
   const handleOpenEditRoleModal = (u: User) => {
+    const uId = u._id || u.id || '';
+    const isCurrent = uId === currentUser?.id || u.email.toLowerCase() === currentUser?.email?.toLowerCase();
+    if (isCurrent) {
+      showToast('error', 'Security safeguard: Administrators cannot change their own assigned role.');
+      return;
+    }
     setSelectedUser(u);
     setEditRole(u.role);
     setEditDepartment(u.department || '');
     setModalType('EDIT_ROLE');
+  };
+
+  const handleQuickRoleChange = async (u: User, newRole: UserRole) => {
+    const uId = u._id || u.id || '';
+    if (!uId || u.role === newRole) return;
+
+    const isCurrent = uId === currentUser?.id || u.email.toLowerCase() === currentUser?.email?.toLowerCase();
+    if (isCurrent) {
+      showToast('error', 'Security safeguard: Administrators cannot change their own assigned role.');
+      return;
+    }
+
+    setChangingRoleId(uId);
+    try {
+      const res = await api.updateUserRole(uId, { role: newRole });
+      showToast('success', res.message || `Assigned role for ${u.name} updated to ${newRole}.`);
+      setUsers((prev) =>
+        prev.map((item) => {
+          const itemId = item._id || item.id || '';
+          if (itemId === uId) {
+            return { ...item, role: newRole };
+          }
+          return item;
+        })
+      );
+      fetchUsersAndStats();
+    } catch (err: any) {
+      showToast('error', err.response?.data?.message || `Failed to update role for ${u.name}.`);
+    } finally {
+      setChangingRoleId(null);
+    }
   };
 
   const handleOpenDeleteModal = (u: User) => {
@@ -249,13 +291,13 @@ export const AdminPortalPage: React.FC = () => {
       const id = selectedUser._id || selectedUser.id || '';
       const res = await api.updateUserRole(id, {
         role: editRole,
-        department: editDepartment
+        department: editDepartment.trim() || undefined
       });
-      showToast('success', res.message || `Permissions for ${selectedUser.name} updated.`);
+      showToast('success', res.message || `Permissions and role for ${selectedUser.name} updated.`);
       closeModal();
       fetchUsersAndStats();
     } catch (err: any) {
-      showToast('error', err.response?.data?.message || 'Update failed.');
+      showToast('error', err.response?.data?.message || 'Role update failed.');
     } finally {
       setActionLoading(false);
     }
@@ -285,6 +327,8 @@ export const AdminPortalPage: React.FC = () => {
         return <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-teal-50 text-teal-800 border border-teal-300 whitespace-nowrap">Mine Planner</span>;
       case 'VIEWER':
         return <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-300 whitespace-nowrap">Ministry Auditor</span>;
+      case 'USER':
+        return <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-800 border border-blue-300 whitespace-nowrap">Standard User</span>;
       default:
         return <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-100 text-slate-800 border border-slate-300 whitespace-nowrap">{role}</span>;
     }
@@ -528,6 +572,7 @@ export const AdminPortalPage: React.FC = () => {
               <option value="MINE_PLANNER">Mine Planners</option>
               <option value="ADMIN">Administrators</option>
               <option value="VIEWER">Ministry Auditors</option>
+              <option value="USER">Standard Users</option>
             </select>
           </div>
         </div>
@@ -596,7 +641,53 @@ export const AdminPortalPage: React.FC = () => {
                       </td>
 
                       {/* Role */}
-                      <td className="px-4 py-4 whitespace-nowrap">{getRoleBadge(u.role)}</td>
+                      <td className="px-4 py-4 whitespace-nowrap">
+                        {isCurrent ? (
+                          <div className="flex items-center gap-1.5">
+                            {getRoleBadge(u.role)}
+                            <span className="text-[10px] text-slate-400 font-semibold" title="Current administrative session">(You)</span>
+                          </div>
+                        ) : (
+                          <div className="flex items-center gap-1.5">
+                            <div className="relative inline-flex items-center">
+                              <select
+                                value={u.role}
+                                disabled={changingRoleId === uId || actionLoading}
+                                onChange={(e) => handleQuickRoleChange(u, e.target.value as UserRole)}
+                                aria-label={`Change assigned role for ${u.name}`}
+                                className={`text-[11px] font-bold py-1 pl-2.5 pr-7 rounded-lg border cursor-pointer focus:outline-none focus:ring-2 focus:ring-teal-500/20 transition-all appearance-none shadow-xs disabled:opacity-60 ${
+                                  u.role === 'ADMIN'
+                                    ? 'bg-purple-50 text-purple-900 border-purple-300 hover:bg-purple-100'
+                                    : u.role === 'MINE_PLANNER'
+                                    ? 'bg-teal-50 text-teal-900 border-teal-300 hover:bg-teal-100'
+                                    : u.role === 'VIEWER'
+                                    ? 'bg-emerald-50 text-emerald-900 border-emerald-300 hover:bg-emerald-100'
+                                    : 'bg-blue-50 text-blue-900 border-blue-300 hover:bg-blue-100'
+                                }`}
+                              >
+                                <option value="ADMIN">Administrator</option>
+                                <option value="MINE_PLANNER">Mine Planner</option>
+                                <option value="VIEWER">Ministry Auditor</option>
+                                <option value="USER">Standard User</option>
+                              </select>
+                              {changingRoleId === uId ? (
+                                <RefreshCw className="w-3 h-3 text-teal-700 animate-spin absolute right-2 pointer-events-none" />
+                              ) : (
+                                <ChevronDown className="w-3 h-3 text-slate-500 absolute right-2 pointer-events-none" />
+                              )}
+                            </div>
+
+                            <button
+                              onClick={() => handleOpenEditRoleModal(u)}
+                              className="p-1 rounded-md text-slate-400 hover:text-purple-700 hover:bg-purple-50 transition cursor-pointer"
+                              title="Configure Role & Permissions in detail"
+                              aria-label={`Configure role for ${u.name}`}
+                            >
+                              <Edit3 className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        )}
+                      </td>
 
                       {/* Department */}
                       <td className="px-4 py-4">
@@ -643,6 +734,18 @@ export const AdminPortalPage: React.FC = () => {
                       {/* Actions */}
                       <td className="px-5 py-4 text-right whitespace-nowrap">
                         <div className="flex items-center justify-end gap-1.5 flex-nowrap">
+                          {/* Admin can change the assigned role of other users in any status */}
+                          {!isCurrent && (
+                            <button
+                              onClick={() => handleOpenEditRoleModal(u)}
+                              className="px-2.5 py-1.5 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-900 border border-purple-200 hover:border-purple-300 font-bold text-[11px] flex items-center gap-1 shadow-xs transition cursor-pointer shrink-0"
+                              title="Change Assigned Role & Clearances"
+                            >
+                              <Shield className="w-3 h-3 text-purple-700" />
+                              <span>Change Role</span>
+                            </button>
+                          )}
+
                           {status === 'PENDING' && (
                             <>
                               <button
@@ -664,15 +767,6 @@ export const AdminPortalPage: React.FC = () => {
 
                           {status === 'APPROVED' && (
                             <>
-                              <button
-                                onClick={() => handleOpenEditRoleModal(u)}
-                                className="px-2.5 py-1.5 rounded-lg bg-white hover:bg-slate-100 border border-slate-300 text-slate-800 text-[11px] font-semibold flex items-center gap-1 transition cursor-pointer shrink-0 shadow-xs"
-                                title="Edit Role & Department"
-                              >
-                                <Edit3 className="w-3 h-3 text-teal-700" />
-                                <span>Edit</span>
-                              </button>
-
                               {!isCurrent && (
                                 <button
                                   onClick={() => handleOpenSuspendModal(u)}
@@ -758,8 +852,43 @@ export const AdminPortalPage: React.FC = () => {
 
                   <div className="grid grid-cols-2 gap-2 text-xs bg-slate-50 p-3 rounded-xl border border-slate-200">
                     <div>
-                      <span className="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">Role</span>
-                      <div className="mt-1">{getRoleBadge(u.role)}</div>
+                      <span className="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">Assigned Role</span>
+                      <div className="mt-1">
+                        {isCurrent ? (
+                          <div className="flex items-center gap-1.5">
+                            {getRoleBadge(u.role)}
+                            <span className="text-[10px] text-slate-400 font-semibold">(You)</span>
+                          </div>
+                        ) : (
+                          <div className="relative inline-flex items-center w-full">
+                            <select
+                              value={u.role}
+                              disabled={changingRoleId === uId || actionLoading}
+                              onChange={(e) => handleQuickRoleChange(u, e.target.value as UserRole)}
+                              aria-label={`Change assigned role for ${u.name}`}
+                              className={`w-full text-xs font-bold py-1.5 pl-2.5 pr-7 rounded-lg border cursor-pointer focus:outline-none transition appearance-none shadow-xs disabled:opacity-60 ${
+                                u.role === 'ADMIN'
+                                  ? 'bg-purple-50 text-purple-900 border-purple-300'
+                                  : u.role === 'MINE_PLANNER'
+                                  ? 'bg-teal-50 text-teal-900 border-teal-300'
+                                  : u.role === 'VIEWER'
+                                  ? 'bg-emerald-50 text-emerald-900 border-emerald-300'
+                                  : 'bg-blue-50 text-blue-900 border-blue-300'
+                              }`}
+                            >
+                              <option value="ADMIN">Administrator</option>
+                              <option value="MINE_PLANNER">Mine Planner</option>
+                              <option value="VIEWER">Ministry Auditor</option>
+                              <option value="USER">Standard User</option>
+                            </select>
+                            {changingRoleId === uId ? (
+                              <RefreshCw className="w-3.5 h-3.5 text-teal-700 animate-spin absolute right-2 pointer-events-none" />
+                            ) : (
+                              <ChevronDown className="w-3.5 h-3.5 text-slate-500 absolute right-2 pointer-events-none" />
+                            )}
+                          </div>
+                        )}
+                      </div>
                     </div>
                     <div>
                       <span className="text-[10px] text-slate-500 uppercase tracking-wider block font-semibold">Department</span>
@@ -787,6 +916,16 @@ export const AdminPortalPage: React.FC = () => {
 
                   {/* Actions for Mobile */}
                   <div className="flex items-center gap-2 pt-1 flex-wrap">
+                    {!isCurrent && (
+                      <button
+                        onClick={() => handleOpenEditRoleModal(u)}
+                        className="flex-1 py-2 rounded-xl bg-purple-50 hover:bg-purple-100 border border-purple-300 text-purple-900 font-bold text-xs flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer min-w-[120px]"
+                      >
+                        <Shield className="w-3.5 h-3.5 text-purple-700" />
+                        <span>Change Role</span>
+                      </button>
+                    )}
+
                     {status === 'PENDING' && (
                       <>
                         <button
@@ -808,14 +947,6 @@ export const AdminPortalPage: React.FC = () => {
 
                     {status === 'APPROVED' && (
                       <>
-                        <button
-                          onClick={() => handleOpenEditRoleModal(u)}
-                          className="flex-1 py-2 rounded-xl bg-white hover:bg-slate-100 border border-slate-300 text-slate-800 text-xs font-semibold flex items-center justify-center gap-1.5 transition shadow-xs cursor-pointer"
-                        >
-                          <Edit3 className="w-3.5 h-3.5 text-teal-700" />
-                          <span>Edit Role</span>
-                        </button>
-
                         {!isCurrent && (
                           <button
                             onClick={() => handleOpenSuspendModal(u)}
@@ -885,6 +1016,7 @@ export const AdminPortalPage: React.FC = () => {
                   <option value="MINE_PLANNER">Mine Planner (Balaghat / Dongri / Kandri)</option>
                   <option value="VIEWER">Ministry Auditor (Auditor / Oversight)</option>
                   <option value="ADMIN">System Administrator (Full Enterprise Control)</option>
+                  <option value="USER">Standard User (Basic Access)</option>
                 </select>
               </div>
 
@@ -1029,45 +1161,148 @@ export const AdminPortalPage: React.FC = () => {
       {/* EDIT ROLE MODAL */}
       {modalType === 'EDIT_ROLE' && selectedUser && (
         <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
-          <div className="w-full max-w-md bg-white border border-slate-300 rounded-2xl sm:rounded-3xl p-5 sm:p-6 space-y-4 sm:space-y-5 shadow-2xl animate-fadeIn my-auto max-h-[90vh] overflow-y-auto text-black">
+          <div className="w-full max-w-lg bg-white border border-slate-300 rounded-2xl sm:rounded-3xl p-5 sm:p-6 space-y-4 sm:space-y-5 shadow-2xl animate-fadeIn my-auto max-h-[90vh] overflow-y-auto text-black">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-teal-50 border border-teal-300 flex items-center justify-center text-teal-700 shrink-0">
-                <Edit3 className="w-5 h-5" />
+              <div className="w-10 h-10 rounded-xl bg-purple-50 border border-purple-300 flex items-center justify-center text-purple-700 shrink-0 shadow-xs">
+                <Shield className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-black">Update Permissions & Unit</h3>
-                <p className="text-xs text-slate-600">Modify operational privileges</p>
+                <h3 className="text-base font-bold text-black">Change Assigned Role & Clearances</h3>
+                <p className="text-xs text-slate-600">Reassign operational permissions for this account</p>
               </div>
             </div>
 
-            <div className="bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs space-y-1">
-              <div className="text-black font-semibold">{selectedUser.name}</div>
-              <div className="text-slate-600 font-mono text-[11px] truncate">{selectedUser.email}</div>
+            {/* Target User Info */}
+            <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200 text-xs flex items-center justify-between gap-3">
+              <div className="min-w-0">
+                <div className="text-black font-bold text-sm truncate">{selectedUser.name}</div>
+                <div className="text-slate-600 font-mono text-[11px] truncate flex items-center gap-1.5 mt-0.5">
+                  <Mail className="w-3 h-3 text-slate-400 shrink-0" />
+                  <span>{selectedUser.email}</span>
+                </div>
+              </div>
+              <div className="text-right shrink-0">
+                <span className="text-[10px] text-slate-500 block uppercase font-semibold">Current Role</span>
+                <div className="mt-0.5">{getRoleBadge(selectedUser.role)}</div>
+              </div>
             </div>
 
-            <div className="space-y-3 text-xs">
-              <div className="space-y-1">
-                <label className="text-slate-700 font-semibold block text-[11px]">System Role</label>
-                <select
-                  value={editRole}
-                  onChange={(e) => setEditRole(e.target.value as UserRole)}
-                  className="w-full px-3 py-2.5 bg-white border border-slate-300 rounded-xl text-black text-xs focus:outline-none focus:border-teal-600 cursor-pointer"
+            {/* Role Cards Selection */}
+            <div className="space-y-2">
+              <label className="text-slate-700 font-bold block text-xs">Select New Operational Role</label>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                {/* ADMIN */}
+                <div
+                  onClick={() => setEditRole('ADMIN')}
+                  className={`p-3 rounded-xl border text-left cursor-pointer transition flex flex-col justify-between ${
+                    editRole === 'ADMIN'
+                      ? 'border-purple-600 bg-purple-50/70 ring-2 ring-purple-500/20 shadow-xs'
+                      : 'border-slate-300 bg-white hover:border-purple-300 hover:bg-slate-50'
+                  }`}
                 >
-                  <option value="MINE_PLANNER">Mine Planner</option>
-                  <option value="VIEWER">Ministry Auditor</option>
-                  <option value="ADMIN">System Administrator</option>
-                </select>
-              </div>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-100 text-purple-900 border border-purple-300">
+                      Administrator
+                    </span>
+                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${editRole === 'ADMIN' ? 'border-purple-600 bg-purple-600 text-white' : 'border-slate-300'}`}>
+                      {editRole === 'ADMIN' && <CheckCircle2 className="w-3 h-3" />}
+                    </div>
+                  </div>
+                  <p className="text-[11px] text-slate-600 leading-snug">
+                    Full organizational clearance, user approvals, role changes, and system settings.
+                  </p>
+                </div>
 
-              <div className="space-y-1">
-                <label className="text-slate-700 font-semibold block text-[11px]">Department</label>
+                {/* MINE_PLANNER */}
+                <div
+                  onClick={() => setEditRole('MINE_PLANNER')}
+                  className={`p-3 rounded-xl border text-left cursor-pointer transition flex flex-col justify-between ${
+                    editRole === 'MINE_PLANNER'
+                      ? 'border-teal-600 bg-teal-50/70 ring-2 ring-teal-500/20 shadow-xs'
+                      : 'border-slate-300 bg-white hover:border-teal-300 hover:bg-slate-50'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-teal-50 text-teal-900 border border-teal-300">
+                      Mine Planner
+                    </span>
+                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${editRole === 'MINE_PLANNER' ? 'border-teal-600 bg-teal-600 text-white' : 'border-slate-300'}`}>
+                      {editRole === 'MINE_PLANNER' && <CheckCircle2 className="w-3 h-3" />}
+                    </div>
+                  </div>
+                  <p className="text-[11px] text-slate-600 leading-snug">
+                    Formulate mine plans, inspect boreholes, calculate reserves, and run AI shortfall simulations.
+                  </p>
+                </div>
+
+                {/* VIEWER */}
+                <div
+                  onClick={() => setEditRole('VIEWER')}
+                  className={`p-3 rounded-xl border text-left cursor-pointer transition flex flex-col justify-between ${
+                    editRole === 'VIEWER'
+                      ? 'border-emerald-600 bg-emerald-50/70 ring-2 ring-emerald-500/20 shadow-xs'
+                      : 'border-slate-300 bg-white hover:border-emerald-300 hover:bg-slate-50'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-900 border border-emerald-300">
+                      Ministry Auditor
+                    </span>
+                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${editRole === 'VIEWER' ? 'border-emerald-600 bg-emerald-600 text-white' : 'border-slate-300'}`}>
+                      {editRole === 'VIEWER' && <CheckCircle2 className="w-3 h-3" />}
+                    </div>
+                  </div>
+                  <p className="text-[11px] text-slate-600 leading-snug">
+                    Read-only regulatory oversight for reserve data, geological logs, ESG, and audits.
+                  </p>
+                </div>
+
+                {/* USER */}
+                <div
+                  onClick={() => setEditRole('USER')}
+                  className={`p-3 rounded-xl border text-left cursor-pointer transition flex flex-col justify-between ${
+                    editRole === 'USER'
+                      ? 'border-blue-600 bg-blue-50/70 ring-2 ring-blue-500/20 shadow-xs'
+                      : 'border-slate-300 bg-white hover:border-blue-300 hover:bg-slate-50'
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-900 border border-blue-300">
+                      Standard User
+                    </span>
+                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${editRole === 'USER' ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-300'}`}>
+                      {editRole === 'USER' && <CheckCircle2 className="w-3 h-3" />}
+                    </div>
+                  </div>
+                  <p className="text-[11px] text-slate-600 leading-snug">
+                    General personnel access with basic platform dashboard and announcements.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Department Input */}
+            <div className="space-y-1">
+              <label className="text-slate-700 font-bold block text-xs">Department / Operational Division</label>
+              <div className="relative">
                 <input
                   type="text"
                   value={editDepartment}
                   onChange={(e) => setEditDepartment(e.target.value)}
-                  className="w-full px-3 py-2.5 bg-white border border-slate-300 rounded-xl text-black text-xs focus:outline-none focus:border-teal-600"
+                  placeholder="e.g. Balaghat Planning Division"
+                  className="w-full pl-9 pr-3 py-2.5 bg-white border border-slate-300 rounded-xl text-black text-xs font-semibold focus:outline-none focus:border-teal-600"
                 />
+                <Building className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
               </div>
+            </div>
+
+            {/* Immediate Impact Callout */}
+            <div className="p-3 bg-purple-50 border border-purple-200 rounded-xl text-[11px] text-purple-900 leading-relaxed font-medium flex items-start gap-2">
+              <ShieldCheck className="w-4 h-4 text-purple-700 shrink-0 mt-0.5" />
+              <span>
+                Role updates take effect immediately on active user sessions. An automated notification email will be dispatched to <strong className="text-purple-950 font-bold">{selectedUser.email}</strong>.
+              </span>
             </div>
 
             <div className="flex flex-col-reverse sm:flex-row sm:items-center justify-end gap-2 pt-2">
@@ -1081,10 +1316,10 @@ export const AdminPortalPage: React.FC = () => {
               <button
                 onClick={handleUpdateRole}
                 disabled={actionLoading}
-                className="w-full sm:w-auto px-5 py-2 rounded-xl bg-teal-700 hover:bg-teal-800 text-white font-extrabold text-xs shadow-sm transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-purple-700 hover:bg-purple-800 text-white font-extrabold text-xs shadow-sm transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
               >
                 {actionLoading ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : <CheckCircle2 className="w-3.5 h-3.5" />}
-                <span>Save Permissions</span>
+                <span>Apply Role Change</span>
               </button>
             </div>
           </div>
@@ -1180,6 +1415,7 @@ export const AdminPortalPage: React.FC = () => {
                     <option value="ADMIN">System Administrator (Full Control)</option>
                     <option value="MINE_PLANNER">Mine Planner</option>
                     <option value="VIEWER">Ministry Auditor (Viewer)</option>
+                    <option value="USER">Standard User</option>
                   </select>
                 </div>
 

@@ -1,4 +1,4 @@
-export type UserRole = 'ADMIN' | 'MINE_PLANNER' | 'VIEWER';
+export type UserRole = 'ADMIN' | 'MINE_PLANNER' | 'VIEWER' | 'USER';
 
 export type RiskLevel = 'CRITICAL' | 'HIGH' | 'MODERATE' | 'LOW';
 
