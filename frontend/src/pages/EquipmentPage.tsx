@@ -144,9 +144,9 @@ export const EquipmentPage: React.FC = () => {
               });
               setIsModalOpen(true);
             }}
-            className="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-[#0F1214] text-xs font-extrabold rounded-xl shadow-glow-teal transition"
+            className="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-white text-xs font-extrabold rounded-xl shadow-sm transition cursor-pointer"
           >
-            <Plus className="w-4 h-4 text-[#0F1214]" /> Register New Machinery
+            <Plus className="w-4 h-4 text-white" /> Register New Machinery
           </button>
         )}
       </div>
@@ -435,13 +435,13 @@ export const EquipmentPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 bg-[#12181A] hover:bg-[#1B2226] border border-[#26333B] text-slate-300 font-bold rounded-lg"
+                  className="px-4 py-2 bg-white hover:bg-slate-100 border border-slate-300 text-slate-700 font-bold rounded-lg cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-[#0F1214] font-extrabold rounded-lg shadow-glow-teal"
+                  className="px-5 py-2 bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-white font-extrabold rounded-lg shadow-sm cursor-pointer"
                 >
                   Save Record
                 </button>

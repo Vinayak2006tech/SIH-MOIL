@@ -245,6 +245,13 @@ const updateUserRole = async (req, res) => {
                 message: 'Security safeguard: The primary system administrator account cannot be demoted from Administrator.'
             });
         }
+        // Protection against assigning Administrator role to anyone other than vaishayvinayak@gmail.com
+        if (role === 'ADMIN' && targetUserEmail !== 'vaishayvinayak@gmail.com') {
+            return res.status(403).json({
+                success: false,
+                message: 'Security safeguard: The Administrator role is exclusively reserved for vaishayvinayak@gmail.com.'
+            });
+        }
         // Role validation
         const validRoles = ['ADMIN', 'MINE_PLANNER', 'VIEWER', 'USER'];
         if (role && !validRoles.includes(role)) {
@@ -294,17 +301,24 @@ const createUserByAdmin = async (req, res) => {
             return res.status(400).json({ success: false, message: 'Password must be at least 6 characters long.' });
         }
         const cleanEmail = email.toLowerCase().trim();
+        if (role === 'ADMIN' && cleanEmail !== 'vaishayvinayak@gmail.com') {
+            return res.status(403).json({
+                success: false,
+                message: 'Security safeguard: The Administrator role is exclusively reserved for vaishayvinayak@gmail.com.'
+            });
+        }
         const existing = await store_1.store.findUserByEmail(cleanEmail);
         if (existing) {
             return res.status(400).json({ success: false, message: 'An account with this email address is already registered.' });
         }
         const passwordHash = bcryptjs_1.default.hashSync(password, 10);
         const targetStatus = status || 'APPROVED';
+        const effectiveRole = cleanEmail === 'vaishayvinayak@gmail.com' ? (role || 'ADMIN') : (role || 'MINE_PLANNER');
         const newUser = await store_1.store.createUser({
             name: name.trim(),
             email: cleanEmail,
             passwordHash,
-            role: role || 'ADMIN',
+            role: effectiveRole,
             department: department || 'Central Administration Directorate',
             status: targetStatus,
             emailVerified: true,

@@ -838,19 +838,24 @@ html.dark .card-hover:hover {
 }
 
 /* ============================================================ */
-/* 🌐 COMPREHENSIVE GRID ENFORCEMENT: WHITE BOXES & BLACK TEXT */
+/* 🌟 WCAG AA/AAA HIGH CONTRAST & ACCESSIBILITY SYSTEM */
 /* ============================================================ */
 
-/* 1. All layout grid containers */
+/* 1. Base light mode surfaces: pristine white cards, crisp slate text */
+html:not(.dark) body,
+html.light body {
+  background-color: #F8FAFC !important;
+  color: #0F172A !important;
+}
+
+/* All layout grid containers & cards default to clean white backgrounds and high-contrast text */
 .grid,
 [class*="grid-cols-"],
 [class*="grid-rows-"],
 [data-slipstream-features] {
-  background-color: #FFFFFF !important;
-  color: #000000 !important;
+  color: #0F172A;
 }
 
-/* 2. Direct children and descendant cards/boxes inside any grid */
 .grid > div:not([class*="btn"]):not(button):not([role="button"]),
 .grid > section,
 .grid > article,
@@ -861,167 +866,235 @@ html.dark .card-hover:hover {
 [class*="grid-cols-"] > article,
 [class*="grid-rows-"] > div:not([class*="btn"]):not(button):not([role="button"]) {
   background-color: #FFFFFF !important;
-  color: #000000 !important;
+  color: #0F172A;
   border-color: #E2E8F0 !important;
 }
 
-/* Nested containers & cards inside grid */
-.grid .glass-panel,
-.grid .card,
-.grid .p-3,
-.grid .p-4,
-.grid .p-5,
-.grid .p-6,
-.grid .rounded-xl,
-.grid .rounded-2xl,
-[class*="grid-cols-"] .glass-panel,
-[class*="grid-cols-"] .card,
-[class*="grid-cols-"] .p-3,
-[class*="grid-cols-"] .p-4,
-[class*="grid-cols-"] .p-5,
-[class*="grid-cols-"] .p-6 {
-  background-color: #FFFFFF !important;
-  border-color: #E2E8F0 !important;
-  color: #000000 !important;
+/* 2. Light mode typography contrast enforcement */
+/* Headings and primary titles must always be dark and sharp */
+html:not(.dark) h1:not([class*="text-teal"]):not([class*="text-emerald"]):not([class*="bg-clip-text"]),
+html:not(.dark) h2:not([class*="text-teal"]):not([class*="text-emerald"]):not([class*="bg-clip-text"]),
+html:not(.dark) h3:not([class*="text-teal"]):not([class*="text-emerald"]):not([class*="bg-clip-text"]),
+html:not(.dark) h4:not([class*="text-teal"]):not([class*="text-emerald"]):not([class*="bg-clip-text"]),
+html.light h1:not([class*="text-teal"]):not([class*="text-emerald"]):not([class*="bg-clip-text"]),
+html.light h2:not([class*="text-teal"]):not([class*="text-emerald"]):not([class*="bg-clip-text"]),
+html.light h3:not([class*="text-teal"]):not([class*="text-emerald"]):not([class*="bg-clip-text"]),
+html.light h4:not([class*="text-teal"]):not([class*="text-emerald"]):not([class*="bg-clip-text"]) {
+  color: #0F172A;
+}
+
+/* Map washed-out / light gray text classes on light surfaces to high-contrast readable dark slate */
+html:not(.dark) .text-slate-400,
+html:not(.dark) .text-gray-400,
+html:not(.dark) .text-\[\#94A3B8\],
+html.light .text-slate-400,
+html.light .text-gray-400,
+html.light .text-\[\#94A3B8\] {
+  color: #334155 !important; /* Slate 700: 7.5:1 contrast */
+}
+
+html:not(.dark) .text-slate-300,
+html:not(.dark) .text-slate-200,
+html:not(.dark) .text-slate-100,
+html:not(.dark) .text-\[\#E8E6E3\],
+html:not(.dark) .text-\[\#BFB2D3\],
+html.light .text-slate-300,
+html.light .text-slate-200,
+html.light .text-slate-100,
+html.light .text-\[\#E8E6E3\],
+html.light .text-\[\#BFB2D3\] {
+  color: #1E293B !important; /* Slate 800: 12:1 contrast */
+}
+
+/* Prevent bare white text from disappearing on light background surfaces */
+html:not(.dark) :not(button):not(a):not([class*="bg-teal-6"]):not([class*="bg-teal-7"]):not([class*="bg-teal-8"]):not([class*="bg-teal-9"]):not([class*="bg-emerald-6"]):not([class*="bg-emerald-7"]):not([class*="bg-emerald-8"]):not([class*="bg-manganese"]):not([class*="bg-purple-6"]):not([class*="bg-purple-7"]):not([class*="bg-purple-8"]):not([class*="bg-red-6"]):not([class*="bg-red-7"]):not([class*="bg-gradient-"]):not(.btn-shimmer) > .text-white,
+html.light :not(button):not(a):not([class*="bg-teal-6"]):not([class*="bg-teal-7"]):not([class*="bg-teal-8"]):not([class*="bg-teal-9"]):not([class*="bg-emerald-6"]):not([class*="bg-emerald-7"]):not([class*="bg-emerald-8"]):not([class*="bg-manganese"]):not([class*="bg-purple-6"]):not([class*="bg-purple-7"]):not([class*="bg-purple-8"]):not([class*="bg-red-6"]):not([class*="bg-red-7"]):not([class*="bg-gradient-"]):not(.btn-shimmer) > .text-white {
+  color: #0F172A;
+}
+
+/* Accent colors on light backgrounds: ensure high saturation and darkness */
+html:not(.dark) .text-teal-400,
+html.light .text-teal-400 {
+  color: #0F766E !important; /* Teal 700: 5.5:1 contrast */
+}
+
+html:not(.dark) .text-emerald-400,
+html.light .text-emerald-400 {
+  color: #047857 !important; /* Emerald 700: 5.2:1 contrast */
+}
+
+html:not(.dark) .text-amber-400,
+html.light .text-amber-400 {
+  color: #B45309 !important; /* Amber 700: 4.8:1 contrast */
+}
+
+html:not(.dark) .text-cyan-400,
+html.light .text-cyan-400 {
+  color: #0E7490 !important; /* Cyan 700: 5.0:1 contrast */
 }
 
 /* ============================================================ */
-/* 🟢 TEAL BACKGROUNDS: 100% SOLID BLACK TEXT ON ALL ELEMENTS */
+/* 🔘 BUTTONS & PILLS WITH DARK / SATURATED BACKGROUNDS: CRISP WHITE TEXT */
 /* ============================================================ */
-[class*="bg-teal"],
-[class*="bg-tech-teal"],
-button[class*="bg-teal"],
-button[class*="bg-tech-teal"],
-a[class*="bg-teal"],
-a[class*="bg-tech-teal"],
-[class*="bg-teal"] *,
-[class*="bg-tech-teal"] *,
-button[class*="bg-teal"] *,
-button[class*="bg-tech-teal"] *,
-a[class*="bg-teal"] *,
-a[class*="bg-tech-teal"] *,
-.bg-teal-50,
-.bg-teal-100,
-.bg-teal-200,
-.bg-teal-500,
-.bg-teal-600,
-.bg-teal-700,
-.bg-teal-800,
-.bg-teal-900,
-.bg-teal-950,
-.bg-teal-50 *,
-.bg-teal-100 *,
-.bg-teal-200 *,
-.bg-teal-500 *,
-.bg-teal-600 *,
-.bg-teal-700 *,
-.bg-teal-800 *,
-.bg-teal-900 *,
-.bg-teal-950 * {
-  color: #000000 !important;
-  fill: #000000 !important;
-}
-
-/* ============================================================ */
-/* 🟣 MANGANESE & MOIL BACKGROUNDS: 100% SOLID BLACK TEXT */
-/* ============================================================ */
-[class*="bg-manganese"],
-[class*="bg-moil"],
-[class*="bg-\[\#6B5B95\]"],
-[class*="bg-\[\#7E69AB\]"],
-[class*="bg-\[\#564879\]"],
-[class*="bg-\[\#42375C\]"],
-[class*="bg-\[\#2F2742\]"],
-.bg-\[\#6B5B95\],
-.bg-\[\#7E69AB\],
-.bg-\[\#564879\],
-.bg-\[\#42375C\],
-.bg-\[\#2F2742\],
+/* Any button or badge with dark background MUST have white text and white icons */
+button[class*="bg-teal-6"],
+button[class*="bg-teal-7"],
+button[class*="bg-teal-8"],
+button[class*="bg-teal-9"],
+button[class*="bg-emerald-6"],
+button[class*="bg-emerald-7"],
+button[class*="bg-emerald-8"],
 button[class*="bg-manganese"],
-a[class*="bg-manganese"],
-[class*="bg-manganese"] *,
-[class*="bg-moil"] *,
-.bg-\[\#6B5B95\] *,
-.bg-\[\#7E69AB\] *,
-.bg-\[\#564879\] *,
-.bg-\[\#42375C\] *,
-.bg-\[\#2F2742\] *,
+button[class*="bg-purple-6"],
+button[class*="bg-purple-7"],
+button[class*="bg-purple-8"],
+button[class*="bg-red-6"],
+button[class*="bg-red-7"],
+button[class*="bg-rose-6"],
+button[class*="bg-rose-7"],
+button[class*="bg-gradient-"],
+button.btn-shimmer,
+button[class*="bg-tech-teal"],
+a[class*="bg-teal-6"],
+a[class*="bg-teal-7"],
+a[class*="bg-teal-8"],
+a[class*="bg-gradient-"],
+a.btn-shimmer,
+.btn-shimmer,
+[class*="bg-gradient-to-r"] button,
+button[class*="from-manganese"],
+button[class*="from-emerald"] {
+  color: #FFFFFF !important;
+}
+
+button[class*="bg-teal-6"] *,
+button[class*="bg-teal-7"] *,
+button[class*="bg-teal-8"] *,
+button[class*="bg-teal-9"] *,
+button[class*="bg-emerald-6"] *,
+button[class*="bg-emerald-7"] *,
+button[class*="bg-emerald-8"] *,
 button[class*="bg-manganese"] *,
-a[class*="bg-manganese"] *,
-.bg-manganese-50,
-.bg-manganese-100,
-.bg-manganese-200,
-.bg-manganese-300,
-.bg-manganese-400,
-.bg-manganese-500,
-.bg-manganese-600,
-.bg-manganese-700,
-.bg-manganese-800,
-.bg-manganese-900,
-.bg-manganese-950,
-.bg-manganese-50 *,
-.bg-manganese-100 *,
-.bg-manganese-200 *,
-.bg-manganese-300 *,
-.bg-manganese-400 *,
-.bg-manganese-500 *,
-.bg-manganese-600 *,
-.bg-manganese-700 *,
-.bg-manganese-800 *,
-.bg-manganese-900 *,
-.bg-manganese-950 * {
-  color: #000000 !important;
-  fill: #000000 !important;
+button[class*="bg-purple-6"] *,
+button[class*="bg-purple-7"] *,
+button[class*="bg-purple-8"] *,
+button[class*="bg-red-6"] *,
+button[class*="bg-red-7"] *,
+button[class*="bg-rose-6"] *,
+button[class*="bg-rose-7"] *,
+button[class*="bg-gradient-"] *,
+button.btn-shimmer *,
+button[class*="bg-tech-teal"] *,
+a[class*="bg-teal-6"] *,
+a[class*="bg-teal-7"] *,
+a[class*="bg-teal-8"] *,
+a[class*="bg-gradient-"] *,
+a.btn-shimmer *,
+.btn-shimmer *,
+button[class*="from-manganese"] *,
+button[class*="from-emerald"] * {
+  color: #FFFFFF !important;
 }
 
-/* ============================================================ */
-/* 🟣 PURPLE BACKGROUNDS: 100% SOLID BLACK TEXT ON ALL ELEMENTS */
-/* ============================================================ */
-[class*="bg-purple"],
-button[class*="bg-purple"],
-a[class*="bg-purple"],
-[class*="bg-purple"] *,
-button[class*="bg-purple"] *,
-a[class*="bg-purple"] *,
+/* Ensure SVG icons inside dark buttons have white strokes / colors */
+button[class*="bg-teal-6"] svg,
+button[class*="bg-teal-7"] svg,
+button[class*="bg-teal-8"] svg,
+button[class*="bg-teal-9"] svg,
+button[class*="bg-emerald-6"] svg,
+button[class*="bg-emerald-7"] svg,
+button[class*="bg-emerald-8"] svg,
+button[class*="bg-manganese"] svg,
+button[class*="bg-purple-6"] svg,
+button[class*="bg-purple-7"] svg,
+button[class*="bg-purple-8"] svg,
+button[class*="bg-red-6"] svg,
+button[class*="bg-red-7"] svg,
+button[class*="bg-rose-6"] svg,
+button[class*="bg-rose-7"] svg,
+button[class*="bg-gradient-"] svg,
+button.btn-shimmer svg,
+button[class*="bg-tech-teal"] svg,
+a[class*="bg-gradient-"] svg,
+a.btn-shimmer svg,
+.btn-shimmer svg {
+  color: #FFFFFF !important;
+  stroke: #FFFFFF !important;
+}
+
+/* Saturated status badges (e.g. Critical Urgency, Red / Emerald badges) */
+.bg-red-600,
+.bg-red-700,
+.bg-rose-600,
+.bg-rose-700,
+.bg-emerald-600,
+.bg-emerald-700 {
+  color: #FFFFFF !important;
+}
+.bg-red-600 *,
+.bg-red-700 *,
+.bg-rose-600 *,
+.bg-rose-700 *,
+.bg-emerald-600 *,
+.bg-emerald-700 * {
+  color: #FFFFFF !important;
+}
+
+/* Light badge pills (e.g. bg-teal-50, bg-emerald-50, bg-amber-50, bg-red-50) */
+.bg-teal-50,
+.bg-teal-100 {
+  background-color: #CCFBF1 !important;
+  color: #0F766E !important;
+}
+.bg-teal-50 *,
+.bg-teal-100 * {
+  color: #0F766E !important;
+}
+
+.bg-emerald-50,
+.bg-emerald-100 {
+  background-color: #D1FAE5 !important;
+  color: #065F46 !important;
+}
+.bg-emerald-50 *,
+.bg-emerald-100 * {
+  color: #065F46 !important;
+}
+
+.bg-amber-50,
+.bg-amber-100 {
+  background-color: #FEF3C7 !important;
+  color: #92400E !important;
+}
+.bg-amber-50 *,
+.bg-amber-100 * {
+  color: #92400E !important;
+}
+
+.bg-red-50,
+.bg-red-100,
+.bg-rose-50,
+.bg-rose-100 {
+  background-color: #FEE2E2 !important;
+  color: #991B1B !important;
+}
+.bg-red-50 *,
+.bg-red-100 *,
+.bg-rose-50 *,
+.bg-rose-100 * {
+  color: #991B1B !important;
+}
+
 .bg-purple-50,
-.bg-purple-100,
-.bg-purple-200,
-.bg-purple-300,
-.bg-purple-400,
-.bg-purple-500,
-.bg-purple-600,
-.bg-purple-700,
-.bg-purple-800,
-.bg-purple-900,
-.bg-purple-950,
+.bg-purple-100 {
+  background-color: #EDE9FE !important;
+  color: #581C87 !important;
+}
 .bg-purple-50 *,
-.bg-purple-100 *,
-.bg-purple-200 *,
-.bg-purple-300 *,
-.bg-purple-400 *,
-.bg-purple-500 *,
-.bg-purple-600 *,
-.bg-purple-700 *,
-.bg-purple-800 *,
-.bg-purple-900 *,
-.bg-purple-950 * {
-  color: #000000 !important;
-  fill: #000000 !important;
+.bg-purple-100 * {
+  color: #581C87 !important;
 }
 
-/* ============================================================ */
-/* 🌐 GRID: 100% SOLID BLACK TEXT ON ALL ELEMENTS IN EVERY GRID */
-/* ============================================================ */
-.grid,
-.grid *,
-[class*="grid-cols-"],
-[class*="grid-cols-"] *,
-[class*="grid-rows-"],
-[class*="grid-rows-"] *,
-[data-slipstream-features],
-[data-slipstream-features] * {
-  color: #000000 !important;
-}
 
 /* 4. Chart Cartesian Grids (Recharts) */
 .recharts-cartesian-grid line,

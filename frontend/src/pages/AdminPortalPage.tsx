@@ -64,7 +64,7 @@ export const AdminPortalPage: React.FC = () => {
   const [newUserEmail, setNewUserEmail] = useState('');
   const [newUserPassword, setNewUserPassword] = useState('');
   const [showNewUserPassword, setShowNewUserPassword] = useState(false);
-  const [newUserRole, setNewUserRole] = useState<UserRole>('ADMIN');
+  const [newUserRole, setNewUserRole] = useState<UserRole>('MINE_PLANNER');
   const [newUserDepartment, setNewUserDepartment] = useState('Central Administration Directorate');
   const [newUserStatus, setNewUserStatus] = useState<'APPROVED' | 'PENDING'>('APPROVED');
   const [changingRoleId, setChangingRoleId] = useState<string | null>(null);
@@ -103,7 +103,8 @@ export const AdminPortalPage: React.FC = () => {
 
   const handleOpenApproveModal = (u: User) => {
     setSelectedUser(u);
-    setEditRole(u.role);
+    const isVaishay = u.email?.toLowerCase().trim() === 'vaishayvinayak@gmail.com';
+    setEditRole(u.role === 'ADMIN' && !isVaishay ? 'MINE_PLANNER' : u.role);
     setEditDepartment(u.department || 'Mine Planning & Geology');
     setModalType('APPROVE');
   };
@@ -128,7 +129,8 @@ export const AdminPortalPage: React.FC = () => {
       return;
     }
     setSelectedUser(u);
-    setEditRole(u.role);
+    const isVaishay = u.email?.toLowerCase().trim() === 'vaishayvinayak@gmail.com';
+    setEditRole(u.role === 'ADMIN' && !isVaishay ? 'MINE_PLANNER' : u.role);
     setEditDepartment(u.department || '');
     setModalType('EDIT_ROLE');
   };
@@ -140,6 +142,12 @@ export const AdminPortalPage: React.FC = () => {
     const isCurrent = uId === currentUser?.id || u.email.toLowerCase() === currentUser?.email?.toLowerCase();
     if (isCurrent) {
       showToast('error', 'Security safeguard: Administrators cannot change their own assigned role.');
+      return;
+    }
+
+    const isVaishay = u.email?.toLowerCase().trim() === 'vaishayvinayak@gmail.com';
+    if (newRole === 'ADMIN' && !isVaishay) {
+      showToast('error', 'The Administrator role is exclusively reserved for vaishayvinayak@gmail.com.');
       return;
     }
 
@@ -175,7 +183,7 @@ export const AdminPortalPage: React.FC = () => {
     setNewUserEmail('');
     setNewUserPassword('');
     setShowNewUserPassword(false);
-    setNewUserRole('ADMIN');
+    setNewUserRole('MINE_PLANNER');
     setNewUserDepartment('Central Administration Directorate');
     setNewUserStatus('APPROVED');
     setModalType('CREATE_USER');
@@ -198,13 +206,16 @@ export const AdminPortalPage: React.FC = () => {
       return;
     }
 
+    const isVaishay = newUserEmail.trim().toLowerCase() === 'vaishayvinayak@gmail.com';
+    const effectiveRole = newUserRole === 'ADMIN' && !isVaishay ? 'MINE_PLANNER' : newUserRole;
+
     setActionLoading(true);
     try {
       const res = await api.createAdminUser({
         name: newUserName.trim(),
         email: newUserEmail.trim().toLowerCase(),
         password: newUserPassword.trim(),
-        role: newUserRole,
+        role: effectiveRole,
         department: newUserDepartment.trim(),
         status: newUserStatus,
         mineAccess: ['ALL']
@@ -286,6 +297,11 @@ export const AdminPortalPage: React.FC = () => {
 
   const handleUpdateRole = async () => {
     if (!selectedUser) return;
+    const isVaishay = selectedUser.email?.toLowerCase().trim() === 'vaishayvinayak@gmail.com';
+    if (editRole === 'ADMIN' && !isVaishay) {
+      showToast('error', 'The Administrator role is exclusively reserved for vaishayvinayak@gmail.com.');
+      return;
+    }
     setActionLoading(true);
     try {
       const id = selectedUser._id || selectedUser.id || '';
@@ -665,7 +681,9 @@ export const AdminPortalPage: React.FC = () => {
                                     : 'bg-blue-50 text-blue-900 border-blue-300 hover:bg-blue-100'
                                 }`}
                               >
-                                <option value="ADMIN">Administrator</option>
+                                {u.email?.toLowerCase().trim() === 'vaishayvinayak@gmail.com' && (
+                                  <option value="ADMIN">Administrator</option>
+                                )}
                                 <option value="MINE_PLANNER">Mine Planner</option>
                                 <option value="VIEWER">Ministry Auditor</option>
                                 <option value="USER">Standard User</option>
@@ -876,7 +894,9 @@ export const AdminPortalPage: React.FC = () => {
                                   : 'bg-blue-50 text-blue-900 border-blue-300'
                               }`}
                             >
-                              <option value="ADMIN">Administrator</option>
+                              {u.email?.toLowerCase().trim() === 'vaishayvinayak@gmail.com' && (
+                                <option value="ADMIN">Administrator</option>
+                              )}
                               <option value="MINE_PLANNER">Mine Planner</option>
                               <option value="VIEWER">Ministry Auditor</option>
                               <option value="USER">Standard User</option>
@@ -1013,9 +1033,11 @@ export const AdminPortalPage: React.FC = () => {
                   onChange={(e) => setEditRole(e.target.value as UserRole)}
                   className="w-full px-3 py-2.5 bg-white border border-slate-300 rounded-xl text-black text-xs focus:outline-none focus:border-teal-600 cursor-pointer"
                 >
+                  {selectedUser.email?.toLowerCase().trim() === 'vaishayvinayak@gmail.com' && (
+                    <option value="ADMIN">System Administrator (Full Enterprise Control)</option>
+                  )}
                   <option value="MINE_PLANNER">Mine Planner (Balaghat / Dongri / Kandri)</option>
                   <option value="VIEWER">Ministry Auditor (Auditor / Oversight)</option>
-                  <option value="ADMIN">System Administrator (Full Enterprise Control)</option>
                   <option value="USER">Standard User (Basic Access)</option>
                 </select>
               </div>
@@ -1191,28 +1213,30 @@ export const AdminPortalPage: React.FC = () => {
             <div className="space-y-2">
               <label className="text-slate-700 font-bold block text-xs">Select New Operational Role</label>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                {/* ADMIN */}
-                <div
-                  onClick={() => setEditRole('ADMIN')}
-                  className={`p-3 rounded-xl border text-left cursor-pointer transition flex flex-col justify-between ${
-                    editRole === 'ADMIN'
-                      ? 'border-purple-600 bg-purple-50/70 ring-2 ring-purple-500/20 shadow-xs'
-                      : 'border-slate-300 bg-white hover:border-purple-300 hover:bg-slate-50'
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-1.5">
-                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-100 text-purple-900 border border-purple-300">
-                      Administrator
-                    </span>
-                    <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${editRole === 'ADMIN' ? 'border-purple-600 bg-purple-600 text-white' : 'border-slate-300'}`}>
-                      {editRole === 'ADMIN' && <CheckCircle2 className="w-3 h-3" />}
+              <div className={`grid grid-cols-1 ${selectedUser.email?.toLowerCase().trim() === 'vaishayvinayak@gmail.com' ? 'sm:grid-cols-2' : 'sm:grid-cols-3'} gap-2.5`}>
+                {/* ADMIN - exclusively for vaishayvinayak@gmail.com */}
+                {selectedUser.email?.toLowerCase().trim() === 'vaishayvinayak@gmail.com' && (
+                  <div
+                    onClick={() => setEditRole('ADMIN')}
+                    className={`p-3 rounded-xl border text-left cursor-pointer transition flex flex-col justify-between ${
+                      editRole === 'ADMIN'
+                        ? 'border-purple-600 bg-purple-50/70 ring-2 ring-purple-500/20 shadow-xs'
+                        : 'border-slate-300 bg-white hover:border-purple-300 hover:bg-slate-50'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-purple-100 text-purple-900 border border-purple-300">
+                        Administrator
+                      </span>
+                      <div className={`w-4 h-4 rounded-full border flex items-center justify-center ${editRole === 'ADMIN' ? 'border-purple-600 bg-purple-600 text-white' : 'border-slate-300'}`}>
+                        {editRole === 'ADMIN' && <CheckCircle2 className="w-3 h-3" />}
+                      </div>
                     </div>
+                    <p className="text-[11px] text-slate-600 leading-snug">
+                      Full organizational clearance, user approvals, role changes, and system settings.
+                    </p>
                   </div>
-                  <p className="text-[11px] text-slate-600 leading-snug">
-                    Full organizational clearance, user approvals, role changes, and system settings.
-                  </p>
-                </div>
+                )}
 
                 {/* MINE_PLANNER */}
                 <div
@@ -1412,7 +1436,9 @@ export const AdminPortalPage: React.FC = () => {
                     onChange={(e) => setNewUserRole(e.target.value as UserRole)}
                     className="w-full px-3 py-2.5 bg-white border border-slate-300 rounded-xl text-black text-xs focus:outline-none focus:border-teal-600 cursor-pointer"
                   >
-                    <option value="ADMIN">System Administrator (Full Control)</option>
+                    {newUserEmail.trim().toLowerCase() === 'vaishayvinayak@gmail.com' && (
+                      <option value="ADMIN">System Administrator (Full Control)</option>
+                    )}
                     <option value="MINE_PLANNER">Mine Planner</option>
                     <option value="VIEWER">Ministry Auditor (Viewer)</option>
                     <option value="USER">Standard User</option>

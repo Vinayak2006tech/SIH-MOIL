@@ -138,14 +138,14 @@ export const RecommendationsPage: React.FC = () => {
       {/* Filter Tabs */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#26333B] pb-3">
         {/* Status Filter */}
-        <div className="flex items-center gap-1 bg-[#12181A] p-1 rounded-lg border border-[#26333B]">
+        <div className="flex items-center gap-1 bg-white p-1 rounded-lg border border-slate-200 shadow-sm">
           {['PENDING', 'ACCEPTED', 'REJECTED', 'ALL'].map((st) => (
             <button
               key={st}
               onClick={() => setFilterStatus(st)}
-              className={`px-3 py-1.5 text-xs font-bold rounded-md transition ${filterStatus === st
-                ? 'bg-tech-teal text-[#0F1214] shadow-glow-teal font-extrabold'
-                : 'text-slate-400 hover:text-[#E8E6E3] hover:bg-[#161D22]'
+              className={`px-3 py-1.5 text-xs font-bold rounded-md transition cursor-pointer ${filterStatus === st
+                ? 'bg-teal-700 text-white shadow-sm font-extrabold'
+                : 'text-slate-700 hover:text-black hover:bg-slate-100'
                 }`}
             >
               {st}
@@ -254,45 +254,45 @@ export const RecommendationsPage: React.FC = () => {
 
               {/* Action Buttons or Status Outcome */}
               {isPending ? (
-                <div className="flex items-center gap-2 pt-2 border-t border-[#26333B]">
+                <div className="flex items-center gap-2 pt-2 border-t border-slate-200">
                   <button
                     onClick={() => handleAction(rec.recommendationId || rec._id!, 'ACCEPTED')}
                     disabled={actionInProgress === (rec.recommendationId || rec._id)}
-                    className="flex-1 py-2 px-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-[#0F1214] text-xs font-bold rounded-lg shadow-glow-teal transition flex items-center justify-center gap-1.5 font-bold"
+                    className="flex-1 py-2 px-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold rounded-lg shadow-sm transition flex items-center justify-center gap-1.5 cursor-pointer"
                   >
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#0F1214]" /> Accept & Apply Directive
+                    <CheckCircle2 className="w-3.5 h-3.5 text-white" /> Accept & Apply Directive
                   </button>
                   <button
                     onClick={() => handleAction(rec.recommendationId || rec._id!, 'SNOOZED')}
                     disabled={actionInProgress === (rec.recommendationId || rec._id)}
-                    className="py-2 px-3 bg-[#12181A] hover:bg-[#1B2226] border border-[#26333B] text-slate-300 text-xs font-bold rounded-lg transition"
+                    className="py-2 px-3 bg-white hover:bg-slate-100 border border-slate-300 text-slate-700 text-xs font-bold rounded-lg transition cursor-pointer"
                     title="Snooze 24h"
                   >
-                    <Clock className="w-3.5 h-3.5" />
+                    <Clock className="w-3.5 h-3.5 text-slate-700" />
                   </button>
                   <button
                     onClick={() => handleAction(rec.recommendationId || rec._id!, 'REJECTED')}
                     disabled={actionInProgress === (rec.recommendationId || rec._id)}
-                    className="py-2 px-3 bg-red-950/60 hover:bg-red-900 border border-red-800 text-[#DC5F4E] text-xs font-bold rounded-lg transition"
+                    className="py-2 px-3 bg-rose-50 hover:bg-rose-100 border border-rose-300 text-rose-700 text-xs font-bold rounded-lg transition cursor-pointer"
                     title="Reject"
                   >
-                    <XCircle className="w-3.5 h-3.5" />
+                    <XCircle className="w-3.5 h-3.5 text-rose-700" />
                   </button>
                 </div>
               ) : (
-                <div className="p-2.5 rounded-lg bg-[#0F1214]/80 border border-[#26333B] text-xs">
+                <div className="p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-xs">
                   <div className="flex items-center justify-between mb-1">
                     <span
-                      className={`font-bold font-mono text-[11px] ${isAccepted ? 'text-emerald-400' : 'text-[#DC5F4E]'
+                      className={`font-bold font-mono text-[11px] ${isAccepted ? 'text-emerald-700' : 'text-rose-700'
                         }`}
                     >
                       Status: {rec.status}
                     </span>
-                    <span className="text-[10px] text-slate-500 font-mono">
+                    <span className="text-[10px] text-slate-600 font-mono">
                       {rec.actionTimestamp ? new Date(rec.actionTimestamp).toLocaleDateString() : 'Logged'}
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-400">{rec.outcomeNote || `Action logged by ${rec.actionTakenBy}`}</p>
+                  <p className="text-[11px] text-slate-700">{rec.outcomeNote || `Action logged by ${rec.actionTakenBy}`}</p>
                 </div>
               )}
             </div>
@@ -301,13 +301,13 @@ export const RecommendationsPage: React.FC = () => {
       </div>
 
       {/* Historical Outcome Feedback Loop Log Table */}
-      <div className="glass-panel rounded-2xl p-6 border border-[#26333B] bg-[#161D22]/85">
+      <div className="rounded-2xl p-6 border border-slate-200 bg-white shadow-sm">
         <div className="flex items-center justify-between mb-4">
           <div>
-            <h3 className="text-sm font-bold text-[#E8E6E3] uppercase tracking-wider flex items-center gap-2">
-              <History className="w-4 h-4 text-tech-teal" /> Recommendation Outcome Feedback Loop Log
+            <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2 font-mono">
+              <History className="w-4 h-4 text-teal-700" /> Recommendation Outcome Feedback Loop Log
             </h3>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-600 font-medium">
               Validating whether applied AI actions achieved projected tonnage gains in actual production logs
             </p>
           </div>
@@ -315,7 +315,7 @@ export const RecommendationsPage: React.FC = () => {
 
         <div className="overflow-x-auto">
           <table className="w-full text-xs text-left">
-            <thead className="bg-[#0F1214]/80 text-slate-400 uppercase font-mono border-b border-[#26333B]">
+            <thead className="bg-slate-50 text-slate-700 uppercase font-mono border-b border-slate-200 font-bold">
               <tr>
                 <th className="p-3">Recommendation Directive</th>
                 <th className="p-3">Mine</th>
@@ -325,28 +325,28 @@ export const RecommendationsPage: React.FC = () => {
                 <th className="p-3">Outcome Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#26333B]/60 font-medium">
+            <tbody className="divide-y divide-slate-200 font-medium">
               {feedbackLog.map((log) => (
-                <tr key={log.recommendationId || log._id} className="hover:bg-[#161D22]">
-                  <td className="p-3 font-semibold text-[#E8E6E3] max-w-xs truncate">
+                <tr key={log.recommendationId || log._id} className="hover:bg-slate-50">
+                  <td className="p-3 font-semibold text-slate-900 max-w-xs truncate">
                     {log.title}
                   </td>
-                  <td className="p-3 text-slate-300">{log.mineName}</td>
+                  <td className="p-3 text-slate-700">{log.mineName}</td>
                   <td className="p-3">
                     <span
                       className={`px-2 py-0.5 rounded font-mono text-[10px] font-bold ${log.status === 'ACCEPTED'
-                        ? 'bg-emerald-950 text-emerald-400 border border-emerald-800'
-                        : 'bg-red-950 text-[#DC5F4E] border border-red-800'
+                        ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                        : 'bg-rose-100 text-rose-800 border border-rose-300'
                         }`}
                     >
                       {log.status}
                     </span>
                   </td>
-                  <td className="p-3 text-slate-400">{log.actionTakenBy || 'Mine Planner'}</td>
-                  <td className="p-3 font-mono text-emerald-400 font-bold">
+                  <td className="p-3 text-slate-600">{log.actionTakenBy || 'Mine Planner'}</td>
+                  <td className="p-3 font-mono text-emerald-700 font-bold">
                     +{log.realizedTonnageGain || log.expectedTonnageGain} t (Est: +{log.expectedTonnageGain} t)
                   </td>
-                  <td className="p-3 text-slate-400 text-[11px] max-w-sm truncate">
+                  <td className="p-3 text-slate-600 text-[11px] max-w-sm truncate">
                     {log.outcomeNote || 'Completed on active shift'}
                   </td>
                 </tr>

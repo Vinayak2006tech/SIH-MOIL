@@ -55,46 +55,46 @@ export const ResetPasswordPage: React.FC<ResetPasswordPageProps> = ({ onGoToLogi
   };
 
   return (
-    <div className="min-h-screen bg-[#0F1214] text-[#E8E6E3] flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
-      <div className="absolute top-1/3 left-1/3 w-[500px] h-[500px] bg-tech-teal/10 rounded-full blur-3xl pointer-events-none" />
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex items-center justify-center p-4 sm:p-6 relative overflow-hidden">
+      <div className="absolute top-1/3 left-1/3 w-[500px] h-[500px] bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="relative w-full max-w-md glass-panel bg-[#161D22]/95 border border-[#26333B] rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 animate-fadeIn">
+      <div className="relative w-full max-w-md bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xl space-y-6 animate-fadeIn">
         <button
           onClick={onGoToLogin}
-          className="text-xs text-[#94A3B8] hover:text-[#E8E6E3] flex items-center gap-1.5 transition cursor-pointer"
+          className="text-xs text-slate-600 hover:text-slate-900 font-bold flex items-center gap-1.5 transition cursor-pointer"
         >
           <ArrowLeft className="w-3.5 h-3.5" /> Back to Sign In
         </button>
 
         <div className="text-center space-y-2">
-          <div className="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-br from-manganese-700 via-tech-teal/80 to-tech-teal border border-tech-teal/30 flex items-center justify-center text-[#0F1214] shadow-glow-teal">
-            <KeyRound className="w-7 h-7" />
+          <div className="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-br from-manganese-700 via-teal-700 to-teal-600 border border-teal-500/30 flex items-center justify-center text-white shadow-sm">
+            <KeyRound className="w-7 h-7 text-white" />
           </div>
-          <h1 className="text-2xl font-extrabold text-[#E8E6E3] tracking-tight">
+          <h1 className="text-2xl font-black text-slate-900 tracking-tight font-sans">
             Set New Password
           </h1>
-          <p className="text-xs text-[#94A3B8] max-w-sm mx-auto">
+          <p className="text-xs text-slate-600 font-medium max-w-sm mx-auto">
             {email ? `Updating security password for ${email}` : 'Enter your reset token and configure your new password'}
           </p>
         </div>
 
         {success ? (
           <div className="space-y-5 text-center py-4 animate-fadeIn">
-            <div className="w-16 h-16 bg-tech-teal/20 border border-tech-teal/40 rounded-full flex items-center justify-center mx-auto text-tech-teal">
+            <div className="w-16 h-16 bg-teal-50 border border-teal-200 rounded-full flex items-center justify-center mx-auto text-teal-700">
               <CheckCircle2 className="w-9 h-9" />
             </div>
             <div className="space-y-2">
-              <h3 className="text-lg font-bold text-[#E8E6E3]">Password Successfully Updated!</h3>
-              <p className="text-xs text-slate-300 leading-relaxed max-w-xs mx-auto">
+              <h3 className="text-lg font-bold text-slate-900">Password Successfully Updated!</h3>
+              <p className="text-xs text-slate-600 leading-relaxed max-w-xs mx-auto">
                 Your MOIL ReserveIQ security password has been updated. You can now log in with your new password.
               </p>
             </div>
             <button
               onClick={onGoToLogin}
-              className="w-full py-3 bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-[#0F1214] font-extrabold rounded-xl shadow-glow-teal transition flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-3 bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-white font-extrabold rounded-xl shadow-sm transition flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>Proceed to Sign In</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 text-white" />
             </button>
           </div>
         ) : (
@@ -109,20 +109,20 @@ export const ResetPasswordPage: React.FC<ResetPasswordPageProps> = ({ onGoToLogi
             <form onSubmit={handleSubmit} className="space-y-3.5 text-xs">
               {!token && (
                 <div className="space-y-1">
-                  <label className="text-slate-300 font-semibold block text-[11px]">Security Reset Token</label>
+                  <label className="text-slate-700 font-bold block text-[11px]">Security Reset Token</label>
                   <input
                     type="text"
                     required
                     value={token}
                     onChange={(e) => setToken(e.target.value)}
                     placeholder="Enter token from reset email"
-                    className="w-full px-3 py-2.5 bg-[#0F1214] border border-[#26333B] rounded-xl text-[#E8E6E3] font-mono text-xs focus:outline-none focus:border-tech-teal"
+                    className="w-full px-3 py-2.5 bg-white border border-slate-300 rounded-xl text-slate-900 font-mono text-xs focus:outline-none focus:border-teal-600"
                   />
                 </div>
               )}
 
               <div className="space-y-1">
-                <label className="text-slate-300 font-semibold block text-[11px]">New Password</label>
+                <label className="text-slate-700 font-bold block text-[11px]">New Password</label>
                 <div className="relative">
                   <input
                     type={showPassword ? 'text' : 'password'}
@@ -130,13 +130,13 @@ export const ResetPasswordPage: React.FC<ResetPasswordPageProps> = ({ onGoToLogi
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="At least 6 characters"
-                    className="w-full pl-9 pr-10 py-2.5 bg-[#0F1214] border border-[#26333B] rounded-xl text-[#E8E6E3] text-xs focus:outline-none focus:border-tech-teal"
+                    className="w-full pl-9 pr-10 py-2.5 bg-white border border-slate-300 rounded-xl text-slate-900 text-xs focus:outline-none focus:border-teal-600"
                   />
                   <Lock className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white transition cursor-pointer"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-900 transition cursor-pointer"
                   >
                     {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
@@ -144,7 +144,7 @@ export const ResetPasswordPage: React.FC<ResetPasswordPageProps> = ({ onGoToLogi
               </div>
 
               <div className="space-y-1">
-                <label className="text-slate-300 font-semibold block text-[11px]">Confirm New Password</label>
+                <label className="text-slate-700 font-bold block text-[11px]">Confirm New Password</label>
                 <div className="relative">
                   <input
                     type={showPassword ? 'text' : 'password'}
@@ -152,7 +152,7 @@ export const ResetPasswordPage: React.FC<ResetPasswordPageProps> = ({ onGoToLogi
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Re-type new password"
-                    className="w-full pl-9 pr-3 py-2.5 bg-[#0F1214] border border-[#26333B] rounded-xl text-[#E8E6E3] text-xs focus:outline-none focus:border-tech-teal"
+                    className="w-full pl-9 pr-3 py-2.5 bg-white border border-slate-300 rounded-xl text-slate-900 text-xs focus:outline-none focus:border-teal-600"
                   />
                   <Lock className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
                 </div>
@@ -161,10 +161,10 @@ export const ResetPasswordPage: React.FC<ResetPasswordPageProps> = ({ onGoToLogi
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-[#0F1214] font-extrabold rounded-xl shadow-glow-teal transition flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer mt-2"
+                className="w-full py-3 bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-white font-extrabold rounded-xl shadow-sm transition flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer mt-2"
               >
                 <span>{loading ? 'Updating Password...' : 'Save New Password & Sign In'}</span>
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 text-white" />
               </button>
             </form>
           </>

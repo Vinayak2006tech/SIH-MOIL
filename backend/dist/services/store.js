@@ -47,6 +47,12 @@ class InMemoryStore {
                     });
                 }
             }
+            // Security safeguard: The Administrator role is exclusively reserved for vaishayvinayak@gmail.com
+            this.data.users.forEach((u) => {
+                if (u.email.toLowerCase().trim() !== 'vaishayvinayak@gmail.com' && u.role === 'ADMIN') {
+                    u.role = 'MINE_PLANNER';
+                }
+            });
         }
         catch (e) {
             console.warn('[Store] Could not load persisted users.json:', e);

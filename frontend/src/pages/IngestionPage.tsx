@@ -309,15 +309,15 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
       </div>
 
       {/* Ingestion Sub-Tabs */}
-      <div className="flex items-center gap-2 border-b border-[#26333B] pb-3 flex-wrap">
+      <div className="flex items-center gap-2 border-b border-slate-200 pb-3 flex-wrap">
         <button
           onClick={() => {
             setActiveTab('drilling');
             handleClearFile();
           }}
-          className={`flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-xl transition ${activeTab === 'drilling'
-            ? 'bg-tech-teal text-[#0F1214] font-extrabold shadow-glow-teal'
-            : 'text-slate-400 hover:text-[#E8E6E3] hover:bg-[#161D22]'
+          className={`flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-xl transition cursor-pointer ${activeTab === 'drilling'
+            ? 'bg-teal-700 text-white font-extrabold shadow-sm'
+            : 'text-slate-700 hover:text-black hover:bg-slate-100'
             }`}
         >
           <Database className="w-4 h-4" /> Diamond Drilling Logs (CSV)
@@ -328,9 +328,9 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
             setActiveTab('production');
             handleClearFile();
           }}
-          className={`flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-xl transition ${activeTab === 'production'
-            ? 'bg-tech-teal text-[#0F1214] font-extrabold shadow-glow-teal'
-            : 'text-slate-400 hover:text-[#E8E6E3] hover:bg-[#161D22]'
+          className={`flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-xl transition cursor-pointer ${activeTab === 'production'
+            ? 'bg-teal-700 text-white font-extrabold shadow-sm'
+            : 'text-slate-700 hover:text-black hover:bg-slate-100'
             }`}
         >
           <FileSpreadsheet className="w-4 h-4" /> Production Records (CSV)
@@ -341,9 +341,9 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
             setActiveTab('satellite');
             handleClearFile();
           }}
-          className={`flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-xl transition ${activeTab === 'satellite'
-            ? 'bg-tech-teal text-[#0F1214] font-extrabold shadow-glow-teal'
-            : 'text-slate-400 hover:text-[#E8E6E3] hover:bg-[#161D22]'
+          className={`flex items-center gap-2 px-4 py-2 text-xs font-bold rounded-xl transition cursor-pointer ${activeTab === 'satellite'
+            ? 'bg-teal-700 text-white font-extrabold shadow-sm'
+            : 'text-slate-700 hover:text-black hover:bg-slate-100'
             }`}
         >
           <Satellite className="w-4 h-4" /> Satellite Pass Synchronizer (Sentinel-2 / MODIS)
@@ -410,10 +410,10 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
               {/* Glowing Icon */}
               <div
                 className={`p-4 rounded-2xl transition-transform ${isDragging
-                  ? 'bg-tech-teal text-[#0F1214] scale-110 shadow-glow-teal animate-bounce'
+                  ? 'bg-teal-700 text-white scale-110 shadow-sm animate-bounce'
                   : file
-                    ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
-                    : 'bg-tech-teal/10 text-tech-teal border border-tech-teal/20'
+                    ? 'bg-emerald-50 text-emerald-700 border border-emerald-300'
+                    : 'bg-teal-50 text-teal-700 border border-teal-200'
                   }`}
               >
                 {file ? <FileSpreadsheet className="w-8 h-8" /> : <UploadCloud className="w-8 h-8" />}
@@ -532,15 +532,15 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
                 <button
                   onClick={activeTab === 'drilling' ? handleUploadDrilling : handleUploadProduction}
                   disabled={!file || uploading}
-                  className="py-2.5 px-6 bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-[#0F1214] text-xs font-extrabold rounded-xl shadow-glow-teal transition disabled:opacity-50 flex items-center gap-2 cursor-pointer"
+                  className="py-2.5 px-6 bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-white text-xs font-extrabold rounded-xl shadow-sm transition disabled:opacity-50 flex items-center gap-2 cursor-pointer"
                 >
                   {uploading ? (
                     <>
-                      <RefreshCw className="w-4 h-4 animate-spin text-[#0F1214]" /> Ingesting & Validating Dataset...
+                      <RefreshCw className="w-4 h-4 animate-spin text-white" /> Ingesting & Validating Dataset...
                     </>
                   ) : (
                     <>
-                      <CheckCircle2 className="w-4 h-4 text-[#0F1214]" /> Parse & Ingest Records
+                      <CheckCircle2 className="w-4 h-4 text-white" /> Parse & Ingest Records
                     </>
                   )}
                 </button>
@@ -678,7 +678,7 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
                         setActiveTab('drilling');
                         loadSampleFile('drilling', true);
                       }}
-                      className="py-1.5 px-3 bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-[#0F1214] text-[11px] font-extrabold rounded-lg shadow-glow-teal transition"
+                      className="py-1.5 px-3 bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-white text-[11px] font-extrabold rounded-lg shadow-sm transition cursor-pointer"
                     >
                       ⚡ Ingest Now
                     </button>
@@ -717,7 +717,7 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
                         setActiveTab('production');
                         loadSampleFile('production', true);
                       }}
-                      className="py-1.5 px-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-[#0F1214] text-[11px] font-extrabold rounded-lg transition"
+                      className="py-1.5 px-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-[11px] font-extrabold rounded-lg transition cursor-pointer"
                     >
                       ⚡ Ingest Now
                     </button>
@@ -794,9 +794,9 @@ export const IngestionPage: React.FC<IngestionPageProps> = ({ onNavigate }) => {
                 <button
                   onClick={handleTriggerSatelliteSync}
                   disabled={syncingSatellite}
-                  className="btn-shimmer px-5 py-2 bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-[#0F1214] text-xs font-extrabold rounded-xl shadow-glow-teal transition flex items-center gap-2 disabled:opacity-50 cursor-pointer"
+                  className="btn-shimmer px-5 py-2 bg-gradient-to-r from-manganese-600 to-tech-teal hover:from-manganese-500 hover:to-tech-teal text-white text-xs font-extrabold rounded-xl shadow-sm transition flex items-center gap-2 disabled:opacity-50 cursor-pointer"
                 >
-                  <RefreshCw className={`w-3.5 h-3.5 text-[#0F1214] ${syncingSatellite ? 'animate-spin' : ''}`} />
+                  <RefreshCw className={`w-3.5 h-3.5 text-white ${syncingSatellite ? 'animate-spin' : ''}`} />
                   {syncingSatellite ? 'Acquiring Orbit Pass...' : 'Trigger Live Sentinel-2 Sync'}
                 </button>
               </div>

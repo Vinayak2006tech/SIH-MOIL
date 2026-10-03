@@ -220,11 +220,11 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onOpenReport, onToggl
         {/* Executive Report Button */}
         <button
           onClick={onOpenReport}
-          className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 bg-teal-700 hover:bg-teal-800 text-black text-xs font-bold rounded-lg shadow-sm transition cursor-pointer shrink-0"
+          className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 bg-teal-700 hover:bg-teal-800 text-white text-xs font-bold rounded-lg shadow-sm transition cursor-pointer shrink-0"
           title="Generate Executive Briefing Report"
         >
-          <FileText className="w-3.5 h-3.5 text-black" />
-          <span className="hidden sm:inline text-black">Executive Report</span>
+          <FileText className="w-3.5 h-3.5 text-white" />
+          <span className="hidden sm:inline text-white">Executive Report</span>
         </button>
 
         {/* Theme Toggle (Light / Dark Mode) */}

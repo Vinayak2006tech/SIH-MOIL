@@ -99,7 +99,7 @@ export default function GlyphPortalDemo(props: Partial<typeof settings>) {
             <>
               <div data-sublime-header>
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#6B5B95] to-[#2DD4BF] flex items-center justify-center text-[#0F1214] font-black text-xs">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#6B5B95] to-[#0D9488] flex items-center justify-center text-white font-black text-xs shadow-sm">
                     IQ
                   </div>
                   <span data-sublime-logo>MOIL ReserveIQ</span>

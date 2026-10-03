@@ -233,22 +233,21 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       {/* ============================================================ */}
       {/* 🌌 HERO SECTION WITH INDUSTRIAL EARTH-TECH AESTHETIC */}
       {/* ============================================================ */}
-      <section className="relative overflow-hidden pt-12 pb-16 px-6 sm:px-12 bg-gradient-to-b from-[#161D22] via-[#12181A] to-[#0F1214] border-b border-[#26333B] rounded-3xl mx-4 sm:mx-6 mt-4 shadow-2xl bg-grid-cyber">
-        {/* Animated Background Glowing Orbs */}
-        <div className="absolute -top-24 left-1/4 w-96 h-96 bg-teal-500/12 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
-        <div className="absolute top-1/2 -right-24 w-96 h-96 bg-[#6B5B95]/15 rounded-full blur-3xl pointer-events-none animate-float-slow" />
-        <div className="absolute -bottom-24 left-1/3 w-80 h-80 bg-teal-600/10 rounded-full blur-3xl pointer-events-none animate-float-reverse" />
+      <section className="relative overflow-hidden pt-12 pb-16 px-6 sm:px-12 bg-white border border-slate-200 rounded-3xl mx-4 sm:mx-6 mt-4 shadow-xl">
+        {/* Subtle Background Accent Orbs */}
+        <div className="absolute -top-24 left-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/2 -right-24 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 max-w-5xl mx-auto text-center space-y-8">
           {/* Top National Initiative Pills & Theme Switcher */}
           <div className="flex items-center justify-center gap-2.5 flex-wrap">
-            <span className="px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-white text-black border border-slate-300 flex items-center gap-2 shadow-sm font-sans">
-              <Building2 className="w-3.5 h-3.5 text-teal-600" />
+            <span className="px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-slate-100 text-slate-900 border border-slate-300 flex items-center gap-2 shadow-sm font-sans">
+              <Building2 className="w-3.5 h-3.5 text-teal-700" />
               Ministry of Steel, Govt. of India
             </span>
-            <span className="px-3.5 py-1.5 rounded-full text-xs font-mono font-bold bg-white text-black border border-slate-300 flex items-center gap-1.5 shadow-sm">
+            <span className="px-3.5 py-1.5 rounded-full text-xs font-mono font-bold bg-slate-100 text-slate-900 border border-slate-300 flex items-center gap-1.5 shadow-sm">
               <span className="w-2 h-2 rounded-full bg-teal-600 animate-ping" />
-              <Sparkles className="w-3.5 h-3.5 text-teal-600" />
+              <Sparkles className="w-3.5 h-3.5 text-teal-700" />
               AI/ML + Earth Observation Platform
             </span>
             <div className="flex items-center gap-1.5 pl-1">
@@ -256,20 +255,20 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </div>
           </div>
 
-          {/* Mega Title with Earth-Tech Gradient Typography */}
+          {/* Mega Title with High-Contrast Typography */}
           <div className="space-y-3">
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight leading-tight font-sans">
-              <span className="text-black font-black bg-white px-3.5 sm:px-4.5 py-0.5 sm:py-1 rounded-2xl border border-slate-300 shadow-md inline-block mr-1.5 sm:mr-2 align-baseline">MOIL</span> <span className="bg-gradient-to-r from-teal-400 via-purple-300 to-teal-300 bg-clip-text text-transparent animate-gradient-flow drop-shadow-sm">ReserveIQ</span>
+            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight leading-tight font-sans">
+              <span className="text-black font-black bg-slate-100 px-3.5 sm:px-4.5 py-0.5 sm:py-1 rounded-2xl border border-slate-300 shadow-sm inline-block mr-1.5 sm:mr-2 align-baseline">MOIL</span> <span className="bg-gradient-to-r from-teal-700 via-purple-700 to-teal-600 bg-clip-text text-transparent">ReserveIQ</span>
             </h1>
-            <p className="text-lg sm:text-2xl font-extrabold text-white tracking-tight max-w-4xl mx-auto font-sans">
+            <p className="text-lg sm:text-2xl font-extrabold text-slate-800 tracking-tight max-w-4xl mx-auto font-sans">
               Intelligent Manganese Ore Reserve Estimation & Production Shortfall Mitigation
             </p>
           </div>
 
           {/* Subtitle / Description */}
-          <p className="text-sm sm:text-base text-slate-200 max-w-3xl mx-auto leading-relaxed font-sans">
-            A state-of-the-art mineral intelligence platform developed for <strong className="text-teal-400 font-bold">Manganese Ore (India) Limited (MOIL)</strong>. 
-            Seamlessly integrating <strong className="text-teal-400 font-bold">ESA Copernicus Sentinel-2 satellite telemetry</strong> with <strong className="text-teal-400 font-bold">sub-surface diamond core assays</strong> and <strong className="text-teal-400 font-bold">predictive machine-learning time-series forecasting</strong> to maximize national mineral security and achieve India's Vision 2030 target of 3.5 Million Tonnes per annum.
+          <p className="text-sm sm:text-base text-slate-600 max-w-3xl mx-auto leading-relaxed font-sans">
+            A state-of-the-art mineral intelligence platform developed for <strong className="text-teal-800 font-bold">Manganese Ore (India) Limited (MOIL)</strong>. 
+            Seamlessly integrating <strong className="text-teal-800 font-bold">ESA Copernicus Sentinel-2 satellite telemetry</strong> with <strong className="text-teal-800 font-bold">sub-surface diamond core assays</strong> and <strong className="text-teal-800 font-bold">predictive machine-learning time-series forecasting</strong> to maximize national mineral security and achieve India's Vision 2030 target of 3.5 Million Tonnes per annum.
           </p>
 
           {/* ============================================================ */}
@@ -330,38 +329,38 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           <div className="flex items-center justify-center gap-3.5 flex-wrap pt-2">
             <button
               onClick={() => setActiveTab('dashboard')}
-              className="btn-shimmer px-6 py-3.5 bg-gradient-to-r from-[#6B5B95] via-[#564879] to-[#0D9488] hover:from-[#7E69AB] hover:to-[#2DD4BF] text-white font-extrabold text-sm rounded-2xl shadow-glow-manganese transition-all duration-300 flex items-center gap-2.5 transform hover:-translate-y-1 hover:scale-105 cursor-pointer font-sans"
+              className="btn-shimmer px-6 py-3.5 bg-gradient-to-r from-[#6B5B95] via-[#564879] to-[#0D9488] hover:from-[#7E69AB] hover:to-[#2DD4BF] text-white font-extrabold text-sm rounded-2xl shadow-sm transition-all duration-300 flex items-center gap-2.5 transform hover:-translate-y-1 hover:scale-105 cursor-pointer font-sans"
             >
-              <Zap className="w-4 h-4 text-teal-300 animate-pulse" /> Launch Intelligence Platform
-              <ArrowRight className="w-4 h-4" />
+              <Zap className="w-4 h-4 text-white animate-pulse" /> Launch Intelligence Platform
+              <ArrowRight className="w-4 h-4 text-white" />
             </button>
 
             <button
               onClick={() => setActiveTab('reserve-map')}
-              className="px-6 py-3.5 bg-[#161D22]/90 hover:bg-[#1B2226] text-slate-200 hover:text-white font-bold text-sm rounded-2xl border border-[#26333B] hover:border-teal-500/80 transition-all duration-200 flex items-center gap-2 shadow-sm transform hover:-translate-y-0.5 cursor-pointer font-sans"
+              className="px-6 py-3.5 bg-white hover:bg-slate-50 text-slate-800 hover:text-black font-bold text-sm rounded-2xl border border-slate-300 transition-all duration-200 flex items-center gap-2 shadow-sm transform hover:-translate-y-0.5 cursor-pointer font-sans"
             >
-              <MapPin className="w-4 h-4 text-teal-400 animate-bounce" /> Explore GIS Reserve Map (19 MOIL Assets)
+              <MapPin className="w-4 h-4 text-teal-700 animate-bounce" /> Explore GIS Reserve Map (19 MOIL Assets)
             </button>
 
             <button
               onClick={onOpenProblemStatement}
-              className="px-5 py-3.5 bg-[#0F1214]/80 hover:bg-[#161D22] text-[#BFB2D3] hover:text-white font-bold text-xs rounded-2xl border border-[#6B5B95]/40 hover:border-[#9B8BBF] transition-all flex items-center gap-2 cursor-pointer font-sans"
+              className="px-5 py-3.5 bg-white hover:bg-slate-50 text-slate-700 hover:text-black font-bold text-xs rounded-2xl border border-slate-300 transition-all flex items-center gap-2 cursor-pointer font-sans"
             >
-              <Shield className="w-4 h-4 text-teal-400" /> SIH Problem Brief
+              <Shield className="w-4 h-4 text-teal-700" /> SIH Problem Brief
             </button>
 
             <button
               onClick={onOpenReport}
-              className="px-5 py-3.5 bg-[#0F1214]/80 hover:bg-[#161D22] text-teal-300 hover:text-white font-bold text-xs rounded-2xl border border-teal-500/40 hover:border-teal-400 transition-all flex items-center gap-2 cursor-pointer font-sans"
+              className="px-5 py-3.5 bg-white hover:bg-slate-50 text-slate-700 hover:text-black font-bold text-xs rounded-2xl border border-slate-300 transition-all flex items-center gap-2 cursor-pointer font-sans"
             >
-              <FileText className="w-4 h-4 text-teal-400" /> Executive Report
+              <FileText className="w-4 h-4 text-teal-700" /> Executive Report
             </button>
           </div>
 
           {/* Provenance Verification Tagline */}
-          <div className="pt-3 flex items-center justify-center gap-3 text-xs text-slate-400 flex-wrap font-mono">
-            <span className="flex items-center gap-1.5 text-emerald-400 font-semibold bg-emerald-950/30 px-2.5 py-1 rounded-full border border-emerald-800/40">
-              <CheckCircle2 className="w-3.5 h-3.5" /> 100% Authentic Public Data Grounding
+          <div className="pt-3 flex items-center justify-center gap-3 text-xs text-slate-600 flex-wrap font-mono">
+            <span className="flex items-center gap-1.5 text-emerald-800 font-semibold bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-300">
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700" /> 100% Authentic Public Data Grounding
             </span>
             <span>•</span>
             <span>Official MOIL AR FY25</span>
@@ -405,34 +404,34 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       {/* 🛰️ COPERNICUS SENTINEL-2 SURFACE SCANNING & TELEMETRY SPOTLIGHT */}
       {/* ============================================================ */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
-        <div className="glass-panel p-6 sm:p-8 rounded-3xl border border-[#26333B] bg-gradient-to-br from-[#161D22] via-[#12181A] to-[#0F1214] shadow-2xl relative overflow-hidden bg-grid-cyber">
+        <div className="p-6 sm:p-8 rounded-3xl border border-slate-200 bg-white shadow-xl relative overflow-hidden">
           {/* Top Title & Mission Badge */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#26333B] pb-5">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-5">
             <div>
               <div className="flex items-center gap-2">
-                <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-teal-950 text-teal-300 border border-teal-700/80 flex items-center gap-1.5 shadow-sm">
-                  <Satellite className="w-3.5 h-3.5 text-teal-400 animate-pulse" />
+                <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-teal-50 text-teal-800 border border-teal-300 flex items-center gap-1.5 shadow-sm">
+                  <Satellite className="w-3.5 h-3.5 text-teal-700 animate-pulse" />
                   ESA Copernicus Sentinel-2 MSI Multi-Spectral Telemetry
                 </span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full font-mono bg-emerald-950/80 text-emerald-300 border border-emerald-800 flex items-center gap-1">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                <span className="text-[10px] px-2 py-0.5 rounded-full font-mono bg-emerald-50 text-emerald-800 border border-emerald-300 flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-ping" />
                   5-Day Orbital Overpass
                 </span>
               </div>
-              <h2 className="text-xl sm:text-3xl font-black text-[#E8E6E3] tracking-tight mt-2 font-sans">
+              <h2 className="text-xl sm:text-3xl font-black text-slate-900 tracking-tight mt-2 font-sans">
                 Spaceborne Earth Observation Scanning MOIL Open-Cast Mines
               </h2>
-              <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-3xl leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-3xl leading-relaxed">
                 Sentinel-2 multispectral scanners capture optical and near-infrared (NIR) reflections at 10m spatial resolution, tracking bench clearing, overburden dump stability, and vegetation proxies across Madhya Pradesh and Maharashtra manganese belts.
               </p>
             </div>
 
             <button
               onClick={() => setActiveTab('ingestion')}
-              className="px-5 py-2.5 bg-gradient-to-r from-[#6B5B95] to-[#0D9488] hover:from-[#7E69AB] hover:to-[#2DD4BF] text-white text-xs font-bold rounded-xl shadow-glow-manganese transition flex items-center gap-2 shrink-0 cursor-pointer self-start sm:self-auto font-sans"
+              className="px-5 py-2.5 bg-gradient-to-r from-[#6B5B95] to-[#0D9488] hover:from-[#7E69AB] hover:to-[#2DD4BF] text-white text-xs font-bold rounded-xl shadow-sm transition flex items-center gap-2 shrink-0 cursor-pointer self-start sm:self-auto font-sans"
             >
               <span>Inspect Satellite Pipeline</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 text-white" />
             </button>
           </div>
 
@@ -540,14 +539,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       {/* ============================================================ */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 space-y-4">
         <div className="text-center space-y-2 max-w-3xl mx-auto">
-          <span className="text-xs font-mono uppercase font-bold text-teal-400 tracking-wider flex items-center justify-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-teal-400" />
+          <span className="text-xs font-mono uppercase font-bold text-teal-700 tracking-wider flex items-center justify-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-teal-700" />
             Interactive 3D Subsurface Exploration
           </span>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-[#E8E6E3] tracking-tight font-sans">
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-sans">
             Scroll-Driven Subsurface Camera Portal
           </h2>
-          <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
             Hover or select any letter in the live 3D typography below and scroll to step inside MOIL's geostatistical ore strata and telemetry layers.
           </p>
         </div>
@@ -562,14 +561,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       {/* ============================================================ */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 space-y-8">
         <div className="text-center space-y-2 max-w-3xl mx-auto">
-          <span className="text-xs font-mono uppercase font-bold text-teal-400 tracking-wider flex items-center justify-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5 animate-spin-slow text-teal-400" />
+          <span className="text-xs font-mono uppercase font-bold text-teal-700 tracking-wider flex items-center justify-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 animate-spin-slow text-teal-700" />
             Architecture & Innovation
           </span>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-[#E8E6E3] tracking-tight font-sans">
+          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-sans">
             How MOIL ReserveIQ Solves Production Shortfalls
           </h2>
-          <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
             A comprehensive four-tier system fusing aerospace earth observation with deep underground geology and predictive intelligence.
           </p>
         </div>
@@ -580,29 +579,28 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             return (
               <div
                 key={pillar.id}
-                className={`glass-panel bg-gradient-to-b ${pillar.gradient} p-6 sm:p-8 rounded-3xl border ${pillar.borderColor} shadow-2xl flex flex-col justify-between space-y-6 hover:border-teal-500/80 transition-all duration-300 group card-hover relative overflow-hidden`}
+                className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-6 hover:border-teal-600 transition-all duration-300 group card-hover relative overflow-hidden"
               >
-                <div className="absolute top-0 right-0 w-36 h-36 bg-teal-500/10 rounded-full blur-2xl group-hover:bg-teal-500/20 transition-all duration-500 pointer-events-none" />
                 <div className="space-y-4 relative z-10">
                   <div className="flex items-center justify-between">
-                    <div className="w-12 h-12 rounded-2xl bg-[#0F1214] border border-[#26333B] flex items-center justify-center text-white shadow-md group-hover:scale-110 group-hover:border-teal-500/60 transition-all">
-                      <Icon className={`w-6 h-6 ${pillar.accentColor}`} />
+                    <div className="w-12 h-12 rounded-2xl bg-teal-50 border border-teal-200 flex items-center justify-center text-teal-700 shadow-sm group-hover:scale-110 transition-all">
+                      <Icon className="w-6 h-6 text-teal-700" />
                     </div>
-                    <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-[#0F1214]/90 text-slate-300 border border-[#26333B] shadow-sm">
+                    <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-slate-100 text-slate-800 border border-slate-200 shadow-sm">
                       {pillar.badge}
                     </span>
                   </div>
 
                   <div>
-                    <h3 className="text-lg sm:text-xl font-bold text-[#E8E6E3] leading-snug group-hover:text-teal-200 transition-colors font-sans">{pillar.title}</h3>
-                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mt-2 font-sans">{pillar.desc}</p>
+                    <h3 className="text-lg sm:text-xl font-bold text-slate-900 leading-snug group-hover:text-teal-800 transition-colors font-sans">{pillar.title}</h3>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mt-2 font-sans">{pillar.desc}</p>
                   </div>
 
                   {/* Feature Bullets */}
-                  <div className="space-y-2 pt-2 border-t border-[#26333B]">
+                  <div className="space-y-2 pt-2 border-t border-slate-200">
                     {pillar.features.map((feat, fIdx) => (
-                      <div key={fIdx} className="flex items-start gap-2.5 text-xs text-slate-300">
-                        <CheckCircle2 className={`w-4 h-4 shrink-0 mt-0.5 ${pillar.accentColor}`} />
+                      <div key={fIdx} className="flex items-start gap-2.5 text-xs text-slate-700 font-medium">
+                        <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5 text-teal-700" />
                         <span>{feat}</span>
                       </div>
                     ))}
@@ -611,10 +609,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
                 <button
                   onClick={() => setActiveTab(pillar.tab)}
-                  className="w-full py-3 bg-[#0F1214]/90 hover:bg-gradient-to-r hover:from-[#6B5B95] hover:to-[#0D9488] text-[#E8E6E3] text-xs font-bold rounded-xl border border-[#26333B] hover:border-transparent transition-all flex items-center justify-center gap-2 group-hover:shadow-glow-teal cursor-pointer transform group-hover:translate-y-[-2px] font-sans"
+                  className="w-full py-3 bg-gradient-to-r from-[#6B5B95] to-[#0D9488] hover:from-[#7E69AB] hover:to-[#2DD4BF] text-white text-xs font-bold rounded-xl shadow-sm transition-all flex items-center justify-center gap-2 cursor-pointer font-sans"
                 >
                   <span>{pillar.btnText}</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-3.5 h-3.5 text-white group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
             );
@@ -626,14 +624,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       {/* 🧭 COMPLETE INTERACTIVE PLATFORM MODULES DIRECTORY */}
       {/* ============================================================ */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 space-y-6">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#26333B] pb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-4">
           <div>
-            <h3 className="text-xl font-bold text-[#E8E6E3] flex items-center gap-2 font-sans">
-              <Compass className="w-5 h-5 text-teal-400 animate-spin-slow" /> Platform Navigation Hub
+            <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2 font-sans">
+              <Compass className="w-5 h-5 text-teal-700 animate-spin-slow" /> Platform Navigation Hub
             </h3>
-            <p className="text-xs text-slate-400">Direct access to all 8 operational intelligence modules.</p>
+            <p className="text-xs text-slate-600">Direct access to all 8 operational intelligence modules.</p>
           </div>
-          <span className="text-xs text-slate-400 font-mono bg-[#161D22] px-3 py-1 rounded-full border border-[#26333B]">8 Modules Live</span>
+          <span className="text-xs text-slate-700 font-mono bg-slate-100 px-3 py-1 rounded-full border border-slate-300">8 Modules Live</span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -643,28 +641,28 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <button
                 key={mod.id}
                 onClick={() => setActiveTab(mod.id as TabType)}
-                className="glass-panel p-5 rounded-2xl border border-[#26333B] hover:border-teal-500/60 bg-[#161D22]/60 hover:bg-[#161D22]/95 transition-all duration-300 text-left space-y-3 group shadow-lg flex flex-col justify-between card-hover cursor-pointer"
+                className="p-5 rounded-2xl border border-slate-200 hover:border-teal-600 bg-white hover:bg-slate-50 transition-all duration-300 text-left space-y-3 group shadow-sm flex flex-col justify-between card-hover cursor-pointer"
               >
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <div className="w-9 h-9 rounded-xl bg-[#0F1214] border border-[#26333B] flex items-center justify-center text-white group-hover:border-teal-500/60 group-hover:scale-110 transition-all">
-                      <Icon className="w-4.5 h-4.5 text-teal-400 group-hover:text-teal-300" />
+                    <div className="w-9 h-9 rounded-xl bg-teal-50 border border-teal-200 flex items-center justify-center text-teal-700 group-hover:scale-110 transition-all">
+                      <Icon className="w-4.5 h-4.5 text-teal-700" />
                     </div>
-                    <span className={`text-[9px] px-2 py-0.5 rounded font-mono font-bold border ${mod.color}`}>
+                    <span className="text-[9px] px-2 py-0.5 rounded font-mono font-bold border border-slate-300 bg-slate-100 text-slate-800">
                       {mod.badge}
                     </span>
                   </div>
                   <div>
-                    <h4 className="text-sm font-bold text-[#E8E6E3] group-hover:text-teal-300 transition-colors font-sans">
+                    <h4 className="text-sm font-bold text-slate-900 group-hover:text-teal-700 transition-colors font-sans">
                       {mod.title}
                     </h4>
-                    <p className="text-[11px] text-slate-400 leading-relaxed mt-1">{mod.subtitle}</p>
+                    <p className="text-[11px] text-slate-600 leading-relaxed mt-1 font-medium">{mod.subtitle}</p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-1 text-[11px] font-semibold text-teal-400 group-hover:translate-x-1.5 transition-transform font-mono">
+                <div className="flex items-center gap-1 text-[11px] font-bold text-teal-700 group-hover:translate-x-1.5 transition-transform font-mono">
                   <span>Enter Module</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-3.5 h-3.5 text-teal-700" />
                 </div>
               </button>
             );
@@ -676,30 +674,29 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       {/* 🏛️ PROBLEM STATEMENT & NATIONAL IMPACT CALLOUT */}
       {/* ============================================================ */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="glass-panel p-8 sm:p-10 rounded-3xl border border-[#26333B] bg-gradient-to-r from-[#1B2226] via-[#161D22] to-[#12181A] shadow-2xl relative overflow-hidden bg-grid-cyber">
-          <div className="absolute -top-16 -right-16 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
+        <div className="p-8 sm:p-10 rounded-3xl border border-slate-200 bg-slate-50 shadow-md relative overflow-hidden">
           <div className="relative z-10 space-y-4 max-w-4xl">
-            <span className="text-xs font-mono uppercase font-bold text-teal-300 bg-teal-950 px-3 py-1 rounded-full border border-teal-800 inline-block shadow-sm">
+            <span className="text-xs font-mono uppercase font-bold text-teal-900 bg-teal-100 px-3 py-1 rounded-full border border-teal-300 inline-block shadow-sm">
               Strategic Mineral Security Mission
             </span>
-            <h3 className="text-2xl sm:text-3xl font-black text-[#E8E6E3] tracking-tight font-sans">
+            <h3 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-sans">
               Powering India's 300 MT Steel Target by 2030
             </h3>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
+            <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-sans">
               Manganese is an irreplaceable deoxidizing and desulfurizing alloying element in steel manufacturing (~10 kg Mn required per tonne of crude steel). MOIL Limited produces over <strong>68% of India's domestic high-grade manganese ore</strong>. MOIL ReserveIQ equips mining engineers and executive leadership with real-time AI foresight to eliminate production deficits, prevent machine breakdowns, and protect domestic supply chains against global market volatility.
             </p>
             <div className="flex items-center gap-4 pt-2 flex-wrap">
               <button
                 onClick={() => setActiveTab('global-market')}
-                className="btn-shimmer px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#6B5B95] to-[#0D9488] hover:from-[#7E69AB] hover:to-[#2DD4BF] text-white text-xs font-bold shadow-glow-manganese transition flex items-center gap-2 cursor-pointer transform hover:scale-105 font-sans"
+                className="btn-shimmer px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#6B5B95] to-[#0D9488] hover:from-[#7E69AB] hover:to-[#2DD4BF] text-white text-xs font-bold shadow-sm transition flex items-center gap-2 cursor-pointer transform hover:scale-105 font-sans"
               >
-                <Globe2 className="w-4 h-4" /> Global Market Benchmark
+                <Globe2 className="w-4 h-4 text-white" /> Global Market Benchmark
               </button>
               <button
                 onClick={onOpenProblemStatement}
-                className="px-5 py-2.5 rounded-xl bg-[#0F1214] hover:bg-[#1B2226] text-[#BFB2D3] text-xs font-bold border border-[#6B5B95]/40 hover:border-[#9B8BBF] transition flex items-center gap-2 cursor-pointer font-sans"
+                className="px-5 py-2.5 rounded-xl bg-white hover:bg-slate-100 text-slate-800 text-xs font-bold border border-slate-300 shadow-sm transition flex items-center gap-2 cursor-pointer font-sans"
               >
-                <Shield className="w-4 h-4 text-teal-400" /> Review SIH Problem Statement
+                <Shield className="w-4 h-4 text-teal-700" /> Review SIH Problem Statement
               </button>
             </div>
           </div>
@@ -709,9 +706,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       {/* ============================================================ */}
       {/* 📌 FOOTER */}
       {/* ============================================================ */}
-      <footer className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 border-t border-[#26333B] text-center space-y-2 text-xs text-slate-500">
-        <p className="text-black font-semibold font-sans">
-          <span className="text-black font-bold">MOIL</span> ReserveIQ • Ministry of Steel, Government of India
+      <footer className="max-w-7xl mx-auto px-4 sm:px-6 pt-6 border-t border-slate-200 text-center space-y-2 text-xs text-slate-500">
+        <p className="text-slate-800 font-bold font-sans">
+          <span className="text-slate-900 font-extrabold">MOIL</span> ReserveIQ • Ministry of Steel, Government of India
         </p>
         <p className="text-[11px] text-slate-500 font-mono">
           Data Sources: MOIL Limited Statutory Disclosures • Indian Bureau of Mines (IBM) • USGS Mineral Commodity Summaries • ESA Copernicus Sentinel-2
