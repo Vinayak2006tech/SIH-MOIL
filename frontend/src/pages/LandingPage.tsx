@@ -22,7 +22,6 @@ import {
 } from 'lucide-react';
 import type { TabType } from '../components/layout/Sidebar';
 import { ThemeToggle } from '../components/common/ThemeToggle';
-import GlyphPortalDemo from '@/components/ui/glyph-portal-demo';
 
 interface LandingPageProps {
   setActiveTab: (tab: TabType) => void;
@@ -534,27 +533,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         </div>
       </section>
 
-      {/* ============================================================ */}
-      {/* 🔮 INTERACTIVE 3D GLYPH PORTAL: STEP INSIDE MOIL RESERVES */}
-      {/* ============================================================ */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 space-y-4">
-        <div className="text-center space-y-2 max-w-3xl mx-auto">
-          <span className="text-xs font-mono uppercase font-bold text-teal-700 tracking-wider flex items-center justify-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-teal-700" />
-            Interactive 3D Subsurface Exploration
-          </span>
-          <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-sans">
-            Scroll-Driven Subsurface Camera Portal
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            Hover or select any letter in the live 3D typography below and scroll to step inside MOIL's geostatistical ore strata and telemetry layers.
-          </p>
-        </div>
-
-        <div className="pt-2">
-          <GlyphPortalDemo word="RESERVE" scrollLength={2.4} interactive={true} annotations={false} />
-        </div>
-      </section>
 
       {/* ============================================================ */}
       {/* 🚀 4 CORE TECHNOLOGICAL & OPERATIONAL PILLARS */}
